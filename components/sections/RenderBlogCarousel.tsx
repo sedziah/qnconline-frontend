@@ -1,14 +1,12 @@
 "use client"
-import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import React from 'react'
-import ProductCard from '../Cards/ProductCard'
 import BlogCard from '../Cards/BlogCard'
+import dynamic from 'next/dynamic'
+
+const Carousel = dynamic(() => import('react-multi-carousel'))
 
 const RenderBlogCarousel = () => {
-  const responsive = {
-
-  }
 
   return (
     <div className='my-14 px-4 w-full max-w-6xl mx-auto'>

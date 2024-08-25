@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 const Footer = () => {
@@ -7,7 +8,10 @@ const Footer = () => {
         <div  className="max-w-sm">
           <div  className="mb-6 flex h-12 items-center space-x-2">
             <a href=''>
-              <img src="./assets/logo-small-removebg-preview.png" className='h-10 object-contain' alt='logo' />
+              <Image
+                width={"100"}
+                height={"40"}
+                src="/assets/logo-small-removebg-preview.png" className='h-10 object-contain' alt='logo' />
             </a>
           </div>
           <div  className="text-gray-500">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad a officia ea expedita!</div>

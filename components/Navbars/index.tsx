@@ -1,6 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 "use client"
 import { COLORS } from '@/constants'
 import { HambergerMenu, SearchNormal, ShoppingCart, Trade, User } from 'iconsax-react'
+import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
 const Navbar = () => {
@@ -11,9 +13,6 @@ const Navbar = () => {
     const position = window.pageYOffset
     setScrollPosition(position)
   }
-
-  console.log("scrollPosition", scrollPosition)
-
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -32,22 +31,23 @@ const Navbar = () => {
       }} className={`w-full transition  shadow z-50 bg-white ${scrollPosition > 275 ? "fixed" : "relative"}`}>
         {/* Mobile Nav */}
         <div className='lg:hidden px-4 py-2'>
-          <div className='flex-row flex justify-between items-center'>
-            <button>
-              <HambergerMenu size="20" color="#000" />
-            </button>
-            <a href=''>
-              <img src="./assets/logo-small.png" className='h-10 object-contain' alt='logo' />
-            </a>
-            <div className='flex flex-row items-center justify-center gap-x-3'>
-              <a href=''>
-                <User size="20" color="#000" />
-              </a>
-              <a href=''>
-                <ShoppingCart size="20" color="#000" />
-              </a>
+            <div className='flex-row flex justify-between items-center'>
+              <button>
+                <HambergerMenu size="20" color="#000" />
+              </button>
+              <Image
+                width={100}
+                height={100}
+                src="/assets/logo-small.png" className='h-10 object-contain' alt='logo' />
+              <div className='flex flex-row items-center justify-center gap-x-3'>
+                <a href=''>
+                  <User size="20" color="#000" />
+                </a>
+                <a href=''>
+                  <ShoppingCart size="20" color="#000" />
+                </a>
+              </div>
             </div>
-          </div>
 
           <div>
             <div className='flex-1 relative h-12'>
@@ -69,7 +69,10 @@ const Navbar = () => {
 
         <div className='hidden lg:flex flex-row gap-x-12  justify-between items-center max-w-[87rem] mx-auto py-2'>
           <a href=''>
-            <img src="./assets/logo-small.png" className='h-10 object-contain' alt='logo' />
+            <Image
+              width={100}
+              height={100}
+              src="/assets/logo-small.png" className='h-10 object-contain' alt='logo' />
           </a>
 
 

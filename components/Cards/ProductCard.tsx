@@ -1,14 +1,22 @@
+import Image from 'next/image'
 import React from 'react'
 
 const ProductCard = () => {
   return (
     <div className="rounded-lg hover:shadow-xl transition-opacity bg-white p-4 shadow-lg">
-      <div className="h-56 w-full">
-        <a href="#">
-          <img className="mx-auto h-full dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg" alt="" />
-          <img className="mx-auto hidden h-full dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />
-        </a>
-      </div>
+      <a href="#">
+        <div className="h-56 w-full">
+          <Image
+            width={250}
+            height={100}
+
+            className="mx-auto h-full dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg" alt="" />
+          <Image
+            width={100}
+            height={100}
+            className="mx-auto hidden h-full dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />
+        </div>
+      </a>
       <div className="pt-6">
         <div className="mb-4 flex items-center justify-between gap-4">
           <span className="me-2 rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300"> Up to 35% off </span>

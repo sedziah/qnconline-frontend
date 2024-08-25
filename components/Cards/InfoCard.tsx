@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -28,7 +29,10 @@ const InfoCard = ({title, description, link }: CardProp) => {
         </div>
         <div className="relative flex items-center rounded-lg justify-center h-72 lg:w-72 overflow-hidden">
           
-          <img
+          <Image
+            width={250}
+            height={100}
+            alt=''
             src='https://images.ctfassets.net/mmeshd7gafk1/4GY8ZXxlzpdhjzhNYgOoHq/953fa0dacf6f03fa2b5f127987fa8b7d/BUYBACK_CountryBusinessLaunch_EventPage_Bloc_3__1_.png'
             className='object-cover h-full w-w-full '
           />
