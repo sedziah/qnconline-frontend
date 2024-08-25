@@ -1,7 +1,7 @@
 // Common Types
 type UUID = string
 type IMAGE = string
-type DATETIME = string // Alternatively, you can use Date if handling as Date objects
+type DATETIME = string
 type EMAIL = string
 
 // Category Table
