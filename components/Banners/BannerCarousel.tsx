@@ -1,7 +1,12 @@
 "use client";
-import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import React from 'react'
+import dynamic from 'next/dynamic'
+import Image from 'next/image'
+
+
+const Carousel = dynamic(() => import('react-multi-carousel'));
+
 
 
 const BannerCarousel = () => {
@@ -79,7 +84,10 @@ const BannerCarousel = () => {
     renderDotsOutside={false}>
     {DUMMYDATA?.map((item) => <div key={item} className='w-full h-[400px] md:h-96 lg:h-96'>
       <a className='w-full h-full'>
-        <img src={item} className='w-full h-full lg:object-cover' alt='banner'/>
+        <Image
+          width={100}
+          height={"200"}
+          src={item} className='w-full h-full lg:object-cover' alt='banner' />
       </a>
     </div>)}
 

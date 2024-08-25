@@ -1,11 +1,13 @@
 "use client"
-import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import React from 'react'
 import ProductCard from '../Cards/ProductCard'
 import BlogCard from '../Cards/BlogCard'
 import { VideoPreviewCard } from '../Cards/VideoPreviewCard'
+import dynamic from 'next/dynamic'
 
+
+const Carousel = dynamic(() => import('react-multi-carousel'))
 
 const DUMMYVIDEOS = [
   "https://videos.ctfassets.net/mmeshd7gafk1/1tKBCXe989lwAbp5LodXgD/99097bb13f54b04160cd44c8c31ffb65/IPAD-EN.mp4",
