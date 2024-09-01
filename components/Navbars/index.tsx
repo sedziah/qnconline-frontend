@@ -4,15 +4,31 @@ import { COLORS } from '@/constants'
 import { HambergerMenu, SearchNormal, ShoppingCart, Trade, User } from 'iconsax-react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import { apiService, ProductCategory } from '@/library/services/apiService' // Import the API service and the ProductCategory interface
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
+  const [categories, setCategories] = useState<ProductCategory[]>([]); // State to hold the categories
 
   const handleScroll = () => {
     const position = window.pageYOffset
     setScrollPosition(position)
   }
+
+  // Fetch categories on component mount
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const fetchedCategories = await apiService.getProductCategories();
+        setCategories(fetchedCategories);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -122,9 +138,9 @@ const Navbar = () => {
             </button>
             <div className='overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 w-full flex flex-row items-center overflow-x-autoscrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200'>
               <div className='flex flex-row gap-x-6'>
-                {DUMMYCATEGORIES?.map((item) => (
-                  <a key={item} href='#' className='py-2.5 hover:underline whitespace-nowrap text-black  text-[13px] capitalize font-normal'>
-                    {item}
+                {categories.map((category) => (
+                  <a key={category.id} href={`#${category.slug}`} className='py-2.5 hover:underline whitespace-nowrap text-black text-[13px] capitalize font-normal'>
+                    {category.name}
                   </a>
                 ))}
               </div>
@@ -135,37 +151,5 @@ const Navbar = () => {
     </>
   )
 }
-
-
-const DUMMYCATEGORIES = [
-  "Electronics",
-  "Fashion",
-  "Home & Kitchen",
-  "Health & Beauty",
-  "Sports & Outdoors",
-  "Books & Stationery",
-  "Toys & Games",
-  "Automotive",
-  "Grocery",
-  "Jewelry",
-  "Watches",
-  "Pet Supplies",
-  "Baby Products",
-  "Musical Instruments",
-  "Office Supplies",
-  "Furniture",
-  "Garden & Outdoor",
-  "Appliances",
-  "Tools & Home Improvement",
-  "Computers & Accessories",
-  "Video Games",
-  "Cameras & Photography",
-  "Mobile Phones & Accessories",
-  "Luggage & Travel Gear",
-  "Movies & TV",
-  "Art & Collectibles",
-  "Handmade Products"
-]
-
 
 export default Navbar
