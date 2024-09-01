@@ -4,7 +4,7 @@ import { COLORS } from '@/constants'
 import { HambergerMenu, SearchNormal, ShoppingCart, Trade, User } from 'iconsax-react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { apiService, ProductCategory } from '@/library/services/apiService' // Import the API service and the ProductCategory interface
+import { apiService, ProductCategory } from '@/library/services/apiService' 
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false)
