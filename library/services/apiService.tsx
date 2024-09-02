@@ -31,7 +31,6 @@ export const apiService = {
 };
 
 apiService.getProductCategories().then((categories) => {
-  console.log("Fetched product categories:", categories);
 }).catch((error) => {
   console.error("Error:", error);
 });
