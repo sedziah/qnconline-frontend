@@ -14,14 +14,15 @@ const Footer = () => {
                 src="/assets/logo-small-removebg-preview.png" className='h-10 object-contain' alt='logo' />
             </a>
           </div>
-          <div  className="text-gray-500">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad a officia ea expedita!</div>
+          <div  className="text-gray-500">Welcome to Q&C! We bring you top-quality products with unmatched convenience. Shop confidently and enjoy the best in quality and service!</div>
         </div>
         <div  className="">
           <div  className="mt-4 mb-2 font-medium xl:mb-4">Address</div>
           <div  className="text-gray-500">
-            35 Remida Heights, <br />
-            45 Street, <br />
-            South Caroline, US
+          +233 20 7597 903<br />
+            17 Hill Street, <br />
+            Accra Newtown, <br />
+            info@qnconline.com
           </div>
         </div>
         <div  className="">
