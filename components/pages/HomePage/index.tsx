@@ -1,11 +1,11 @@
 import React from 'react'
-import BannerCarousel from '../Banners/BannerCarousel'
-import RenderMostWanted from '../sections/RenderMostWanted'
-import RenderAccessories from '../sections/RenderAccessories'
-import RenderBlogCarousel from '../sections/RenderBlogCarousel'
-import InfoCard from '../Cards/InfoCard'
-import NewsLetter from '../NewsLetter'
-import RenderVideoReviews from '../sections/RenderVideoReviews'
+import BannerCarousel from '../../Banners/BannerCarousel'
+import RenderMostWanted from '../../sections/RenderMostWanted'
+import RenderAccessories from '../../sections/RenderAccessories'
+import RenderBlogCarousel from '../../sections/RenderBlogCarousel'
+import InfoCard from '../../Cards/InfoCard'
+import NewsLetter from '../../NewsLetter'
+import RenderVideoReviews from '../../sections/RenderVideoReviews'
 
 export default function HomePage() {
   return (
@@ -17,23 +17,23 @@ export default function HomePage() {
       <RenderMostWanted />
 
 
-      
+
       {/* Popular devices */}
       <RenderMostWanted />
 
       <RenderAccessories />
 
-      
+
       <RenderMostWanted />
 
       {/* RenderBlogCarousel */}
       <RenderBlogCarousel />
 
-      
+
       {/* Accessories, PCs */}
       <RenderAccessories />
 
-    
+
       {/* View Reviews */}
       <RenderVideoReviews />
 
@@ -43,9 +43,9 @@ export default function HomePage() {
         link='/'
       />
 
-      
+
       <NewsLetter />
-    
+
 
     </>
   )
