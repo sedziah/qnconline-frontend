@@ -98,7 +98,7 @@ const Footer = () => {
           </div>
         </div>
         <p className="mt-8 text-xs text-gray-800">
-          © 2022 Comany Name
+          © {new Date().getFullYear()} QNC 
         </p>
       </div>
     </footer>
