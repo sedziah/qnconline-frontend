@@ -1,36 +1,27 @@
+import axios from 'axios';
+
 const API_BASE_URL = "https://api.qnconline.com";
 
 export interface ProductCategory {
-  id: string;  
   name: string;
   slug: string;
 }
 
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 export const apiService = {
   getProductCategories: async (): Promise<ProductCategory[]> => {
     try {
-      const response = await fetch(`${API_BASE_URL}/products/product-categories/`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch product categories.");
-      }
-
-      const data: ProductCategory[] = await response.json();
-      return data;
+      const response = await api.get<ProductCategory[]>('/products/categories/active-product-categories/');
+      return response.data;
     } catch (error) {
       console.error("Error fetching product categories:", error);
       throw error;
     }
   },
 };
-
-apiService.getProductCategories().then((categories) => {
-}).catch((error) => {
-  console.error("Error:", error);
-});
