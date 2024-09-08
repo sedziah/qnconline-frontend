@@ -51,7 +51,7 @@ const Navbar = () => {
         open={isOpen}
         onClose={toggleDrawer}
         direction='left'
-        zIndex={999}
+        zIndex={9999}
         className='bla bla bla'
         size={300}
       >
@@ -62,7 +62,7 @@ const Navbar = () => {
       </Drawer>
 
       <div style={{
-        zIndex: 888,
+        zIndex: 8888,
         transitionTimingFunction: "linear",
         transition: "transform 0.7s ease-out, opacity 0.7s ease-out"
       }} className={`w-full transition  shadow z-50 bg-white ${scrollPosition > 275 ? "fixed top-0" : "relative"}`}>
@@ -72,10 +72,12 @@ const Navbar = () => {
             <button onClick={toggleDrawer}>
               <HambergerMenu size="20" color="#000" />
             </button>
-            <Image
-              width={100}
-              height={100}
-              src="/assets/logo-small.png" className='h-10 object-contain' alt='logo' />
+            <a href="/">
+              <Image
+                width={100}
+                height={100}
+                src="/assets/logo-small.png" className='h-10 object-contain' alt='logo' />
+            </a>
             <div className='flex flex-row items-center justify-center gap-x-3'>
               <a href=''>
                 <User size="20" color="#000" />
