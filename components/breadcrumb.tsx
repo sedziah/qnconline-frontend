@@ -11,7 +11,7 @@ interface BreadcrumbProps {
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
   return (
-    <nav className="flex capitalize my-7 lg:px-0 md:px-4 px-4 w-full max-w-6xl mx-auto" aria-label="Breadcrumb">
+    <nav className="flex capitalize my-7  md:px-4 px-4 w-full max-w-6xl mx-auto" aria-label="Breadcrumb">
       <ol className="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         {items.map((item, index) => (
           <li key={index} className="inline-flex items-center">

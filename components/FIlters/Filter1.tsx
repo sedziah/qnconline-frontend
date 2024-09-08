@@ -18,14 +18,14 @@ const Filter1 = () => {
 
   const { leather, cotton, fabric, crocodile, wool, large, medium, small, mini, luxesignatire, luxelondon } = check
 
-  const changeHandler = (e) => {
+  const changeHandler = (e: any) => {
     setCheck({
       ...check,
       [e.target.name]: e.target.checked,
     })
   }
 
-  const applyFilters = (e) => {
+  const applyFilters = (e: any) => {
     setCheck({
       ...check,
       leather: false,

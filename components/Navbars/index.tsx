@@ -5,11 +5,18 @@ import { HambergerMenu, SearchNormal, ShoppingCart, Trade, User } from 'iconsax-
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { apiService, ProductCategory } from '@/library/services/apiService'
+import Drawer from 'react-modern-drawer'
+import 'react-modern-drawer/dist/index.css'
+import MobileDrawer from './MobileDrawer'
 
 const Navbar = () => {
-  const [showMenu, setShowMenu] = useState(false)
+  const [isOpen, setIsOpen] = React.useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
-  const [categories, setCategories] = useState<ProductCategory[]>([]) // State to hold the categories
+  const [categories, setCategories] = useState<ProductCategory[]>([])
+
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState)
+  }
 
   const handleScroll = () => {
     const position = window.pageYOffset
@@ -40,15 +47,29 @@ const Navbar = () => {
 
   return (
     <>
+      <Drawer
+        open={isOpen}
+        onClose={toggleDrawer}
+        direction='left'
+        zIndex={999}
+        className='bla bla bla'
+        size={300}
+      >
+        <MobileDrawer
+          categories={categories}
+          setIsOpen={setIsOpen}
+        />
+      </Drawer>
+
       <div style={{
-        zIndex: 8888,
+        zIndex: 888,
         transitionTimingFunction: "linear",
         transition: "transform 0.7s ease-out, opacity 0.7s ease-out"
       }} className={`w-full transition  shadow z-50 bg-white ${scrollPosition > 275 ? "fixed top-0" : "relative"}`}>
         {/* Mobile Nav */}
         <div className='lg:hidden px-4 py-2'>
           <div className='flex-row flex justify-between items-center'>
-            <button>
+            <button onClick={toggleDrawer}>
               <HambergerMenu size="20" color="#000" />
             </button>
             <Image
@@ -128,11 +149,11 @@ const Navbar = () => {
             </a>
           </div>
         </div>
-        <div className='hidden sm:hidden lg:block bg-lightGray/20 overflow-hidden pl-7'>
+        <div className='hidden md:hidden sm:hidden lg:block bg-lightGray/20 overflow-hidden pl-7'>
           <div className='w-full flex flex-row'>
-            <button className='flex w-[120px] flex-row gap-x-2 py-2.5'>
+            <button onClick={toggleDrawer} className='flex w-[120px] flex-row gap-x-2 py-2.5'>
               <HambergerMenu size="20" color="#000" />
-              <p className='text-sm capitalize font-semibold'>
+              <p className='text-sm capitalize font-normal'>
                 all items
               </p>
             </button>
@@ -142,7 +163,7 @@ const Navbar = () => {
                   categories.map((category) => (
                     <a
                       key={category.name}
-                      href={`/products?slug=${category.slug}&name=${category.name}`}
+                      href={`/products?s=${category.slug}&name=${category.name}`}
                       className="py-2.5 hover:underline whitespace-nowrap text-black text-[13px] capitalize font-normal"
                     >
                       {category.name}

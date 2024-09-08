@@ -11,7 +11,7 @@ const ProductsWrapper = ({ cateogry = "All Products" }: PropType) => {
   return (
     <>
       <div className='w-full max-w-6xl mx-auto'>
-        <div className='lg:mx-0 md:mx-4 my-10 mx-4 flex md:flex-row lg:flex-row items-center justify-between'>
+        <div className=' md:mx-4 my-10 mx-4 flex md:flex-row lg:flex-row items-center justify-between'>
           <h1 className='text-xl font-semibold capitalize'>{cateogry}</h1>
 
 
@@ -29,7 +29,7 @@ const ProductsWrapper = ({ cateogry = "All Products" }: PropType) => {
       </div>
 
 
-      <div className='my-10 lg:mx-0 md:mx-4 mx-4'>
+      <div className='my-10  md:mx-4 mx-4'>
 
         <div className='max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-y-3 gap-x-6'>
           <Filter1 />
