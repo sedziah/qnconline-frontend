@@ -1,6 +1,7 @@
 import React from 'react'
 import ProductCard from './Cards/ProductCard'
 import Filter1 from './FIlters/Filter1'
+import { Pagination } from './Pagination'
 
 type PropType = {
   cateogry: string
@@ -39,6 +40,7 @@ const ProductsWrapper = ({ cateogry = "All Products" }: PropType) => {
           </div>
         </div>
 
+        <Pagination />
       </div>
     </>
   )
