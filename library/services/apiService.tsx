@@ -8,6 +8,25 @@ export interface ProductCategory {
   slug: string;
 }
 
+export interface Product {
+  id: string;
+  name: string;
+  slug: string;
+  base_price: string;
+  currency: string;
+  price_adjustment: string;
+  inventory_quantity: number;
+  condition: string;
+  images: any[];
+  reviews: any[];
+  specifications: { specification_name: string; value: string }[];
+  deals: any[];
+  catalogueId?: string; // Optional field
+  actualPrice?: number; // Optional custom fields
+  isFeatured?: boolean;
+  freeDelivery?: boolean;
+}
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -25,4 +44,14 @@ export const apiService = {
       throw error;
     }
   },
+  getDailyDeals: async (): Promise<Product[]> => {
+    try {
+      const response = await api.get<Product[]>('/products/daily-deals');
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching daily deals:", error);
+      throw error;
+    }
+  },
+  
 };

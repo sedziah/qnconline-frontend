@@ -1,38 +1,61 @@
-import React from 'react'
-import BannerCarousel from '../../Banners/BannerCarousel'
-import RenderMostWanted from '../../sections/RenderMostWanted'
-import RenderAccessories from '../../sections/RenderAccessories'
-import RenderBlogCarousel from '../../sections/RenderBlogCarousel'
-import InfoCard from '../../Cards/InfoCard'
-import NewsLetter from '../../NewsLetter'
-import RenderVideoReviews from '../../sections/RenderVideoReviews'
+"use client"
+import React, { useEffect, useState } from 'react';
+import BannerCarousel from '../../Banners/BannerCarousel';
+import RenderMostWanted from '../../sections/RenderMostWanted';
+import RenderAccessories from '../../sections/RenderAccessories';
+import RenderBlogCarousel from '../../sections/RenderBlogCarousel';
+import InfoCard from '../../Cards/InfoCard';
+import NewsLetter from '../../NewsLetter';
+import RenderVideoReviews from '../../sections/RenderVideoReviews';
+import RenderCarousel from '../../sections/RenderCarousel';
+import { apiService, Product } from '../../../library/services/apiService';
 
 export default function HomePage() {
+  const [mostWantedProducts, setMostWantedProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Fetch products (e.g., daily deals or most wanted)
+    const fetchMostWantedProducts = async () => {
+      try {
+        const products = await apiService.getDailyDeals();
+        setMostWantedProducts(products); // Assuming the response is an array of products
+        setError(null);
+      } catch (err) {
+        console.error('Failed to fetch products', err);
+        setError('Failed to fetch products.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMostWantedProducts();
+  }, []);
+
   return (
     <>
       <BannerCarousel />
 
-
       {/* Most wanted */}
-      <RenderMostWanted />
-
-
+      {loading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>{error}</div>
+      ) : (
+        <RenderCarousel title='Most Wanted' payload={mostWantedProducts} />
+      )}
 
       {/* Popular devices */}
       <RenderMostWanted />
-
       <RenderAccessories />
-
-
       <RenderMostWanted />
 
       {/* RenderBlogCarousel */}
       <RenderBlogCarousel />
 
-
       {/* Accessories, PCs */}
       <RenderAccessories />
-
 
       {/* View Reviews */}
       <RenderVideoReviews />
@@ -43,10 +66,7 @@ export default function HomePage() {
         link='/'
       />
 
-
       <NewsLetter />
-
-
     </>
-  )
+  );
 }
