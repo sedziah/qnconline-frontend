@@ -4,12 +4,19 @@ import { COLORS } from '@/constants'
 import { HambergerMenu, SearchNormal, ShoppingCart, Trade, User } from 'iconsax-react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { apiService, ProductCategory } from '@/library/services/apiService' 
+import { apiService, ProductCategory } from '@/library/services/apiService'
+import Drawer from 'react-modern-drawer'
+import 'react-modern-drawer/dist/index.css'
+import MobileDrawer from './MobileDrawer'
 
 const Navbar = () => {
-  const [showMenu, setShowMenu] = useState(false)
+  const [isOpen, setIsOpen] = React.useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
-  const [categories, setCategories] = useState<ProductCategory[]>([]); // State to hold the categories
+  const [categories, setCategories] = useState<ProductCategory[]>([])
+
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState)
+  }
 
   const handleScroll = () => {
     const position = window.pageYOffset
@@ -20,15 +27,15 @@ const Navbar = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const fetchedCategories = await apiService.getProductCategories();
-        setCategories(fetchedCategories);
+        const fetchedCategories = await apiService.getProductCategories()
+        setCategories(fetchedCategories)
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Error fetching categories:", error)
       }
-    };
+    }
 
-    fetchCategories();
-  }, []);
+    fetchCategories()
+  }, [])
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -40,30 +47,46 @@ const Navbar = () => {
 
   return (
     <>
+      <Drawer
+        open={isOpen}
+        onClose={toggleDrawer}
+        direction='left'
+        zIndex={9999}
+        className='bla bla bla'
+        size={300}
+      >
+        <MobileDrawer
+          categories={categories}
+          setIsOpen={setIsOpen}
+        />
+      </Drawer>
+
       <div style={{
         zIndex: 8888,
         transitionTimingFunction: "linear",
-        transition: "0.7s ease-out",
-      }} className={`w-full transition  shadow z-50 bg-white ${scrollPosition > 275 ? "fixed" : "relative"}`}>
+        transition: "transform 0.7s ease-out, opacity 0.7s ease-out"
+      }} className={`w-full transition  shadow z-50 bg-white ${scrollPosition > 275 ? "fixed top-0" : "relative"}`}>
         {/* Mobile Nav */}
         <div className='lg:hidden px-4 py-2'>
-            <div className='flex-row flex justify-between items-center'>
-              <button>
-                <HambergerMenu size="20" color="#000" />
-              </button>
+          <div className='flex-row flex justify-between items-center'>
+            <button onClick={toggleDrawer}>
+              <HambergerMenu size="20" color="#000" />
+            </button>
+            <a href="/">
               <Image
                 width={100}
                 height={100}
                 src="/assets/logo-small.png" className='h-10 object-contain' alt='logo' />
-              <div className='flex flex-row items-center justify-center gap-x-3'>
-                <a href=''>
-                  <User size="20" color="#000" />
-                </a>
-                <a href=''>
-                  <ShoppingCart size="20" color="#000" />
-                </a>
-              </div>
+            </a>
+            <div className='flex flex-row items-center justify-center gap-x-3'>
+              <a href=''>
+                <User size="20" color="#000" />
+              </a>
+              <a href=''>
+                <ShoppingCart size="20" color="#000" />
+              </a>
             </div>
+          </div>
 
           <div>
             <div className='flex-1 relative h-12'>
@@ -84,7 +107,7 @@ const Navbar = () => {
 
 
         <div className='hidden lg:flex flex-row gap-x-12  justify-between items-center max-w-[87rem] mx-auto py-2'>
-          <a href=''>
+          <a href='/'>
             <Image
               width={100}
               height={100}
@@ -128,21 +151,39 @@ const Navbar = () => {
             </a>
           </div>
         </div>
-        <div className='hidden sm:hidden lg:block bg-lightGray/20 overflow-hidden pl-7'>
+        <div className='hidden md:hidden sm:hidden lg:block bg-lightGray/20 overflow-hidden pl-7'>
           <div className='w-full flex flex-row'>
-            <button className='flex w-[120px] flex-row gap-x-2 py-2.5'>
+            <button onClick={toggleDrawer} className='flex w-[120px] flex-row gap-x-2 py-2.5'>
               <HambergerMenu size="20" color="#000" />
-              <p className='text-sm capitalize font-semibold'>
+              <p className='text-sm capitalize font-normal'>
                 all items
               </p>
             </button>
             <div className='overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 w-full flex flex-row items-center overflow-x-autoscrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200'>
               <div className='flex flex-row gap-x-6'>
-                {categories.map((category) => (
-                  <a key={category.id} href={`#${category.slug}`} className='py-2.5 hover:underline whitespace-nowrap text-black text-[13px] capitalize font-normal'>
-                    {category.name}
-                  </a>
-                ))}
+                {categories.length > 0 ? (
+                  categories.map((category) => (
+                    <a
+                      key={category.name}
+                      href={`/products?s=${category.slug}&name=${category.name}`}
+                      className="py-2.5 hover:underline whitespace-nowrap text-black text-[13px] capitalize font-normal"
+                    >
+                      {category.name}
+                    </a>
+                  ))
+                ) : (
+                  <div className="flex flex-row gap-3">
+                    {Array(15)
+                      .fill('')
+                      .map((_, index) => (
+                        <div
+                          key={index}
+                          className="h-6 w-20 bg-gray-200 rounded animate-pulse"
+                        ></div>
+                      ))}
+                  </div>
+                )}
+
               </div>
             </div>
           </div>
