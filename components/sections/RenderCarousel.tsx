@@ -82,13 +82,6 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
           >
             {payload && payload.length > 0 ? (
               payload.map((product, index) => {
-                // Log each product and its properties
-                console.log(`Product ${index}:`, product);
-                console.log(`Product ID: ${product.id}`);
-                console.log(`Product Name: ${product.name}`);
-                console.log(`Product Images:`, product.images);
-                console.log(`Product Reviews:`, product.reviews);
-
                 return (
                   <div key={index} className="mx-1 py-3">
                     <NewProductCard

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import { Product } from '../../library/services/apiService'; // Ensure the types file is correctly updated
+import { Product } from '../../library/services/apiService';
 
 interface ProductCardProps {
   product: Product;
@@ -29,18 +29,18 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="rounded-lg hover:shadow-xl transition-opacity bg-white p-4 shadow-lg">
       <a href="#">
-        <div className="h-24 w-full">
+        <div className="h-40 w-full flex justify-center items-center">
           <Image
-            width={250}
-            height={100}
-            className="mx-auto h-full dark:hidden"
+            width={150}
+            height={150}
+            className="object-contain h-full dark:hidden"
             src={imageUrl}  // Main image for light mode
             alt={product.name}
           />
           <Image
-            width={200}
-            height={100}
-            className="mx-auto hidden h-full dark:block"
+            width={150}
+            height={150}
+            className="object-contain h-full hidden dark:block"
             src={darkModeImageUrl}  // Dark mode image or fallback to main
             alt={product.name}
           />
@@ -53,7 +53,20 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </span>
         </div>
       </div>
-      <a href="#" className="text-sm font-semibold leading-tight text-gray-900 hover:underline">
+
+      {/* Product Name with fixed height */}
+      <a
+        href="#"
+        className="text-sm font-semibold leading-tight text-gray-900 hover:underline flex items-center"
+        style={{
+          height: '3rem', // Fixed height to ensure uniformity (adjust based on font size)
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          display: '-webkit-box',
+          WebkitLineClamp: 2, // Limits to 2 lines
+          WebkitBoxOrient: 'vertical',
+        }}
+      >
         {product.name}
       </a>
 
