@@ -29,18 +29,18 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="rounded-lg hover:shadow-xl transition-opacity bg-white p-4 shadow-lg">
       <a href="#">
-        <div className="h-24 w-full">
+        <div className="h-40 w-full flex justify-center items-center">
           <Image
-            width={250}
+            width={150}
             height={150}
-            className="mx-auto h-full dark:hidden"
+            className="object-contain h-full dark:hidden"
             src={imageUrl}  // Main image for light mode
             alt={product.name}
           />
           <Image
-            width={200}
+            width={150}
             height={150}
-            className="mx-auto hidden h-full dark:block"
+            className="object-contain h-full hidden dark:block"
             src={darkModeImageUrl}  // Dark mode image or fallback to main
             alt={product.name}
           />
