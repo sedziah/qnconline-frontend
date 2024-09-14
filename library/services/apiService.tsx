@@ -12,7 +12,7 @@ export interface Product {
   id: string;
   name: string;
   slug: string;
-  base_price: string;
+  base_price: string | number;
   currency: string;
   price_adjustment: string;
   inventory_quantity: number;

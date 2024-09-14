@@ -43,7 +43,7 @@ export default function HomePage() {
       ) : error ? (
         <div>{error}</div>
       ) : (
-        <RenderCarousel title='Most Wanted' payload={mostWantedProducts} />
+        <RenderCarousel title='Daily Deals' payload={mostWantedProducts} />
       )}
 
       {/* Popular devices */}

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import 'react-multi-carousel/lib/styles.css';
 import React, { useState, useEffect } from 'react';
 import NewProductCard from '../Cards/NewProductCard';
@@ -81,30 +81,39 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
             renderDotsOutside={false}
           >
             {payload && payload.length > 0 ? (
-              payload.map((product, index) => (
-                <div key={index} className="mx-1 py-3">
-                  <NewProductCard
-                    product={{
-                      id: product.id,
-                      name: product.name,
-                      slug: product.slug,
-                      base_price: product.base_price,
-                      currency: product.currency,
-                      price_adjustment: product.price_adjustment, // Directly from the product
-                      inventory_quantity: product.inventory_quantity, // Directly from the product
-                      condition: product.condition, // Directly from the product
-                      images: product.images, // Directly from the product
-                      reviews: product.reviews, // Directly from the product
-                      specifications: product.specifications, // Directly from the product
-                      deals: product.deals, // Directly from the product
-                      catalogueId: '', // Add your custom field
-                      actualPrice: 0, // Set the actual price
-                      isFeatured: false, // Set default values for additional fields
-                      freeDelivery: false, // Set default values for additional fields
-                    }}
-                  />
-                </div>
-              ))
+              payload.map((product, index) => {
+                // Log each product and its properties
+                console.log(`Product ${index}:`, product);
+                console.log(`Product ID: ${product.id}`);
+                console.log(`Product Name: ${product.name}`);
+                console.log(`Product Images:`, product.images);
+                console.log(`Product Reviews:`, product.reviews);
+
+                return (
+                  <div key={index} className="mx-1 py-3">
+                    <NewProductCard
+                      product={{
+                        id: product.id || 'N/A',
+                        name: product.name || 'No name available',
+                        slug: product.slug || 'no-slug',
+                        base_price: product.base_price || 0,
+                        currency: product.currency || 'N/A',
+                        price_adjustment: product.price_adjustment || '0.00',
+                        inventory_quantity: product.inventory_quantity || 0,
+                        condition: product.condition || 'Unknown',
+                        images: product.images || [],
+                        reviews: product.reviews || [],
+                        specifications: product.specifications || [],
+                        deals: product.deals || [],
+                        catalogueId: '', // Add your custom field
+                        actualPrice: 0, // Set the actual price
+                        isFeatured: false, // Set default values for additional fields
+                        freeDelivery: false, // Set default values for additional fields
+                      }}
+                    />
+                  </div>
+                );
+              })
             ) : (
               <div>No products available</div>
             )}
