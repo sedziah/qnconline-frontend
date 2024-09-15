@@ -5,7 +5,7 @@ import Footer from "@/components/Footer"
 
 
 export const metadata: Metadata = {
-  title: "QNCONLINE - Home",
+  title: "Q&C Online - Home",
   description: "A Home of Premium Products & Exemplary Customer Care!",
 }
 

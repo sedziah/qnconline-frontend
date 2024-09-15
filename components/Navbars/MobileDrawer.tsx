@@ -1,4 +1,4 @@
-import { ProductCategory } from '@/library/services/apiService'
+import { ProductCategory } from '../../library/types'
 import { CloseCircle, Trade } from 'iconsax-react'
 import Image from 'next/image'
 import React from 'react'
