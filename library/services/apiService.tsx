@@ -53,5 +53,16 @@ export const apiService = {
       throw error;
     }
   },
+
+  // New subscribe function
+  subscribe: async (email: string): Promise<void> => {
+    try {
+      const response = await api.post('/accounts/subscribe/', { email });
+      console.log("Subscription successful:", response.data);
+    } catch (error) {
+      console.error("Error subscribing:", error);
+      throw error;
+    }
+  },
   
 };

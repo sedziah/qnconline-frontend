@@ -37,7 +37,7 @@ export default function HomePage() {
     <>
       <BannerCarousel />
 
-      {/* Most wanted */}
+      {/* Daily Deals */}
       {loading ? (
         <div>Loading...</div>
       ) : error ? (
@@ -46,8 +46,17 @@ export default function HomePage() {
         <RenderCarousel title='Daily Deals' subtitle="Amazing offers just for today. Don't Miss Out!" payload={mostWantedProducts} />
       )}
 
-      {/* Popular devices */}
-      <RenderMostWanted />
+      {/* New Arrivals */}
+      {loading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>{error}</div>
+      ) : (
+        <RenderCarousel title='New Arrivals' subtitle="Discover Our Newest Arrivals.!" payload={mostWantedProducts} />
+      )}
+
+
+
       <RenderAccessories />
       <RenderMostWanted />
 
