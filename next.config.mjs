@@ -4,7 +4,6 @@ const nextConfig = {
     images: {
       domains: [
         'images.ctfassets.net',
-        'qnconline.lon1.digitaloceanspaces.com',
       ],
       remotePatterns: [
         {
