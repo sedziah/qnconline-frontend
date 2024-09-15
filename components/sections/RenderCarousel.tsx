@@ -2,8 +2,9 @@
 import 'react-multi-carousel/lib/styles.css';
 import React, { useState, useEffect } from 'react';
 import NewProductCard from '../Cards/NewProductCard';
+import ProductCardSkeleton from '../Cards/ProductCardSkeleton';
 import dynamic from 'next/dynamic';
-import { Product } from '../../library/services/apiService';
+import { Product } from '../../library/types';
 
 const Carousel = dynamic(() => import('react-multi-carousel'), { ssr: false });
 
@@ -11,9 +12,10 @@ interface RenderCarouselProps {
   title: string;
   subtitle?: string;
   payload: Product[]; // Use Product interface directly
+  loading: boolean; // Add loading state
 }
 
-const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payload }) => {
+const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payload, loading }) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -49,7 +51,16 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
       {subtitle && <p className="text-base text-black/60 font-normal">{subtitle}</p>}
 
       <div className="mt-5">
-        {error ? (
+        {loading ? (
+          // Show skeletons while loading
+          <Carousel responsive={responsive}>
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="mx-1 py-3">
+                <ProductCardSkeleton />
+              </div>
+            ))}
+          </Carousel>
+        ) : error ? (
           <div className="text-red-500">{error}</div>
         ) : (
           <Carousel
@@ -81,32 +92,30 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
             renderDotsOutside={false}
           >
             {payload && payload.length > 0 ? (
-              payload.map((product, index) => {
-                return (
-                  <div key={index} className="mx-1 py-3">
-                    <NewProductCard
-                      product={{
-                        id: product.id || 'N/A',
-                        name: product.name || 'No name available',
-                        slug: product.slug || 'no-slug',
-                        base_price: product.base_price || 0,
-                        currency: product.currency || 'N/A',
-                        price_adjustment: product.price_adjustment || '0.00',
-                        inventory_quantity: product.inventory_quantity || 0,
-                        condition: product.condition || 'Unknown',
-                        images: product.images || [],
-                        reviews: product.reviews || [],
-                        specifications: product.specifications || [],
-                        deals: product.deals || [],
-                        catalogueId: '', // Add your custom field
-                        actualPrice: 0, // Set the actual price
-                        isFeatured: false, // Set default values for additional fields
-                        freeDelivery: false, // Set default values for additional fields
-                      }}
-                    />
-                  </div>
-                );
-              })
+              payload.map((product, index) => (
+                <div key={index} className="mx-1 py-3">
+                  <NewProductCard
+                    product={{
+                      id: product.id || 'N/A',
+                      name: product.name || 'No name available',
+                      slug: product.slug || 'no-slug',
+                      base_price: product.base_price || 0,
+                      currency: product.currency || 'N/A',
+                      price_adjustment: product.price_adjustment || '0.00',
+                      inventory_quantity: product.inventory_quantity || 0,
+                      condition: product.condition || 'Unknown',
+                      images: product.images || [],
+                      reviews: product.reviews || [],
+                      specifications: product.specifications || [],
+                      deals: product.deals || [],
+                      catalogueId: '', // Add your custom field
+                      actualPrice: 0, // Set the actual price
+                      isFeatured: false, // Set default values for additional fields
+                      freeDelivery: false, // Set default values for additional fields
+                    }}
+                  />
+                </div>
+              ))
             ) : (
               <div>No products available</div>
             )}

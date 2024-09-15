@@ -81,20 +81,22 @@ export interface Catalogue {
 
 // Product Table
 export interface Product {
-  id: UUID // Primary Key
-  catalogueId: UUID // Foreign Key to Catalogue
-  parentId?: UUID // Foreign Key to Product (optional)
-  name: string
-  actualPrice: number
-  supplierId?: UUID // Foreign Key to Supplier (optional)
-  isFeatured: boolean
-  dealsId?: UUID // Foreign Key to Deals (optional)
-  freeDelivery: boolean
-  slug: string
-  createdAt: DATETIME
-  updatedAt: DATETIME
-  isActive: boolean
-  isVisible: boolean
+  id: string;
+  name: string;
+  slug: string;
+  base_price: string | number;
+  currency: string;
+  price_adjustment: string;
+  inventory_quantity: number;
+  condition: string;
+  images: any[];
+  reviews: any[];
+  specifications: { specification_name: string; value: string }[];
+  deals: any[];
+  catalogueId?: string; // Optional field
+  actualPrice?: number; // Optional custom fields
+  isFeatured?: boolean;
+  freeDelivery?: boolean;
 }
 
 // Feature Table
@@ -130,6 +132,14 @@ export interface Supplier {
   email?: EMAIL
   phone?: string
 }
+
+// ProdctCategory Table
+export interface ProductCategory {
+  id: string;
+  name: string;
+  slug: string;
+}
+
 
 // ProductFeature Table
 export interface ProductFeature {

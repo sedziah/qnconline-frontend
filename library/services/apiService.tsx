@@ -1,31 +1,8 @@
 import axios from 'axios';
+import { Product, ProductCategory } from '../types';
 
 const API_BASE_URL = "https://api.qnconline.com";
 
-export interface ProductCategory {
-  id: string;
-  name: string;
-  slug: string;
-}
-
-export interface Product {
-  id: string;
-  name: string;
-  slug: string;
-  base_price: string | number;
-  currency: string;
-  price_adjustment: string;
-  inventory_quantity: number;
-  condition: string;
-  images: any[];
-  reviews: any[];
-  specifications: { specification_name: string; value: string }[];
-  deals: any[];
-  catalogueId?: string; // Optional field
-  actualPrice?: number; // Optional custom fields
-  isFeatured?: boolean;
-  freeDelivery?: boolean;
-}
 
 const api = axios.create({
   baseURL: API_BASE_URL,
