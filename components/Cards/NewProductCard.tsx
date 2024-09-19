@@ -8,22 +8,22 @@ interface ProductCardProps {
 
 const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
   // Calculate discount if applicable
-  const discount = product.priceAdjustment
-    ? `${product.priceAdjustment} off`
+  const discount = product?.priceAdjustment
+    ? `${product?.priceAdjustment} off`
     : 'No discount';
 
   // Handle the image, fallback if no image available
-  const imageUrl = (product.images && product.images.length > 0 && product.images[0].image)
-    ? product.images[0].image
+  const imageUrl = (product?.images && product?.images?.length > 0 && product?.images[0]?.image)
+    ? product?.images[0].image
     : '/placeholder-image.png'; // Use a placeholder image if no images are present or the image URL is invalid
 
-  const darkModeImageUrl = product.images.length > 1 && product.images[1].image 
-    ? product.images[1].image 
+  const darkModeImageUrl = product?.images?.length > 1 && product?.images[1]?.image 
+    ? product?.images[1]?.image 
     : imageUrl; // Fallback to main image if dark mode image is unavailable
 
   // Handle rating fallback if not available in product
-  const rating = product.reviews.length > 0
-    ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length
+  const rating = product?.reviews?.length > 0
+    ? product?.reviews.reduce((sum, review) => sum + review.rating, 0) / product?.reviews.length
     : 0;
 
   return (
@@ -35,14 +35,14 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
             height={150}
             className="object-contain h-full dark:hidden"
             src={imageUrl}  // Main image for light mode
-            alt={product.name}
+            alt={product?.name}
           />
           <Image
             width={150}
             height={150}
             className="object-contain h-full hidden dark:block"
             src={darkModeImageUrl}  // Dark mode image or fallback to main
-            alt={product.name}
+            alt={product?.name}
           />
         </div>
       </a>
@@ -67,7 +67,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
           WebkitBoxOrient: 'vertical',
         }}
       >
-        {product.name}
+        {product?.name}
       </a>
 
       <div className="mt-2 flex items-center gap-2">
@@ -86,7 +86,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         <p className="text-sm font-medium text-gray-900">{rating.toFixed(1)}</p>
-        <p className="text-sm font-medium text-gray-500">({product.reviews.length})</p>
+        <p className="text-sm font-medium text-gray-500">({product?.reviews?.length})</p>
       </div>
 
       <ul className="mt-2 flex items-center gap-4">
@@ -114,7 +114,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       <div className="mt-4 flex items-center justify-between gap-4">
         <p className="text-lg font-extrabold leading-tight text-gray-900">
-          {`₵ ${product.price}`}
+          {`₵ ${product?.price}`}
         </p>
 
         <button
