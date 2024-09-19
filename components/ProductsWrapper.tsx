@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import NewFilters from '../components/FIlters/NewFilter';
+import FilterSection from './FIlters/NewFilter';
 import { Pagination } from './Pagination';
 import { apiService } from '@/library/services/apiService';
-import { Product, ProductListingResponse } from '@/library/types'; 
+import { Product, ProductListingResponse } from '@/library/types';
 import NewProductCard from './Cards/NewProductCard';
 
 type PropType = {
-  categorySlug: string;  // Pass slug for API calls
-  categoryName: string;  // Pass name for display
+  categorySlug: string;
+  categoryName: string;
 };
 
 const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [filters, setFilters] = useState<Record<string, string>>({});
+  const [filters, setFilters] = useState<Record<string, string[]>>({});
+  const [specifications, setSpecifications] = useState<Record<string, string[]>>({}); // State to hold specifications
   const [loading, setLoading] = useState(true);
 
-  // Fetch products based on category slug and filters
+  // Fetch products and specifications based on category and filters
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProductsAndSpecs = async () => {
       setLoading(true);
       try {
         const fetchedProducts: ProductListingResponse = await apiService.getProductsByCategory(categorySlug, filters);
-        setProducts(fetchedProducts.products); 
+        setProducts(fetchedProducts.products);
+        setSpecifications(fetchedProducts.specifications); // Set specifications to display filters
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -29,19 +31,18 @@ const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => 
       }
     };
 
-    fetchProducts();
+    fetchProductsAndSpecs();
   }, [categorySlug, filters]);
 
-  // Handle filter change from NewFilter component
-  const handleFilterChange = (selectedFilters: Record<string, string>) => {
-    setFilters(selectedFilters); // Update filters to trigger new fetch
+  // Handle filter changes from FilterSection component
+  const handleFiltersChange = (updatedFilters: Record<string, string[]>) => {
+    setFilters(updatedFilters);  // Update filters state
   };
 
   return (
     <>
       <div className='w-full max-w-6xl mx-auto'>
         <div className='md:mx-4 my-10 mx-4 flex md:flex-row lg:flex-row items-center justify-between'>
-          {/* Display the category name here */}
           <h1 className='text-xl font-semibold capitalize'>Shop {categoryName}</h1>
 
           <form className="hidden lg:block md:block">
@@ -57,8 +58,8 @@ const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => 
 
       <div className='my-10 md:mx-4 mx-4'>
         <div className='max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-y-3 gap-x-6'>
-          {/* NewFilters component with filters */}
-          <NewFilters />
+          {/* Pass dynamic specifications to FilterSection */}
+          <FilterSection specifications={specifications} onFiltersChange={handleFiltersChange} />
             
           {/* Product grid */}
           <div className='col-span-1 md:col-span-4 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4'>
