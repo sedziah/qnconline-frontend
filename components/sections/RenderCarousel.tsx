@@ -96,19 +96,20 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
                 <div key={index} className="mx-1 py-3">
                   <NewProductCard
                     product={{
-                      id: product.id || 'N/A',
-                      name: product.name || 'No name available',
-                      slug: product.slug || 'no-slug',
-                      price: product.price || 0,
-                      currency: product.currency || 'N/A',
-                      basePrice: product.basePrice || '0.00',
-                      priceAdjustment: product.priceAdjustment || '0.00',
-                      inventoryQuantity: product.inventoryQuantity || 0,
-                      condition: product.condition || 'Unknown',
-                      images: product.images || [],
-                      reviews: product.reviews || [],
-                      specifications: product.specifications || [],
-                      deals: product.deals || [],
+                      ...product?.product,
+                      id: product?.id || 'N/A',
+                      name: product?.name || 'No name available',
+                      slug: product?.slug || 'no-slug',
+                      price: product?.price || 0,
+                      currency: product?.currency || 'N/A',
+                      basePrice: product?.basePrice || '0.00',
+                      priceAdjustment: product?.priceAdjustment || '0.00',
+                      inventoryQuantity: product?.inventoryQuantity || 0,
+                      condition: product?.condition || 'Unknown',
+                      images: product?.images || [],
+                      reviews: product?.reviews || [],
+                      specifications: product?.specifications || [],
+                      deals: product?.deals || [],
                       catalogueId: '', // Add your custom field
                       actualPrice: 0, // Set the actual price
                       isFeatured: false, // Set default values for additional fields

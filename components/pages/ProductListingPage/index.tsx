@@ -3,6 +3,7 @@ import Breadcrumb from '@/components/breadcrumb'
 import { CTAOne } from '@/components/CTAS/CTAOne'
 import FloatingFilter from '@/components/FloatingFilter'
 import ProductsWrapper from '@/components/ProductsWrapper'
+import RenderReviews from '@/components/sections/RenderReviews'
 import { useSearchParams } from 'next/navigation'
 import React, { Suspense } from 'react'
 import { BiSortAlt2 } from "react-icons/bi"
@@ -41,6 +42,8 @@ const ProductContent = () => {
         <ProductsWrapper categorySlug={categorySlug} categoryName={categoryName} />
       )}
 
+      {categorySlug && <RenderReviews />}
+      
       <FloatingFilter />
     </>
   )
