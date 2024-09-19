@@ -13,7 +13,9 @@ type PropType = {
   productCount: number
 }
 
-export const FilterDrawer = ({ openFilter, productCount, toogleFilterDrawer, specifications, handleFiltersChange }: PropType) => {
+const SORTOPTION = ["Bestsellers", "Price: Low to High", "Price: High to Low"]
+
+export const ProductSortDrawer = ({ openFilter, productCount, toogleFilterDrawer, specifications, handleFiltersChange }: PropType) => {
 
   return (
     <Drawer
@@ -31,12 +33,16 @@ export const FilterDrawer = ({ openFilter, productCount, toogleFilterDrawer, spe
         <button onClick={toogleFilterDrawer} className='w-10 h-10 text-3xl text-black'>
           <IoMdClose />
         </button>
-        <h1 className='text-base text-black font-normal text-center'>Filter</h1>
+        <h1 className='text-base text-black font-normal text-center'>Sort</h1>
         <div className="w-16"></div>
       </div>
 
-      <div className='h-full overflow-y-scroll px-4 mt-14'>
-        <FilterSection specifications={specifications} onFiltersChange={handleFiltersChange} />
+      <div className='h-full overflow-y-scroll flex flex-col space-y-3 w-full px-4 mt-14'>
+        {SORTOPTION?.map((option) => <button key={option} className='px-3 hover:bg-primary/10 py-4 flex flex-row items-center rounded-lg border border-bg-primary/10 gap-x-3'>
+          <div className='w-5 h-5 rounded-full border items-center justify-between border-primary'>
+          </div>
+          <span className="text-sm font-medium">{option}</span>
+        </button>)}
       </div>
 
 

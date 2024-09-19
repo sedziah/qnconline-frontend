@@ -12,7 +12,7 @@ const ProductListingPage = () => {
   return (
     <>
       {/* Loading indicator while waiting for the content */}
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Loading -...</div>}>
         <ProductContent />
       </Suspense>
     </>
