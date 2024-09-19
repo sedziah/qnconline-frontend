@@ -87,6 +87,7 @@ export interface Product {
   basePrice: string | number;
   currency: string;
   priceAdjustment: string;
+  price: number;
   inventoryQuantity: number;
   condition: string;
   images: ProductImage[];

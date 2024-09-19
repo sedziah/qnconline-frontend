@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ProductCard from './Cards/ProductCard';
 import NewFilters from '../components/FIlters/NewFilter';
 import { Pagination } from './Pagination';
 import { apiService } from '@/library/services/apiService';
@@ -58,7 +57,7 @@ const ProductsWrapper = ({ category = "All Products" }: PropType) => {
         <div className='max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-y-3 gap-x-6'>
           {/* NewFilters component with filters */}
           <NewFilters categorySlug={category} onFilterChange={handleFilterChange} />
-          
+            
           {/* Product grid */}
           <div className='col-span-1 md:col-span-4 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4'>
             {loading ? (

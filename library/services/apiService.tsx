@@ -11,6 +11,22 @@ const api = axios.create({
   },
 });
 
+// Helper function to build query parameters for filters
+const buildFilterParams = (filters: FilterParams): string => {
+  const params = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(filters)) {
+    if (Array.isArray(value)) {
+      value.forEach((val) => params.append(key, val.toString()));
+    } else {
+      params.append(key, value.toString());
+    }
+  }
+
+  return params.toString();
+};
+
+
 export const apiService = {
   getProductCategories: async (): Promise<ProductCategory[]> => {
     try {
@@ -32,16 +48,17 @@ export const apiService = {
   },
 
     // New API function to fetch products by category and filter based on specifications
-    getProductsByCategory: async (categorySlug: string, filters: FilterParams): Promise<ProductListingResponse> => {
-      const params = new URLSearchParams(filters);
-      try {
-        const response = await api.get<ProductListingResponse>(`/products/category/${categorySlug}/?${params.toString()}`);
-        return response.data;
-      } catch (error) {
-        console.error("Error fetching products by category:", error);
-        throw error;
-      }
-    },
+      // API function to fetch products by category and filter based on specifications
+  getProductsByCategory: async (categorySlug: string, filters: FilterParams): Promise<ProductListingResponse> => {
+    const query = buildFilterParams(filters); // Use the helper function here
+    try {
+      const response = await api.get<ProductListingResponse>(`/products/category/${categorySlug}/?${query}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching products by category:", error);
+      throw error;
+    }
+  },
 
   // New subscribe function
   subscribe: async (email: string): Promise<void> => {
