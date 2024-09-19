@@ -1,29 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation'; // Import the hook to access URL search params
 import NewFilters from '../components/FIlters/NewFilter';
 import { Pagination } from './Pagination';
 import { apiService } from '@/library/services/apiService';
-import { Product, ProductListingResponse } from '@/library/types';
+import { Product, ProductListingResponse } from '@/library/types'; // Import ProductListingResponse
 import NewProductCard from './Cards/NewProductCard';
 
-const ProductsWrapper = () => {
-  const searchParams = useSearchParams();
-  const categorySlug = searchParams.get('s'); // Get the category slug from the URL
-  const categoryName = searchParams.get('name') || 'All Products'; // Get the category name, default to "All Products" if missing
+type PropType = {
+  category: string;  // Ensure that 'category' prop is part of PropType
+};
 
+const ProductsWrapper: React.FC<PropType> = ({ category }) => {  // Make sure to use the PropType
   const [products, setProducts] = useState<Product[]>([]);
   const [filters, setFilters] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
 
   // Fetch products based on category and filters
   useEffect(() => {
-    if (!categorySlug) return; // Ensure we have a categorySlug before making API call
-
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const fetchedProducts: ProductListingResponse = await apiService.getProductsByCategory(categorySlug, filters);
-        setProducts(fetchedProducts.products);
+        const fetchedProducts: ProductListingResponse = await apiService.getProductsByCategory(category, filters);
+        setProducts(fetchedProducts.products); // Only set the products array
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -32,7 +29,7 @@ const ProductsWrapper = () => {
     };
 
     fetchProducts();
-  }, [categorySlug, filters]);
+  }, [category, filters]);
 
   // Handle filter change from NewFilter component
   const handleFilterChange = (selectedFilters: Record<string, string>) => {
@@ -43,7 +40,7 @@ const ProductsWrapper = () => {
     <>
       <div className='w-full max-w-6xl mx-auto'>
         <div className='md:mx-4 my-10 mx-4 flex md:flex-row lg:flex-row items-center justify-between'>
-          <h1 className='text-xl font-semibold capitalize'>Shop {categoryName}</h1>
+          <h1 className='text-xl font-semibold capitalize'>Shop {category}</h1>
 
           <form className="hidden lg:block md:block">
             <select id="sort" className="bg-white border border-lightGray text-gray-900 text-sm rounded-lg focus:ring-lightGray focus:border-lightGray block w-full p-2.5">
