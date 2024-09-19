@@ -28,7 +28,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div className="rounded-lg hover:shadow-xl transition-opacity bg-white p-4 shadow-lg">
-      <a href={`products/${product?.product?.slug}?i=${product?.id}`}
+      <a href={`products/${product?.product?.slug}?i=${product?.id}&name=${product?.name}`}
       >
         <div className="h-40 w-full flex justify-center items-center">
           <Image
@@ -57,7 +57,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       {/* Product Name with fixed height */}
       <a
-        href={`products/${product?.product?.slug}?i=${product?.id}`}
+        href={`products/${product?.product?.slug}?i=${product?.id}&name=${product?.name}`}
         className="text-sm font-semibold leading-tight text-gray-900 hover:underline flex items-center"
         style={{
           height: '3rem', // Fixed height to ensure uniformity (adjust based on font size)
