@@ -2,25 +2,26 @@ import React, { useState, useEffect } from 'react';
 import NewFilters from '../components/FIlters/NewFilter';
 import { Pagination } from './Pagination';
 import { apiService } from '@/library/services/apiService';
-import { Product, ProductListingResponse } from '@/library/types'; // Import ProductListingResponse
+import { Product, ProductListingResponse } from '@/library/types'; 
 import NewProductCard from './Cards/NewProductCard';
 
 type PropType = {
-  category: string;  // Ensure that 'category' prop is part of PropType
+  categorySlug: string;  // Pass slug for API calls
+  categoryName: string;  // Pass name for display
 };
 
-const ProductsWrapper: React.FC<PropType> = ({ category }) => {  // Make sure to use the PropType
+const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filters, setFilters] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
 
-  // Fetch products based on category and filters
+  // Fetch products based on category slug and filters
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const fetchedProducts: ProductListingResponse = await apiService.getProductsByCategory(category, filters);
-        setProducts(fetchedProducts.products); // Only set the products array
+        const fetchedProducts: ProductListingResponse = await apiService.getProductsByCategory(categorySlug, filters);
+        setProducts(fetchedProducts.products); 
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -29,7 +30,7 @@ const ProductsWrapper: React.FC<PropType> = ({ category }) => {  // Make sure to
     };
 
     fetchProducts();
-  }, [category, filters]);
+  }, [categorySlug, filters]);
 
   // Handle filter change from NewFilter component
   const handleFilterChange = (selectedFilters: Record<string, string>) => {
@@ -40,7 +41,8 @@ const ProductsWrapper: React.FC<PropType> = ({ category }) => {  // Make sure to
     <>
       <div className='w-full max-w-6xl mx-auto'>
         <div className='md:mx-4 my-10 mx-4 flex md:flex-row lg:flex-row items-center justify-between'>
-          <h1 className='text-xl font-semibold capitalize'>Shop {category}</h1>
+          {/* Display the category name here */}
+          <h1 className='text-xl font-semibold capitalize'>Shop {categoryName}</h1>
 
           <form className="hidden lg:block md:block">
             <select id="sort" className="bg-white border border-lightGray text-gray-900 text-sm rounded-lg focus:ring-lightGray focus:border-lightGray block w-full p-2.5">
