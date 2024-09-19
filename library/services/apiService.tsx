@@ -49,10 +49,18 @@ export const apiService = {
 
 
   // API function to fetch products by category and filter based on specifications
-  getProductsByCategory: async (categorySlug: string, filters: FilterParams): Promise<ProductListingResponse> => {
-    const query = buildFilterParams(filters); // Use the helper function here
+  getProductsByCategory: async (categorySlug: string, filters: Record<string, string[]>): Promise<ProductListingResponse> => {
+    const params = new URLSearchParams();
+
+    // Add filters to the URL search params
+    Object.keys(filters).forEach(filterKey => {
+      filters[filterKey].forEach(value => {
+        params.append(filterKey, value);  // Append multiple values for each filter
+      });
+    });
+
     try {
-      const response = await api.get<ProductListingResponse>(`/products/category/${categorySlug}/?${query}`);
+      const response = await api.get<ProductListingResponse>(`/products/category/${categorySlug}/?${params.toString()}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching products by category:", error);
