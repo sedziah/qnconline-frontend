@@ -36,7 +36,7 @@ const ProductContent = () => {
 
       {/* Pass the category slug to ProductsWrapper */}
       {categorySlug && (
-        <ProductsWrapper category={categorySlug} categoryName={categoryName || ''} />
+        <ProductsWrapper category={categorySlug} />
       )}
 
       <div className='block lg:hidden md:hidden bg-white shadow-md transition-all border-t-2 border-lightGray/20 px-4 py-3 w-full fixed bottom-0 '>
