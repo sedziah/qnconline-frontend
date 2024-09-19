@@ -1,34 +1,35 @@
-import Image from 'next/image';
-import React from 'react';
-import { Product } from '../../library/types';
+import Image from 'next/image'
+import React from 'react'
+import { Product } from '../../library/types'
 
 interface ProductCardProps {
-  product: Product;
+  product: Product
 }
 
 const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
   // Calculate discount if applicable
   const discount = product?.priceAdjustment
     ? `${product?.priceAdjustment} off`
-    : 'No discount';
+    : 'No discount'
 
   // Handle the image, fallback if no image available
   const imageUrl = (product?.images && product?.images?.length > 0 && product?.images[0]?.image)
     ? product?.images[0].image
-    : '/placeholder-image.png'; // Use a placeholder image if no images are present or the image URL is invalid
+    : '/placeholder-image.png' // Use a placeholder image if no images are present or the image URL is invalid
 
-  const darkModeImageUrl = product?.images?.length > 1 && product?.images[1]?.image 
-    ? product?.images[1]?.image 
-    : imageUrl; // Fallback to main image if dark mode image is unavailable
+  const darkModeImageUrl = product?.images?.length > 1 && product?.images[1]?.image
+    ? product?.images[1]?.image
+    : imageUrl // Fallback to main image if dark mode image is unavailable
 
   // Handle rating fallback if not available in product
   const rating = product?.reviews?.length > 0
     ? product?.reviews.reduce((sum, review) => sum + review.rating, 0) / product?.reviews.length
-    : 0;
+    : 0
 
   return (
     <div className="rounded-lg hover:shadow-xl transition-opacity bg-white p-4 shadow-lg">
-      <a href="#">
+      <a href={`products/${product?.product?.slug}?i=${product?.id}`}
+      >
         <div className="h-40 w-full flex justify-center items-center">
           <Image
             width={150}
@@ -56,7 +57,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       {/* Product Name with fixed height */}
       <a
-        href="#"
+        href={`products/${product?.product?.slug}?i=${product?.id}`}
         className="text-sm font-semibold leading-tight text-gray-900 hover:underline flex items-center"
         style={{
           height: '3rem', // Fixed height to ensure uniformity (adjust based on font size)
@@ -142,7 +143,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NewProductCard;
+export default NewProductCard
