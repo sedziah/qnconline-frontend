@@ -15,7 +15,7 @@ const Footer = () => {
                 src="/assets/logo-small-removebg-preview.png" className='h-10 object-contain' alt='logo' />
             </a>
             <p className="max-w-xs mt-4 text-sm text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, accusantium.
+            Welcome to Q&C Online – where quality meets convenience. Discover the latest in tech, accessories, and more with unbeatable deals.
             </p>
             <div className="flex mt-8 space-x-6 text-gray-600">
               <a className="hover:opacity-75" href="#" target="_blank" rel="noreferrer">

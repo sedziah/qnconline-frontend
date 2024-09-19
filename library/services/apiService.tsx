@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Product, ProductCategory } from '../types';
+import { Product, ProductCategory, ProductListingResponse, FilterParams } from '../types';
 
 const API_BASE_URL = "https://api.qnconline.com";
 
@@ -30,6 +30,18 @@ export const apiService = {
       throw error;
     }
   },
+
+    // New API function to fetch products by category and filter based on specifications
+    getProductsByCategory: async (categorySlug: string, filters: FilterParams): Promise<ProductListingResponse> => {
+      const params = new URLSearchParams(filters);
+      try {
+        const response = await api.get<ProductListingResponse>(`/products/category/${categorySlug}/?${params.toString()}`);
+        return response.data;
+      } catch (error) {
+        console.error("Error fetching products by category:", error);
+        throw error;
+      }
+    },
 
   // New subscribe function
   subscribe: async (email: string): Promise<void> => {
