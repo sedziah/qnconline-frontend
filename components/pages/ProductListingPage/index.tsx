@@ -1,42 +1,41 @@
-"use client"
-import Breadcrumb from '@/components/breadcrumb'
-import { CTAOne } from '@/components/CTAS/CTAOne'
-import ProductsWrapper from '@/components/ProductsWrapper'
-import { useSearchParams } from 'next/navigation'
-import React, { Suspense } from 'react'  // Import Suspense
-import { BiSortAlt2 } from "react-icons/bi"
-import { FaFilter } from "react-icons/fa"
+"use client";
+import Breadcrumb from '@/components/breadcrumb';
+import { CTAOne } from '@/components/CTAS/CTAOne';
+import ProductsWrapper from '@/components/ProductsWrapper';
+import { useSearchParams } from 'next/navigation';
+import React, { Suspense } from 'react';  
+import { BiSortAlt2 } from "react-icons/bi";
+import { FaFilter } from "react-icons/fa";
 
 const ProductListingPage = () => {
   return (
     <>
-      {/* TODO: REPLACE WITH ACTUAL LOADING INDICATOR */}
+      {/* Loading indicator while waiting for the content */}
       <Suspense fallback={<div>Loading...</div>}>
         <ProductContent />
       </Suspense>
     </>
-  )
-}
+  );
+};
 
 const ProductContent = () => {
-  const searchParams = useSearchParams()
-  const categorySlug = searchParams.get('s') // 's' for slug based on your endpoint requirements
-  const categoryName = searchParams.get('name')
+  const searchParams = useSearchParams();
+  const categorySlug = searchParams.get('s'); // Extract the slug from the URL
+  const categoryName = searchParams.get('name') || 'All Products'; // Extract the name from the URL
 
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: categoryName! }, // Ensure categoryName is being passed
-  ]
+    { label: categoryName },  // Display the category name in the breadcrumb
+  ];
 
   return (
     <>
-      <Breadcrumb items={categoryName ? breadcrumbItems : breadcrumbItems?.slice(0, 1)} />
-
+      <Breadcrumb items={categoryName ? breadcrumbItems : breadcrumbItems.slice(0, 1)} />
       <CTAOne />
 
-      {/* Pass the category slug to ProductsWrapper */}
+      {/* Pass both categorySlug and categoryName to ProductsWrapper */}
       {categorySlug && (
-        <ProductsWrapper category={categorySlug} />
+        <ProductsWrapper categorySlug={categorySlug} categoryName={categoryName} />
       )}
 
       <div className='block lg:hidden md:hidden bg-white shadow-md transition-all border-t-2 border-lightGray/20 px-4 py-3 w-full fixed bottom-0 '>
@@ -53,7 +52,7 @@ const ProductContent = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ProductListingPage
+export default ProductListingPage;
