@@ -47,8 +47,8 @@ export const apiService = {
     }
   },
 
-    // New API function to fetch products by category and filter based on specifications
-      // API function to fetch products by category and filter based on specifications
+
+  // API function to fetch products by category and filter based on specifications
   getProductsByCategory: async (categorySlug: string, filters: FilterParams): Promise<ProductListingResponse> => {
     const query = buildFilterParams(filters); // Use the helper function here
     try {

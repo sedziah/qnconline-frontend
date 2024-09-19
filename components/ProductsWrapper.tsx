@@ -6,10 +6,10 @@ import { Product, ProductListingResponse } from '@/library/types'; // Import Pro
 import NewProductCard from './Cards/NewProductCard';
 
 type PropType = {
-  category: string;
+  category: string;  // Ensure that 'category' prop is part of PropType
 };
 
-const ProductsWrapper = ({ category = "All Products" }: PropType) => {
+const ProductsWrapper: React.FC<PropType> = ({ category }) => {  // Make sure to use the PropType
   const [products, setProducts] = useState<Product[]>([]);
   const [filters, setFilters] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
