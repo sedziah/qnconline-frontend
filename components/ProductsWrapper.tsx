@@ -40,7 +40,7 @@ const ProductsWrapper = ({ category = "All Products" }: PropType) => {
     <>
       <div className='w-full max-w-6xl mx-auto'>
         <div className='md:mx-4 my-10 mx-4 flex md:flex-row lg:flex-row items-center justify-between'>
-          <h1 className='text-xl font-semibold capitalize'>{category}</h1>
+          <h1 className='text-xl font-semibold capitalize'>Shop {category}</h1>
 
           <form className="hidden lg:block md:block">
             <select id="sort" className="bg-white border border-lightGray text-gray-900 text-sm rounded-lg focus:ring-lightGray focus:border-lightGray block w-full p-2.5">
@@ -56,7 +56,7 @@ const ProductsWrapper = ({ category = "All Products" }: PropType) => {
       <div className='my-10 md:mx-4 mx-4'>
         <div className='max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-y-3 gap-x-6'>
           {/* NewFilters component with filters */}
-          <NewFilters categorySlug={category} onFilterChange={handleFilterChange} />
+          <NewFilters />
             
           {/* Product grid */}
           <div className='col-span-1 md:col-span-4 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4'>
