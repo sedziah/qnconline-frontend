@@ -20,11 +20,12 @@ const ProductListingPage = () => {
 
 const ProductContent = () => {
   const searchParams = useSearchParams()
+  const categorySlug = searchParams.get('s') // 's' for slug based on your endpoint requirements
   const categoryName = searchParams.get('name')
 
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: categoryName! },
+    { label: categoryName! }, // Ensure categoryName is being passed
   ]
 
   return (
@@ -33,7 +34,10 @@ const ProductContent = () => {
 
       <CTAOne />
 
-      <ProductsWrapper cateogry={`All Refurbished ${categoryName ?? ""}`} />
+      {/* Pass the category slug to ProductsWrapper */}
+      {categorySlug && (
+        <ProductsWrapper category={categorySlug} />
+      )}
 
       <div className='block lg:hidden md:hidden bg-white shadow-md transition-all border-t-2 border-lightGray/20 px-4 py-3 w-full fixed bottom-0 '>
         <div className='flex flex-row items-center justify-center w-full'>

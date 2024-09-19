@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 
 
-type PropType = {
-  label: string
-  options: string[]
+interface PropType {
+  key: string;
+  label: string;
+  options: string[];
+  selectedOption: string; // Add this line
+  onChange: (e: any) => void;
 }
+
 
 const FilterCard = ({label, options }: PropType) => {
   const [checked, setIsChecked] = useState(false)

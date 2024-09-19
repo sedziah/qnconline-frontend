@@ -8,8 +8,8 @@ interface ProductCardProps {
 
 const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
   // Calculate discount if applicable
-  const discount = product.price_adjustment
-    ? `${product.price_adjustment} off`
+  const discount = product.priceAdjustment
+    ? `${product.priceAdjustment} off`
     : 'No discount';
 
   // Handle the image, fallback if no image available
@@ -114,7 +114,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       <div className="mt-4 flex items-center justify-between gap-4">
         <p className="text-lg font-extrabold leading-tight text-gray-900">
-          {`GHS ${product.base_price}`}
+          {`GHS ${product.price}`}
         </p>
 
         <button

@@ -53,11 +53,11 @@ const Filter1 = () => {
         {/* Colors Section */}
 
 
+        {/* <FilterCard label="Brand" options={[]} />
         <FilterCard label="Brand" options={[]} />
         <FilterCard label="Brand" options={[]} />
         <FilterCard label="Brand" options={[]} />
-        <FilterCard label="Brand" options={[]} />
-        <FilterCard label="Brand" options={[]} />
+        <FilterCard label="Brand" options={[]} /> */}
 
 
 
