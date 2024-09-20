@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import React from 'react'
 
 export const metadata: Metadata = {
-  title: "QNCONLINE - Products",
+  title: "Q&C Online - Products",
   description: "A Home of Premium Products & Exemplary Customer Care!",
 }
 
