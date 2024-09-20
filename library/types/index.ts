@@ -98,13 +98,7 @@ export interface Product {
   actualPrice?: number // Optional custom fields
   isFeatured?: boolean
   freeDelivery?: boolean
-  product: {
-    id: string
-    name: string
-    slug: string
-    base_price: string
-    currency: string
-  },
+  
 }
 
 // Feature Table

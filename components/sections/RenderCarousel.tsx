@@ -96,7 +96,7 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
                 <div key={index} className="mx-1 py-3">
                   <NewProductCard
                     product={{
-                      ...product?.product,
+                      // ...product?.product,
                       id: product?.id || 'N/A',
                       name: product?.name || 'No name available',
                       slug: product?.slug || 'no-slug',
