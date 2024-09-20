@@ -1,43 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import FilterSection from './FIlters/NewFilter';
-import { Pagination } from './Pagination';
-import { apiService } from '@/library/services/apiService';
-import { Product, ProductListingResponse } from '@/library/types';
-import NewProductCard from './Cards/NewProductCard';
+import React, { useState, useEffect } from 'react'
+import FilterSection from './FIlters/NewFilter'
+import { Pagination } from './Pagination'
+import { apiService } from '@/library/services/apiService'
+import { Product, ProductListingResponse } from '@/library/types'
+import NewProductCard from './Cards/NewProductCard'
 
 type PropType = {
-  categorySlug: string;
-  categoryName: string;
-};
+  categorySlug: string
+  categoryName: string
+}
 
 const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [filters, setFilters] = useState<Record<string, string[]>>({});
-  const [specifications, setSpecifications] = useState<Record<string, string[]>>({}); // State to hold specifications
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState<Product[]>([])
+  const [filters, setFilters] = useState<Record<string, string[]>>({})
+  const [specifications, setSpecifications] = useState<Record<string, string[]>>({}) // State to hold specifications
+  const [loading, setLoading] = useState(true)
 
   // Fetch products and specifications based on category and filters
   useEffect(() => {
     const fetchProductsAndSpecs = async () => {
-      setLoading(true);
+      setLoading(true)
       try {
-        const fetchedProducts: ProductListingResponse = await apiService.getProductsByCategory(categorySlug, filters);
-        setProducts(fetchedProducts.products);
-        setSpecifications(fetchedProducts.specifications); // Set specifications to display filters
+        const fetchedProducts: ProductListingResponse = await apiService.getProductsByCategory(categorySlug, filters)
+        setProducts(fetchedProducts.products)
+        setSpecifications(fetchedProducts.specifications) // Set specifications to display filters
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error fetching products:", error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchProductsAndSpecs();
-  }, [categorySlug, filters]);
+    fetchProductsAndSpecs()
+  }, [categorySlug, filters])
 
   // Handle filter changes from FilterSection component
   const handleFiltersChange = (updatedFilters: Record<string, string[]>) => {
-    setFilters(updatedFilters);  // Update filters state
-  };
+    setFilters(updatedFilters)  // Update filters state
+  }
 
   return (
     <>
@@ -59,15 +59,27 @@ const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => 
       <div className='my-10 md:mx-4 mx-4'>
         <div className='max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-y-3 gap-x-6'>
           {/* Pass dynamic specifications to FilterSection */}
+          <div className='hidden lg:block'>
           <FilterSection specifications={specifications} onFiltersChange={handleFiltersChange} />
-            
+          </div>
+
           {/* Product grid */}
           <div className='col-span-1 md:col-span-4 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4'>
             {loading ? (
-              <p>Loading products...</p>
+              Array(15).fill({})?.map((_, key) => <div   key={key}className='w-full'>
+                <div
+                  className="h-40 w-full bg-gray-200 rounded animate-pulse"
+                ></div>
+                <div
+                  className="h-2 w-3/4 mt-2 bg-gray-200 rounded animate-pulse"
+                ></div>
+                <div
+                  className="h-2 w-3/4 mt-2 bg-gray-200 rounded animate-pulse"
+                ></div>
+              </div>)
             ) : (
               products.map((product) => (
-                <div key={product.id} className='mx-1 py-3'>
+                <div key={product?.id} className='mx-1 py-3'>
                   <NewProductCard product={product} />
                 </div>
               ))
@@ -79,7 +91,7 @@ const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => 
         <Pagination />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ProductsWrapper;
+export default ProductsWrapper
