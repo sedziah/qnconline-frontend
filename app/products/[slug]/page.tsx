@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import React from 'react'
 
 export const metadata: Metadata = {
-  title: "QNCONLINE - ", // Dynamic Title
+  title: "Q&C Online - ", // Dynamic Title
   description: "A Home of Premium Products & Exemplary Customer Care!",
 }
 
