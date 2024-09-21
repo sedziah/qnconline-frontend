@@ -10,7 +10,7 @@ interface ProductCategoryCardProps {
   linkUrl: string;
 }
 
-const ProductCategoryCard: React.FC<ProductCategoryCardProps> = ({
+const NewProductCategoryCard: React.FC<ProductCategoryCardProps> = ({
   name,
   description,
   imageUrl,
@@ -49,4 +49,4 @@ const ProductCategoryCard: React.FC<ProductCategoryCardProps> = ({
   );
 };
 
-export default ProductCategoryCard;
+export default NewProductCategoryCard;
