@@ -28,6 +28,8 @@ const buildFilterParams = (filters: FilterParams): string => {
 
 
 export const apiService = {
+
+  // API function to fetch product categories by slug
   getProductCategories: async (): Promise<ProductCategory[]> => {
     try {
       const response = await api.get<ProductCategory[]>('/products/categories/active-product-categories/');
@@ -37,6 +39,8 @@ export const apiService = {
       throw error;
     }
   },
+
+  // API function to fetch daily deals
   getDailyDeals: async (): Promise<Product[]> => {
     try {
       const response = await api.get<Product[]>('/products/daily-deals');
@@ -75,6 +79,16 @@ export const apiService = {
       console.log("Subscription successful:", response.data);
     } catch (error) {
       console.error("Error subscribing:", error);
+      throw error;
+    }
+  },
+
+  getSustainableProducts: async () => {
+    try {
+      const response = await api.get('/products/sustainable-products/');
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching sustainable products:", error);
       throw error;
     }
   },

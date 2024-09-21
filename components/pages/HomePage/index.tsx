@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import BannerCarousel from '../../Banners/BannerCarousel';
-import RenderMostWanted from '../../sections/RenderMostWanted';
 import RenderAccessories from '../../sections/RenderAccessories';
 import RenderBlogCarousel from '../../sections/RenderBlogCarousel';
 import InfoCard from '../../Cards/InfoCard';
@@ -10,6 +9,7 @@ import RenderVideoReviews from '../../sections/RenderVideoReviews';
 import RenderCarousel from '../../sections/RenderCarousel';
 import { apiService } from '../../../library/services/apiService';
 import { Product } from '../../../library/types';
+import RenderSustainableProduct from '../../sections/RenderSustainableProduct';
 
 
 export default function HomePage() {
@@ -66,7 +66,7 @@ export default function HomePage() {
         loading={loading} 
       />
 
-      <RenderAccessories />
+      <RenderSustainableProduct />
 
       <RenderCarousel
         title="Trending Products"
