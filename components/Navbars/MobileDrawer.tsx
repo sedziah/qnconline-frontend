@@ -24,7 +24,7 @@ const MobileDrawer = ({ categories, setIsOpen }: {
         </button>
       </div>
 
-      <div className='mb-6'>
+      <div className='mb-6 mt-24'>
         {categories.map((category) => (
           <a
             key={category.name}
