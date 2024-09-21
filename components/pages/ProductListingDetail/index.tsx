@@ -3,8 +3,12 @@ import Breadcrumb from '@/components/breadcrumb'
 import ReviewCard from '@/components/Cards/ReviewCard'
 import { CTAOne } from '@/components/CTAS/CTAOne'
 import Footer from '@/components/Footer'
+import RenderAppearanceControl from '@/components/sections/RenderAppearanceControl'
+import RenderBatteryControl from '@/components/sections/RenderBatteryControl'
 import RenderCarousel from '@/components/sections/RenderCarousel'
 import RenderReviews from '@/components/sections/RenderReviews'
+import RenderStorageControl from '@/components/sections/RenderStorageControl'
+import RenderTradeInPromo from '@/components/sections/RenderTradeInPromo'
 import { apiService } from '@/library/services/apiService'
 import { Product } from '@/library/types'
 import { useSearchParams } from 'next/navigation'
@@ -14,7 +18,7 @@ export const ProductListingDetail = () => {
   const searchParams = useSearchParams()
   const productName = searchParams.get('name')
   const [mostWantedProducts, setMostWantedProducts] = useState<Product[]>([])
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
 
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
@@ -27,7 +31,7 @@ export const ProductListingDetail = () => {
     const fetchMostWantedProducts = async () => {
       try {
         const products = await apiService.getDailyDeals()
-        setMostWantedProducts(products) 
+        setMostWantedProducts(products)
       } catch (err) {
         console.error('Failed to fetch products', err)
       } finally {
@@ -36,11 +40,30 @@ export const ProductListingDetail = () => {
     }
 
     fetchMostWantedProducts()
-  }, []);
+  }, [])
 
   return (
     <>
+
+
       <Breadcrumb items={breadcrumbItems} />
+
+      <RenderAppearanceControl />
+
+      <RenderBatteryControl />
+
+      <RenderStorageControl />
+
+
+      {/* Detail Preview */}
+
+
+      <RenderTradeInPromo />
+
+
+
+
+
 
 
       <RenderCarousel
@@ -49,7 +72,7 @@ export const ProductListingDetail = () => {
         payload={mostWantedProducts}
         loading={loading}
       />
-      
+
       <RenderCarousel
         title="Pairs well with"
         payload={mostWantedProducts}
@@ -59,6 +82,8 @@ export const ProductListingDetail = () => {
       <RenderReviews />
 
       <CTAOne />
+
+      <div className='my-10'></div>
     </>
   )
 }
