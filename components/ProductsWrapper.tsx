@@ -37,8 +37,9 @@ const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => 
         // Log pagination details
         console.log('Pagination details:', fetchedProducts.pagination)
 
-        setTotalPages(fetchedProducts.pagination.totalPages) // Update total pages
-        setCurrentPage(fetchedProducts.pagination.currentPage) // Ensure current page is being updated
+        // Use correct field names for pagination
+        setTotalPages(fetchedProducts.pagination.total_pages) // Update total pages
+        setCurrentPage(fetchedProducts.pagination.current_page) // Ensure current page is being updated
 
       } catch (error) {
         console.error("Error fetching products:", error)
