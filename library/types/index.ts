@@ -5,8 +5,8 @@ type DATETIME = string
 type EMAIL = string
 
 export interface Pagination {
-  currentPage: number
-  totalPages: number
+  current_page: number
+  total_pages: number
   totalProducts: number
   pageSize: number
 }
