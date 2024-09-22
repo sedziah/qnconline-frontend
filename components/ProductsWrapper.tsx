@@ -34,9 +34,6 @@ const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => 
         setProducts(fetchedProducts.products)
         setSpecifications(fetchedProducts.specifications) // Set specifications to display filters
 
-        // Log pagination details
-        console.log('Pagination details:', fetchedProducts.pagination)
-
         // Use correct field names for pagination
         setTotalPages(fetchedProducts.pagination.total_pages) // Update total pages
         setCurrentPage(fetchedProducts.pagination.current_page) // Ensure current page is being updated
