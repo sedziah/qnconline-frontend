@@ -4,6 +4,13 @@ type IMAGE = string
 type DATETIME = string
 type EMAIL = string
 
+export interface Pagination {
+  currentPage: number
+  totalPages: number
+  totalProducts: number
+  pageSize: number
+}
+
 // Category Table
 export interface Category {
   id: UUID // Primary Key
@@ -98,8 +105,11 @@ export interface Product {
   actualPrice?: number // Optional custom fields
   isFeatured?: boolean
   freeDelivery?: boolean
+  pagination: Pagination
   
 }
+
+
 
 // Feature Table
 export interface Feature {
@@ -196,6 +206,7 @@ export interface SpecificationOptions {
 export interface ProductListingResponse {
   products: Product[]
   specifications: Record<string, string[]> // Adjust this if needed
+  pagination: Pagination
   // Add other fields here if necessary (pagination, etc.)
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import FilterSection from './FIlters/NewFilter'
-import { Pagination } from './Pagination'
+import { NewPagination } from './NewPagination'
 import { apiService } from '@/library/services/apiService'
 import { Product, ProductListingResponse } from '@/library/types'
 import NewProductCard from './Cards/NewProductCard'
@@ -16,14 +16,30 @@ const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => 
   const [specifications, setSpecifications] = useState<Record<string, string[]>>({}) // State to hold specifications
   const [loading, setLoading] = useState(true)
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+
   // Fetch products and specifications based on category and filters
   useEffect(() => {
     const fetchProductsAndSpecs = async () => {
       setLoading(true)
       try {
-        const fetchedProducts: ProductListingResponse = await apiService.getProductsByCategory(categorySlug, filters)
+        // Fetch products with pagination and filters
+        const fetchedProducts: ProductListingResponse = await apiService.getProductsByCategory(categorySlug, {
+          ...filters,
+          page: [currentPage.toString()] // Pass the current page as a filter
+        })
+
         setProducts(fetchedProducts.products)
         setSpecifications(fetchedProducts.specifications) // Set specifications to display filters
+
+        // Log pagination details
+        console.log('Pagination details:', fetchedProducts.pagination)
+
+        setTotalPages(fetchedProducts.pagination.total_pages) // Update total pages
+        setCurrentPage(fetchedProducts.pagination.current_page) // Ensure current page is being updated
+
       } catch (error) {
         console.error("Error fetching products:", error)
       } finally {
@@ -32,11 +48,17 @@ const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => 
     }
 
     fetchProductsAndSpecs()
-  }, [categorySlug, filters])
+  }, [categorySlug, filters, currentPage])
 
   // Handle filter changes from FilterSection component
   const handleFiltersChange = (updatedFilters: Record<string, string[]>) => {
     setFilters(updatedFilters)  // Update filters state
+    setCurrentPage(1) // Reset to the first page when filters change
+  }
+
+  // Handle page change
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
   }
 
   return (
@@ -60,13 +82,13 @@ const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => 
         <div className='max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-y-3 gap-x-6'>
           {/* Pass dynamic specifications to FilterSection */}
           <div className='hidden lg:block'>
-          <FilterSection specifications={specifications} onFiltersChange={handleFiltersChange} />
+            <FilterSection specifications={specifications} onFiltersChange={handleFiltersChange} />
           </div>
 
           {/* Product grid */}
           <div className='col-span-1 md:col-span-4 lg:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4'>
             {loading ? (
-              Array(15).fill({})?.map((_, key) => <div   key={key}className='w-full'>
+              Array(15).fill({})?.map((_, key) => <div key={key} className='w-full'>
                 <div
                   className="h-40 w-full bg-gray-200 rounded animate-pulse"
                 ></div>
@@ -88,7 +110,9 @@ const ProductsWrapper: React.FC<PropType> = ({ categorySlug, categoryName }) => 
         </div>
 
         {/* Pagination */}
-        <Pagination />
+        {totalPages > 1 && (
+          <NewPagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+        )}
       </div>
     </>
   )
