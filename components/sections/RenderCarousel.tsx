@@ -114,6 +114,7 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
                       actualPrice: 0, // Set the actual price
                       isFeatured: false, // Set default values for additional fields
                       freeDelivery: false, // Set default values for additional fields
+                      pagination: product?.pagination,
                     }}
                   />
                 </div>
