@@ -87,7 +87,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         <p className="text-sm font-medium text-gray-900">{rating.toFixed(1)}</p>
-        <p className="text-sm font-medium text-gray-500">({product?.reviews?.length})</p>
+        {/* <p className="text-sm font-medium text-gray-500">({product?.reviews?.length})</p> */}
       </div>
 
       <ul className="mt-2 flex items-center gap-4">
