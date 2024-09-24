@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import RenderAppearanceControl from '@/components/sections/RenderAppearanceControl'
 import RenderBatteryControl from '@/components/sections/RenderBatteryControl'
 import RenderCarousel from '@/components/sections/RenderCarousel'
+import RenderProductSummary from '@/components/sections/RenderProductSummary'
 import RenderReviews from '@/components/sections/RenderReviews'
 import RenderStorageControl from '@/components/sections/RenderStorageControl'
 import RenderTradeInPromo from '@/components/sections/RenderTradeInPromo'
@@ -44,9 +45,9 @@ export const ProductListingDetail = () => {
 
   return (
     <>
-
-
       <Breadcrumb items={breadcrumbItems} />
+
+      <RenderProductSummary />
 
       <RenderAppearanceControl />
 
@@ -59,9 +60,6 @@ export const ProductListingDetail = () => {
 
 
       <RenderTradeInPromo />
-
-
-
 
 
 
