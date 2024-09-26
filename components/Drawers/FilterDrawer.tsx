@@ -3,7 +3,7 @@ import { IoMdClose } from 'react-icons/io'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import FloatingButton from '../FloatingButton'
-// import FilterSection from '../Filters/NewFilter'
+import FilterSection from '../Filters/NewFilter'
 
 type PropType = {
   openFilter: boolean
@@ -35,9 +35,9 @@ export const FilterDrawer = ({ openFilter, productCount, toogleFilterDrawer, spe
         <div className="w-16"></div>
       </div>
 
-      {/* <div className='h-full overflow-y-scroll px-4 mt-14'>
+      <div className='h-full overflow-y-scroll px-4 mt-14'>
         <FilterSection specifications={specifications} onFiltersChange={handleFiltersChange} />
-      </div> */}
+      </div>
 
 
 
