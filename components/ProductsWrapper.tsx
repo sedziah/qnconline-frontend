@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from '@/library/services/apiService';
 import NewProductCard from './Cards/NewProductCard';
-import FilterSection from './Filters/NewFilter';
+// import FilterSection from './Filters/NewFilter';
 import { NewPagination } from './NewPagination';
 
 type ProductsWrapperProps = {
@@ -43,9 +43,9 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ categorySlug, categor
   return (
     <div className="w-full max-w-6xl mx-auto">
       <div className="flex flex-col lg:flex-row my-10 gap-6">
-        <div className="w-full lg:w-1/4">
+        {/* <div className="w-full lg:w-1/4">
           <FilterSection specifications={availableFilters} onFiltersChange={handleFilterChange} />
-        </div>
+        </div> */}
 
         <div className="w-full lg:w-3/4">
           <div className="flex items-center justify-between mb-4">
