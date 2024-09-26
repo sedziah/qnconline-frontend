@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from '@/library/services/apiService';
 import NewProductCard from './Cards/NewProductCard';
-import FilterSection from "./Filters/NewFilter"
+import FilterSection from "./FIlters/NewFilter"
 import { NewPagination } from './NewPagination';
 
 type ProductsWrapperProps = {
