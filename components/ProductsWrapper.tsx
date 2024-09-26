@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router'; // Import useRouter to get query params
 import { apiService } from '@/library/services/apiService'; // Import your apiService
 import NewProductCard from './Cards/NewProductCard'; // Import your product card component
 import FilterSection from './Filters/NewFilter'; // Import the filter section component
 import { NewPagination } from './NewPagination'; // Import your pagination component
 
-const ProductsWrapper: React.FC = () => {
-  const router = useRouter(); // Get the router instance to access the query params
-  const { s: categorySlug } = router.query; // Extract the 's' query parameter for category slug
+type ProductsWrapperProps = {
+  categorySlug: string;
+  categoryName: string; // Accept categoryName as a prop
+};
 
+const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ categorySlug, categoryName }) => {
   const [products, setProducts] = useState<any[]>([]); // To store the fetched products
   const [availableFilters, setAvailableFilters] = useState<Record<string, string[]>>({}); // To store available filters from API
   const [loading, setLoading] = useState(true); // To handle the loading state
@@ -23,7 +24,7 @@ const ProductsWrapper: React.FC = () => {
       setLoading(true);
       try {
         // Fetch products based on categorySlug and filters (no pagination passed)
-        const fetchedData = await apiService.getProductsByCategory(categorySlug as string, filters);
+        const fetchedData = await apiService.getProductsByCategory(categorySlug, filters);
 
         // Log the API response for debugging
         console.log('API Response:', fetchedData);
@@ -56,9 +57,13 @@ const ProductsWrapper: React.FC = () => {
         <div className="w-full lg:w-1/4">
           <FilterSection availableFilters={availableFilters} onFiltersChange={handleFilterChange} />
         </div>
-        
+
         {/* Product Grid - Right side */}
         <div className="w-full lg:w-3/4">
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-2xl font-bold">Shop {categoryName}</h1> {/* Use categoryName here */}
+          </div>
+
           <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
             {loading ? (
               Array(15)
