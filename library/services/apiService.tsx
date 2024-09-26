@@ -52,25 +52,42 @@ export const apiService = {
   },
 
 
-  // API function to fetch products by category and filter based on specifications
-  getProductsByCategory: async (categorySlug: string, filters: Record<string, string[]>): Promise<ProductListingResponse> => {
+  // Updated API function to fetch products by category slug
+  getProductsByCategory: async (
+    categorySlug: string,
+    filters: { [key: string]: string[] } // Accept dynamic filters
+  ): Promise<any> => {
+    // Construct query parameters for filters
     const params = new URLSearchParams();
 
-    // Add filters to the URL search params
-    Object.keys(filters).forEach(filterKey => {
-      filters[filterKey].forEach(value => {
-        params.append(filterKey, value);  // Append multiple values for each filter
+    // Add filters to query parameters
+    Object.keys(filters).forEach((filterKey: string) => {
+      const filterValues: string[] = filters[filterKey];
+      filterValues.forEach((filterValue: string) => {
+        params.append(filterKey, filterValue); // Add each filter value to the query string
       });
     });
 
     try {
-      const response = await api.get<ProductListingResponse>(`/products/category/${categorySlug}/?${params.toString()}`);
-      return response.data;
+      // Log the constructed query string for debugging
+      console.log('Constructed Query Params:', params.toString());
+
+      // Make the GET request to the category products endpoint with filters
+      const response = await axios.get<any>(
+        `https://api.qnconline.com/products/category/${categorySlug}/?${params.toString()}`
+      );
+
+      // Log the API response for debugging
+      console.log('API Response:', response.data);
+
+      return response.data; // Return the response data
     } catch (error) {
-      console.error("Error fetching products by category:", error);
-      throw error;
+      console.error('Error fetching products by category:', error);
+      throw error; // Throw error to handle it properly in calling code
     }
   },
+
+  
 
   // New subscribe function
   subscribe: async (email: string): Promise<void> => {
