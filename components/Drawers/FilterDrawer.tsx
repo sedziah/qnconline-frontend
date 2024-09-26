@@ -3,7 +3,7 @@ import { IoMdClose } from 'react-icons/io'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import FloatingButton from '../FloatingButton'
-import FilterSection from '../Filters/NewFilter'
+import FilterSection from '../FIlters/NewFilter'
 
 type PropType = {
   openFilter: boolean
