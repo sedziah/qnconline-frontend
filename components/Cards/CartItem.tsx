@@ -30,7 +30,7 @@ const CartItem = () => {
         </div>
 
         <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-          <a href="#" className="text-sm font-medium text-gray-900 hover:underline ">PC system All in One APPLE iMac (2023) mqrq3ro/a, Apple M3, 24" Retina 4.5K, 8GB, SSD 256GB, 10-core GPU, Keyboard layout INT</a>
+          <a href="#" className="text-sm font-medium text-gray-900 hover:underline ">PC system All in One APPLE iMac (2023) mqrq3ro/a, Apple M3, 24` Retina 4.5K, 8GB, SSD 256GB, 10-core GPU, Keyboard layout INT</a>
 
           <div className="flex items-center gap-4">
             <button type="button" className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gray-900 hover:underline ">

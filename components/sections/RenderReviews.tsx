@@ -62,11 +62,11 @@ const RenderReviews = () => {
         <div>
           <p className='text-sm font-medium text-black'>Filter by stars</p>
           <div className='mt-7'>
-            {DUMMYDATA?.map((filter) => <button onClick={() => setSelectedFilter(filter)} className='flex flex-row capitalize text-start transition-all  items-center gap-x-5 my-6 w-full'>
-              {filter?.rating === selectedFilter?.rating ? <div className='w-5 h-5 border flex flex-row items-center justify-center bg-black border-black rounded-full'>
+            {DUMMYDATA?.map((filter) => <button key={filter?.percentage} onClick={() => setSelectedFilter(filter)} className='flex flex-row capitalize text-start transition-all  items-center gap-x-5 my-6 w-full'>
+              {filter?.rating === selectedFilter?.rating ? <div className='w-5 h-5 border flex flex-row items-center justify-center bg-primary border-primary rounded-full'>
                 <div className='h-2 w-2 bg-white rounded-full'></div>
               </div> :
-                <div className='w-5 h-5 border border-black rounded-full'></div>
+                <div className='w-5 h-5 border border-primary rounded-full'></div>
               }
 
               <p className='text-base font-normal text-black w-12'>{filter?.rating}</p>
