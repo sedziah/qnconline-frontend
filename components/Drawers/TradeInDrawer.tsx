@@ -48,6 +48,7 @@ const TradeInDrawer: FC<PropType> = ({ openFilter, toogleFilterDrawer }) => {
 
   return (
     <Drawer
+      key='trade-in'
       open={openFilter}
       onClose={toogleFilterDrawer}
       direction='right'

@@ -22,7 +22,8 @@ const RenderTradeInPromo = () => {
 
   return (
     <>
-      <TradeInDrawer openFilter={openDrawer} toogleFilterDrawer={() => setOpenDrawer(!openDrawer)} />
+      <TradeInDrawer openFilter={openDrawer} toogleFilterDrawer={() => setOpenDrawer(!openDrawer)}
+      />
       <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
         <div className='w-full mb-3 black md:hidden lg:hidden'>
           <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>Get this for <span className='italic'>even less.</span></h1>
