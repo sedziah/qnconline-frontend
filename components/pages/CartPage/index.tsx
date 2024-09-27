@@ -1,5 +1,6 @@
 "use client"
 import CartItem from '@/components/Cards/CartItem'
+import DefaultNavbar from '@/components/Navbars/DefaultNavbar'
 import Image from 'next/image'
 import React from 'react'
 
@@ -32,21 +33,7 @@ const CartPage = () => {
 
   return (
     <div className='bg-lightGray/10 h-screen'>
-      <div style={{
-        zIndex: 8888,
-        transitionTimingFunction: "linear",
-        transition: "transform 0.7s ease-out, opacity 0.7s ease-out"
-      }} className={`w-full transition fixed left-0 right-0 top-0  shadow z-50 bg-white `}>
-        {/* Mobile Nav */}
-        <div className='p-4'>
-          <a href="/">
-            <Image
-              width={100}
-              height={100}
-              src="/assets/logo-small.png" className='h-10 object-contain' alt='logo' />
-          </a>
-        </div>
-      </div>
+      <DefaultNavbar />
 
       <section className="py-8 antialiased md:py-16">
         <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">

@@ -24,6 +24,30 @@ const TradeInOverview = () => {
 
       <CTAThree />
 
+
+      <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
+        <h1 className='text-lg lg:text-xl font-bold text-black'>
+          Trade in your smartphone
+        </h1>
+        <div className='mt-2 flex flex-col lg:flex-row md:flex-row lg:items-center md:items-center gap-3'>
+          <a href='/trade-in/iPhone'>
+            <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
+              Trade in your iPhone
+            </button>
+          </a>
+          <a href='/trade-in/samsung'>
+            <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
+              Trade in your samsung galaxy phone
+            </button>
+          </a>
+          <a href='/trade-in/macbook'>
+            <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
+              Trade in your macbook
+            </button>
+          </a>
+        </div>
+      </div>
+
       <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
         <div className='w-full mb-3 black md:hidden lg:hidden'>
           <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>What’s Back QNC Trade-in?</h1>
@@ -74,7 +98,7 @@ const TradeInOverview = () => {
             </p>
           </div>
 
-         
+
         </div>
       </div>
 
@@ -128,7 +152,7 @@ const TradeInOverview = () => {
             </a>
           </div>
 
-          
+
         </div>
       </div>
 
@@ -176,15 +200,15 @@ const TradeInOverview = () => {
         <p className='text-sm text-gray-500 mt-4 leading-7'>
           In a nutshell: Trade in your old tech and get cash for it. Yep, unlike other trade-in programs out there, with Back Market Trade-in you get cold hard cash dropped straight into your bank account because, well, it's better than store credit (amiright?).
         </p>
-        
+
         <p className='text-sm text-gray-500 leading-7 mt-10'>
           It's easy, too. Go through the assessment, get a price offer instantly from an expert refurbisher, and mail your device for free using our prepaid shipping label. Once the refurbisher receives the item, they'll check to see that it matches the assessment. If it's all good, they'll pay you by direct deposit. If things are a little off, all is not lost! The refurbisher will send you a counteroffer. But the power is always yours: you're free to accept or reject any offers.
         </p>
-        
+
         <p className='text-sm text-gray-500  eading-7 mt-10'>
           You can sell smartphones, tablets, gaming consoles, headphones, earphones, and speakers through Trade-in. Even broken ones. There's a lot of trash out there, but when it comes to tech a lot of it isn't. Refurbishers will restore your old electronics to perfect working condition so that any tech you sell can live its best reborn life.
-        </p> 
-        
+        </p>
+
         <p className='text-sm text-gray-500 leading-7 mt-10'>
           Why's that? Reusing, repairing, and refurbishing our electronics is a simple way to reduce the environmental damage that comes from manufacturing brand-new tech and lower the amount of toxic e-waste that ends up in our landfills. Guess this makes you a do-gooder. We're okay with it if you are.
         </p>

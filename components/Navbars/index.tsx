@@ -16,6 +16,7 @@ const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0)
   const [categories, setCategories] = useState<ProductCategory[]>([])
   const path = usePathname();
+  const absolutePath = /^\/trade-in\/.*/.test(path);
 
 
 
@@ -50,7 +51,7 @@ const Navbar = () => {
     }
   }, [])
 
-  if (HIDDENROUTES?.includes(path)) {
+  if (HIDDENROUTES?.includes(path) || absolutePath) {
     return null
   }
 

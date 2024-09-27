@@ -26,8 +26,8 @@ const DUMMYDATA = [
   {
     title: "Audio - Up to $270",
     image: "https://www.backmarket.com/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://images.ctfassets.net/mmeshd7gafk1/2Wc6c12TSDKN5kE8IodYpl/fd6ee95413537f5ecf8ac7380b829e5d/Sennheiser-headphones.jpeg"
-  }, 
-  
+  },
+
 ]
 
 const RenderTradeInCategory = () => {
@@ -43,7 +43,7 @@ const RenderTradeInCategory = () => {
           name={item?.title}
           description=''
           imageUrl={item?.image}
-          linkUrl=''
+          linkUrl={`/trade-in/${item?.title}`}
         />)}
       </div>
 

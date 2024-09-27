@@ -7,9 +7,10 @@ import React from 'react'
 const Footer = () => {
   
   const path = usePathname();
+  const absolutePath = /^\/trade-in\/.*/.test(path);
 
 
-  if (HIDDENROUTES?.includes(path)) {
+  if (HIDDENROUTES?.includes(path) || absolutePath) {
     return null
   }
 
