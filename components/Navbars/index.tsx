@@ -9,11 +9,17 @@ import { ProductCategory } from '@/library/types'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import MobileDrawer from './MobileDrawer'
+import { usePathname } from 'next/navigation'
+
+const routes = ["/signin", "/signup"]
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [categories, setCategories] = useState<ProductCategory[]>([])
+  const path = usePathname();
+
+
 
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState)
@@ -45,6 +51,10 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll)
     }
   }, [])
+
+  if (routes?.includes(path)) {
+    return null
+  }
 
   return (
     <>
@@ -144,7 +154,7 @@ const Navbar = () => {
           </div>
 
           <div className='flex flex-row items-center justify-center gap-x-3'>
-            <a href=''>
+            <a href='/signin'>
               <User size="20" color="#000" />
             </a>
             <a href=''>

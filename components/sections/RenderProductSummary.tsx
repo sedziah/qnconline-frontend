@@ -1,7 +1,40 @@
 /* eslint-disable @next/next/no-img-element */
+import { COLORS } from '@/constants'
+import { Lock1, Timer1, Trade, TruckFast, Verify } from 'iconsax-react'
 import React from 'react'
+import { MdOutlineChevronRight } from 'react-icons/md'
 
 const RenderProductSummary = () => {
+
+
+  // Open trade in drawer
+  const openTradeInModal = () => { }
+
+
+  const ProductStats = [
+    {
+      icon: <TruckFast size={20}  />,
+      title: "Free delivery by Oct 1 - Oct 2",
+      onClick: () => {}
+    },
+    {
+      icon: <Lock1 size={20} />,
+      title: "Works with all carriers",
+      onClick: () => { }
+    },
+    {
+      icon: <Timer1 size={20}  />,
+      title: "Free 30-day returns",
+      description: "1-year warranty",
+      onClick: () => { }
+    },
+    {
+      icon: <Verify size={20} />,
+      title: "Verified Refurbished in the US",
+      onClick: () => { }
+    }
+  ]
+  
   return (
     <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
       <div className="">
@@ -88,13 +121,36 @@ const RenderProductSummary = () => {
                   </button>
                 </div>
               </div>
-              <p className="text-gray-700 mb-3 text-sm">Experience premium sound quality and industry-leading noise cancellation
+              <p className="text-gray-700 mb-3 text-sm">
+                Experience premium sound quality and industry-leading noise cancellation
                 with
-                these wireless headphones. Perfect for music lovers and frequent travelers.</p>
+                these wireless headphones. Perfect for music lovers and frequent travelers.
+              </p>
 
+              <button onClick={openTradeInModal} className='bg-lightGray/30 transition-all hover:bg-lightGray/40 flex flex-row items-center justify-between py-2 gap-x-2 px-4 rounded-full'>
+                <Trade size="20" color={COLORS.primary} />
+                <p className='text-xs text-black'>Get this for even less with Trade-in</p>
+                <MdOutlineChevronRight />
+              </button>
 
+              <div className="py-4 border-t border-b b border-lightGray mt-7 grid grid-cols-2 gap-5">
+                {ProductStats?.map((info) => <button key={info?.title}
+                  className='w-full flex flex-row items-center justify-center gap-x-1'
+                  onClick={info?.onClick}
+                >
+                  <div className='w-full flex flex-row items-center'>
+                    <div className='flex items-center justify-center rounded-lg w-10 h-10 bg-lightblue'>
+                      {info?.icon}
+                    </div>
+                    <div className='flex-1 ml-3 items-start justify-start text-left'>
+                      <p className='text-xs text-black'>{info?.title}</p>
+                      {info.description && <p className='text-xs text-black'>{info?.description}</p>}
+                    </div>
+                  </div>
+                  <MdOutlineChevronRight />
 
-
+                </button>)}
+              </div>
             </div>
           </div>
         </div>

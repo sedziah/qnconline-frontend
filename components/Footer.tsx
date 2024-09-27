@@ -1,7 +1,18 @@
+"use client"
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 
 const Footer = () => {
+  const routes = ["/signin", "/signup"]
+  const path = usePathname();
+
+
+  if (routes?.includes(path)) {
+    return null
+  }
+
+
   return (
 
     <footer className="bg-gradient-to-r bg-white">

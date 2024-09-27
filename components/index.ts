@@ -5,11 +5,13 @@ import ProductListingPage from "./pages/ProductListingPage"
 import { ProductListingDetail } from "./pages/ProductListingDetail"
 
 import Breadcrumb from "./breadcrumb"
+import SigninPage from "./pages/SigninPage"
 
 export {
   HomePage,
   ProductListingDetail,
   Navbar,
   ProductListingPage,
+  SigninPage,
   Breadcrumb
 }
