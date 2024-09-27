@@ -26,7 +26,7 @@ const NewProductCategoryCard: React.FC<ProductCategoryCardProps> = ({
               width={100}
               height={200}
               className="mx-auto h-full dark:hidden"
-              src={imageUrl} // Light mode image
+              src={imageUrl} 
               alt={name}
             />
             <Image

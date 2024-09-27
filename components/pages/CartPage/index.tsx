@@ -121,9 +121,6 @@ const CartPage = () => {
         </div>
       </section>
 
-
-  
-
     </div>
   )
 }

@@ -4,6 +4,7 @@ import ProductCategoryCard from "./Cards/ProductCategoryCard"
 import ProductListingPage from "./pages/ProductListingPage"
 import { ProductListingDetail } from "./pages/ProductListingDetail"
 import CartPage from "./pages/CartPage"
+import TradeInOverview from "./pages/TradeInOverview"
 
 import Breadcrumb from "./breadcrumb"
 import SigninPage from "./pages/SigninPage"
@@ -15,5 +16,6 @@ export {
   ProductListingPage,
   SigninPage,
   Breadcrumb,
-  CartPage
+  CartPage,
+  TradeInOverview
 }
