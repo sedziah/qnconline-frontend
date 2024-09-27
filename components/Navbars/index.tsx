@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
-import { COLORS } from '@/constants'
+import { COLORS, HIDDENROUTES } from '@/constants'
 import { HambergerMenu, SearchNormal, ShoppingCart, Trade, User } from 'iconsax-react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
@@ -10,8 +10,6 @@ import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
 import MobileDrawer from './MobileDrawer'
 import { usePathname } from 'next/navigation'
-
-const routes = ["/signin", "/signup"]
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -52,7 +50,7 @@ const Navbar = () => {
     }
   }, [])
 
-  if (routes?.includes(path)) {
+  if (HIDDENROUTES?.includes(path)) {
     return null
   }
 
@@ -93,7 +91,7 @@ const Navbar = () => {
               <a href=''>
                 <User size="20" color="#000" />
               </a>
-              <a href=''>
+              <a href='/cart'>
                 <ShoppingCart size="20" color="#000" />
               </a>
             </div>
@@ -157,7 +155,7 @@ const Navbar = () => {
             <a href='/signin'>
               <User size="20" color="#000" />
             </a>
-            <a href=''>
+            <a href='/cart'>
               <ShoppingCart size="20" color="#000" />
             </a>
           </div>
