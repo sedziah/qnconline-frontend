@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import { Money2, ShoppingCart, Trade, Verify } from 'iconsax-react'
 import React, { FC, useEffect, useState } from 'react'
 import { IoMdClose } from 'react-icons/io'

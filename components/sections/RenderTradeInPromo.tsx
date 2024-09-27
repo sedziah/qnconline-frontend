@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Trade } from 'iconsax-react'
 import React, { useState } from 'react'
 import { IoIosBatteryCharging } from 'react-icons/io'

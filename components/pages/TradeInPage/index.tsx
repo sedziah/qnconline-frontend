@@ -4,11 +4,14 @@ import DefaultNavbar from '@/components/Navbars/DefaultNavbar'
 import { ArrowLeft } from 'iconsax-react'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
+import { FunctionalityForm } from './FunctionalityForm'
+import DeviceForm from './DeviceForm'
+import AppearanceForm from './AppearanceForm'
 
 const TradeInPage = () => {
   const router = useRouter()
   const [activeStep, setActiveStep] = useState<number>(0)
-  const steps = ["Your device", "Functionality", "Appearance"] // Will be sent dynamically based on the trade in type
+  const steps = ["Your device", "Carrier", "Screen condition", "Functionality", "Appearance"] // Will be sent dynamically based on the trade in type
   const [listItems, setListItems] = useState<{
     label: string
     value: string
@@ -46,7 +49,7 @@ const TradeInPage = () => {
           <div className='max-w-lg mx-auto w-full px-4 lg:px-20'>
 
 
-            <button className="flex flex-row items-center gap-x-2">
+            <button onClick={handleBack} className="flex flex-row items-center gap-x-2">
               <ArrowLeft size="20" color="#000" />
               <p className='font-semibold text-sm underline text-black'>
                 {activeStep === 0 ? "Back" : steps[activeStep]}
@@ -70,24 +73,40 @@ const TradeInPage = () => {
         <div className='w-full col-span-2 h-screen bg-lightGray/10 pt-28 px-4 '>
           <div className='w-full max-w-3xl mx-auto'>
 
-            <div>
-              <p className='text-center text-base font-normal'>
-                {`${activeStep + 1}/${steps?.length} ${steps[activeStep]}`} 
-              </p>
+            <div className='w-full'>
+              <div className='w-full flex flex-row items-center justify-between'>
+                <button onClick={handleBack} className="flex lg:hidden h-10 w-10 rounded-full items-center justify-center transition-opacity hover:bg-lightGray/20">
+                  <ArrowLeft size="27" color="#000" />
+                </button>
+                <div className='hidden lg:block'></div>
+
+                <p className='text-center text-base font-normal'>
+                  {`${activeStep + 1}/${steps?.length} ${steps[activeStep]}`}
+                </p>
+                <div></div>
+              </div>
 
               <div className='mt-6 h-0.5 rounded-full w-full bg-lightGray/40'>
                 <div
                   style={{
                     width: `${((activeStep + 1) / (steps?.length)) * 100}%`
                   }}
-                className={`h-0.5 rounded-full bg-primary`}
-              />
+                  className={`h-0.5 rounded-full bg-primary`}
+                />
               </div>
             </div>
 
-            
+
             <div className="mt-10">
-              
+              {{
+
+                "Your device": <DeviceForm />,
+                "Carrier": <DeviceForm />,
+                "Screen condition": <DeviceForm />,
+                "Functionality": <FunctionalityForm />,
+                "Appearance": <AppearanceForm />,
+
+              }[steps[activeStep]]}
             </div>
 
 
