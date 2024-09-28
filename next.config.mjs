@@ -2,19 +2,17 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-      domains: [
-        'images.ctfassets.net',
-      ],
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'qnconline.lon1.digitaloceanspaces.com',
-          port: '',
-          pathname: '/qnconline/static/products/images/**', // Allow all images in this path
-        },
-      ],
+        domains: [
+            'images.ctfassets.net',
+            'www.backmarket.com'
+        ],
+        remotePatterns: [{
+            protocol: 'https',
+            hostname: 'qnconline.lon1.digitaloceanspaces.com',
+            port: '',
+            pathname: '/qnconline/static/products/images/**', // Allow all images in this path
+        }, ],
     },
-  };
-  
-  export default nextConfig;
-  
+};
+
+export default nextConfig;

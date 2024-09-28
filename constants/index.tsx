@@ -13,4 +13,9 @@ export {
 }
 
 
+/**
+ * routes to hide footer and navbar components
+ */
+export const HIDDENROUTES = ["/signin", "/signup", "/cart"]
+
 // 
