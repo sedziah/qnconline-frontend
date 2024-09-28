@@ -14,7 +14,8 @@ import ScreenConditionForm from './ScreenConditionForm'
 const TradeInPage = () => {
   const router = useRouter()
   const [activeStep, setActiveStep] = useState<number>(0)
-  const steps = ["Your device", "Carrier", "Screen condition", "Functionality"] // Will be sent dynamically based on the trade in type
+  const steps = ["Your device", "Carrier", "Screen condition", "Functionality"]
+  // Will be sent dynamically based on the trade in type
 
   // state to hold the data as an array
   const [listItems, setListItems] = useState<{
@@ -34,6 +35,11 @@ const TradeInPage = () => {
   const handleNext = () => {
     if (activeStep < steps.length - 1) {
       setActiveStep(activeStep + 1)
+    } else {
+      // Navigate to the offer page with offer ID
+      let device = "unknown"
+      let offerID = "unknown"
+      router.push(`/trade-in/${device}/${offerID}`)
     }
   }
 
@@ -50,7 +56,7 @@ const TradeInPage = () => {
     <>
       <DefaultNavbar />
       <div className=' w-full grid grid-cols-1 lg:grid-cols-3'>
-        <div className='hidden lg:block w-full h-full  bg-lightGray/20 pt-28   '>
+        <div className='hidden lg:block w-full h-screen max-h-full overflow-hidden overflow-y-scroll bg-lightGray/20 pt-28   '>
           <div className='max-w-lg mx-auto w-full px-4 lg:px-20'>
 
 
@@ -75,16 +81,13 @@ const TradeInPage = () => {
           </div>
         </div>
 
-        <div className='w-full col-span-2 h-full bg-lightGray/10 pt-28 px-4 '>
+        <div className='w-full col-span-2 h-screen max-h-full overflow-hidden overflow-y-scroll bg-lightGray/10 pt-28 px-4 '>
           <div className='w-full max-w-2xl mx-auto'>
-
             <RenderHeader
               activeStep={activeStep}
               handleBack={handleBack}
               steps={steps}
             />
-
-
 
             <div className="mt-10">
               {{
@@ -113,7 +116,7 @@ const RenderHeader = (
 ) => (
   <div className='w-full'>
     <div className='w-full flex flex-row items-center justify-between'>
-      <button onClick={handleBack} className="flex lg:hidden h-10 w-10 rounded-full items-center justify-center transition-opacity hover:bg-lightGray/20">
+      <button onClick={handleBack} className="flex lg:hidden h-10 w-10 rounded-full items-center justify-center transition-opacity hover:bg-lightGray/10">
         <ArrowLeft size="27" color="#000" />
       </button>
       <div className='hidden lg:block'></div>

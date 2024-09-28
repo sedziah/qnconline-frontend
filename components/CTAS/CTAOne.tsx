@@ -6,7 +6,7 @@ export const CTAOne = () => {
     <div className="w-full max-w-6xl mx-auto">
       <div className="mx-4 overflow-x-auto">
         {/* Inner container with flex-row to enable horizontal scroll */}
-        <div className="flex flex-row items-center justify-between md:mx-4 bg-lightGray/20 p-6 rounded-lg min-w-max">
+        <div className="flex flex-row items-center justify-between md:mx-4 bg-lightGray/10 p-6 rounded-lg min-w-max">
           {/* Each item */}
           <div className="w-60 flex flex-row capitalize items-center gap-x-2">
             <Verify size="20" color="#374151" />

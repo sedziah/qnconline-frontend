@@ -161,7 +161,7 @@ const Navbar = () => {
             </a>
           </div>
         </div>
-        <div className='hidden md:hidden sm:hidden lg:block bg-lightGray/20 overflow-hidden pl-7'>
+        <div className='hidden md:hidden sm:hidden lg:block bg-lightGray/10 overflow-hidden pl-7'>
           <div className='w-full flex flex-row'>
             <button onClick={toggleDrawer} className='flex w-[120px] flex-row gap-x-2 py-2.5'>
               <HambergerMenu size="20" color="#000" />
