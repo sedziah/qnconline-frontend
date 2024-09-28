@@ -11,13 +11,13 @@ type PropType = {
   toogleFilterDrawer: () => void
 }
 
-const BatteryDrawer: FC<PropType> = ({ openFilter, toogleFilterDrawer }) => {
+const BatteryDrawer = ({ openFilter, toogleFilterDrawer }: PropType) => {
 
   return (
     <Drawer
       key='battery'
       open={openFilter}
-      onClose={toogleFilterDrawer}
+      onClose={() => toogleFilterDrawer()}
       direction='right'
       zIndex={9999}
       className='h-full'
@@ -40,7 +40,7 @@ const BatteryDrawer: FC<PropType> = ({ openFilter, toogleFilterDrawer }) => {
           Battery Options
         </p>
 
-        <button onClick={toogleFilterDrawer}>
+        <button onClick={() => toogleFilterDrawer()}>
           <IoMdClose size="24" color="#000" />
         </button>
       </div>

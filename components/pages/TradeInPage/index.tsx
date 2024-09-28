@@ -7,11 +7,16 @@ import React, { useState } from 'react'
 import { FunctionalityForm } from './FunctionalityForm'
 import DeviceForm from './DeviceForm'
 import AppearanceForm from './AppearanceForm'
+import CarrierForm from './CarrierForm'
+import ScreenConditionForm from './ScreenConditionForm'
+
 
 const TradeInPage = () => {
   const router = useRouter()
   const [activeStep, setActiveStep] = useState<number>(0)
-  const steps = ["Your device", "Carrier", "Screen condition", "Functionality", "Appearance"] // Will be sent dynamically based on the trade in type
+  const steps = ["Your device", "Carrier", "Screen condition", "Functionality"] // Will be sent dynamically based on the trade in type
+
+  // state to hold the data as an array
   const [listItems, setListItems] = useState<{
     label: string
     value: string
@@ -44,15 +49,15 @@ const TradeInPage = () => {
   return (
     <>
       <DefaultNavbar />
-      <div className='w-full grid grid-cols-1 lg:grid-cols-3'>
-        <div className='hidden lg:block w-full h-screen bg-lightGray/20 pt-28   '>
+      <div className=' w-full grid grid-cols-1 lg:grid-cols-3'>
+        <div className='hidden lg:block w-full h-full  bg-lightGray/20 pt-28   '>
           <div className='max-w-lg mx-auto w-full px-4 lg:px-20'>
 
 
             <button onClick={handleBack} className="flex flex-row items-center gap-x-2">
               <ArrowLeft size="20" color="#000" />
               <p className='font-semibold text-sm underline text-black'>
-                {activeStep === 0 ? "Back" : steps[activeStep]}
+                {activeStep === 0 ? "Back" : steps[activeStep -1]}
               </p>
             </button>
 
@@ -70,41 +75,25 @@ const TradeInPage = () => {
           </div>
         </div>
 
-        <div className='w-full col-span-2 h-screen bg-lightGray/10 pt-28 px-4 '>
-          <div className='w-full max-w-3xl mx-auto'>
+        <div className='w-full col-span-2 h-full bg-lightGray/10 pt-28 px-4 '>
+          <div className='w-full max-w-2xl mx-auto'>
 
-            <div className='w-full'>
-              <div className='w-full flex flex-row items-center justify-between'>
-                <button onClick={handleBack} className="flex lg:hidden h-10 w-10 rounded-full items-center justify-center transition-opacity hover:bg-lightGray/20">
-                  <ArrowLeft size="27" color="#000" />
-                </button>
-                <div className='hidden lg:block'></div>
+            <RenderHeader
+              activeStep={activeStep}
+              handleBack={handleBack}
+              steps={steps}
+            />
 
-                <p className='text-center text-base font-normal'>
-                  {`${activeStep + 1}/${steps?.length} ${steps[activeStep]}`}
-                </p>
-                <div></div>
-              </div>
-
-              <div className='mt-6 h-0.5 rounded-full w-full bg-lightGray/40'>
-                <div
-                  style={{
-                    width: `${((activeStep + 1) / (steps?.length)) * 100}%`
-                  }}
-                  className={`h-0.5 rounded-full bg-primary`}
-                />
-              </div>
-            </div>
 
 
             <div className="mt-10">
               {{
 
-                "Your device": <DeviceForm />,
-                "Carrier": <DeviceForm />,
-                "Screen condition": <DeviceForm />,
-                "Functionality": <FunctionalityForm />,
-                "Appearance": <AppearanceForm />,
+                "Your device": <DeviceForm handleNext={handleNext} />,
+                "Carrier": <CarrierForm handleNext={handleNext} />,
+                "Screen condition": <ScreenConditionForm handleNext={handleNext} />,
+                "Appearance": <AppearanceForm handleNext={handleNext} />,
+                "Functionality": <FunctionalityForm handleNext={handleNext} />,
 
               }[steps[activeStep]]}
             </div>
@@ -116,5 +105,34 @@ const TradeInPage = () => {
     </>
   )
 }
+
+
+const RenderHeader = (
+  { handleBack, activeStep, steps }:
+    { steps: any[], activeStep: number, handleBack: () => void }
+) => (
+  <div className='w-full'>
+    <div className='w-full flex flex-row items-center justify-between'>
+      <button onClick={handleBack} className="flex lg:hidden h-10 w-10 rounded-full items-center justify-center transition-opacity hover:bg-lightGray/20">
+        <ArrowLeft size="27" color="#000" />
+      </button>
+      <div className='hidden lg:block'></div>
+
+      <p className='text-center text-base font-normal'>
+        {`${activeStep + 1}/${steps?.length} ${steps[activeStep]}`}
+      </p>
+      <div></div>
+    </div>
+
+    <div className='mt-6 h-0.5 rounded-full w-full bg-lightGray/40'>
+      <div
+        style={{
+          width: `${((activeStep + 1) / (steps?.length)) * 100}%`
+        }}
+        className={`h-0.5 rounded-full bg-primary`}
+      />
+    </div>
+  </div>
+)
 
 export default TradeInPage

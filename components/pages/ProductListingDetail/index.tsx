@@ -1,9 +1,7 @@
 "use client"
 import Breadcrumb from '@/components/breadcrumb'
-import ReviewCard from '@/components/Cards/ReviewCard'
 import { CTAOne } from '@/components/CTAS/CTAOne'
 import CTATwo from '@/components/CTAS/CTATwo'
-import Footer from '@/components/Footer'
 import FloatingInfo from '@/components/Navbars/FloatingInfo'
 import RenderAppearanceControl from '@/components/sections/RenderAppearanceControl'
 import RenderBatteryControl from '@/components/sections/RenderBatteryControl'
@@ -48,7 +46,6 @@ export const ProductListingDetail = () => {
   return (
     <>
       <FloatingInfo product={null} />
-
 
       <Breadcrumb items={breadcrumbItems} />
 
