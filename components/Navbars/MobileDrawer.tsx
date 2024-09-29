@@ -40,7 +40,7 @@ const MobileDrawer = ({ categories, setIsOpen }: {
       </div>
 
       <div className='flex px-3 flex-col space-y-5'>
-        <a href='' className='flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all'>
+        <a href='/trade-in' className='flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all'>
           <Trade size="20" color="#000" />
           <span>Trade In</span>
         </a>

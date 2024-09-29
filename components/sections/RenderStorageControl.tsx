@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react'
 import { IoIosBatteryCharging } from 'react-icons/io'
 import { MdOutlineChevronRight } from 'react-icons/md'

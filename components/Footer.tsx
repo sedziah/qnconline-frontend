@@ -1,7 +1,20 @@
+"use client"
+import { HIDDENROUTES } from '@/constants'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import React from 'react'
 
 const Footer = () => {
+  
+  const path = usePathname();
+  const absolutePath = /^\/trade-in\/.*/.test(path);
+
+
+  if (HIDDENROUTES?.includes(path) || absolutePath) {
+    return null
+  }
+
+
   return (
 
     <footer className="bg-gradient-to-r bg-white">
