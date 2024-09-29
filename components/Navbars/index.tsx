@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 import { COLORS, HIDDENROUTES } from '@/constants'
-import { HambergerMenu, SearchNormal, ShoppingCart, Trade, User } from 'iconsax-react'
+import { HambergerMenu, Heart, Logout, SearchNormal, Shop, ShoppingCart, Trade, User } from 'iconsax-react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { apiService } from '@/library/services/apiService'
@@ -11,13 +11,40 @@ import 'react-modern-drawer/dist/index.css'
 import MobileDrawer from './MobileDrawer'
 import { usePathname } from 'next/navigation'
 
+const DropdownOptions = [
+  {
+    label: 'account',
+    href: '/dashboard/profile',
+    icon: <User size="19" color="#000" />
+  },
+  {
+    label: 'orders',
+    href: '/dashboard/orders',
+    icon: <Shop size="19" color="#000" />
+  },
+  {
+    label: 'favorites',
+    href: '/dashboard/favorites',
+    icon: <Heart size="19" color="#000" />
+  },
+  {
+    label: 'trade-ins',
+    href: '/dashboard/trade-ins',
+    icon: <Trade size="19" color="#000" />
+  },
+]
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = React.useState(false)
   const [scrollPosition, setScrollPosition] = useState(0)
   const [categories, setCategories] = useState<ProductCategory[]>([])
-  const path = usePathname();
-  const absolutePath = /^\/trade-in\/.*/.test(path);
+  const path = usePathname()
+  const absolutePath = /^\/trade-in\/.*/.test(path)
+  const [openDropdown, setOpenDropdown] = useState(false)
 
+  const toggleDropdown = () => {
+    setOpenDropdown(!openDropdown)
+  }
 
 
   const toggleDrawer = () => {
@@ -89,9 +116,43 @@ const Navbar = () => {
                 src="/assets/logo-small.png" className='h-10 object-contain' alt='logo' />
             </a>
             <div className='flex flex-row items-center justify-center gap-x-3'>
-              <a href=''>
+              {/* Toggle icon based on login status */}
+              {/* <a href='/signin'>
                 <User size="20" color="#000" />
-              </a>
+              </a> */}
+
+              <div className='relative'>
+
+                <button
+                  onClick={toggleDropdown}
+                  className='w-10 h-10 rounded-full hover:bg-lightGray/20 bg-lightGray/10 flex items-center justify-center'>
+                  <User size="20" color="#000" />
+                </button>
+
+                {openDropdown && (
+                  <div style={{
+                    zIndex: 99999,
+                  }} className="absolute right-0 mt-2 w-56 bg-white shadow-md rounded-lg py-2 z-50">
+                    {DropdownOptions?.map((option, index) => <a href={option?.href} key={option?.label}>
+                      <div key={option?.label} className={`py-5 px-4 ${index !== 0 ? "border-t border-lightGray/20" : ""} flex flex-row items-center gap-x-5`}>
+
+                        {option?.icon}
+
+                        <span className='text-[13px] text-black capitalize' >{option?.label}</span>
+                      </div>
+                    </a>)}
+
+                    <button className={`py-5 border-t border-lightGray/20 px-4 flex flex-row items-center gap-x-5`}>
+
+                      <Logout size="19" color="#000" />
+
+                      <span className='text-[13px] text-black capitalize'>Log out</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+
+
               <a href='/cart'>
                 <ShoppingCart size="20" color="#000" />
               </a>
@@ -130,10 +191,10 @@ const Navbar = () => {
               <Trade size="20" color="#000" />
               <span>Trade In</span>
             </a>
-            <a href='about' className='flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all'>
+            <a href='/about' className='flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all'>
               <span>About us</span>
             </a>
-            <a href='help' className='flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all'>
+            <a href='/help' className='flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all'>
               <span>Help</span>
             </a>
           </div>
@@ -153,9 +214,41 @@ const Navbar = () => {
           </div>
 
           <div className='flex flex-row items-center justify-center gap-x-3'>
-            <a href='/signin'>
-              <User size="20" color="#000" />
-            </a>
+
+            {/* Toggle icon based on login status */}
+            {/* <a href='/signin'>
+                <User size="20" color="#000" />
+              </a> */}
+            <div className='relative'>
+
+              <button
+                onClick={toggleDropdown}
+                className='w-10 h-10 rounded-full hover:bg-lightGray/20 bg-lightGray/10 flex items-center justify-center'>
+                <User size="20" color="#000" />
+              </button>
+
+              {openDropdown && (
+                <div style={{
+                  zIndex: 99999,
+                }} className="absolute right-0 mt-2 w-56 bg-white shadow-md rounded-lg py-2 z-50">
+                  {DropdownOptions?.map((option, index) => <a href={option?.href} key={option?.label}>
+                    <div key={option?.label} className={`py-5 px-4 ${index !== 0 ? "border-t border-lightGray/20" : ""} flex flex-row items-center gap-x-5`}>
+
+                      {option?.icon}
+
+                      <span className='text-[13px] text-black capitalize' >{option?.label}</span>
+                    </div>
+                  </a>)}
+
+                  <button className={`py-5 border-t border-lightGray/20 px-4 flex flex-row items-center gap-x-5`}>
+
+                    <Logout size="19" color="#000" />
+
+                    <span className='text-[13px] text-black capitalize'>Log out</span>
+                  </button>
+                </div>
+              )}
+            </div>
             <a href='/cart'>
               <ShoppingCart size="20" color="#000" />
             </a>
