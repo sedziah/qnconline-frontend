@@ -25,7 +25,7 @@ const DeviceForm = ({ handleNext }: Props) => {
 
       <div style={{ ...ANIMATIONSTYLE }} className='my-7 transition'>
         <label className='text-lg font-semibold text-black'>
-          What's the model of your Blackberry?
+          What&#39;s the model of your Blackberry?
         </label>
 
         <select className="mt-4 bg-white border border-black text-black text-sm rounded-lg focus:ring-black outline-black focus:border-black block w-full px-2.5 py-3  ">
