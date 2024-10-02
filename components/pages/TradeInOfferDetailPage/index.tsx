@@ -78,8 +78,8 @@ const TradeInOfferDetailPage = () => {
               One last thing...
             </h3>
 
-            <p className='text-sm mt-3 text-gray-600 font-normal leading-7'>
-              Your device will be checked once the refurbisher receives it. If the information you've provided is inaccurate, the refurbisher may send you a new offer. In any case, honesty is the best policy. We do not accept rooted, stolen, or counterfeit devices, and devices that have been blocked by a carrier.
+            <p className="text-sm mt-3 text-gray-600 font-normal leading-7">
+              Your device will be checked once the refurbisher receives it. If the information you&#39;ve provided is inaccurate, the refurbisher may send you a new offer. In any case, honesty is the best policy. We do not accept rooted, stolen, or counterfeit devices, and devices that have been blocked by a carrier.
             </p>
           </div>
 
