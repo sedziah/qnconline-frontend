@@ -18,4 +18,8 @@ export {
  */
 export const HIDDENROUTES = ["/signin", "/signup", "/cart"]
 
-// 
+
+export const ANIMATIONSTYLE = {
+    transitionTimingFunction: "linear",
+    transition: "0.7s ease-out",
+}

@@ -30,7 +30,7 @@ const TradeInOverview = () => {
         <h1 className='text-lg lg:text-xl font-bold text-black'>
           Trade in your smartphone
         </h1>
-        <div className='mt-2 flex flex-col lg:flex-row md:flex-row lg:items-center md:items-center gap-3'>
+        <div className='mt-2 flex flex-row flex-wrap gap-3'>
           <a href='/trade-in/iPhone'>
             <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
               Trade in your iPhone
@@ -147,7 +147,7 @@ const TradeInOverview = () => {
             </p>
 
             <a href='/'>
-              <button className="border border-lightGray py-2 text-sm px-2 w-1/2 mt-10 hover:bg-lightGray/20 rounded-lg">
+              <button className="border border-lightGray py-2 text-sm px-2 w-1/2 mt-10 hover:bg-lightGray/10 rounded-lg">
                 See FAQs
               </button>
             </a>
@@ -179,7 +179,7 @@ const TradeInOverview = () => {
             </p>
 
             <a href='/'>
-              <button className="border border-lightGray py-2 text-sm px-2 w-1/2 mt-10 hover:bg-lightGray/20 rounded-lg">
+              <button className="border border-lightGray py-2 text-sm px-2 w-1/2 mt-10 hover:bg-lightGray/10 rounded-lg">
                 See FAQs
               </button>
             </a>
@@ -190,7 +190,72 @@ const TradeInOverview = () => {
       </div>
 
 
+      <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
+        <h1 className='text-lg lg:text-xl font-bold text-black'>
+          Instant cash offers, just a few clicks away
+        </h1>
+        <p className='text-sm text-gray-500 mt-4 leading-7'>
+          Instant cash offers, just a few clicks away
+        </p>
+        <div className='mt-2 flex flex-row flex-wrap gap-3'>
+          <a href='/trade-in/iPhone'>
+            <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
+              Trade in your iPhone
+            </button>
+          </a>
+          <a href='/trade-in/samsung'>
+            <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
+              Trade in your samsung galaxy phone
+            </button>
+          </a>
+          <a href='/trade-in/macbook'>
+            <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
+              Trade in your macbook
+            </button>
+          </a>
+          
+          <a href='/trade-in/wallet'>
+            <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
+              Trade in your wallet
+            </button>
+          </a>
+          
+          <a href='/trade-in/consoles'>
+            <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
+              Trade in your consoles
+            </button>
+          </a> 
+          
+          <a href='/trade-in/glasses'>
+            <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
+              Trade in your glasses
+            </button>
+          </a>
+          
+          <a href='/trade-in/glasses'>
+            <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
+              Trade in your glasses
+            </button>
+          </a>
+
+          <a href='/trade-in/wallet'>
+            <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
+              Trade in your wallet
+            </button>
+          </a>
+
+          <a href='/trade-in/consoles'>
+            <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
+              Trade in your consoles
+            </button>
+          </a>
+
+        </div>
+      </div>
+
       <CTAFour />
+
+   
 
 
       <div className='my-14 px-4 w-full max-w-3xl mx-auto'>

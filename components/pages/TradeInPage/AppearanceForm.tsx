@@ -1,6 +1,10 @@
 import React from 'react'
 
-const AppearanceForm = () => {
+type Props = {
+  handleNext: () => void
+}
+
+const AppearanceForm = ({ handleNext }: Props) => {
   return (
     <div>AppearanceForm</div>
   )
