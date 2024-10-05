@@ -10,7 +10,6 @@ function RenderShipping() {
     <>
       <ShippingAddressModal open={openModal} onCloseModal={toogleModal} />
 
-
       <div className='w-full rounded-md bg-white py-3 px-5 shadow-md'>
         <div className='flex flex-row items-center justify-between'>
           <h1 className='text-base font-bold text-black capitalize'>

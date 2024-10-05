@@ -7,6 +7,7 @@ import OrdersPage from './OrdersPage'
 import ProfilePage from './ProfilePage'
 import FavoritesPage from './FavoritesPage'
 import TradeIns from './TradeIns'
+import OtherPage from './OtherPage'
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -21,8 +22,6 @@ export default function DashboardPage() {
   }
 
   useEffect(() => {
-    console.log("dashboardTab", dashboardTab)
-
     if (dashboardTab) {
       setSelectedTab(dashboardTab)
     }
@@ -34,7 +33,7 @@ export default function DashboardPage() {
     "profile": ProfilePage,
     "favorites": FavoritesPage,
     "trade-ins": TradeIns,
-    "other": TradeIns,
+    "other": OtherPage
   }
 
   const SelectedComponent = componentMap[selectedTab] || OrdersPage
