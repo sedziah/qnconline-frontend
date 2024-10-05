@@ -17,7 +17,7 @@ const TradeInDrawer: FC<PropType> = ({ openFilter, toggleFilterDrawer }) => {
       "title": "Get an offer",
       "description": "See an offer from a professional refurbisher in about 2 minutes.",
       icon: <Verify
-        size="20"
+        size="24"
         color="#000"
       />
     },
@@ -25,7 +25,7 @@ const TradeInDrawer: FC<PropType> = ({ openFilter, toggleFilterDrawer }) => {
       "title": "Add an item to your cart",
       "description": "Shop as usual and see your trade-in offer at checkout.",
       icon: <ShoppingCart
-        size="20"
+        size="24"
         color="#000"
       />
     },
@@ -33,7 +33,7 @@ const TradeInDrawer: FC<PropType> = ({ openFilter, toggleFilterDrawer }) => {
       "title": "Ship your trade-in for free",
       "description": "You’ll have 21 days to ship your item.",
       icon: <Trade
-        size="20"
+        size="24"
         color="#000"
       />
     },
@@ -61,10 +61,12 @@ const TradeInDrawer: FC<PropType> = ({ openFilter, toggleFilterDrawer }) => {
         height: "100vh",
         // Responsive width
         width: "100%",
-        minWidth: "450px",
+        minWidth: "250px",
         maxWidth: "400px",
         // Centered
         marginLeft: "auto",
+        background: '#f8f9fc',
+
         marginRight: "auto",
         overflowY: "scroll"
       }}

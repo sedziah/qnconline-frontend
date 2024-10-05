@@ -11,8 +11,8 @@ function OrdersPage() {
       <div className='mt-10 rounded-md bg-white shadow-xl gap-y-4 gap-x-5 p-5 flex flex-col md:flex-row lg:flex-row justify-between'>
 
         <div className='relative'>
-          <h1 className='text-lg font-bold text-black'>It's pretty hard to believe.</h1>
-          <p className='text-sm text-gray-500 font-normal mt-10'>But it looks like you haven't purchased anything on QnC yet.</p>
+          <h1 className='text-lg font-bold text-black'>It`s pretty hard to believe.</h1>
+          <p className='text-sm text-gray-500 font-normal mt-10'>But it looks like you haven`t purchased anything on QnC yet.</p>
 
           <div className='hidden lg:block md:block absolute bottom-4'>
             <a href='/'>

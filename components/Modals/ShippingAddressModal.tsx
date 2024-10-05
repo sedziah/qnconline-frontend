@@ -17,11 +17,12 @@ const ShippingAddressModal = ({onCloseModal, open}: PropType) => {
           zIndex: 9999
         },
         modal: {
-          borderRadius: 10
+          borderRadius: 10,
+          background: "#f8f9fc"
         }
       }}
     >
-      <div className='bg-white w-96 md:w-[30rem] lg:w-[40rem]'>
+      <div className='w-96 md:w-[30rem] lg:w-[40rem]'>
         <div className='flex flex-row items-center justify-between py-3 border-b border-lightGray'>
           <div className='w-10'></div>
           <p className='text-sm text-center text-black'>Shipping address</p>

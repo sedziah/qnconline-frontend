@@ -26,10 +26,12 @@ const BatteryDrawer = ({ openFilter, toggleFilterDrawer }: PropType) => {
         height: "100vh",
         // Responsive width
         width: "100%",
-        minWidth: "450px",
+        minWidth: "250px",
         maxWidth: "400px",
         // Centered
         marginLeft: "auto",
+        background: '#f8f9fc',
+
         marginRight: "auto",
         overflowY: "scroll"
       }}
