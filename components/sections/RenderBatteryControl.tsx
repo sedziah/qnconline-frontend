@@ -31,7 +31,7 @@ const RenderBatteryControl = () => {
     <>
       <BatteryDrawer
         openFilter={openDrawer}
-        toogleFilterDrawer={toggleDrawer}
+        toggleFilterDrawer={toggleDrawer}
       />
 
       <div className='my-14 px-4 w-full max-w-6xl mx-auto'>

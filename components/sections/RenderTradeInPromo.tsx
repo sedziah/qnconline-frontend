@@ -23,7 +23,7 @@ const RenderTradeInPromo = () => {
 
   return (
     <>
-      <TradeInDrawer openFilter={openDrawer} toogleFilterDrawer={() => setOpenDrawer(!openDrawer)}
+      <TradeInDrawer openFilter={openDrawer} toggleFilterDrawer={() => setOpenDrawer(!openDrawer)}
       />
       <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
         <div className='w-full mb-3 black md:hidden lg:hidden'>

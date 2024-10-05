@@ -36,7 +36,7 @@ const FloatingFilter = () => {
     setFilters(updatedFilters)  // Update filters state
   }
 
-  const toogleFilterDrawer = () => setOpenFilter(!openFilter)
+  const toggleFilterDrawer = () => setOpenFilter(!openFilter)
   const toogleOpenSortingDrawer = () => setOpenSortingDrawer(!openSortingDrawer)
 
   return (
@@ -46,7 +46,7 @@ const FloatingFilter = () => {
         handleFiltersChange={handleFiltersChange}
         productCount={products?.length!}
         specifications={specifications}
-        openFilter={openFilter} toogleFilterDrawer={toogleFilterDrawer} />
+        openFilter={openFilter} toggleFilterDrawer={toggleFilterDrawer} />
       
 
       {/* Drawer for product sorting */}
@@ -55,13 +55,13 @@ const FloatingFilter = () => {
         productCount={products?.length!}
         specifications={specifications}
         openFilter={openSortingDrawer}
-        toogleFilterDrawer={toogleOpenSortingDrawer} />
+        toggleFilterDrawer={toogleOpenSortingDrawer} />
       
       
 
       <div className='block lg:hidden bg-white shadow-md transition-all border-t-2 border-lightGray/20 px-4 py-3 w-full fixed bottom-0 '>
         <div className='flex flex-row items-center justify-center w-full'>
-          <button onClick={toogleFilterDrawer} className='w-full justify-center h-10 flex items-center text-base flex-row gap-x-2'>
+          <button onClick={toggleFilterDrawer} className='w-full justify-center h-10 flex items-center text-base flex-row gap-x-2'>
             <p>Filters</p>
             <FaFilter />
           </button>

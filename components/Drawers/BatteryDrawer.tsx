@@ -8,16 +8,16 @@ import 'react-modern-drawer/dist/index.css'
 
 type PropType = {
   openFilter: boolean
-  toogleFilterDrawer: () => void
+  toggleFilterDrawer: () => void
 }
 
-const BatteryDrawer = ({ openFilter, toogleFilterDrawer }: PropType) => {
+const BatteryDrawer = ({ openFilter, toggleFilterDrawer }: PropType) => {
 
   return (
     <Drawer
       key='battery'
       open={openFilter}
-      onClose={() => toogleFilterDrawer()}
+      onClose={() => toggleFilterDrawer()}
       direction='right'
       zIndex={9999}
       className='h-full'
@@ -40,7 +40,7 @@ const BatteryDrawer = ({ openFilter, toogleFilterDrawer }: PropType) => {
           Battery Options
         </p>
 
-        <button onClick={() => toogleFilterDrawer()}>
+        <button onClick={() => toggleFilterDrawer()}>
           <IoMdClose size="24" color="#000" />
         </button>
       </div>

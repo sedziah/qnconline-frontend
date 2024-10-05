@@ -37,15 +37,19 @@ const RenderProductSummary = () => {
     {
       icon: <Verify size={20} />,
       title: "Verified Refurbished in the US",
-      onClick: () => { }
+      onClick: toggleRefurbishDrawer
     }
   ]
 
   return (
     <>
-      <TradeInDrawer openFilter={openDrawer}
-        toogleFilterDrawer={() => setOpenDrawer(!openDrawer)}
+      <TradeInDrawer
+        openFilter={openDrawer}
+        toggleFilterDrawer={() => setOpenDrawer(!openDrawer)}
       />
+
+
+
       <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
         <div className="">
           <div className="container mx-auto px-4 py-8">

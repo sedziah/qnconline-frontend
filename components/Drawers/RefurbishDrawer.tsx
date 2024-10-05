@@ -11,7 +11,7 @@ type PropType = {
   toggleFilterDrawer: () => void
 }
 
-const TradeInDrawer: FC<PropType> = ({ openFilter, toggleFilterDrawer }) => {
+const RefurbishDrawer: FC<PropType> = ({ openFilter, toggleFilterDrawer }) => {
   const LIST = [
     {
       "title": "Get an offer",
@@ -72,7 +72,7 @@ const TradeInDrawer: FC<PropType> = ({ openFilter, toggleFilterDrawer }) => {
       <div className=' fixed top-0 left-0 right-0 p-4 bg-white border-b border-lightGray/30 flex flex-row items-center justify-between'>
 
         <p className='text-base font-normal text-center flex-1 items-center justify-center'>
-          Trade-In
+          What is Verified Refurbished?
         </p>
 
         <button onClick={toggleFilterDrawer}>
@@ -97,7 +97,7 @@ const TradeInDrawer: FC<PropType> = ({ openFilter, toggleFilterDrawer }) => {
             <div>
               <p className='text-base font-semibold text-black'>{item?.title}</p>
               <p className='text-[13px] text-gray-500 mt-2'>{item?.description}</p>
-          </div>
+            </div>
           </div>)}
         </div>
 
@@ -106,4 +106,4 @@ const TradeInDrawer: FC<PropType> = ({ openFilter, toggleFilterDrawer }) => {
   )
 }
 
-export default TradeInDrawer
+export default RefurbishDrawer
