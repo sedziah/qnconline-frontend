@@ -4,11 +4,11 @@ import ShippingAddressModal from '../Modals/ShippingAddressModal'
 function RenderShipping() {
   const [openModal, setOpenModal] = useState(false)
 
-  const toogleModal = () => setOpenModal(!openModal)
+  const toggleModal = () => setOpenModal(!openModal)
 
   return (
     <>
-      <ShippingAddressModal open={openModal} onCloseModal={toogleModal} />
+      <ShippingAddressModal open={openModal} onCloseModal={toggleModal} />
 
       <div className='w-full rounded-md bg-white py-3 px-5 shadow-md'>
         <div className='flex flex-row items-center justify-between'>
@@ -16,7 +16,7 @@ function RenderShipping() {
             Shipping address
           </h1>
 
-          <button onClick={toogleModal} className='text-sm border border-black hover:bg-bglight rounded-md px-4 py-1.5 text-black font-normal capitalize'>Edit</button>
+          <button onClick={toggleModal} className='text-sm border border-black hover:bg-bglight rounded-md px-4 py-1.5 text-black font-normal capitalize'>Edit</button>
         </div>
 
         <div className='mt-3'>

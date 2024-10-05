@@ -7,17 +7,21 @@ import TradeInDrawer from '../Drawers/TradeInDrawer'
 
 const RenderProductSummary = () => {
   const [openDrawer, setOpenDrawer] = useState(false)
+  const [openRefurbishDrawer, setOpenRefurbishDrawer] = useState(false)
 
 
   // Open trade in drawer
   const openTradeInModal = () => setOpenDrawer(!openDrawer)
 
+  // Open refurbish drawer
+  const toggleRefurbishDrawer = () => setOpenRefurbishDrawer(!openRefurbishDrawer)
+
 
   const ProductStats = [
     {
-      icon: <TruckFast size={20}  />,
+      icon: <TruckFast size={20} />,
       title: "Free delivery by Oct 1 - Oct 2",
-      onClick: () => {}
+      description: "Express delivery by Oct 8 - Oct 9 from $15.00"
     },
     {
       icon: <Lock1 size={20} />,
@@ -25,7 +29,7 @@ const RenderProductSummary = () => {
       onClick: () => { }
     },
     {
-      icon: <Timer1 size={20}  />,
+      icon: <Timer1 size={20} />,
       title: "Free 30-day returns",
       description: "1-year warranty",
       onClick: () => { }
@@ -36,10 +40,11 @@ const RenderProductSummary = () => {
       onClick: () => { }
     }
   ]
-  
+
   return (
     <>
-     <TradeInDrawer openFilter={openDrawer} toogleFilterDrawer={() => setOpenDrawer(!openDrawer)}
+      <TradeInDrawer openFilter={openDrawer}
+        toogleFilterDrawer={() => setOpenDrawer(!openDrawer)}
       />
       <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
         <div className="">
@@ -152,8 +157,7 @@ const RenderProductSummary = () => {
                         {info.description && <p className='text-xs text-black'>{info?.description}</p>}
                       </div>
                     </div>
-                    <MdOutlineChevronRight />
-
+                    {info?.onClick && <MdOutlineChevronRight />}
                   </button>)}
                 </div>
               </div>
@@ -161,8 +165,9 @@ const RenderProductSummary = () => {
           </div>
 
 
-        </div></div>
-      </>
+        </div>
+      </div>
+    </>
   )
 }
 

@@ -7,12 +7,12 @@ import { LuPencil } from 'react-icons/lu'
 function RenderBankDetail() {
   const [openModal, setOpenModal] = useState(false)
 
-  const toogleModal = () => setOpenModal(!openModal)
+  const toggleModal = () => setOpenModal(!openModal)
 
 
   return (
     <>
-      <Modal open={openModal} onClose={toogleModal} center showCloseIcon={false}
+      <Modal open={openModal} onClose={toggleModal} center showCloseIcon={false}
         styles={{
           modalContainer: {
             zIndex: 9999
@@ -26,7 +26,7 @@ function RenderBankDetail() {
           <div className='flex flex-row items-center justify-between py-3 border-b border-lightGray'>
             <div className='w-10'></div>
             <p className='text-sm text-center text-black'>Upload my bank details</p>
-            <button onClick={toogleModal} className=' hover:bg-lightGray/10 rounded-full items-center text-base  flex justify-center w-10 h-10 text-black font-normal capitalize'>
+            <button onClick={toggleModal} className=' hover:bg-lightGray/10 rounded-full items-center text-base  flex justify-center w-10 h-10 text-black font-normal capitalize'>
               <IoClose size={25} />
             </button>
           </div>
@@ -71,7 +71,7 @@ function RenderBankDetail() {
         </div>
 
 
-        <button onClick={toogleModal} className='mt-3 text-sm border border-black hover:bg-bglight rounded-md px-4 py-1.5 text-black font-normal'>
+        <button onClick={toggleModal} className='mt-3 text-sm border border-black hover:bg-bglight rounded-md px-4 py-1.5 text-black font-normal'>
           Upload bank Details
         </button>
 
