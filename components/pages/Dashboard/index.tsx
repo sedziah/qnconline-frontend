@@ -1,8 +1,8 @@
 "use client"
+import React, { Suspense, useEffect, useState } from 'react'
 import NavigationFilter from '@/components/NavigationFilter'
 import { DashboardFilter } from '@/library/types'
 import { useSearchParams, useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
 import OrdersPage from './OrdersPage'
 import ProfilePage from './ProfilePage'
 import FavoritesPage from './FavoritesPage'
@@ -27,7 +27,6 @@ export default function DashboardPage() {
     }
   }, [dashboardTab])
 
-
   const componentMap = {
     "orders": OrdersPage,
     "profile": ProfilePage,
@@ -39,18 +38,14 @@ export default function DashboardPage() {
   const SelectedComponent = componentMap[selectedTab] || OrdersPage
 
   return (
-    <>
-      <div className='w-full h-screen overflow-hidden overflow-y-scroll bg-bglight'>
+    <div className='w-full h-screen overflow-hidden overflow-y-scroll bg-bglight'>
+      <NavigationFilter tab={selectedTab} handleTabChange={handleTabChange} />
 
-        <NavigationFilter tab={selectedTab} handleTabChange={handleTabChange} />
-
-
+      <Suspense fallback={<div>Loading...</div>}>
         <SelectedComponent />
+      </Suspense>
 
-
-        <div className='h-10'></div>
-
-      </div>
-    </>
+      <div className='h-10'></div>
+    </div>
   )
 }
