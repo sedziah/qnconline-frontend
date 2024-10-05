@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import 'react-multi-carousel/lib/styles.css'
 import React from 'react'
@@ -83,10 +84,10 @@ const BannerCarousel = () => {
     renderButtonGroupOutside={false}
     renderDotsOutside={false}>
     {DUMMYDATA?.map((item) => <div key={item} className='w-full h-[85vh] md:h-96 lg:h-96'>
-      <a className='w-full h-full'>
-        <Image
-          width={100}
-          height={"200"}
+      <a className='w-full h-full' href=''>
+        <img
+          // width={100}
+          // height={"200"}
           src={item} className='w-full h-full object-fill lg:object-cover' alt='banner' />
       </a>
     </div>)}
@@ -95,9 +96,9 @@ const BannerCarousel = () => {
 }
 
 const DUMMYDATA = [
-  "https://images.ctfassets.net/mmeshd7gafk1/N89lOcXmDMzcHylfC5uIM/5aece37d20ed9cede35d3de23650033d/HP_banner_-_desktop_-_SWAP_-_US.jpeg",
-  "https://images.ctfassets.net/mmeshd7gafk1/2Sjyr850qM5Kj1VV6yyn3O/fe4f23e5572b8705d6e8d7357ad91225/HP_banner_-_desktop_-_generic_B_-_US.jpg",
-  "https://images.ctfassets.net/mmeshd7gafk1/3Xpl0rtrXbBRIZDONnbeNm/da1ec02caca4b8dcba2f8c5b31c68d6b/GENERIC_HPBANNERS_iPad2021_Desktop_US.jpg"
+  "https://www.backmarket.com/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://images.ctfassets.net/mmeshd7gafk1/3MsolfbYgGOEYFpCDYzAK9/8f88dfec68a72eb7af529a02d595a3da/Visible_CommCampaign_HP-Banner_A_Desktop_v3__1_.jpg",
+  "https://www.backmarket.com/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://images.ctfassets.net/mmeshd7gafk1/t8JhndTyTa1sDJIhaH37I/f70c90624156c0562ad41e083da5e9e5/GENERIC_HPBANNERS_MacBookAirM1_Desktop_US.jpg",
+  "https://www.backmarket.com/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://images.ctfassets.net/mmeshd7gafk1/6ftzgVlwDWYTxzFy3eY5Cw/f9253bace06cbba3ecfb98e8daca92a3/DN_HP-Banners_2_desktop_US.jpg"
 ]
 
 export default BannerCarousel

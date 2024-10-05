@@ -14,22 +14,22 @@ import { usePathname } from 'next/navigation'
 const DropdownOptions = [
   {
     label: 'account',
-    href: '/dashboard/profile',
+    href: '/dashboard?tab=profile',
     icon: <User size="19" color="#000" />
   },
   {
     label: 'orders',
-    href: '/dashboard/orders',
+    href: '/dashboard?tab=orders',
     icon: <Shop size="19" color="#000" />
   },
   {
     label: 'favorites',
-    href: '/dashboard/favorites',
+    href: '/dashboard?tab=favorites',
     icon: <Heart size="19" color="#000" />
   },
   {
     label: 'trade-ins',
-    href: '/dashboard/trade-ins',
+    href: '/dashboard?tab=trade-ins',
     icon: <Trade size="19" color="#000" />
   },
 ]
@@ -125,7 +125,7 @@ const Navbar = () => {
 
                 <button
                   onClick={toggleDropdown}
-                  className='w-10 h-10 rounded-full hover:bg-lightGray/20 bg-lightGray/10 flex items-center justify-center'>
+                  className='w-10 h-10 rounded-full hover:bg-lightGray/20 bg-bglight flex items-center justify-center'>
                   <User size="20" color="#000" />
                 </button>
 
@@ -223,7 +223,7 @@ const Navbar = () => {
 
               <button
                 onClick={toggleDropdown}
-                className='w-10 h-10 rounded-full hover:bg-lightGray/20 bg-lightGray/10 flex items-center justify-center'>
+                className='w-10 h-10 rounded-full hover:bg-lightGray/20 bg-bglight flex items-center justify-center'>
                 <User size="20" color="#000" />
               </button>
 
@@ -254,7 +254,7 @@ const Navbar = () => {
             </a>
           </div>
         </div>
-        <div className='hidden md:hidden sm:hidden lg:block bg-lightGray/10 overflow-hidden pl-7'>
+        <div className='hidden md:hidden sm:hidden lg:block bg-bglight overflow-hidden pl-7'>
           <div className='w-full flex flex-row'>
             <button onClick={toggleDrawer} className='flex w-[120px] flex-row gap-x-2 py-2.5'>
               <HambergerMenu size="20" color="#000" />

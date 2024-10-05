@@ -32,7 +32,7 @@ const CartPage = () => {
   // }
 
   return (
-    <div className='bg-lightGray/10 h-screen'>
+    <div className='bg-bglight h-screen'>
       <DefaultNavbar />
 
       <section className="py-8 antialiased md:py-16">

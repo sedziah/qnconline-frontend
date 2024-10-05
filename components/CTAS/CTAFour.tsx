@@ -5,7 +5,7 @@ export const CTAFour = () => {
   return (
     <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
 
-      <div className="w-full p-3 bg-lightGray/10 rounded-md">
+      <div className="w-full p-3 bg-bglight rounded-md">
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-6">
           <div className='flex flex-row items-center gap-x-3'>
             <div className="w-10 h-10 flex items-center justify-center bg-white rounded-md">

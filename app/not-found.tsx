@@ -5,7 +5,7 @@ export default function NotFound() {
   const router = useRouter()
   return (
     <div>
-      <section className="bg-lightGray/10 ">
+      <section className="bg-bglight ">
         <div className="container flex items-center min-h-screen px-6 py-12 mx-auto">
           <div>
             <p className="text-sm font-medium text-black">404 error</p>

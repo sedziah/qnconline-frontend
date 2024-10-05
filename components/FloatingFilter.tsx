@@ -65,7 +65,7 @@ const FloatingFilter = () => {
             <p>Filters</p>
             <FaFilter />
           </button>
-          <div className='h-8 w-0.5 border bg-lightGray/10'></div>
+          <div className='h-8 w-0.5 border bg-bglight'></div>
           <button onClick={toogleOpenSortingDrawer} className='w-full justify-center h-10 flex items-center text-base flex-row gap-x-2'>
             <p>Sort</p>
             <BiSortAlt2 />

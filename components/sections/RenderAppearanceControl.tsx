@@ -43,7 +43,7 @@ const RenderAppearanceControl = () => {
           <div className='w-full hidden md:block lg:block'>
             <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>Select the <span className='italic'>appearance</span></h1>
 
-            <div className='my-4 flex flex-row gap-x-3 bg-lightGray/10 p-4 rounded-lg'>
+            <div className='my-4 flex flex-row gap-x-3 bg-bglight p-4 rounded-lg'>
               <PiEyesFill className='text-black text-xl' size={30} />
               <p className='text-[13px] text-black font-semibold leading-6 tracking-wider'>
                 Appearance describes the look of the device. Fair, Good, Excellent, Premium — all 100% functional. These images are examples only.
