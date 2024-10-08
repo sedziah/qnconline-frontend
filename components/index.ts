@@ -6,7 +6,7 @@ import CartPage from "./pages/CartPage"
 import TradeInOverview from "./pages/TradeInOverview"
 import TradeInPage from "./pages/TradeInPage"
 import TradeInOfferDetailPage from "./pages/TradeInOfferDetailPage"
-
+import DashboardPage from "./pages/Dashboard"
 import Breadcrumb from "./breadcrumb"
 import SigninPage from "./pages/SigninPage"
 
@@ -20,5 +20,6 @@ export {
   CartPage,
   TradeInOverview,
   TradeInOfferDetailPage,
-  TradeInPage
+  TradeInPage,
+  DashboardPage
 }

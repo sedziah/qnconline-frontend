@@ -147,7 +147,7 @@ const TradeInOverview = () => {
             </p>
 
             <a href='/'>
-              <button className="border border-lightGray py-2 text-sm px-2 w-1/2 mt-10 hover:bg-lightGray/10 rounded-lg">
+              <button className="border border-lightGray py-2 text-sm px-2 w-1/2 mt-10 hover:bg-bglight rounded-lg">
                 See FAQs
               </button>
             </a>
@@ -179,7 +179,7 @@ const TradeInOverview = () => {
             </p>
 
             <a href='/'>
-              <button className="border border-lightGray py-2 text-sm px-2 w-1/2 mt-10 hover:bg-lightGray/10 rounded-lg">
+              <button className="border border-lightGray py-2 text-sm px-2 w-1/2 mt-10 hover:bg-bglight rounded-lg">
                 See FAQs
               </button>
             </a>

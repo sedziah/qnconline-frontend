@@ -1,23 +1,22 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import { Money2, ShoppingCart, Trade, Verify } from 'iconsax-react'
-import React, { FC, useEffect, useState } from 'react'
-import { IoMdClose } from 'react-icons/io'
 import Drawer from 'react-modern-drawer'
 import 'react-modern-drawer/dist/index.css'
+import React, { FC, useEffect, useState } from 'react'
+import { IoMdClose } from 'react-icons/io'
 
 type PropType = {
   openFilter: boolean
-  toogleFilterDrawer: () => void
+  toggleFilterDrawer: () => void
 }
 
-const BatteryDrawer = ({ openFilter, toogleFilterDrawer }: PropType) => {
+const BatteryDrawer = ({ openFilter, toggleFilterDrawer }: PropType) => {
 
   return (
     <Drawer
       key='battery'
       open={openFilter}
-      onClose={() => toogleFilterDrawer()}
+      onClose={toggleFilterDrawer}
       direction='right'
       zIndex={9999}
       className='h-full'
@@ -26,10 +25,12 @@ const BatteryDrawer = ({ openFilter, toogleFilterDrawer }: PropType) => {
         height: "100vh",
         // Responsive width
         width: "100%",
-        minWidth: "450px",
+        minWidth: "250px",
         maxWidth: "400px",
         // Centered
         marginLeft: "auto",
+        background: '#f8f9fc',
+
         marginRight: "auto",
         overflowY: "scroll"
       }}
@@ -40,7 +41,7 @@ const BatteryDrawer = ({ openFilter, toogleFilterDrawer }: PropType) => {
           Battery Options
         </p>
 
-        <button onClick={() => toogleFilterDrawer()}>
+        <button onClick={toggleFilterDrawer}>
           <IoMdClose size="24" color="#000" />
         </button>
       </div>
