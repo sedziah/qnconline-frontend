@@ -109,7 +109,7 @@ const HomePage = () => {
       <InfoCard
         title="Trading in your old tech is easier than a lot of things."
         description="Earn cash when you trade in your forgotten tech. It’s a simple way to help do more with what we already have."
-        link="/"
+        link="/trade-in"
       />
 
       {/* Newsletter Subscription Section */}
