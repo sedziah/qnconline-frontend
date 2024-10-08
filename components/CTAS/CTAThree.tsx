@@ -23,7 +23,7 @@ export const CTAThree = () => {
             <div className="flex-1 w-full">
               <h1 className='text-sm font-semibold text-white'>Get an offer</h1>
               <p className="text-xs font-normal text-lightGray mt-2">
-                See an offer from our partners within 5 minutes.
+                See an offer from our partners within minutes.
               </p>
             </div>
           </div>

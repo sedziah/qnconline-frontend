@@ -8,7 +8,7 @@ const DUMMYDATA = [
     image: "https://www.backmarket.com/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://images.ctfassets.net/mmeshd7gafk1/5BB0e2ruosL8c7yuCNzrGA/204d49ce0e3ce63a55ff8a61990fb7af/iphone_XR.jpeg"
   },
   {
-    title: "Other Phones",
+    title: "Smartphones",
     image: "https://www.backmarket.com/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://images.ctfassets.net/mmeshd7gafk1/5pb4SPz2VcnDtXgaJxOvLR/6ea23ef48c551778cf1b9d31b59af58e/Samsung_Galaxy_S10_.jpg"
   },
   {
