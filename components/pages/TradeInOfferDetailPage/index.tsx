@@ -8,7 +8,7 @@ const TradeInOfferDetailPage = () => {
   return (
     <>
       <DefaultNavbar />
-      <div className="w-full h-screen overflow-hidden overflow-y-scroll bg-lightGray/10">
+      <div className="w-full h-screen overflow-hidden overflow-y-scroll bg-bglight">
         <div className='w-full  px-4 pt-28 max-w-xl mx-auto'>
           <div className='border-b border-lightGray pb-3'>
             <p className='text-base font-normal text-center text-black'>See the offer</p>

@@ -18,7 +18,8 @@ const config: Config = {
         primary2: "#f9b233",
         lightGray: "#adb5bd",
         black: "#2f3137",
-        lightblue: "#b5e2fa"
+        lightblue: "#b5e2fa",
+        bglight: "#f8f9fc"
       }
     },
   },

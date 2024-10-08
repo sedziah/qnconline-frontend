@@ -215,3 +215,10 @@ export interface FilterParams {
   [key: string]: string // This handles dynamic filters like color, storage, etc.
 }
 
+export enum DashboardFilter {
+  "profile",
+  "orders",
+  "favorites",
+  "trade-ins",
+  "other"
+}

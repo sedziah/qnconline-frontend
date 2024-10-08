@@ -17,10 +17,10 @@ const NoOfferPage = () => {
 
     <>
       <DefaultNavbar />
-      <div className='pt-24 px-4 bg-lightGray/10'>
+      <div className='pt-24 px-4 bg-bglight'>
         <Breadcrumb items={breadcrumbItems} />
       </div>
-      <div className="w-full h-screen overflow-hidden overflow-y-scroll bg-lightGray/10">
+      <div className="w-full h-screen overflow-hidden overflow-y-scroll bg-bglight">
         <div className='w-full  px-4 mt-10 max-w-3xl mx-auto'>
           <div className='flex items-center justify-center'>
             <img

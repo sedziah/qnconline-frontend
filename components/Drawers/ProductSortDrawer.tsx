@@ -7,7 +7,7 @@ import FilterSection from '../FIlters/NewFilter'
 
 type PropType = {
   openFilter: boolean
-  toogleFilterDrawer: () => void
+  toggleFilterDrawer: () => void
   specifications: Record<string, string[]>
   handleFiltersChange: (filters: Record<string, string[]>) => void
   productCount: number
@@ -15,12 +15,12 @@ type PropType = {
 
 const SORTOPTION = ["Bestsellers", "Price: Low to High", "Price: High to Low"]
 
-export const ProductSortDrawer = ({ openFilter, productCount, toogleFilterDrawer, specifications, handleFiltersChange }: PropType) => {
+export const ProductSortDrawer = ({ openFilter, productCount, toggleFilterDrawer, specifications, handleFiltersChange }: PropType) => {
 
   return (
     <Drawer
       open={openFilter}
-      onClose={toogleFilterDrawer}
+      onClose={toggleFilterDrawer}
       direction='bottom'
       zIndex={9999}
       className='h-full'
@@ -30,7 +30,7 @@ export const ProductSortDrawer = ({ openFilter, productCount, toogleFilterDrawer
       }}
     >
       <div className='px-4 flex w-full bg-white z-50 fixed top-0 flex-row items-center justify-between'>
-        <button onClick={toogleFilterDrawer} className='w-10 h-10 text-3xl text-black'>
+        <button onClick={toggleFilterDrawer} className='w-10 h-10 text-3xl text-black'>
           <IoMdClose />
         </button>
         <h1 className='text-base text-black font-normal text-center'>Sort</h1>
@@ -47,7 +47,7 @@ export const ProductSortDrawer = ({ openFilter, productCount, toogleFilterDrawer
 
 
 
-      <FloatingButton label={`See all ${productCount} products`} onClick={toogleFilterDrawer} />
+      <FloatingButton label={`See all ${productCount} products`} onClick={toggleFilterDrawer} />
     </Drawer>
   )
 }

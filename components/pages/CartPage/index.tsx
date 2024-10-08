@@ -32,7 +32,7 @@ const CartPage = () => {
   // }
 
   return (
-    <div className='bg-lightGray/10 h-screen'>
+    <div className='bg-bglight max-h-full overflow-hidden overflow-y-scroll'>
       <DefaultNavbar />
 
       <section className="py-8 antialiased md:py-16">

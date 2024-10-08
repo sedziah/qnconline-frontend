@@ -1,85 +1,83 @@
-/* eslint-disable @next/next/no-img-element */
 "use client"
-import { COLORS, HIDDENROUTES } from '@/constants'
-import { HambergerMenu, Heart, Logout, SearchNormal, Shop, ShoppingCart, Trade, User } from 'iconsax-react'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import { apiService } from '@/library/services/apiService'
-import { ProductCategory } from '@/library/types'
-import Drawer from 'react-modern-drawer'
-import 'react-modern-drawer/dist/index.css'
-import MobileDrawer from './MobileDrawer'
-import { usePathname } from 'next/navigation'
+import { COLORS, HIDDENROUTES } from '@/constants';
+import { HambergerMenu, Heart, Logout, SearchNormal, Shop, ShoppingCart, Trade, User } from 'iconsax-react';
+import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
+import { apiService } from '@/library/services/apiService';
+import { ProductCategory } from '@/library/types';
+import Drawer from 'react-modern-drawer';
+import 'react-modern-drawer/dist/index.css';
+import MobileDrawer from './MobileDrawer';
+import { usePathname } from 'next/navigation';
 
 const DropdownOptions = [
   {
     label: 'account',
-    href: '/dashboard/profile',
+    href: '/dashboard?tab=profile',
     icon: <User size="19" color="#000" />
   },
   {
     label: 'orders',
-    href: '/dashboard/orders',
+    href: '/dashboard?tab=orders',
     icon: <Shop size="19" color="#000" />
   },
   {
     label: 'favorites',
-    href: '/dashboard/favorites',
+    href: '/dashboard?tab=favorites',
     icon: <Heart size="19" color="#000" />
   },
   {
     label: 'trade-ins',
-    href: '/dashboard/trade-ins',
+    href: '/dashboard?tab=trade-ins',
     icon: <Trade size="19" color="#000" />
   },
-]
+];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const [scrollPosition, setScrollPosition] = useState(0)
-  const [categories, setCategories] = useState<ProductCategory[]>([])
-  const path = usePathname()
-  const absolutePath = /^\/trade-in\/.*/.test(path)
-  const [openDropdown, setOpenDropdown] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [categories, setCategories] = useState<ProductCategory[]>([]);
+  const path = usePathname();
+  const absolutePath = /^\/trade-in\/.*/.test(path);
+  const [openDropdown, setOpenDropdown] = useState(false);
 
   const toggleDropdown = () => {
-    setOpenDropdown(!openDropdown)
-  }
-
+    setOpenDropdown(!openDropdown);
+  };
 
   const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState)
-  }
+    setIsOpen((prevState) => !prevState);
+  };
 
   const handleScroll = () => {
-    const position = window.pageYOffset
-    setScrollPosition(position)
-  }
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
 
   // Fetch categories on component mount
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const fetchedCategories = await apiService.getProductCategories()
-        setCategories(fetchedCategories)
+        const fetchedCategories = await apiService.getProductCategories();
+        setCategories(fetchedCategories);
       } catch (error) {
-        console.error("Error fetching categories:", error)
+        console.error("Error fetching categories:", error);
       }
-    }
+    };
 
-    fetchCategories()
-  }, [])
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   if (HIDDENROUTES?.includes(path) || absolutePath) {
-    return null
+    return null;
   }
 
   return (
@@ -89,7 +87,6 @@ const Navbar = () => {
         onClose={toggleDrawer}
         direction='left'
         zIndex={9999}
-        className='bla bla bla'
         size={300}
       >
         <MobileDrawer
@@ -102,7 +99,7 @@ const Navbar = () => {
         zIndex: 8888,
         transitionTimingFunction: "linear",
         transition: "transform 0.7s ease-out, opacity 0.7s ease-out"
-      }} className={`w-full transition  shadow z-50 bg-white ${scrollPosition > 275 ? "fixed top-0" : "relative"}`}>
+      }} className={`w-full transition shadow z-50 bg-white ${scrollPosition > 275 ? "fixed top-0" : "relative"}`}>
         {/* Mobile Nav */}
         <div className='lg:hidden px-4 py-2'>
           <div className='flex-row flex justify-between items-center'>
@@ -116,42 +113,9 @@ const Navbar = () => {
                 src="/assets/logo-small.png" className='h-10 object-contain' alt='logo' />
             </a>
             <div className='flex flex-row items-center justify-center gap-x-3'>
-              {/* Toggle icon based on login status */}
-              {/* <a href='/signin'>
+              <a href='/signin'>
                 <User size="20" color="#000" />
-              </a> */}
-
-              <div className='relative'>
-
-                <button
-                  onClick={toggleDropdown}
-                  className='w-10 h-10 rounded-full hover:bg-lightGray/20 bg-lightGray/10 flex items-center justify-center'>
-                  <User size="20" color="#000" />
-                </button>
-
-                {openDropdown && (
-                  <div style={{
-                    zIndex: 99999,
-                  }} className="absolute right-0 mt-2 w-56 bg-white shadow-md rounded-lg py-2 z-50">
-                    {DropdownOptions?.map((option, index) => <a href={option?.href} key={option?.label}>
-                      <div key={option?.label} className={`py-5 px-4 ${index !== 0 ? "border-t border-lightGray/20" : ""} flex flex-row items-center gap-x-5`}>
-
-                        {option?.icon}
-
-                        <span className='text-[13px] text-black capitalize' >{option?.label}</span>
-                      </div>
-                    </a>)}
-
-                    <button className={`py-5 border-t border-lightGray/20 px-4 flex flex-row items-center gap-x-5`}>
-
-                      <Logout size="19" color="#000" />
-
-                      <span className='text-[13px] text-black capitalize'>Log out</span>
-                    </button>
-                  </div>
-                )}
-              </div>
-
+              </a>
 
               <a href='/cart'>
                 <ShoppingCart size="20" color="#000" />
@@ -167,24 +131,20 @@ const Navbar = () => {
                 </input>
               </div>
               <button className='absolute right-2 top-1/3'>
-                <SearchNormal
-                  size="20"
-                  color={COLORS.lightGray}
-                />
+                <SearchNormal size="20" color={COLORS.lightGray} />
               </button>
             </div>
           </div>
         </div>
 
-
-        <div className='hidden lg:flex flex-row gap-x-12  justify-between items-center max-w-[87rem] mx-auto py-2'>
+        {/* Desktop Nav */}
+        <div className='hidden lg:flex flex-row gap-x-12 justify-between items-center max-w-[87rem] mx-auto py-2'>
           <a href='/'>
             <Image
               width={100}
               height={100}
               src="/assets/logo-small.png" className='h-10 object-contain' alt='logo' />
           </a>
-
 
           <div className='flex flex-row items-center justify-center gap-x-5'>
             <a href='/trade-in' className='flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all'>
@@ -206,61 +166,24 @@ const Navbar = () => {
               </input>
             </div>
             <button className='absolute right-2 top-1/3'>
-              <SearchNormal
-                size="20"
-                color={COLORS.lightGray}
-              />
+              <SearchNormal size="20" color={COLORS.lightGray} />
             </button>
           </div>
 
           <div className='flex flex-row items-center justify-center gap-x-3'>
-
-            {/* Toggle icon based on login status */}
-            {/* <a href='/signin'>
-                <User size="20" color="#000" />
-              </a> */}
-            <div className='relative'>
-
-              <button
-                onClick={toggleDropdown}
-                className='w-10 h-10 rounded-full hover:bg-lightGray/20 bg-lightGray/10 flex items-center justify-center'>
-                <User size="20" color="#000" />
-              </button>
-
-              {openDropdown && (
-                <div style={{
-                  zIndex: 99999,
-                }} className="absolute right-0 mt-2 w-56 bg-white shadow-md rounded-lg py-2 z-50">
-                  {DropdownOptions?.map((option, index) => <a href={option?.href} key={option?.label}>
-                    <div key={option?.label} className={`py-5 px-4 ${index !== 0 ? "border-t border-lightGray/20" : ""} flex flex-row items-center gap-x-5`}>
-
-                      {option?.icon}
-
-                      <span className='text-[13px] text-black capitalize' >{option?.label}</span>
-                    </div>
-                  </a>)}
-
-                  <button className={`py-5 border-t border-lightGray/20 px-4 flex flex-row items-center gap-x-5`}>
-
-                    <Logout size="19" color="#000" />
-
-                    <span className='text-[13px] text-black capitalize'>Log out</span>
-                  </button>
-                </div>
-              )}
-            </div>
+            <a href='/signin'>
+              <User size="20" color="#000" />
+            </a>
             <a href='/cart'>
               <ShoppingCart size="20" color="#000" />
             </a>
           </div>
         </div>
-        <div className='hidden md:hidden sm:hidden lg:block bg-lightGray/10 overflow-hidden pl-7'>
+        <div className='hidden md:hidden sm:hidden lg:block bg-bglight overflow-hidden pl-7'>
           <div className='w-full flex flex-row'>
             <button onClick={toggleDrawer} className='flex w-[120px] flex-row gap-x-2 py-2.5'>
               <HambergerMenu size="20" color="#000" />
-              <p className='text-sm capitalize font-normal'>
-                all items
-              </p>
+              <p className='text-sm capitalize font-normal'>all items</p>
             </button>
             <div className='overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 w-full flex flex-row items-center overflow-x-autoscrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200'>
               <div className='flex flex-row gap-x-6'>
@@ -286,14 +209,13 @@ const Navbar = () => {
                       ))}
                   </div>
                 )}
-
               </div>
             </div>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

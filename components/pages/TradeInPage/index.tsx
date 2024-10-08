@@ -81,7 +81,7 @@ const TradeInPage = () => {
           </div>
         </div>
 
-        <div className='w-full col-span-2 h-screen max-h-full overflow-hidden overflow-y-scroll bg-lightGray/10 pt-28 px-4 '>
+        <div className='w-full col-span-2 h-screen max-h-full overflow-hidden overflow-y-scroll bg-bglight pt-28 px-4 '>
           <div className='w-full max-w-2xl mx-auto'>
             <RenderHeader
               activeStep={activeStep}
@@ -116,7 +116,7 @@ const RenderHeader = (
 ) => (
   <div className='w-full'>
     <div className='w-full flex flex-row items-center justify-between'>
-      <button onClick={handleBack} className="flex lg:hidden h-10 w-10 rounded-full items-center justify-center transition-opacity hover:bg-lightGray/10">
+      <button onClick={handleBack} className="flex lg:hidden h-10 w-10 rounded-full items-center justify-center transition-opacity hover:bg-bglight">
         <ArrowLeft size="27" color="#000" />
       </button>
       <div className='hidden lg:block'></div>

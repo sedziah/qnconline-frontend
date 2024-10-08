@@ -4,43 +4,80 @@ import { Lock1, Timer1, Trade, TruckFast, Verify } from 'iconsax-react'
 import React, { useState } from 'react'
 import { MdOutlineChevronRight } from 'react-icons/md'
 import TradeInDrawer from '../Drawers/TradeInDrawer'
+import RefurbishDrawer from '../Drawers/RefurbishDrawer'
+import WarrantDrawer from '../Drawers/WarrantDrawer'
+import CarrierDrawer from '../Drawers/CarrierDrawer'
+
+type DrawersState = {
+  tradeIn: boolean
+  refurbish: boolean
+  warrant: boolean
+  carrier: boolean
+}
+
 
 const RenderProductSummary = () => {
-  const [openDrawer, setOpenDrawer] = useState(false)
+  const [drawers, setDrawers] = useState<DrawersState>({
+    tradeIn: false,
+    refurbish: false,
+    warrant: false,
+    carrier: false,
+  })
 
 
-  // Open trade in drawer
-  const openTradeInModal = () => setOpenDrawer(!openDrawer)
-
+  const toggleDrawer = (drawerName: keyof DrawersState) => {
+    setDrawers((prev) => ({
+      ...prev,
+      [drawerName]: !prev[drawerName],
+    }))
+  }
 
   const ProductStats = [
     {
-      icon: <TruckFast size={20}  />,
+      icon: <TruckFast size={20} />,
       title: "Free delivery by Oct 1 - Oct 2",
-      onClick: () => {}
+      description: "Express delivery by Oct 8 - Oct 9 from $15.00"
     },
     {
       icon: <Lock1 size={20} />,
       title: "Works with all carriers",
-      onClick: () => { }
+      onClick: () => toggleDrawer('carrier')
     },
     {
-      icon: <Timer1 size={20}  />,
+      icon: <Timer1 size={20} />,
       title: "Free 30-day returns",
       description: "1-year warranty",
-      onClick: () => { }
+      onClick: () => toggleDrawer('warrant')
     },
     {
       icon: <Verify size={20} />,
       title: "Verified Refurbished in the US",
-      onClick: () => { }
+      onClick: () => toggleDrawer('refurbish')
     }
   ]
-  
+
   return (
     <>
-     <TradeInDrawer openFilter={openDrawer} toogleFilterDrawer={() => setOpenDrawer(!openDrawer)}
+      <TradeInDrawer
+        openFilter={drawers.tradeIn}
+        toggleFilterDrawer={() => toggleDrawer('tradeIn')}
       />
+
+      <RefurbishDrawer
+        openFilter={drawers.refurbish}
+        toggleFilterDrawer={() => toggleDrawer('refurbish')}
+      />
+
+      <WarrantDrawer
+        openFilter={drawers.warrant}
+        toggleFilterDrawer={() => toggleDrawer('warrant')}
+      />
+
+      <CarrierDrawer
+        openFilter={drawers.carrier}
+        toggleFilterDrawer={() => toggleDrawer('carrier')}
+      />
+
       <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
         <div className="">
           <div className="container mx-auto px-4 py-8">
@@ -132,7 +169,7 @@ const RenderProductSummary = () => {
                   these wireless headphones. Perfect for music lovers and frequent travelers.
                 </p>
 
-                <button onClick={openTradeInModal} className='bg-lightGray/30 transition-all hover:bg-lightGray/40 flex flex-row items-center justify-between py-2 gap-x-2 px-4 rounded-full'>
+                <button onClick={() => toggleDrawer('tradeIn')} className='bg-lightGray/30 transition-all hover:bg-lightGray/40 flex flex-row items-center justify-between py-2 gap-x-2 px-4 rounded-full'>
                   <Trade size="20" color={COLORS.primary} />
                   <p className='text-xs text-black'>Get this for even less with Trade-in</p>
                   <MdOutlineChevronRight />
@@ -141,7 +178,7 @@ const RenderProductSummary = () => {
                 <div className="py-4 border-t border-b b border-lightGray mt-7 grid grid-cols-2 gap-5">
                   {ProductStats?.map((info) => <button key={info?.title}
                     className='w-full flex flex-row items-center justify-center gap-x-1'
-                    onClick={info?.onClick}
+                    onClick={info?.onClick!}
                   >
                     <div className='w-full flex flex-row items-center'>
                       <div className='flex items-center justify-center rounded-lg w-10 h-10 bg-lightblue'>
@@ -152,8 +189,7 @@ const RenderProductSummary = () => {
                         {info.description && <p className='text-xs text-black'>{info?.description}</p>}
                       </div>
                     </div>
-                    <MdOutlineChevronRight />
-
+                    {info?.onClick && <MdOutlineChevronRight />}
                   </button>)}
                 </div>
               </div>
@@ -161,8 +197,9 @@ const RenderProductSummary = () => {
           </div>
 
 
-        </div></div>
-      </>
+        </div>
+      </div>
+    </>
   )
 }
 
