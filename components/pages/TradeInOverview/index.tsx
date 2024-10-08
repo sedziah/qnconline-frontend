@@ -5,6 +5,7 @@ import { CTAFour } from '@/components/CTAS/CTAFour'
 import { CTAThree } from '@/components/CTAS/CTAThree'
 import RenderTradeInCategory from '@/components/sections/RenderTradeInCategory'
 import React from 'react'
+import { COMPANY_NAME } from '@/constants'
 
 const TradeInOverview = () => {
   const breadcrumbItems = [
@@ -51,14 +52,16 @@ const TradeInOverview = () => {
 
       <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
         <div className='w-full mb-3 black md:hidden lg:hidden'>
-          <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>What’s Back QNC Trade-in?</h1>
+          <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>
+            What’s {COMPANY_NAME} Trade-in?
+          </h1>
 
         </div>
 
         <div className='grid gap-10 grid-cols-1 lg:grid-cols-2 md:grid-cols-2 items-center'>
           <div>
             <div className='w-full hidden md:block lg:block'>
-              <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>What’s Back QNC Trade-in?</h1>
+              <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>What’s {COMPANY_NAME} Trade-in?</h1>
 
             </div>
             <p className='text-sm text-gray-500 mt-2 leading-7'>
