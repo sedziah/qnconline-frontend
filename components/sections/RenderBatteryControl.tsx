@@ -22,10 +22,8 @@ const RenderBatteryControl = () => {
     },
   ]
 
-  const toggleDrawer = () => {
-    console.log("openDrawer", openDrawer)
-    setOpenDrawer(!openDrawer)
-  }
+  const toggleDrawer = () => setOpenDrawer(!openDrawer)
+
 
   return (
     <>
@@ -38,7 +36,7 @@ const RenderBatteryControl = () => {
         <div className='w-full mb-3 black md:hidden lg:hidden'>
           <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>Your phone comes with a <span className='italic'>healthy battery</span></h1>
 
-          <button onClick={() => toggleDrawer()} className='my-4 hover:shadow-xl transition-opacity delay-300 flex w-full items-center flex-row gap-x-3 bg-lightblue/60 p-4 rounded-lg'>
+          <button onClick={() => setOpenDrawer(true)} className='my-4 hover:shadow-xl transition-opacity delay-300 flex w-full items-center flex-row gap-x-3 bg-lightblue/60 p-4 rounded-lg'>
             <IoIosBatteryCharging className='text-black text-xl' size={30} />
             <p className='text-[13px] text-start flex text-black font-normal leading-6 tracking-wider'>
               All devices guaranteed solid battery health. Learn about your options
