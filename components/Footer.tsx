@@ -86,12 +86,11 @@ const Footer = () => {
                 Services
               </p>
               <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                <a className="hover:opacity-75" href="#"> 1on1 Coaching </a>
-                <a className="hover:opacity-75" href="#"> Company Review </a>
-                <a className="hover:opacity-75" href="#"> Accounts Review </a>
-                <a className="hover:opacity-75" href="#"> HR Consulting </a>
-                <a className="hover:opacity-75" href="#"> SEO Optimisation </a>
-              </nav>
+              <a className="hover:opacity-75" href="#"> Trade-In Program </a>
+              <a className="hover:opacity-75" href="#"> Buy Now, Pay Later </a>
+              <a className="hover:opacity-75" href="#"> Free Shipping </a>
+              <a className="hover:opacity-75" href="#"> Easy Returns & Refunds </a>
+            ` </nav>
             </div>
             <div>
               <p className="font-medium">
