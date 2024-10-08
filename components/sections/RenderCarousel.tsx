@@ -103,7 +103,7 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
                       price: product?.price || 0,
                       currency: product?.currency || 'N/A',
                       basePrice: product?.basePrice || '0.00',
-                      priceAdjustment: product?.priceAdjustment || '0.00',
+                      priceAdjustment: product?.priceAdjustment,
                       inventoryQuantity: product?.inventoryQuantity || 0,
                       condition: product?.condition || 'Unknown',
                       images: product?.images || [],
