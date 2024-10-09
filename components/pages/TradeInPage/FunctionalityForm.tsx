@@ -38,7 +38,7 @@ export const FunctionalityForm = ({ handleNext }: Props) => {
             <button
               onClick={() => setSelectedOption(condition)}
               key={condition}
-              className={`w-full transition-opacity my-2  delay-150  gap-x-3 flex flex-row justify-between rounded-md p-5 border  hover:bg-[#dee2ff]/10 hover:border-l[#dee2ff]/40 bg-white`}
+              className={`w-full transition-opacity my-2  delay-150  gap-x-3 flex flex-row justify-between rounded-md p-5 border  hover:bg-[#bde0fe]/10 hover:border-l[#bde0fe]/40 bg-white`}
             >
 
 

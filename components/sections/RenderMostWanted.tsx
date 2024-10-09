@@ -12,7 +12,7 @@ const RenderMostWanted = () => {
   }
 
   return (
-    <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
+    <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
       <h2 className='text-base font-semibold'>Trending Products</h2>
       <p className='text-base text-black/60 font-normal'>The tech in everyone’s search bar</p>
 

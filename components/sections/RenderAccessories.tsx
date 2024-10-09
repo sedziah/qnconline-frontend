@@ -3,7 +3,7 @@ import ProductCategoryCard from '../Cards/ProductCategoryCard'
 
 const RenderAccessories = () => {
   return (
-    <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
+    <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
       <h2 className='text-base font-semibold'>Accessories, PCs, and more</h2>
       <p className='text-base text-black/50 font-normal'>We’re more than just smartphones</p>
 

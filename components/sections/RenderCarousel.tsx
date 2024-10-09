@@ -46,7 +46,7 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
   };
 
   return (
-    <div className="my-14 px-4 w-full max-w-6xl mx-auto">
+    <div className="my-16 px-4 w-full max-w-6xl mx-auto">
       <h2 className="text-base font-semibold">{title}</h2>
       {subtitle && <p className="text-base text-black/60 font-normal">{subtitle}</p>}
 

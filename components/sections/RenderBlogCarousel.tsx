@@ -9,7 +9,7 @@ const Carousel = dynamic(() => import('react-multi-carousel'))
 const RenderBlogCarousel = () => {
 
   return (
-    <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
+    <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
       <h2 className='text-base font-semibold'>The latest in refurbished tech</h2>
 
       <div className='mt-4'>

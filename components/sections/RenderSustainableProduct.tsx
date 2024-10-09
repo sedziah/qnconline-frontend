@@ -17,7 +17,7 @@ interface RenderSustainableProductProps {
 
 const RenderSustainableProduct: React.FC<RenderSustainableProductProps> = ({ products, loading }) => {
   return (
-    <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
+    <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
       <h2 className='text-base font-semibold'>Explore Our Eco-Friendly Collection</h2>
       <p className='text-base text-black/50 font-normal'>Browse our Smart Choices for a Sustainable Future</p>
 
