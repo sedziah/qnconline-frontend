@@ -57,8 +57,7 @@ export const ProductListingDetail = () => {
 
       <RenderStorageControl />
 
-      {/* Detail Preview */}
-
+      
 
       <RenderTradeInPromo />
 
