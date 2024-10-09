@@ -31,14 +31,14 @@ const FilterSection: React.FC<FilterSectionProps> = ({ specifications, onFilters
   };
 
   return (
-    <div>
+    <div className=''>
       {Object.keys(specifications || {}).length === 0
         ? Array(10)
             .fill({})
             .map((_, key) => (
               <div key={key} className="w-full flex flex-row items-center gap-x-3 my-2">
                 <div className="h-5 w-5 bg-gray-200 rounded animate-pulse"></div>
-                <div className="h-5 w-1/2 bg-gray-200 rounded animate-pulse"></div>
+                <div className="h-5 w-full bg-gray-200 rounded animate-pulse"></div>
               </div>
             ))
         : Object.keys(specifications).map((specKey) => (
