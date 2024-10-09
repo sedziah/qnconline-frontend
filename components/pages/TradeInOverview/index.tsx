@@ -5,6 +5,7 @@ import { CTAFour } from '@/components/CTAS/CTAFour'
 import { CTAThree } from '@/components/CTAS/CTAThree'
 import RenderTradeInCategory from '@/components/sections/RenderTradeInCategory'
 import React from 'react'
+import { COMPANY_NAME } from '@/constants'
 
 const TradeInOverview = () => {
   const breadcrumbItems = [
@@ -28,41 +29,43 @@ const TradeInOverview = () => {
 
       <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
         <h1 className='text-lg lg:text-xl font-bold text-black'>
-          Trade in your smartphone
+          Trade in your smartphones
         </h1>
         <div className='mt-2 flex flex-row flex-wrap gap-3'>
           <a href='/trade-in/iPhone'>
             <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
-              Trade in your iPhone
+              Trade in your iPhones
             </button>
           </a>
           <a href='/trade-in/samsung'>
             <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
-              Trade in your samsung galaxy phone
+              Trade in your Other phones
             </button>
           </a>
-          <a href='/trade-in/macbook'>
+          {/* <a href='/trade-in/macbook'>
             <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
-              Trade in your macbook
+              Trade in your Laptops
             </button>
-          </a>
+          </a> */}
         </div>
       </div>
 
       <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
         <div className='w-full mb-3 black md:hidden lg:hidden'>
-          <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>What’s Back QNC Trade-in?</h1>
+          <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>
+            What’s {COMPANY_NAME} Trade-in?
+          </h1>
 
         </div>
 
         <div className='grid gap-10 grid-cols-1 lg:grid-cols-2 md:grid-cols-2 items-center'>
           <div>
             <div className='w-full hidden md:block lg:block'>
-              <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>What’s Back QNC Trade-in?</h1>
+              <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>What’s {COMPANY_NAME} Trade-in?</h1>
 
             </div>
             <p className='text-sm text-gray-500 mt-2 leading-7'>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus natus aperiam consectetur eaque dicta voluptate ea numquam corrupti, harum facilis consequuntur sint asperiores nulla veritatis amet totam non. Iste, officiis.
+            An easy win for your wallet and the planet. Sell your unwanted electronics to professional refurbishers on Back Market — just complete the assessment and see the best offer for your device in as little as 5 minutes.
             </p>
           </div>
 
@@ -89,13 +92,13 @@ const TradeInOverview = () => {
 
             </div>
             <p className='text-sm text-gray-500 mt-2 leading-7'>
-              1. Get an offer from a professional refurbisher
+              1. Get an offer from our partners within minutes
             </p>
             <p className='text-sm text-gray-500 mt-2 leading-7'>
-              2. Ship your device for free
+              2. Ship our delver your device to our service center
             </p>
             <p className='text-sm text-gray-500 mt-2 leading-7'>
-              3. Get cash in your bank account
+              3. Receive instant cash after we receive your device
             </p>
           </div>
 
@@ -116,7 +119,7 @@ const TradeInOverview = () => {
 
             </div>
             <p className='text-sm text-gray-500 mt-2 leading-7'>
-              Professional refurbishers make offers based on your device’s condition and its current market value. If you don’t get an offer right away, you can always try again — Trade-in offers depend on the market, so there’s always round 2.
+              Our partners make offers based on your device’s condition and its current market value. If you don’t get an offer right away, you can always try again — Trade-in offers depend on the market, so there’s always round 2.
             </p>
           </div>
 
@@ -171,7 +174,7 @@ const TradeInOverview = () => {
 
           <div>
             <div className='w-full hidden md:block lg:block'>
-              <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>SThink it’s the end of the road for your device? Think again!</h1>
+              <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>Think it’s the end of the road for your device? Think again!</h1>
 
             </div>
             <p className='text-sm text-gray-500 mt-2 leading-7'>
@@ -200,23 +203,23 @@ const TradeInOverview = () => {
         <div className='mt-2 flex flex-row flex-wrap gap-3'>
           <a href='/trade-in/iPhone'>
             <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
-              Trade in your iPhone
+              Trade in your iPhones
             </button>
           </a>
           <a href='/trade-in/samsung'>
             <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
-              Trade in your samsung galaxy phone
+              Smartphones
             </button>
           </a>
           <a href='/trade-in/macbook'>
             <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
-              Trade in your macbook
+              Trade in your Laptops
             </button>
           </a>
           
           <a href='/trade-in/wallet'>
             <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
-              Trade in your wallet
+              Trade in your Tablets
             </button>
           </a>
           
@@ -228,28 +231,29 @@ const TradeInOverview = () => {
           
           <a href='/trade-in/glasses'>
             <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
-              Trade in your glasses
+              Trade in your Audio
             </button>
           </a>
           
+          {/* 
           <a href='/trade-in/glasses'>
             <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
               Trade in your glasses
             </button>
-          </a>
+          </a> 
 
           <a href='/trade-in/wallet'>
             <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
-              Trade in your wallet
+              Trade in your Appliances
             </button>
           </a>
 
           <a href='/trade-in/consoles'>
             <button className='text-sm font-normal text-white bg-[#000] hover:bg-[#000]/95 py-2 px-2 rounded-md'>
-              Trade in your consoles
+              Trade in your Audio
             </button>
           </a>
-
+        */}
         </div>
       </div>
 

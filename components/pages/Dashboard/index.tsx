@@ -9,7 +9,7 @@ import FavoritesPage from './FavoritesPage'
 import TradeIns from './TradeIns'
 import OtherPage from './OtherPage'
 
-export default function DashboardPage() {
+function DashboardContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const dashboardTab = searchParams.get('tab') as keyof typeof DashboardFilter
@@ -38,13 +38,19 @@ export default function DashboardPage() {
   const SelectedComponent = componentMap[selectedTab] || OrdersPage
 
   return (
-    <div className='w-full h-screen overflow-hidden overflow-y-scroll bg-bglight'>
+    <>
       <NavigationFilter tab={selectedTab} handleTabChange={handleTabChange} />
+      <SelectedComponent />
+    </>
+  )
+}
 
+export default function DashboardPage() {
+  return (
+    <div className='w-full h-screen overflow-hidden overflow-y-scroll bg-bglight'>
       <Suspense fallback={<div>Loading...</div>}>
-        <SelectedComponent />
+        <DashboardContent />
       </Suspense>
-
       <div className='h-10'></div>
     </div>
   )

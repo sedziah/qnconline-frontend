@@ -109,5 +109,47 @@ export const apiService = {
       throw error;
     }
   },
+
+  searchProducts: async (query: string): Promise<Product[]> => {
+    try {
+      const response = await api.get<Product[]>(`/products/search/?q=${encodeURIComponent(query)}`);
+      return response.data; // Return the search results
+    } catch (error) {
+      console.error("Error searching for products:", error);
+      throw error; // Throw error to handle it properly in calling code
+    }
+  },
+
+    // Login function
+    login: async (email: string, password: string): Promise<any> => {
+      try {
+        const response = await api.post('/accounts/login/', { email, password }, { withCredentials: true });
+        return response.data; // Return user data
+      } catch (error) {
+        console.error("Login error:", error);
+        throw error;
+      }
+    },
+  
+    // Logout function
+    logout: async () => {
+      try {
+        await api.post('/accounts/logout/', {}, { withCredentials: true });
+      } catch (error) {
+        console.error("Logout error:", error);
+        throw error;
+      }
+    },
+  
+    // Check if the user is authenticated
+    isAuthenticated: async () => {
+      try {
+        const response = await api.get('/accounts/status/', { withCredentials: true });
+        return response.data.isAuthenticated; // Assumes the API returns an isAuthenticated flag
+      } catch (error) {
+        console.error("Error checking authentication status:", error);
+        return false; // Default to not authenticated on error
+      }
+    },
   
 };

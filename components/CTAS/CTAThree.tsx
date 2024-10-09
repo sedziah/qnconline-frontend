@@ -21,9 +21,9 @@ export const CTAThree = () => {
               <ShieldTick size="28" color="#fff" />
             </div>
             <div className="flex-1 w-full">
-              <h1 className='text-sm font-semibold text-white'>Lorem ipsum</h1>
+              <h1 className='text-sm font-semibold text-white'>Get an offer</h1>
               <p className="text-xs font-normal text-lightGray mt-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus, odit.
+                See an offer from our partners within minutes.
               </p>
             </div>
           </div>
@@ -32,9 +32,9 @@ export const CTAThree = () => {
               <TruckFast size="28" color="#fff" />
             </div>
             <div className="flex-1 w-full">
-              <h1 className='text-sm font-semibold text-white'>Lorem ipsum</h1>
+              <h1 className='text-sm font-semibold text-white'>Ship or Deliver </h1>
               <p className="text-xs font-normal text-lightGray mt-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus, odit.
+                Transfer your data and ship or deliver your device to our service center.
               </p>
             </div>
           </div>
@@ -43,9 +43,9 @@ export const CTAThree = () => {
               <MoneySend size="28" color="#fff" />
             </div>
             <div className="flex-1 w-full">
-              <h1 className='text-sm font-semibold text-white'>Lorem ipsum</h1>
+              <h1 className='text-sm font-semibold text-white'>Get paid</h1>
               <p className="text-xs font-normal text-lightGray mt-2">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Accusamus, odit.
+                Recieve your direct deposit instantly after we receive your device.
               </p>
             </div>
           </div>
