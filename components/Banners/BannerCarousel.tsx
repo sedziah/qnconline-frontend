@@ -3,12 +3,8 @@
 import 'react-multi-carousel/lib/styles.css'
 import React from 'react'
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
-
 
 const Carousel = dynamic(() => import('react-multi-carousel'));
-
-
 
 const BannerCarousel = () => {
   const responsive = {

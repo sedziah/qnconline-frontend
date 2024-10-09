@@ -84,7 +84,7 @@ const ShippingAddressModal = ({onCloseModal, open}: PropType) => {
 
         </div>
 
-        <button className='h-12 bg-primary w-full rounded-md flex items-center justify-center text-white hover:bg-primary/90'>
+        <button className='h-12 bg-primary w-full rounded-full flex items-center justify-center text-white hover:bg-primary/90'>
           Save
         </button>
       </div>
