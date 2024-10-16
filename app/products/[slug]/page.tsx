@@ -1,4 +1,4 @@
-import { ProductListingDetail } from '@/components'
+import { ProductListingDetail, GenericListingDetailPage } from '@/components'
 import { Metadata } from 'next'
 import React from 'react'
 
@@ -9,7 +9,8 @@ export const metadata: Metadata = {
 
 
 const page = () => {
-  return <ProductListingDetail />
+  return <GenericListingDetailPage />
+  // return <ProductListingDetail />
 }
 
 export default page

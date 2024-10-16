@@ -1,30 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
-import { COLORS } from '@/constants'
+import React, { useEffect, useRef, useState } from 'react'
+import Breadcrumb from '../breadcrumb'
 import { ArrowLeft2, ArrowRight2, Lock1, Timer1, Trade, TruckFast, Verify } from 'iconsax-react'
-import React, { useState } from 'react'
-import { MdOutlineChevronRight } from 'react-icons/md'
+import { DrawersState } from '../sections/RenderProductSummary'
 import TradeInDrawer from '../Drawers/TradeInDrawer'
 import RefurbishDrawer from '../Drawers/RefurbishDrawer'
 import WarrantDrawer from '../Drawers/WarrantDrawer'
 import CarrierDrawer from '../Drawers/CarrierDrawer'
-import RenderProductInfo from './RenderProductInfo'
+import RenderProductInfo from '../sections/RenderProductInfo'
+import MemorySelector from '../MemorySelector'
+import ProcessorSelector from '../ProcessorSelector'
+import StorageSelector from '../StorageSelector'
 
-export type DrawersState = {
-  tradeIn: boolean
-  refurbish: boolean
-  warrant: boolean
-  carrier: boolean
+type PropType = {
+  breadcrumbItems: {
+    label: string
+    href?: string
+  }[]
 }
+const AnimatedScrollBanner = ({ breadcrumbItems }: PropType) => {
+  const rightRef = useRef<HTMLDivElement>(null)
+  const leftRef = useRef<HTMLDivElement>(null)
 
-
-const RenderProductSummary = () => {
   const [drawers, setDrawers] = useState<DrawersState>({
     tradeIn: false,
     refurbish: false,
     warrant: false,
     carrier: false,
   })
-
 
   const toggleDrawer = (drawerName: keyof DrawersState) => {
     setDrawers((prev) => ({
@@ -33,29 +36,33 @@ const RenderProductSummary = () => {
     }))
   }
 
-  const ProductStats = [
-    {
-      icon: <TruckFast size={20} />,
-      title: "Free delivery by Oct 1 - Oct 2",
-      description: "Express delivery by Oct 8 - Oct 9 from $15.00"
-    },
-    {
-      icon: <Lock1 size={20} />,
-      title: "Works with all carriers",
-      onClick: () => toggleDrawer('carrier')
-    },
-    {
-      icon: <Timer1 size={20} />,
-      title: "Free 30-day returns",
-      description: "1-year warranty",
-      onClick: () => toggleDrawer('warrant')
-    },
-    {
-      icon: <Verify size={20} />,
-      title: "Verified Refurbished in the US",
-      onClick: () => toggleDrawer('refurbish')
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (rightRef.current && leftRef.current) {
+        const rightScrollHeight = rightRef.current.scrollHeight
+        const rightScrollTop = rightRef.current.scrollTop
+        const rightClientHeight = rightRef.current.clientHeight
+
+        if (rightScrollTop + rightClientHeight >= rightScrollHeight) {
+          leftRef.current.style.opacity = '1'
+        } else {
+          leftRef.current.style.opacity = '1'
+        }
+      }
     }
-  ]
+
+    const rightElement = rightRef.current
+    if (rightElement) {
+      rightElement.addEventListener('scroll', handleScroll)
+    }
+
+    return () => {
+      if (rightElement) {
+        rightElement.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [])
 
   return (
     <>
@@ -79,11 +86,17 @@ const RenderProductSummary = () => {
         toggleFilterDrawer={() => toggleDrawer('carrier')}
       />
 
-      <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
-        <div className="">
-          <div className="container mx-auto px-4 py-8">
-            <div className="flex flex-wrap -mx-4">
-              <div className="w-full md:w-1/2 px-4 mb-8">
+
+      <div className="bg-white w-full ">
+
+        {/* <div className="max-w-6xl mx-auto">
+          <Breadcrumb items={breadcrumbItems} />
+        </div> */}
+
+        <div className="pt-16 w-full grid gap-10 grid-cols-1 md:grid-cols-2">
+          <div ref={leftRef} className="w-full transition-opacity duration-300">
+            <div className="w-full flex items-center justify-center h-full max-w-md mx-auto">
+              <div className="w-full -mt-16">
                 <img src="https://www.backmarket.com/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://d2e6ccujb3mkqf.cloudfront.net/432ab35d-2664-4918-9df5-bf534f41e0b9-1_382e462b-f6c3-4c70-ab8d-60a359bbeb76.jpg" alt="Product"
                   className="w-full object-contain h-96 rounded-lg mb-4" id="mainImage" />
                 <div className="flex gap-1 py-4 justify-center items-center overflow-x-auto">
@@ -115,18 +128,37 @@ const RenderProductSummary = () => {
 
                 </div>
               </div>
-
-              <div className="w-full md:w-1/2 px-4">
-                <RenderProductInfo toggleDrawer={toggleDrawer} />
-              </div>
             </div>
           </div>
 
+          <div ref={rightRef} className="overflow-y-scroll w-full max-h-screen ">
+            <div className="w-full px-4">
+              <RenderProductInfo toggleDrawer={toggleDrawer} />
+              {/* Specifications */}
 
+
+              {/* Processor type and speed */}
+              <ProcessorSelector />
+
+              {/* Memory */}
+              <MemorySelector />
+
+
+              {/* Storage */}
+              <StorageSelector />
+
+
+
+            </div>
+          </div>
         </div>
       </div>
     </>
   )
 }
 
-export default RenderProductSummary
+
+
+
+export default AnimatedScrollBanner
+

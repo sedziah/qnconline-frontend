@@ -10,6 +10,7 @@ import DashboardPage from "./pages/Dashboard"
 import Breadcrumb from "./breadcrumb"
 import SigninPage from "./pages/SigninPage"
 import SearchPage from "./pages/SearchPage"
+import GenericListingDetailPage from "./pages/GenericListingDetailPage"
 
 export {
   HomePage,
@@ -23,5 +24,6 @@ export {
   TradeInOfferDetailPage,
   TradeInPage,
   DashboardPage,
-  SearchPage
+  SearchPage,
+  GenericListingDetailPage
 }
