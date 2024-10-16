@@ -136,6 +136,8 @@ const AnimatedScrollBanner = ({ breadcrumbItems }: PropType) => {
               <RenderProductInfo toggleDrawer={toggleDrawer} />
               {/* Specifications */}
 
+              {/* Condition */}
+
 
               {/* Processor type and speed */}
               <ProcessorSelector />
@@ -146,6 +148,9 @@ const AnimatedScrollBanner = ({ breadcrumbItems }: PropType) => {
 
               {/* Storage */}
               <StorageSelector />
+
+
+              {/* Color */}
 
 
 
