@@ -79,15 +79,12 @@ const BannerCarousel = () => {
     renderArrowsWhenDisabled={false}
     renderButtonGroupOutside={false}
     renderDotsOutside={false}>
-    {DUMMYDATA?.map((item) => <div key={item} className='w-full h-96 md:h-96 lg:h-96'>
+    {DUMMYDATA?.map((item) => <div key={item} className='w-full h-44 md:h-96 lg:h-96'>
       <a className='w-full h-full' href=''>
         <img
-          // width={100}
-          // height={"200"}
-          src={item} className='w-full h-full object-center lg:object-cover' alt='banner' />
+          src={item} className='w-auto lg:w-full h-full object-center lg:object-cover' alt='banner' />
       </a>
     </div>)}
-
   </Carousel>
 }
 
