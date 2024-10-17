@@ -81,7 +81,7 @@ export const ProductListingDetail = () => {
 
       <CTAOne />
 
-      <div className='my-10'></div>
+      <div className='my-7'></div>
     </>
   )
 }

@@ -40,7 +40,7 @@ const SigninPage = () => {
           "Register": <SignupComponent />,
         }[forms[activeStep]]}
 
-        <div className='my-10'>
+        <div className='my-7'>
           <div className='flex flex-row items-center gap-3'>
             <div className='h-0.5 w-full bg-lightGray/40'></div>
             <p className='w-full text-xs text-center text-black'>Or continue with</p>

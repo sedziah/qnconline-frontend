@@ -57,7 +57,7 @@ export const RenderColorSelector = () => {
               className="md:object-contain lg:object-cover w-full h-full rounded-lg mb-4" id="mainImage" />
           </div>
           <div className="flex gap-1 py-4 justify-center items-center overflow-x-auto">
-            
+
             <div className='flex items-center justify-center h-full'>
               <button className='bg-black hover:bg-black/90 w-8 h-8 flex flex-row items-center justify-center rounded-full'>
                 <ArrowLeft2 size="20" color="#fff" />
@@ -86,16 +86,12 @@ export const RenderColorSelector = () => {
           </div>
         </div>
 
-        {/* <div className='relative w-full h-[500px] rounded-xl overflow-hidden bg-black'>
-          <img className='w-full h-full object-cover' src="https://www.backmarket.com/cdn-cgi/image/format%3Dauto%2Cquality%3D75%2Cwidth%3D3840/https://d2e6ccujb3mkqf.cloudfront.net/233eb774-20da-4381-8392-04d3e945b9da-1_e5b3beae-eccd-47f7-be64-1ea2767c89e8.jpg" alt='placeholder' />
-        </div> */}
-
         <div>
           <div className='w-full hidden md:block lg:block'>
             <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>Finally, select the&nbsp;<span className='italic'>color</span></h1>
 
           </div>
-          <div className='grid grid-cols-2 gap-3 mt-5'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 mt-5'>
             {conditions.map((condition, index) => (
               <button
                 onClick={() => setSelectedColor(condition?.code)}

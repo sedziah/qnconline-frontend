@@ -20,12 +20,12 @@ const MemorySelector = () => {
   ]
 
   return (
-    <div className='my-10'>
+    <div className='my-7'>
       <p className={`text-sm text-black font-medium`}>
         Memory (GB)
       </p>
 
-      <div className='grid grid-cols-2 gap-3 mt-5'>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3 mt-5'>
         {conditions.map((condition, index) => (
           <button
             disabled={condition?.isDisabled}
