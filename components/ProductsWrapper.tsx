@@ -10,7 +10,7 @@ type ProductsWrapperProps = {
 };
 
 const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ categorySlug, categoryName }) => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [variations, setVariations] = useState<any[]>([]);
   const [availableFilters, setAvailableFilters] = useState<Record<string, string[]>>({});
   const [loading, setLoading] = useState(true);
   const [totalPages, setTotalPages] = useState(1);
@@ -23,11 +23,11 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ categorySlug, categor
       setLoading(true);
       try {
         const fetchedData = await apiService.getProductsByCategory(categorySlug, filters);
-        setProducts(fetchedData.products);
-        setAvailableFilters(fetchedData.specifications);
+        setVariations(fetchedData.variations); // Use 'variations' instead of 'products'
+        setAvailableFilters(fetchedData.specifications); // Use 'specifications' for available filters
         setTotalPages(fetchedData.pagination.total_pages);
       } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Error fetching product variations:', error);
       } finally {
         setLoading(false);
       }
@@ -63,10 +63,10 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ categorySlug, categor
                     <div className="h-2 w-3/4 mt-2 bg-gray-200 rounded animate-pulse"></div>
                   </div>
                 ))
-            ) : products.length > 0 ? (
-              products.map((product) => (
-                <div key={product?.id} className="mx-1 py-3">
-                  <NewProductCard product={product} />
+            ) : variations.length > 0 ? (
+              variations.map((variation) => (
+                <div key={variation?.id} className="mx-1 py-3">
+                  <NewProductCard product={variation} /> {/* Pass variation as product prop */}
                 </div>
               ))
             ) : (

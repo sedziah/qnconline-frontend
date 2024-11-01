@@ -91,7 +91,10 @@ export interface Product {
   id: UUID // Primary Key
   name: string
   slug: string
-  basePrice: string | number
+  brand:Brand
+  category: ProductCategory
+  base_price: string | number
+  description?: string
   currency: string
   priceAdjustment: string
   price: number
@@ -106,6 +109,7 @@ export interface Product {
   isFeatured?: boolean
   freeDelivery?: boolean
   pagination: Pagination
+  variations: any[]
   
 }
 

@@ -87,7 +87,16 @@ export const apiService = {
     }
   },
 
-  
+  getProductDetails: async (id: string): Promise<Product> => {
+    try {
+      const response = await api.get<Product>(`/products/${id}/`); // Use UUID in the URL
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching product details for ${id}:`, error); // Use ID for error logging
+      throw error;
+    }
+  },
+
 
   // New subscribe function
   subscribe: async (email: string): Promise<void> => {
