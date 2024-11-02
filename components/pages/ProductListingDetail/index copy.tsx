@@ -21,7 +21,6 @@
 //   const productName = searchParams.get('name')
 //   const [mostWantedProducts, setMostWantedProducts] = useState<Product[]>([])
 //   const [loading, setLoading] = useState(true)
-//   const [product, setProduct] = useState<Product | null>(null)
 
 //   const breadcrumbItems = [
 //     { label: 'Home', href: '/' },
@@ -45,42 +44,13 @@
 //     fetchMostWantedProducts()
 //   }, [])
 
-//   useEffect(() => {
-//     // Fetch the product details
-//     const fetchProductDetails = async () => {
-//       if (!productName) return;
-
-//       try {
-//         const productDetailsResponse = await apiService.getProductDetails(productName);
-        
-//         // Log the fetched product details for debugging
-//         console.log('Product Details Response:', productDetailsResponse);
-
-//         // Transform the response to match the Product type
-//         const productDetails: Product = {
-//           name: productDetailsResponse.name,
-//           category: productDetailsResponse.category,
-//           priceAdjustment: productDetailsResponse.priceAdjustment,
-//           price: productDetailsResponse.price,
-//           // Add other necessary fields here
-//         };
-
-//         setProduct(productDetails);
-//       } catch (err) {
-//         console.error('Failed to fetch product details', err);
-//       }
-//     };
-
-//     fetchProductDetails();
-//   }, [productName]);
-
 //   return (
 //     <>
 //       <FloatingInfo product={null} />
 
 //       <Breadcrumb items={breadcrumbItems} />
 
-//       <RenderProductSummary product={product} />
+//       <RenderProductSummary />
 
 //       <RenderAppearanceControl />
 
