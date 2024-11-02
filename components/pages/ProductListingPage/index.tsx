@@ -34,18 +34,18 @@ const ProductContent = () => {
 
   return (
     <>
-    <h1>Hello World Test</h1>
-      {/* <Breadcrumb items={categoryName ? breadcrumbItems : breadcrumbItems.slice(0, 1)} />
+    {/* <h1>Hello World Test</h1> */}
+      <Breadcrumb items={categoryName ? breadcrumbItems : breadcrumbItems.slice(0, 1)} />
       <CTAOne />
 
-      {/* Pass both categorySlug and categoryName to ProductsWrapper 
+      {/* Pass both categorySlug and categoryName to ProductsWrapper */}
       {categorySlug && (
         <ProductsWrapper categorySlug={categorySlug} categoryName={categoryName} />
       )}
 
       {categorySlug && <RenderReviews />}
       
-      <FloatingFilter /> */}
+      <FloatingFilter />
     </>
   )
 }

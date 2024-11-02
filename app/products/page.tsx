@@ -9,8 +9,7 @@ export const metadata: Metadata = {
 
 
 const ProductListing = () => {
-  // return <ProductListingPage />
-  return "Hello World Test"
+  return <ProductListingPage />
 }
 
 export default ProductListing
