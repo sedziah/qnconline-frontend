@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Product, ProductCategory, ProductListingResponse, FilterParams } from '../types';
+import { Product, ProductCategory, ProductListingResponse, FilterParams, ProductVariation, ProductDetailsResponse  } from '../types';
 
 const API_BASE_URL = "https://api.qnconline.com";
 
@@ -87,12 +87,17 @@ export const apiService = {
     }
   },
 
-  getProductDetails: async (id: string): Promise<Product> => {
+  getProductDetails: async (id: string): Promise<ProductDetailsResponse> => {
     try {
-      const response = await api.get<Product>(`/products/${id}/`); // Use UUID in the URL
-      return response.data;
+      // Fetch the single product details including related variations and specifications
+      const response = await api.get<ProductDetailsResponse>(`/product/${id}/`); // Use UUID in the URL
+      
+      // Log the response data for debugging
+      console.log('Fetched product details:', response.data);
+
+      return response.data; // Return the complete response data including main variation, related variations, and specifications
     } catch (error) {
-      console.error(`Error fetching product details for ${id}:`, error); // Use ID for error logging
+      console.error(`Error fetching product details for ${id}:`, error);
       throw error;
     }
   },

@@ -113,8 +113,6 @@ export interface Product {
   
 }
 
-
-
 // Feature Table
 export interface Feature {
   id: UUID // Primary Key
@@ -191,6 +189,29 @@ export interface CatalogueSpecification {
   catalogueId: UUID
   specificationId: UUID
   value: string
+}
+
+export interface ProductDetailsResponse {
+  id: string;
+  product_name: string; // `product_name` from the response
+  slug: string;
+  brand: string;
+  base_price: string;
+  currency: string;
+  description: string;
+  images: Array<{ url: string }>;
+  specifications: Array<{ name: string; value: string }>;
+  // Add any other fields that the API returns
+}
+
+
+export interface ProductVariation {
+  id: string;
+  product_name: string;
+  price: string;
+  currency: string;
+  specifications: { specification_name: string; value: string }[];
+  images: { image: string; alt_text: string }[];
 }
 
 // ProductCondition Table

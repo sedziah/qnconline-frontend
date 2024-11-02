@@ -12,13 +12,16 @@ import RenderReviews from '@/components/sections/RenderReviews'
 import RenderStorageControl from '@/components/sections/RenderStorageControl'
 import RenderTradeInPromo from '@/components/sections/RenderTradeInPromo'
 import { apiService } from '@/library/services/apiService'
-import { Product } from '@/library/types'
+import { Product, ProductDetailsResponse } from '@/library/types'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+
 
 export const ProductListingDetail = () => {
   const searchParams = useSearchParams()
   const productName = searchParams.get('name')
+  const productId = searchParams.get('id')
+  const [product, setProduct] = useState<Product | null>(null)
   const [mostWantedProducts, setMostWantedProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -29,7 +32,42 @@ export const ProductListingDetail = () => {
   ]
 
   useEffect(() => {
-    // Fetch actual related products
+    // Fetch the main product details
+    const fetchProductDetails = async () => {
+      if (!productId) return;
+
+      try {
+        const productData: ProductDetailsResponse = await apiService.getProductDetails(productId);
+
+        // Transform ProductDetailsResponse to Product type
+        const transformedProduct: Product = {
+          id: productData.id,
+          name: productData.product_name, // Map `product_name` to `name`
+          slug: productData.slug,
+          brand: productData.brand as Brand, // Assuming `brand` needs to be transformed if not string
+          base_price: productData.base_price,
+          currency: productData.currency,
+          description: productData.description,
+          images: productData.images.map(image => ({
+            id: '', // Assign a unique ID if required
+            productId: productData.id,
+            isMainImage: false, // Assuming default
+            image: image.url, // Map `url` to `image`
+          }) as ProductImage),
+          specifications: productData.specifications.map(spec => ({
+            specificationName: spec.name, // Map `name` to `specificationName`
+            value: spec.value,
+          }) as ProductSpecification),
+          // Add any other necessary mappings
+        };
+
+        setProduct(transformedProduct);
+      } catch (err) {
+        console.error('Failed to fetch product details', err);
+      }
+    };
+
+    // Fetch related products
     const fetchMostWantedProducts = async () => {
       try {
         const products = await apiService.getDailyDeals()
@@ -41,16 +79,17 @@ export const ProductListingDetail = () => {
       }
     }
 
+    fetchProductDetails()
     fetchMostWantedProducts()
-  }, [])
+  }, [productId])
 
   return (
     <>
-      <FloatingInfo product={null} />
+      <FloatingInfo product={product} />
 
       <Breadcrumb items={breadcrumbItems} />
 
-      <RenderProductSummary />
+      {product && <RenderProductSummary product={product} />} {/* Pass product prop */}
 
       <RenderAppearanceControl />
 
@@ -62,21 +101,6 @@ export const ProductListingDetail = () => {
 
       <RenderTradeInPromo />
 
-      <RenderCarousel
-        title="You may also like"
-        subtitle="Related Projects"
-        payload={mostWantedProducts}
-        loading={loading}
-      />
-
-      <RenderCarousel
-        title="Pairs well with"
-        payload={mostWantedProducts}
-        loading={loading}
-      />
-
-      <RenderReviews />
-
       <CTATwo />
 
       <CTAOne />
@@ -85,3 +109,5 @@ export const ProductListingDetail = () => {
     </>
   )
 }
+
+export default ProductListingDetail
