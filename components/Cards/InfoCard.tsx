@@ -11,7 +11,7 @@ type CardProp = {
 
 const InfoCard = ({title, description, link }: CardProp) => {
   return (
-    <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
+    <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
       <div className="relative my-10 mx-auto flex flex-col justify-between  px-10 lg:max-w-screen-lg lg:flex-row">
         <div className="bg-slate-100 absolute left-0 h-full w-full lg:w-5/6 rounded-md border border-blue-200"></div>
         <div className="relative py-10 ">

@@ -3,7 +3,7 @@ import React from 'react'
 
 export const CTAThree = () => {
   return (
-    <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
+    <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
 
       <div className="w-full px-5 py-7 bg-[#14213d] rounded-md shadow">
 

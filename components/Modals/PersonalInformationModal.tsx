@@ -3,6 +3,7 @@ import 'react-responsive-modal/styles.css'
 import { Modal } from 'react-responsive-modal'
 import { IoClose } from 'react-icons/io5'
 import CustomInput from '../Inputs/CustomInput'
+import ReactCountryDropdown from "react-country-dropdown"
 
 type PropType = {
   open: boolean
@@ -50,14 +51,31 @@ const PersonalInformationModal = ({ onCloseModal, open }: PropType) => {
           </div>
           <CustomInput
             labal='Email'
-            onChange={(e) => {}}
+            onChange={(e) => { }}
             value=''
             type='email'
             placeholder=''
           />
+
+          <div className='flex flex-row items-center w-full rounded-lg border border-lightGray'>
+            <ReactCountryDropdown
+              defaultCountry="JP"
+              onSelect={(country) => console.log(country.name)}
+            />
+            <div className='flex-1 w-full border-l border-lightGray'>
+              <CustomInput
+                labal='Phone Number - Optional'
+                onChange={(e) => { }}
+                value=''
+                type='tel'
+                placeholder=''
+                className="block px-2.5 pb-2 pt-5 w-full text-sm text-black hover:bg-lightGray/20 appearance-none focus:outline-none focus:ring-0 focus:border-lightGray peer"
+              />
+            </div>
+          </div>
         </div>
 
-        <button className='h-12 bg-primary w-full rounded-md flex items-center justify-center text-white hover:bg-primary/90'>
+        <button className='h-12 bg-primary w-full rounded-full flex items-center justify-center text-white hover:bg-primary/90'>
           Save
         </button>
       </div>

@@ -3,12 +3,8 @@
 import 'react-multi-carousel/lib/styles.css'
 import React from 'react'
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
-
 
 const Carousel = dynamic(() => import('react-multi-carousel'));
-
-
 
 const BannerCarousel = () => {
   const responsive = {
@@ -83,12 +79,12 @@ const BannerCarousel = () => {
     renderArrowsWhenDisabled={false}
     renderButtonGroupOutside={false}
     renderDotsOutside={false}>
-    {DUMMYDATA?.map((item) => <div key={item} className='w-full h-[85vh] md:h-96 lg:h-96'>
+    {DUMMYDATA?.map((item) => <div key={item} className='w-full h-96 md:h-96 lg:h-96'>
       <a className='w-full h-full' href=''>
         <img
           // width={100}
           // height={"200"}
-          src={item} className='w-full h-full object-fill lg:object-cover' alt='banner' />
+          src={item} className='w-full h-full object-center lg:object-cover' alt='banner' />
       </a>
     </div>)}
 

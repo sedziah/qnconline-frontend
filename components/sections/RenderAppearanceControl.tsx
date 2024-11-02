@@ -28,8 +28,8 @@ const RenderAppearanceControl = () => {
   ]
 
   return (
-    <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
-      <div className='w-full mb-3 black md:hidden lg:hidden'>
+    <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
+      <div className='w-full mb-3 block md:hidden lg:hidden'>
         <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>Select the <span className='italic'>appearance</span></h1>
 
         <p className='text-[13px] text-black font-normal leading-6 tracking-wider'>

@@ -14,7 +14,7 @@ const NewFilterCard: React.FC<NewFilterCardProps> = ({
   onChange
 }) => {
   return (
-    <div className='mb-10'>
+    <div className='mb-10 px-4'>
       {/* Filter Label */}
       <div className="flex space-x-2">
         <p className="text-sm leading-5 font-medium text-gray-800">{label}</p>

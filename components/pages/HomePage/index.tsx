@@ -10,6 +10,8 @@ import RenderCarousel from '../../sections/RenderCarousel';
 import RenderSustainableProduct from '../../sections/RenderSustainableProduct';
 import { apiService } from '../../../library/services/apiService';
 import { Product } from '../../../library/types';
+import CTAFive from '@/components/CTAS/CTAFive'
+import RenderMostWantedCategory from '@/components/sections/RenderMostWantedCategory'
 
 // Define the SustainableProduct type
 interface SustainableProduct {
@@ -57,9 +59,16 @@ const HomePage = () => {
   }, []);
 
   return (
-    <>
+    <div className='bg-bglight'>
       {/* Banner Carousel */}
       <BannerCarousel />
+
+
+      {/* CTA Component */}
+      <CTAFive />
+
+
+      <RenderMostWantedCategory />
 
       {/* Daily Deals Section */}
       <RenderCarousel
@@ -114,7 +123,7 @@ const HomePage = () => {
 
       {/* Newsletter Subscription Section */}
       <NewsLetter />
-    </>
+    </div>
   );
 };
 

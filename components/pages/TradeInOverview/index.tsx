@@ -17,7 +17,7 @@ const TradeInOverview = () => {
     <div className=''>
       <Breadcrumb items={breadcrumbItems} />
 
-      <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
+      <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
         <p className='text-xl lg:text-2xl text-black font-bold'>Trade in your tech</p>
       </div>
 
@@ -27,7 +27,7 @@ const TradeInOverview = () => {
       <CTAThree />
 
 
-      <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
+      <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
         <h1 className='text-lg lg:text-xl font-bold text-black'>
           Trade in your smartphones
         </h1>
@@ -50,8 +50,8 @@ const TradeInOverview = () => {
         </div>
       </div>
 
-      <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
-        <div className='w-full mb-3 black md:hidden lg:hidden'>
+      <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
+        <div className='w-full mb-3 block md:hidden lg:hidden'>
           <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>
             What’s {COMPANY_NAME} Trade-in?
           </h1>
@@ -75,8 +75,8 @@ const TradeInOverview = () => {
         </div>
       </div>
 
-      <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
-        <div className='w-full mb-3 black md:hidden lg:hidden'>
+      <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
+        <div className='w-full mb-3 block md:hidden lg:hidden'>
           <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>How does Trade-in work?</h1>
 
         </div>
@@ -106,8 +106,8 @@ const TradeInOverview = () => {
         </div>
       </div>
 
-      <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
-        <div className='w-full mb-3 black md:hidden lg:hidden'>
+      <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
+        <div className='w-full mb-3 block md:hidden lg:hidden'>
           <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>What goes into an offer?</h1>
 
         </div>
@@ -129,8 +129,8 @@ const TradeInOverview = () => {
         </div>
       </div>
 
-      <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
-        <div className='w-full mb-3 black md:hidden lg:hidden'>
+      <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
+        <div className='w-full mb-3 block md:hidden lg:hidden'>
           <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>See all frequently asked questions</h1>
 
         </div>
@@ -161,8 +161,8 @@ const TradeInOverview = () => {
       </div>
 
 
-      <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
-        <div className='w-full mb-3 black md:hidden lg:hidden'>
+      <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
+        <div className='w-full mb-3 block md:hidden lg:hidden'>
           <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>Think it’s the end of the road for your device? Think again!</h1>
 
         </div>
@@ -193,7 +193,7 @@ const TradeInOverview = () => {
       </div>
 
 
-      <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
+      <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
         <h1 className='text-lg lg:text-xl font-bold text-black'>
           Instant cash offers, just a few clicks away
         </h1>

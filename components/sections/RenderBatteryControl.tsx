@@ -32,8 +32,8 @@ const RenderBatteryControl = () => {
         toggleFilterDrawer={toggleDrawer}
       />
 
-      <div className='my-14 px-4 w-full max-w-6xl mx-auto'>
-        <div className='w-full mb-3 black md:hidden lg:hidden'>
+      <div className='my-16 px-4 w-full max-w-6xl mx-auto'>
+        <div className='w-full mb-3 block md:hidden lg:hidden'>
           <h1 className='text-lg md:text-xl lg:text-2xl font-semibold text-black'>Your phone comes with a <span className='italic'>healthy battery</span></h1>
 
           <button onClick={() => setOpenDrawer(true)} className='my-4 hover:shadow-xl transition-opacity delay-300 flex w-full items-center flex-row gap-x-3 bg-lightblue/60 p-4 rounded-lg'>
@@ -68,7 +68,7 @@ const RenderBatteryControl = () => {
                 <button
                   onClick={() => setCondition(condition?.id)}
                   key={condition?.id}
-                  className={`w-full transition-opacity my-2  delay-150  gap-x-3 flex flex-row justify-between rounded-md p-3 border  hover:bg-[#dee2ff]/10 hover:border-l[#dee2ff]/40  ${selectedCondition === condition?.id ? 'bg-[#dee2ff]/40 border-l[#dee2ff]/40' : 'bg-transparent border-black/40'
+                  className={`w-full transition-opacity my-2  delay-150  gap-x-3 flex flex-row justify-between rounded-md p-3 border  hover:bg-[#bde0fe]/10 hover:border-l[#bde0fe]/40  ${selectedCondition === condition?.id ? 'bg-[#bde0fe]/40 border-l[#bde0fe]/40' : 'bg-transparent border-black/40'
                     }`}
                 >
                   {condition?.name?.toLowerCase() === "premium" ? <></> :

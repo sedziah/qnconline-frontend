@@ -91,7 +91,10 @@ export interface Product {
   id: UUID // Primary Key
   name: string
   slug: string
-  basePrice: string | number
+  brand:Brand
+  category: ProductCategory
+  base_price: string | number
+  description?: string
   currency: string
   priceAdjustment: string
   price: number
@@ -106,10 +109,9 @@ export interface Product {
   isFeatured?: boolean
   freeDelivery?: boolean
   pagination: Pagination
+  variations: any[]
   
 }
-
-
 
 // Feature Table
 export interface Feature {
@@ -187,6 +189,29 @@ export interface CatalogueSpecification {
   catalogueId: UUID
   specificationId: UUID
   value: string
+}
+
+export interface ProductDetailsResponse {
+  id: string;
+  product_name: string; // `product_name` from the response
+  slug: string;
+  brand: string;
+  base_price: string;
+  currency: string;
+  description: string;
+  images: Array<{ url: string }>;
+  specifications: Array<{ name: string; value: string }>;
+  // Add any other fields that the API returns
+}
+
+
+export interface ProductVariation {
+  id: string;
+  product_name: string;
+  price: string;
+  currency: string;
+  specifications: { specification_name: string; value: string }[];
+  images: { image: string; alt_text: string }[];
 }
 
 // ProductCondition Table

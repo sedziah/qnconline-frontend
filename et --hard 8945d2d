@@ -1,0 +1,196 @@
+[33m80e03c5[m[33m ([m[1;36mHEAD -> [m[1;32msolomon[m[33m)[m Refactor product listing pages and components
+[33m095f516[m chore: added search page
+[33mac61b8a[m chore: added phone input with country picker
+[33m93672b4[m chore: disable @next/next/no-img-element
+[33m97ab686[m chore: refactored authentication pages
+[33mac8c8ff[m chore: updated banner
+[33m3f188d6[m chore: update layout
+[33m4c9d279[m chore: updated UIs and added new CTA card on homepage
+[33mf399a47[m chore: updated margins for cards
+[33m8945d2d[m chore: added color selector components
+[33m8826ef5[m Merge branch 'main' of https://github.com/sedziah/qnconline-frontend into raymond
+[33m4f3ac44[m chore: cleanup
+[33m159c123[m[33m ([m[1;32mmain[m[33m)[m Merge branch 'staging'
+[33m0909690[m[33m ([m[1;31morigin/staging[m[33m, [m[1;31morigin/solomon[m[33m, [m[1;32mstaging[m[33m, [m[1;32mproduct_detail[m[33m)[m refactor: Update Footer component with new links in the Services section
+[33mef970b4[m Merge branch 'staging'
+[33m47812ba[m refactor: Update LinkedIn profile link in Footer component
+[33m3f63e16[m Merge pull request #51 from sedziah/staging
+[33m796deba[m refactor: Update product category titles and images
+[33m85ad043[m Merge pull request #50 from sedziah/staging
+[33m77c4487[m Update product category titles and images
+[33m0997797[m Merge pull request #49 from sedziah/staging
+[33mbe1c759[m refactor: Update product category titles and images
+[33mf4c368b[m Merge pull request #48 from sedziah/staging
+[33mc2c813f[m refactor: Update product category titles and images
+[33ma09be69[m Merge pull request #47 from sedziah/staging
+[33m2c27821[m Merge branch 'solomon' into staging
+[33m6f03d61[m chore: Update link in InfoCard component on HomePage
+[33m373fe26[m Merge pull request #46 from sedziah/staging
+[33ma7104a9[m Merge pull request #45 from sedziah/solomon
+[33m30d7af0[m chore: Update RenderCarousel to remove default value for priceAdjustment
+[33m1effa6c[m Merge pull request #44 from sedziah/staging
+[33mc91c930[m Merge pull request #43 from sedziah/solomon
+[33m2e41b38[m chore: Refactor DashboardPage component and add lazy loading for selected component
+[33md05d822[m chore: Refactor API service to include searchProducts and authentication methods
+[33m2fc5b19[m local update
+[33mc647a62[m chore: UI fixes
+[33madfb6d6[m chore: reafctored component by adding the Suspense boundary
+[33md8e9664[m chore: added drawers on product detail page
+[33md85336b[m chore: fixed typos
+[33mbc09ef9[m chore: corrected typos
+[33m77ae46b[m chore: setting dashboard pages
+[33mb1c6112[m chore: setting up dashboard pages and UI fixes
+[33mb132270[m Merge pull request #42 from sedziah/staging
+[33m2ffc5a8[m Fix typo in label for Blackberry model selection
+[33m9988373[m Merge pull request #41 from sedziah/staging
+[33m8db5728[m Fix typo in label for Blackberry model selection
+[33md56f73b[m Merge branch 'main' of https://github.com/sedziah/qnconline-frontend into raymond
+[33m5dd90bb[m chore: added dropdown component for logged in users
+[33m55aed5b[m Merge pull request #40 from sedziah/staging
+[33m823ea03[m Merge branch 'solomon' into staging
+[33mf75f106[m chore: added no offer page and components
+[33m3add66e[m chore: added in trade in offer page
+[33md6e2dff[m chore: setting up trade in components
+[33m6dd7b67[m Merge branch 'raymond' into solomon
+[33m1327b8e[m chore: code clean up
+[33m70f5613[m chore: disabled @next/next/no-img-element
+[33m6113cdf[m chore: setting up trade in pege
+[33mfd5ab6a[m chore: setting up trade in page
+[33ma71d5d6[m chore: added initial trade in overvuew page and other components
+[33ma024868[m chore: initial cart page rendering
+[33mb69c121[m chore: added checks to hide navbar and footer on specific pages
+[33mbf1efc8[m chore: updated responsiveness
+[33m68dbf84[m chore: added product detail page and other components
+[33m78fba35[m initial login page
+[33m7cd75b0[m Merge pull request #37 from sedziah/staging
+[33m5fb4600[m Merge pull request #39 from sedziah/solomon
+[33mc6c44b1[m Refactor import statements in FilterDrawer and ProductSortDrawer components
+[33mb15d193[m Refactor FilterDrawer and ProductsWrapper components to remove unused imports and optimize filter handling
+[33m7aa2b5c[m Refactor ProductsWrapper component to comment out unused import and remove reference to NewFilter component
+[33m681ce06[m Refactor FilterDrawer component to comment out unused import and remove reference to NewFilter component
+[33m6af4040[m Refactor FilterSection component to remove unused code and optimize filter handling
+[33mc9af17c[m Merge pull request #38 from sedziah/solomon
+[33m16f8f3b[m Refactor FilterDrawer and NewFilter components
+[33mde21b54[m Merge branch 'raymond' into solomon
+[33m90fc61c[m Refactor ProductsWrapper component to accept categoryName as a prop and display it in the page title
+[33m85306f4[m Refactor imports in FilterDrawer and ProductSortDrawer components
+[33m62bf734[m Merge branch 'staging'
+[33mddfda50[m Refactor ProductsWrapper component to improve code readability and maintainability
+[33mdcc8a65[m Merge branch 'solomon' into staging
+[33m6138826[m Merge branch 'staging' of https://github.com/sedziah/qnconline-frontend into staging
+[33me0391a0[m Refactor HomePage component to fetch and display sustainable products
+[33mb2beeac[m Refactor NewProductCard component to remove display of product reviews count
+[33md03a9d2[m Merge branch 'raymond' into solomon
+[33m63af6be[m chore: setting up product detail component
+[33mff060de[m Merge pull request #36 from sedziah/staging
+[33m1dd2a65[m Merge pull request #35 from sedziah/raymond
+[33m7114d0c[m Merge branch 'raymond' into staging
+[33m8d86e65[m Merge pull request #34 from sedziah/staging
+[33m361ea0e[m Merge pull request #33 from sedziah/solomon
+[33m4c92ad8[m Merge pull request #32 from sedziah/staging
+[33m44ce205[m Refactor pagination field names and remove pagination logging in ProductsWrapper component
+[33m29f04cc[m Merge pull request #31 from sedziah/solomon
+[33m89e602e[m Refactor pagination field names in ProductsWrapper component
+[33mb9fca64[m Merge pull request #30 from sedziah/solomon
+[33me3a3db4[m Refactor pagination in ProductsWrapper and RenderCarousel components
+[33m3fcd7a6[m Refactor component names and update pagination in ProductsWrapper
+[33maca8b28[m Merge pull request #29 from sedziah/staging
+[33m82d7e66[m Merge pull request #28 from sedziah/solomon
+[33m91fd430[m Refactor component names and add new section for sustainable products
+[33m1b55618[m Merge pull request #27 from sedziah/staging
+[33mf4dc084[m Merge pull request #26 from sedziah/raymond
+[33m79f3d5e[m Merge branch 'staging'
+[33m9abffae[m Merge branch 'raymond' into staging
+[33m6c8f03b[m Merge branch 'raymond' of https://github.com/sedziah/qnconline-frontend into raymond
+[33m5bea45a[m chore: adding listing detail components
+[33m25ef870[m fix: fixed drawer layout
+[33m77500d9[m Merge pull request #25 from sedziah/staging
+[33maf62244[m Refactor product page titles to use correct branding
+[33mfe8f84e[m Merge pull request #24 from sedziah/staging
+[33m872acda[m Refactor product card links to use correct slug and remove unnecessary code
+[33me103cc4[m chore: setting up reviews cards and renders
+[33m2ae7389[m chore: connected cards to detail page
+[33m24c5a84[m chore: setting up listing detail page
+[33m05431b3[m chore: local updated
+[33m4a7032e[m chore: updated types to match actual response interface
+[33m5b589cd[m chore: linked product cards to detail
+[33m30721cc[m chore: code cleanup
+[33m0c7d110[m chore: rendering initial product detail page
+[33m074ab97[m chore: code cleanup
+[33m82392a6[m chore: made the floating drawers functional
+[33m93f0b58[m chore: local update
+[33ma191a86[m chore: added mobile drawer for specifications
+[33ma2fefa5[m chore: added custom skeleton loading
+[33m487f1e7[m chore: cleanup and seperated flating filters component
+[33m5e8028f[m chore: added Filter component
+[33md285c11[m chore: handled null values
+[33m02ec0f8[m Merge pull request #22 from sedziah/staging
+[33mbb7cb84[m Refactor code to update NewFilterCard component in Filter1.tsx and NewFilter.tsx
+[33m4bf7800[m Merge pull request #21 from sedziah/staging
+[33mc0b8444[m Refactor code to update product category display and remove commented out FilterCard component in Filter1.tsx
+[33mb11c0f5[m Merge pull request #20 from sedziah/staging
+[33m6e90f1c[m Refactor code to update product category display
+[33mab00aea[m Refactor code to update product price display
+[33m945413f[m Refactor code to update product price display
+[33mc4c29f0[m Refactor code to remove commented out FilterCard component in Filter1.tsx and update props passed to ProductsWrapper in ProductListingPage/index.tsx
+[33m9962014[m Merge pull request #18 from sedziah/snyk-fix-3a5c6c196f9b6af118c45faef4b557fa
+[33m3bf72cb[m Merge pull request #19 from sedziah/staging
+[33ma22615b[m Refactor code to remove commented out FilterCard component in Filter1.tsx and update props passed to ProductsWrapper in ProductListingPage/index.tsx
+[33mc00f9f5[m Refactor code to update product category display
+[33m6fbf52c[m Refactor code to update product price display
+[33mbd9712a[m[33m ([m[1;31morigin/snyk-fix-3a5c6c196f9b6af118c45faef4b557fa[m[33m)[m fix: package.json & package-lock.json to reduce vulnerabilities
+[33m4156602[m Refactor code to import ProductCategory from correct file
+[33m69b8f64[m Merge pull request #17 from sedziah/staging
+[33m4e392df[m Refactor code to import ProductCategory from correct file
+[33m7d93e0f[m Refactor code to adhere to TypeScript type definitions
+[33m7b64077[m Merge pull request #15 from sedziah/staging
+[33m4063de2[m Newsletter sunscription integration
+[33mdbdf716[m Merge pull request #14 from sedziah/staging
+[33m5f3f811[m Update Daily product subtitle text
+[33m52dbf73[m Update product image holder
+[33mcbc6ee4[m Update product page
+[33m964da17[m Update Render Carousel Page
+[33m5f963c3[m Merge pull request #13 from sedziah/staging
+[33m2ef198b[m Home page daily deals integration
+[33mc3fbef1[m integrate daily deals emdpoint
+[33mb366f26[m[33m ([m[1;32mhome_integration[m[33m)[m Merge pull request #12 from sedziah/raymond
+[33m78ed9e4[m chore: added pagination component and UI fixes
+[33md6fdd5a[m chore: UI fix
+[33ma10d91b[m local update
+[33m7bea84e[m updated footer
+[33m422760d[m chore: changed favicon
+[33m6cc297b[m fix: vercel deployment issue
+[33m6c57d02[m chore: added mobile drawer and syles refactoring
+[33md4ead3f[m chore: added product listing page
+[33m799cab7[m chore: local update
+[33m0fbe4fb[m chore: code clean up and linking categories to products
+[33m4171c75[m chore: settting initial filters for products
+[33m9a0c4cc[m chore: static call to action compoment
+[33mf5f61ac[m chore: removed all dark styles
+[33m419a876[m chore: setting up product wrapper with filters
+[33m0bc46ad[m chore: global exports
+[33m8d08af6[m chore: custom breadcrum component
+[33m0f405cd[m chore: rendering product listing page
+[33m09e8df7[m Merge pull request #11 from sedziah/staging
+[33mab63ab5[m Merge pull request #10 from sedziah/homepage_integration
+[33m2486968[m[33m ([m[1;31morigin/homepage_integration[m[33m, [m[1;32mhomepage_integration[m[33m)[m update id
+[33m8728ed1[m Merge pull request #9 from sedziah/staging
+[33m5c622f3[m Merge pull request #8 from sedziah/homepage_integration
+[33m7e5e081[m Update API endpoint for fetching active product categories
+[33mcf81837[m Merge pull request #7 from sedziah/staging
+[33m95b7820[m Merge pull request #6 from sedziah/homepage_integration
+[33mbd14e32[m chore: Remove console.log statement in apiService.tsx
+[33me85bddb[m Merge pull request #5 from sedziah/staging
+[33m3d90e55[m Merge pull request #4 from sedziah/homepage_integration
+[33m0349682[m chore: Update footer content and contact information
+[33m0c330fc[m chore: Refactor Navbars component and API service
+[33mad37edb[m chore: Fetch and display product categories in the navbar
+[33m7d1ebd1[m Merge pull request #3 from sedziah/staging
+[33m912f0e1[m Merge pull request #2 from sedziah/raymond
+[33mc20d44b[m chore: code cleanup
+[33m3134b00[m chore: added store types
+[33me2d52ed[m chore: changed all img tags with next Image  tags
+[33m41b29f8[m Merge pull request #1 from sedziah/raymond
+[33mfc360b1[m chore: rendering initial home page designs and layouts
+[33mf80b2a7[m chore: project setup
+[33m51e039f[m Initial commit
