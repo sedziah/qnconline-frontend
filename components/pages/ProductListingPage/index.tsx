@@ -29,12 +29,11 @@ const ProductContent = () => {
 
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
-    { label: categoryName },  // Display the category name in the breadcrumb
+    { label: categoryName }, 
   ]
 
   return (
     <>
-    {/* <h1>Hello World Test</h1> */}
       <Breadcrumb items={categoryName ? breadcrumbItems : breadcrumbItems.slice(0, 1)} />
       <CTAOne />
 

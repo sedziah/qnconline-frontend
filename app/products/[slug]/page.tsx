@@ -1,16 +1,21 @@
-import { ProductListingDetail, GenericListingDetailPage } from '@/components'
-import { Metadata } from 'next'
-import React from 'react'
+"use client";
+import React, { useEffect } from 'react';
+import { useParams } from 'next/navigation';
 
-export const metadata: Metadata = {
-  title: "Q&C Online - ", // Dynamic Title
-  description: "A Home of Premium Products & Exemplary Customer Care!",
-}
+const ProductListingDetail: React.FC = () => {
+  const params = useParams(); // Retrieve all route parameters
+  const slug = params.slug; // Access the 'slug' directly
 
+  useEffect(() => {
+    console.log('Product Slug:', slug); // Log the product slug to confirm it's being received
+  }, [slug]);
 
-const page = () => {
-  return <GenericListingDetailPage />
-  // return <ProductListingDetail />
-}
+  return (
+    <div>
+      <h1>Product Details Page</h1>
+      <p>Product Slug: {slug}</p> {/* Display the slug directly */}
+    </div>
+  );
+};
 
-export default page
+export default ProductListingDetail;
