@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 }
 
 
-const page = () => {
-  return <ProductListingDetail />
-}
+// const page = () => {
+//   return <ProductListingDetail />
+// }
 
-export default page
+// export default page

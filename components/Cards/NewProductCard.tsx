@@ -1,52 +1,57 @@
-import Image from 'next/image'
-import React from 'react'
-import { Product } from '../../library/types'
+import Link from 'next/link';
+import Image from 'next/image';
+import React, { useEffect } from 'react';
+import { Product } from '../../library/types';
 
 interface ProductCardProps {
-  product: Product
+  product: Product;
 }
 
 const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  // Log the Product ID to verify
+  useEffect(() => {
+    console.log("Product ID:", product.id);
+  }, [product.id]);
+
   // Calculate discount if applicable
-  const discount = product?.priceAdjustment
-    ? `${product?.priceAdjustment} off`
-    : 'No discount'
+  const discount = product?.priceAdjustment ? `${product?.priceAdjustment} off` : 'No discount';
 
   // Handle the image, fallback if no image available
-  const imageUrl = (product?.images && product?.images?.length > 0 && product?.images[0]?.image)
-    ? product?.images[0].image
-    : '/placeholder-image.png' // Use a placeholder image if no images are present or the image URL is invalid
+  const imageUrl = (product?.images && product?.images.length > 0 && product.images[0].image)
+    ? product.images[0].image
+    : '/placeholder-image.png';
 
-  const darkModeImageUrl = product?.images?.length > 1 && product?.images[1]?.image
-    ? product?.images[1]?.image
-    : imageUrl // Fallback to main image if dark mode image is unavailable
+  const darkModeImageUrl = product?.images.length > 1 && product.images[1].image
+    ? product.images[1].image
+    : imageUrl;
 
   // Handle rating fallback if not available in product
   const rating = product?.reviews?.length > 0
-    ? product?.reviews.reduce((sum, review) => sum + review.rating, 0) / product?.reviews.length
-    : 0
+    ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length
+    : 0;
 
   return (
     <div className="rounded-lg hover:shadow-xl transition-opacity bg-white p-4 shadow-lg">
-      <a href={`products/${product?.slug}?i=${product?.id}&name=${product?.name}`}
-      >
+      {/* Navigate to ProductListingDetail page with dynamic product ID */}
+      <Link href={`/products/${product.id}`}>
         <div className="h-40 w-full flex justify-center items-center">
           <Image
             width={150}
             height={150}
             className="object-contain h-full dark:hidden"
-            src={imageUrl}  // Main image for light mode
+            src={imageUrl}
             alt={product?.name}
           />
           <Image
             width={150}
             height={150}
             className="object-contain h-full hidden dark:block"
-            src={darkModeImageUrl}  // Dark mode image or fallback to main
+            src={darkModeImageUrl}
             alt={product?.name}
           />
         </div>
-      </a>
+      </Link>
+
       <div className="pt-6">
         <div className="mb-4 flex items-center justify-between gap-4">
           <span className="me-2 rounded bg-primary-100 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">
@@ -56,20 +61,21 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
 
       {/* Product Name with fixed height */}
-      <a
-        href={`products/${product?.slug}?i=${product?.id}&name=${product?.name}`}
-        className="text-sm font-semibold leading-tight text-gray-900 hover:underline flex items-center"
-        style={{
-          height: '3rem', // Fixed height to ensure uniformity (adjust based on font size)
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          display: '-webkit-box',
-          WebkitLineClamp: 2, // Limits to 2 lines
-          WebkitBoxOrient: 'vertical',
-        }}
-      >
-        {product?.name}
-      </a>
+      <Link href={`/products/${product.id}`}>
+        <span
+          className="text-sm font-semibold leading-tight text-gray-900 hover:underline flex items-center"
+          style={{
+            height: '3rem',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+          }}
+        >
+          {product?.name}
+        </span>
+      </Link>
 
       <div className="mt-2 flex items-center gap-2">
         <div className="flex items-center">
@@ -87,7 +93,6 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
 
         <p className="text-sm font-medium text-gray-900">{rating.toFixed(1)}</p>
-        {/* <p className="text-sm font-medium text-gray-500">({product?.reviews?.length})</p> */}
       </div>
 
       <ul className="mt-2 flex items-center gap-4">
@@ -139,11 +144,10 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
               d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6"
             />
           </svg>
-          {/* Add to cart */}
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NewProductCard
+export default NewProductCard;
