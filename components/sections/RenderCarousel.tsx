@@ -100,21 +100,25 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
                       id: product?.id || 'N/A',
                       name: product?.name || 'No name available',
                       slug: product?.slug || 'no-slug',
+                      brand: product?.brand || { /* default brand object if necessary */ },
+                      category: product?.category || { /* default category object if necessary */ },
+                      base_price: product?.base_price || '0.00',
+                      description: product?.description || 'No description available',
+                      currency: product?.currency || 'USD',
+                      priceAdjustment: product?.priceAdjustment || '',
                       price: product?.price || 0,
-                      currency: product?.currency || 'N/A',
-                      basePrice: product?.basePrice || '0.00',
-                      priceAdjustment: product?.priceAdjustment,
                       inventoryQuantity: product?.inventoryQuantity || 0,
-                      condition: product?.condition || 'Unknown',
+                      condition: product?.condition || 'New',
                       images: product?.images || [],
                       reviews: product?.reviews || [],
                       specifications: product?.specifications || [],
                       deals: product?.deals || [],
-                      catalogueId: '', // Add your custom field
-                      actualPrice: 0, // Set the actual price
-                      isFeatured: false, // Set default values for additional fields
-                      freeDelivery: false, // Set default values for additional fields
+                      catalogueId: product?.catalogueId || '', // Optional field
+                      actualPrice: product?.actualPrice || 0,  // Optional field
+                      isFeatured: product?.isFeatured || false, // Optional field
+                      freeDelivery: product?.freeDelivery || false, // Optional field
                       pagination: product?.pagination,
+                      variations: product?.variations || [],   // Required field
                     }}
                   />
                 </div>

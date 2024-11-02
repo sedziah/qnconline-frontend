@@ -9,7 +9,7 @@ import WarrantDrawer from '../Drawers/WarrantDrawer';
 import CarrierDrawer from '../Drawers/CarrierDrawer';
 import { ProductVariation } from '@/library/types';
 
-type DrawersState = {
+export type DrawersState = {
   tradeIn: boolean;
   refurbish: boolean;
   warrant: boolean;
