@@ -9,9 +9,9 @@ interface ProductCardProps {
 
 const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
   // Log the Product ID to verify
-  useEffect(() => {
-    console.log("Product ID:", product.id);
-  }, [product.id]);
+  // useEffect(() => {
+  //   console.log("Product ID:", product.id);
+  // }, [product.id]);
 
   // Calculate discount if applicable
   const discount = product?.priceAdjustment ? `${product?.priceAdjustment} off` : 'No discount';
@@ -33,7 +33,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="rounded-lg hover:shadow-xl transition-opacity bg-white p-4 shadow-lg">
       {/* Navigate to ProductListingDetail page with dynamic product ID */}
-      <Link href={`/products/${product.id}`}>
+      {/* <Link href={`/products/${product.id}`}> */}
         <div className="h-40 w-full flex justify-center items-center">
           <Image
             width={150}
@@ -50,7 +50,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
             alt={product?.name}
           />
         </div>
-      </Link>
+      {/* </Link> */}
 
       <div className="pt-6">
         <div className="mb-4 flex items-center justify-between gap-4">
@@ -61,7 +61,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
       </div>
 
       {/* Product Name with fixed height */}
-      <Link href={`/products/${product.id}`}>
+      {/* <Link href={`/products/${product.id}`}> */}
         <span
           className="text-sm font-semibold leading-tight text-gray-900 hover:underline flex items-center"
           style={{
@@ -75,7 +75,7 @@ const NewProductCard: React.FC<ProductCardProps> = ({ product }) => {
         >
           {product?.name}
         </span>
-      </Link>
+      {/* </Link> */}
 
       <div className="mt-2 flex items-center gap-2">
         <div className="flex items-center">

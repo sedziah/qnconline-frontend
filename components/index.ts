@@ -1,7 +1,7 @@
 import HomePage from "./pages/HomePage"
 import Navbar from "./Navbars"
 import ProductListingPage from "./pages/ProductListingPage"
-import ProductListingDetail from './pages/ProductListingDetail';
+// import ProductListingDetail from './pages/ProductListingDetail';
 import CartPage from "./pages/CartPage"
 import TradeInOverview from "./pages/TradeInOverview"
 import TradeInPage from "./pages/TradeInPage"
@@ -10,11 +10,11 @@ import DashboardPage from "./pages/Dashboard"
 import Breadcrumb from "./breadcrumb"
 import SigninPage from "./pages/SigninPage"
 import SearchPage from "./pages/SearchPage"
-import GenericListingDetailPage from "./pages/GenericListingDetailPage"
+// import GenericListingDetailPage from "./pages/GenericListingDetailPage"
 
 export {
   HomePage,
-  ProductListingDetail,
+  // ProductListingDetail,
   Navbar,
   ProductListingPage,
   SigninPage,
@@ -25,5 +25,5 @@ export {
   TradeInPage,
   DashboardPage,
   SearchPage,
-  GenericListingDetailPage
+  // GenericListingDetailPage
 }

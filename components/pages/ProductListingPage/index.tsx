@@ -42,7 +42,7 @@ const ProductContent = () => {
         <ProductsWrapper categorySlug={categorySlug} categoryName={categoryName} />
       )}
 
-      {categorySlug && <RenderReviews />}
+      {/* {categorySlug && <RenderReviews />} */}
       
       <FloatingFilter />
     </>

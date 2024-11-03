@@ -2,6 +2,8 @@ import axios from 'axios';
 import { Product, ProductCategory, ProductListingResponse, FilterParams, ProductVariation, ProductDetailsResponse  } from '../types';
 
 const API_BASE_URL = "https://api.qnconline.com";
+// const API_BASE_URL = "http://http://127.0.0.1:8000";
+
 
 
 const api = axios.create({
@@ -90,7 +92,7 @@ export const apiService = {
   getProductDetails: async (id: string): Promise<ProductDetailsResponse> => {
     try {
       // Fetch the single product details including related variations and specifications
-      const response = await api.get<ProductDetailsResponse>(`/product/${id}/`); // Use UUID in the URL
+      const response = await api.get<ProductDetailsResponse>(`products/product/${id}/`); // Use UUID in the URL
       
       // Log the response data for debugging
       console.log('Fetched product details:', response.data);
