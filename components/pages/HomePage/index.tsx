@@ -87,7 +87,7 @@ const HomePage = () => {
       />
 
       {/* Sustainable Products Section */}
-      <RenderSustainableProduct products={sustainableProducts} loading={loading} />
+      {/* <RenderSustainableProduct products={sustainableProducts} loading={loading} /> */}
 
       {/* Trending Products Section */}
       <RenderCarousel
@@ -98,10 +98,10 @@ const HomePage = () => {
       />
 
       {/* Sustainable Products Section */}
-      <RenderSustainableProduct products={sustainableProducts} loading={loading} />
+      {/* <RenderSustainableProduct products={sustainableProducts} loading={loading} /> */}
 
       {/* Blog Carousel Section */}
-      <RenderBlogCarousel />
+      {/* <RenderBlogCarousel /> */}
 
       {/* Featured Products Section */}
       <RenderCarousel
@@ -112,7 +112,7 @@ const HomePage = () => {
       />
 
       {/* Video Reviews Section */}
-      <RenderVideoReviews />
+      {/* <RenderVideoReviews /> */}
 
       {/* Information Card Section */}
       <InfoCard

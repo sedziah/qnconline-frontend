@@ -116,14 +116,14 @@
 //   )
 // }
 
-import React from 'react';
+// import React from 'react';
 
-const ProductListingDetail = () => {
-  return (
-    <div>
-      <h1>Hello, World!</h1>
-    </div>
-  );
-};
+// const ProductListingDetail = () => {
+//   return (
+//     <div>
+//       <h1>Hello, World!</h1>
+//     </div>
+//   );
+// };
 
-export default ProductListingDetail;
+// export default ProductListingDetail;

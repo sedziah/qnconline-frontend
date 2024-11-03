@@ -3,11 +3,11 @@ import Breadcrumb from '@/components/breadcrumb'
 import { CTAOne } from '@/components/CTAS/CTAOne'
 import FloatingFilter from '@/components/FloatingFilter'
 import ProductsWrapper from '@/components/ProductsWrapper'
-import RenderReviews from '@/components/sections/RenderReviews'
 import { useSearchParams } from 'next/navigation'
 import React, { Suspense } from 'react'
-import { BiSortAlt2 } from "react-icons/bi"
-import { FaFilter } from "react-icons/fa"
+// import { BiSortAlt2 } from "react-icons/bi"
+// import { FaFilter } from "react-icons/fa"
+// import RenderReviews from '@/components/sections/RenderReviews'
 
 const ProductListingPage = () => {
   return (
@@ -42,7 +42,7 @@ const ProductContent = () => {
         <ProductsWrapper categorySlug={categorySlug} categoryName={categoryName} />
       )}
 
-      {categorySlug && <RenderReviews />}
+      {/* {categorySlug && <RenderReviews />} */}
       
       <FloatingFilter />
     </>
