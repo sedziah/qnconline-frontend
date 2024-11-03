@@ -1,13 +1,9 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import BannerCarousel from '../../Banners/BannerCarousel';
-import RenderAccessories from '../../sections/RenderAccessories';
-import RenderBlogCarousel from '../../sections/RenderBlogCarousel';
 import InfoCard from '../../Cards/InfoCard';
 import NewsLetter from '../../NewsLetter';
-import RenderVideoReviews from '../../sections/RenderVideoReviews';
 import RenderCarousel from '../../sections/RenderCarousel';
-import RenderSustainableProduct from '../../sections/RenderSustainableProduct';
 import { apiService } from '../../../library/services/apiService';
 import { Product } from '../../../library/types';
 import CTAFive from '@/components/CTAS/CTAFive'
