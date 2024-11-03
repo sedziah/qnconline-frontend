@@ -67,7 +67,6 @@ const HomePage = () => {
       {/* CTA Component */}
       <CTAFive />
 
-
       <RenderMostWantedCategory />
 
       {/* Daily Deals Section */}
@@ -104,12 +103,12 @@ const HomePage = () => {
       {/* <RenderBlogCarousel /> */}
 
       {/* Featured Products Section */}
-      <RenderCarousel
+      {/* <RenderCarousel
         title="Featured Products"
         subtitle="Top-Rated Favorites Curated for You. Explore Now!"
         payload={mostWantedProducts}
         loading={loading}
-      />
+      /> */}
 
       {/* Video Reviews Section */}
       {/* <RenderVideoReviews /> */}
