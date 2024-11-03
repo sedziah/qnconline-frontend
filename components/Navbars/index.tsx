@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import { COLORS, HIDDENROUTES } from '@/constants';
-import { HambergerMenu, Heart, Logout, SearchNormal, Shop, ShoppingCart, Trade, User } from 'iconsax-react';
+import { HambergerMenu, Heart, SearchNormal, Shop, ShoppingCart, Trade, User } from 'iconsax-react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { apiService } from '@/library/services/apiService';
@@ -8,7 +8,7 @@ import { ProductCategory } from '@/library/types';
 import Drawer from 'react-modern-drawer';
 import 'react-modern-drawer/dist/index.css';
 import MobileDrawer from './MobileDrawer';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const DropdownOptions = [
   {
@@ -37,6 +37,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const [categories, setCategories] = useState<ProductCategory[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const router = useRouter();
   const path = usePathname();
   const absolutePath = /^\/trade-in\/.*/.test(path);
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -52,6 +54,12 @@ const Navbar = () => {
   const handleScroll = () => {
     const position = window.pageYOffset;
     setScrollPosition(position);
+  };
+
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      router.push(`/products?s=${encodeURIComponent(searchTerm)}`);
+    }
   };
 
   // Fetch categories on component mount
@@ -70,7 +78,6 @@ const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -100,6 +107,7 @@ const Navbar = () => {
         transitionTimingFunction: "linear",
         transition: "transform 0.7s ease-out, opacity 0.7s ease-out"
       }} className={`w-full transition shadow z-50 bg-white ${scrollPosition > 275 ? "fixed top-0" : "relative"}`}>
+        
         {/* Mobile Nav */}
         <div className='lg:hidden px-4 py-2'>
           <div className='flex-row flex justify-between items-center'>
@@ -116,24 +124,28 @@ const Navbar = () => {
               <a href='/signin'>
                 <User size="20" color="#000" />
               </a>
-
               <a href='/cart'>
                 <ShoppingCart size="20" color="#000" />
               </a>
             </div>
           </div>
 
-          <div>
-            <div className='flex-1 relative h-12'>
-              <div className="pt-2 relative mx-auto text-black text-sm">
-                <input className="border border-lightGray w-full bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-                  type="search" name="search" placeholder="Search">
-                </input>
-              </div>
-              <button className='absolute right-2 top-1/3'>
-                <SearchNormal size="20" color={COLORS.lightGray} />
-              </button>
+          {/* Mobile Search Bar */}
+          <div className='flex-1 relative h-12 mt-2'>
+            <div className="pt-2 relative mx-auto text-black text-sm">
+              <input
+                className="border border-lightGray w-full bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                type="search"
+                name="search"
+                placeholder="Search for products, brands, or categories"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              />
             </div>
+            <button onClick={handleSearch} className='absolute right-2 top-1/3'>
+              <SearchNormal size="20" color={COLORS.lightGray} />
+            </button>
           </div>
         </div>
 
@@ -159,21 +171,22 @@ const Navbar = () => {
             </a>
           </div>
 
-          <div className='flex-1 relative h-12'>
-          <div className="pt-2 relative mx-auto text-black text-sm">
-            <input
-              className="border border-lightGray w-full bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-              type="search"
-              name="search"
-              placeholder="Search for products, brands, or categories"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-            />
-          </div>
-          <button onClick={handleSearch} className='absolute right-2 top-1/3'>
-            <SearchNormal size="20" color="#a9a9a9" />
-          </button>
+          {/* Desktop Search Bar */}
+          <div className='flex-1 relative h-12 max-w-[400px]'>
+            <div className="pt-2 relative mx-auto text-black text-sm">
+              <input
+                className="border border-lightGray w-full bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
+                type="search"
+                name="search"
+                placeholder="Search for products, brands, or categories"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              />
+            </div>
+            <button onClick={handleSearch} className='absolute right-2 top-1/3'>
+              <SearchNormal size="20" color={COLORS.lightGray} />
+            </button>
           </div>
 
           <div className='flex flex-row items-center justify-center gap-x-3'>
@@ -183,40 +196,6 @@ const Navbar = () => {
             <a href='/cart'>
               <ShoppingCart size="20" color="#000" />
             </a>
-          </div>
-        </div>
-        <div className='hidden md:hidden sm:hidden lg:block bg-bglight overflow-hidden pl-7'>
-          <div className='w-full flex flex-row'>
-            <button onClick={toggleDrawer} className='flex w-[120px] flex-row gap-x-2 py-2.5'>
-              <HambergerMenu size="20" color="#000" />
-              <p className='text-sm capitalize font-normal'>all items</p>
-            </button>
-            <div className='overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 w-full flex flex-row items-center overflow-x-autoscrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200'>
-              <div className='flex flex-row gap-x-6'>
-                {categories.length > 0 ? (
-                  categories.map((category) => (
-                    <a
-                      key={category.name}
-                      href={`/products?s=${category.slug}&name=${category.name}`}
-                      className="py-2.5 hover:underline whitespace-nowrap text-black text-[13px] capitalize font-normal"
-                    >
-                      {category.name}
-                    </a>
-                  ))
-                ) : (
-                  <div className="flex flex-row gap-3">
-                    {Array(15)
-                      .fill('')
-                      .map((_, index) => (
-                        <div
-                          key={index}
-                          className="h-6 w-20 bg-gray-200 rounded animate-pulse"
-                        ></div>
-                      ))}
-                  </div>
-                )}
-              </div>
-            </div>
           </div>
         </div>
       </div>
