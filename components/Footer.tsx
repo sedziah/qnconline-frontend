@@ -75,8 +75,8 @@ const Footer = () => {
                 Company
               </p>
               <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                <a className="hover:opacity-75" href="#"> About Us </a>
-                <a className="hover:opacity-75" href="#"> Meet the Team </a>
+                <a className="hover:opacity-75" href="/about"> About Us </a>
+                <a className="hover:opacity-75" href="/about"> Meet the Team </a>
                 {/* <a className="hover:opacity-75" href="#"> History </a>
                 <a className="hover:opacity-75" href="#"> Careers </a> */}
               </nav>
@@ -86,10 +86,10 @@ const Footer = () => {
                 Services
               </p>
               <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-              <a className="hover:opacity-75" href="#"> Trade-In Program </a>
+              <a className="hover:opacity-75" href="/trade-in"> Trade-In Program </a>
               <a className="hover:opacity-75" href="#"> Buy Now, Pay Later </a>
-              <a className="hover:opacity-75" href="#"> Free Shipping </a>
-              <a className="hover:opacity-75" href="#"> Easy Returns & Refunds </a>
+              {/* <a className="hover:opacity-75" href="#"> Free Shipping </a>
+              <a className="hover:opacity-75" href="#"> Easy Returns & Refunds </a> */}
             ` </nav>
             </div>
             <div>
@@ -97,8 +97,8 @@ const Footer = () => {
                 Helpful Links
               </p>
               <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                <a className="hover:opacity-75" href="#"> Contact Us</a>
-                <a className="hover:opacity-75" href="#"> FAQs </a>
+                <a className="hover:opacity-75" href="/about"> Contact Us</a>
+                <a className="hover:opacity-75" href="/about"> FAQs </a>
                 {/* <a className="hover:opacity-75" href="#"> Live Chat </a> */}
               </nav>
             </div>
@@ -107,9 +107,9 @@ const Footer = () => {
                 Legal
               </p>
               <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                <a className="hover:opacity-75" href="#"> Privacy Policy </a>
-                <a className="hover:opacity-75" href="#"> Terms &amp; Conditions </a>
-                <a className="hover:opacity-75" href="#"> Returns Policy </a>
+                <a className="hover:opacity-75" href="/about"> Privacy Policy </a>
+                <a className="hover:opacity-75" href="/about"> Terms &amp; Conditions </a>
+                <a className="hover:opacity-75" href="/about"> Returns Policy </a>
                 {/* <a className="hover:opacity-75" href="#"> Accessibility </a> */}
               </nav>
             </div>
