@@ -35,7 +35,7 @@ const ProductContent = () => {
   return (
     <>
       <Breadcrumb items={categoryName ? breadcrumbItems : breadcrumbItems.slice(0, 1)} />
-      <CTAOne />
+      {/* <CTAOne /> */}
 
       {/* Pass both categorySlug and categoryName to ProductsWrapper */}
       {categorySlug && (
