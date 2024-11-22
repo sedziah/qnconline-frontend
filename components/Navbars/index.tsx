@@ -168,16 +168,6 @@ const Navbar = () => {
                   <SearchNormal size="20" color={COLORS.lightGray} />
                 </button>
               </form>
-          <div className='flex-1 relative h-12'>
-            <div className="pt-2 relative mx-auto text-black text-sm">
-              <input className="border border-lightGray w-full bg-white h-10 px-5 pr-16 rounded-lg text-sm focus:outline-none"
-                type="search" name="search" placeholder="Type here to start your search…">
-              </input>
-            </div>
-            <button className='absolute right-2 top-1/3'>
-              <SearchNormal size="20" color={COLORS.lightGray} />
-            </button>
-          </div>
 
               <div className="flex flex-row items-center justify-center gap-x-3">
                 <a href="/signin">
