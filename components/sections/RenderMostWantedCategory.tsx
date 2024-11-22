@@ -5,17 +5,17 @@ const ITEMS = [
   {
     image: "https://compasia.com.ph/cdn/shop/files/iphone-14-pro-max-757354_600x.png?v=1717653209",
     href: "/products?s=iphone-0d39a2fe-87ae-4566-b4c6-b505a7f9df6e&name=iPhone",
-    title: "iPhone",
+    title: "Mobile Phones",
   },
   {
     image: "https://lib.arizona.edu/sites/default/files/styles/lendable_item_image/public/2022-08/macbook.png?itok=OYz7BkZC",
     href: "/products?s=iphone-0d39a2fe-87ae-4566-b4c6-b505a7f9df6e&name=Macbook",
-    title: "Macbook",
+    title: "Laptops",
   },
   {
     image: "https://www.aptronixindia.com/media/catalog/product/i/p/ipad_10th_gen_1.png",
     href: "/products?s=iphone-0d39a2fe-87ae-4566-b4c6-b505a7f9df6e&name=iPad",
-    title: "iPad",
+    title: "Tablets",
   },
   {
     image: "https://myxprs.com/cdn/shop/products/sony-playstation-5-slim-570862.png?v=1723625774&width=700",
