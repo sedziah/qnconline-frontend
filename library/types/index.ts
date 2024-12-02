@@ -245,5 +245,5 @@ export enum DashboardFilter {
   "orders",
   "favorites",
   "trade-ins",
-  "other"
+  "credit"
 }

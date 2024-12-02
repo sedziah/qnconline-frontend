@@ -14,7 +14,7 @@ const NavigationFilter = ({ handleTabChange, tab }: PropType) => {
     "trade-ins",
     "profile",
     "favorites",
-    "other"
+    "credit"
   ]
 
   return <div className="mt-14 px-4 w-full max-w-2xl flex items-center justify-center mx-auto">
