@@ -167,5 +167,22 @@ export const apiService = {
         return false; // Default to not authenticated on error
       }
     },
+
+    /**
+   * Fetch products by fixed category slug.
+   * Designed for fixed categories like "most wanted".
+   *
+   * @param categorySlug - The slug of the category.
+   * @returns A Promise containing the product list.
+   */
+    getMostWantedCategoryProducts: async (categorySlug: string): Promise<any[]> => {
+      try {
+        const response = await api.get<any[]>(`/products/${categorySlug}/`);
+        return response.data; // Return products directly
+      } catch (error) {
+        console.error(`Error fetching products for fixed category: ${categorySlug}`, error);
+        throw error;
+      }
+    },
   
 };
