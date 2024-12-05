@@ -43,15 +43,15 @@ const SigninPage = () => {
 
         <div className="flex gap-x-3">
           <button className="h-12 border border-black w-full rounded-full flex items-center justify-center text-black font-semibold hover:bg-lightGray/20 transition">
-            <img src="https://storage.googleapis.com/support-kms-prod/ZAl1gIwyUsvfwxoW9ns47iJFioHXODBbIkrK" alt="google" className="w-9 h-9 rounded-full" />
+            <img src="https://storage.googleapis.com/support-kms-prod/ZAl1gIwyUsvfwxoW9ns47iJFioHXODBbIkrK" alt="google" className="w-5 h-5 rounded-full object-contain shrink-0" />
             Google
           </button>
           <button className="h-12 border border-black w-full rounded-full flex items-center justify-center text-black font-semibold hover:bg-lightGray/20 transition">
-            <img src="https://www.wavetransit.com/wp-content/uploads/2021/08/Facebook-logo.png" alt="facebook" className="w-9 h-9 rounded-full" />
+            <img src="https://www.wavetransit.com/wp-content/uploads/2021/08/Facebook-logo.png" alt="facebook" className="w-9 h-9 rounded-full object-contain shrink-0" />
             Facebook
           </button>
           <button className="h-12 border border-black w-full rounded-full flex items-center justify-center text-black font-semibold hover:bg-lightGray/20 transition">
-            <img src="https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png" alt="apple" className="w-9 h-9 rounded-full" />
+            <img src="https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png" alt="apple" className="w-9 h-9 rounded-full object-contain shrink-0" />
             Apple
           </button>
         </div>
