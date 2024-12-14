@@ -7,7 +7,7 @@ import OrdersPage from './OrdersPage'
 import ProfilePage from './ProfilePage'
 import FavoritesPage from './FavoritesPage'
 import TradeIns from './TradeIns'
-import OtherPage from './OtherPage'
+import CreditPage from './CreditPage'
 
 function DashboardContent() {
   const router = useRouter()
@@ -32,7 +32,7 @@ function DashboardContent() {
     "profile": ProfilePage,
     "favorites": FavoritesPage,
     "trade-ins": TradeIns,
-    "other": OtherPage
+    "credit": CreditPage
   }
 
   const SelectedComponent = componentMap[selectedTab] || OrdersPage
@@ -47,7 +47,7 @@ function DashboardContent() {
 
 export default function DashboardPage() {
   return (
-    <div className='w-full h-screen overflow-hidden overflow-y-scroll bg-bglight'>
+    <div className='w-full  overflow-hidden overflow-y-scroll bg-bglight'>
       <Suspense fallback={<div>Loading...</div>}>
         <DashboardContent />
       </Suspense>

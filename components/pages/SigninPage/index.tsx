@@ -13,7 +13,7 @@ const SigninPage = () => {
     <div className="px-4 h-screen overflow-hidden overflow-y-scroll bg-bglight flex items-center justify-center">
       <DefaultNavbar />
       <div className="w-full max-w-lg mx-auto">
-        <h1 className="text-2xl font-semibold text-black">
+        <h1 className="text-2xl mt-7 font-semibold text-black">
           {activeStep === 0 ? "Sign In" : "Create an account"}
         </h1>
 
