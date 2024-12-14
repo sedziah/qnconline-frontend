@@ -10,6 +10,7 @@ import DashboardPage from "./pages/Dashboard"
 import Breadcrumb from "./breadcrumb"
 import SigninPage from "./pages/SigninPage"
 import SearchPage from "./pages/SearchPage"
+import ContactPage from "./pages/contactPage/page"
 // import GenericListingDetailPage from "./pages/GenericListingDetailPage"
 
 export {
@@ -25,5 +26,6 @@ export {
   TradeInPage,
   DashboardPage,
   SearchPage,
+  ContactPage,
   // GenericListingDetailPage
 }
