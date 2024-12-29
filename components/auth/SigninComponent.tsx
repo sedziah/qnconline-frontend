@@ -2,19 +2,22 @@
 "use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { apiService } from '@/library/services/apiService';
+import { useLoginMutation } from "../../redux/api/features/authApi";
 
 const SigninComponent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [checkingAuth, setCheckingAuth] = useState(true); // State for auth check
   const router = useRouter();
+  const [login, { isLoading, error: loginError }] = useLoginMutation();
 
   const handleLogin = async (e: React.FormEvent) => {
+    
     e.preventDefault();
     try {
       setError(null); // Reset previous errors
-      const user = await apiService.login(email, password); // API call for login
+      const user = await login({ email, password }).unwrap(); // Use the mutation
       if (user) {
         router.push('/dashboard'); // Redirect to dashboard on successful login
       }
