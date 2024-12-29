@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { Product, ProductCategory, ProductListingResponse, FilterParams, ProductVariation, ProductDetailsResponse  } from '../types';
 
-const API_BASE_URL = "https://api.qnconline.com";
-// const API_BASE_URL = "http://http://127.0.0.1:8000";
+// const API_BASE_URL = "https://api.qnconline.com";
+const API_BASE_URL = "http://127.0.0.1:8000";
 
 
 
 const api = axios.create({
   baseURL: API_BASE_URL,
+  withCredentials: true, // Include cookies in requests
   headers: {
     "Content-Type": "application/json",
   },
@@ -137,15 +138,39 @@ export const apiService = {
   },
 
     // Login function
+    // login: async (email: string, password: string): Promise<any> => {
+    //   try {
+    //     const response = await api.post('/accounts/login/', { email, password }, { withCredentials: true });
+    //     return response.data; // Return user data
+    //   } catch (error) {
+    //     console.error("Login error:", error);
+    //     throw error;
+    //   }
+    // },
+
     login: async (email: string, password: string): Promise<any> => {
       try {
+        // Call the login endpoint
         const response = await api.post('/accounts/login/', { email, password }, { withCredentials: true });
+    
+        // Log the successful login response
+        console.log("Login successful:", response.data);
+    
+        // Check authentication status immediately after login
+        const isAuthenticated = await apiService.isAuthenticated();
+        if (isAuthenticated) {
+          console.log("User is authenticated after login");
+        } else {
+          console.log("User is not authenticated after login");
+        }
+    
         return response.data; // Return user data
       } catch (error) {
         console.error("Login error:", error);
-        throw error;
+        throw error; // Throw the error for the calling function to handle
       }
     },
+    
   
     // Logout function
     logout: async () => {
@@ -158,14 +183,20 @@ export const apiService = {
     },
   
     // Check if the user is authenticated
-    isAuthenticated: async () => {
-      try {
-        const response = await api.get('/accounts/status/', { withCredentials: true });
-        return response.data.isAuthenticated; // Assumes the API returns an isAuthenticated flag
-      } catch (error) {
-        console.error("Error checking authentication status:", error);
-        return false; // Default to not authenticated on error
+  isAuthenticated: async () => {
+    try {
+      const response = await api.get('/accounts/status/', { withCredentials: true });
+      const isAuthenticated = response.data.isAuthenticated; // Assumes the API returns an isAuthenticated flag
+      if (isAuthenticated) {
+        console.log("User Authenticated"); // Log when user is authenticated
+      } else {
+        console.log("User Not Authenticated"); // Log when user is not authenticated
       }
-    },
+      return isAuthenticated;
+    } catch (error) {
+      console.error("Error checking authentication status:", error);
+      return false; // Default to not authenticated on error
+    }
+  },
   
 };
