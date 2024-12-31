@@ -11,7 +11,7 @@
 // Authentication
 /////////////////////////
 
-export const loginUrl = "accounts/login/";
+export const loginUrl = "accounts/auth/jwt/create/";
 export const logoutUrl = "accounts/logout/";
 export const checkSessionUrl = "accounts/check-session/";
 export const registerUrl = "accounts/register/";
