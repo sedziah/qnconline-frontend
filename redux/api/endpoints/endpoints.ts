@@ -25,3 +25,18 @@ export const subscribeEmailUrl = "accounts/subscribe/";
 export const uploadDocumentsUrl = "accounts/upload-documents/";
 export const tokenObtainPairUrl = "accounts/token/";
 export const tokenRefreshUrl = "accounts/token/refresh/";
+
+
+/////////////////////////
+// Products
+/////////////////////////
+
+export const activeProductCategoriesUrl = "products/categories/active-product-categories/";
+export const dailyDealsUrl = "products/daily-deals/";
+export const featuredProductsUrl = "products/featured-products/";
+export const productsByCategoryUrl = (categorySlug: string) => `products/category/${categorySlug}/`;
+export const productSearchUrl = "products/search/";
+export const sustainableProductsUrl = "products/sustainable-products/";
+export const fetchSingleProductUrl = (productId: string) => `products/product/${productId}/`;
+export const categorySearchUrl = (categorySlug: string) => `products/${categorySlug}/`;
+

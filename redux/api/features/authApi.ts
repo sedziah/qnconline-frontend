@@ -1,5 +1,5 @@
 /**
- * authApi.js
+ * authApi.ts
  *
  * Authentication-related API endpoints, injected into the apiClient.
  */
