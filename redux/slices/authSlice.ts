@@ -3,102 +3,115 @@
  *
  * Manages authentication state, including user data, loading state, and error handling.
  * Integrates with Redux Persist to enable persistent authentication.
- * Also works with `authApi` to handle login and logout processes via RTK Query.
+ * Also works with `authApi` to handle login, logout, and user-fetch processes via RTK Query.
  */
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { authApi } from "../api/features/authApi"; // Import the correct RTK Query slice
+import { authApi } from "../api/features/authApi"; // Import the RTK Query slice
 import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // Default: localStorage
+import storage from "redux-persist/lib/storage"; // LocalStorage for persistence
 
-// Define the User type
+// User data structure
 interface User {
   id: string;
   name: string;
   email: string;
-  // Add more fields based on your API response
 }
 
-// Define the state type
+// State structure for authentication
 interface AuthState {
-  user: User | null; // The logged-in user's data
-  loading: boolean; // Indicates if an authentication action is in progress
-  error: string | null; // Stores error messages related to authentication
+  user: User | null; // Current user data
+  loading: boolean; // Tracks if an authentication action is in progress
+  error: string | null; // Error messages related to authentication
+  isAuthenticated: boolean; // Tracks whether the user is authenticated
 }
 
-// Initial state
+// Initial state for the auth slice
 const initialState: AuthState = {
   user: null,
   loading: false,
   error: null,
+  isAuthenticated: false, // Initialize as not authenticated
 };
 
-// Create the auth slice
+// Auth slice definition
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // Manually set user data (useful for initial session restoration)
+    // Action to manually set the user data
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
+      state.isAuthenticated = true; // Mark as authenticated when user is set
     },
-    // Reset authentication state (used during logout)
+    // Action to reset the authentication state (e.g., on logout)
     resetAuth: (state) => {
       state.user = null;
+      state.isAuthenticated = false; // Mark as not authenticated when user is cleared
       state.error = null;
     },
   },
   extraReducers: (builder) => {
-    // Handle successful login
-    builder.addMatcher(
-      authApi.endpoints.login.matchFulfilled,
-      (state, action: PayloadAction<{ user: User }>) => {
-        console.log(
-          "authSlice: matchFulfilled triggered, payload:",
-          action.payload.user
-        ); // Debugging
-        state.user = action.payload.user; // Update user state
-        state.loading = false;
-        state.error = null;
-      }
-    );
-    // Handle successful logout
-    builder.addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
-      state.user = null; // Clear user state
-      state.error = null;
-    });
-    // Handle login pending state
-    builder.addMatcher(authApi.endpoints.login.matchPending, (state) => {
-      state.loading = true; // Indicate loading during login
-    });
-    // Handle login errors
-    builder.addMatcher(
-      authApi.endpoints.login.matchRejected,
-      (state, action: any) => {
-        state.error = action.error?.data?.message || "Login failed"; // Store error message
-        state.loading = false;
-      }
-    );
-    // Handle logout errors
-    builder.addMatcher(
-      authApi.endpoints.logout.matchRejected,
-      (state, action: any) => {
-        state.error = action.payload || "Logout failed"; // Store error message for logout
-        state.loading = false;
-      }
-    );
+    builder
+      // Handle successful login
+      .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
+        state.user = action.payload.user; // Update the user state
+        state.isAuthenticated = true; // Mark as authenticated
+        state.loading = false; // Clear loading state
+        state.error = null; // Clear errors
+      })
+      // Handle user fetch success
+      .addMatcher(authApi.endpoints.fetchUser.matchFulfilled, (state, action) => {
+        state.user = action.payload; // Set user data from fetchUser response
+        state.isAuthenticated = true; // Mark as authenticated
+        state.loading = false; // Clear loading state
+        state.error = null; // Clear errors
+      })
+      // Handle user fetch failure
+      .addMatcher(authApi.endpoints.fetchUser.matchRejected, (state) => {
+        state.user = null; // Clear user data
+        state.isAuthenticated = false; // Mark as not authenticated
+        state.loading = false; // Clear loading state
+        state.error = "Failed to fetch user data"; // Set an error message
+      })
+      // Handle successful logout
+      .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
+        state.user = null; // Clear user state
+        state.isAuthenticated = false; // Clear authentication state
+        state.error = null; // Clear errors
+      })
+      // Handle loading state during login
+      .addMatcher(authApi.endpoints.login.matchPending, (state) => {
+        state.loading = true; // Set loading state
+      })
+      // Handle login errors
+      .addMatcher(authApi.endpoints.login.matchRejected, (state, action: any) => {
+        state.error = action.error?.data?.message || "Login failed"; // Set error message
+        state.loading = false; // Clear loading state
+      })
+      // Handle token refresh (if needed)
+      .addMatcher(authApi.endpoints.tokenRefresh.matchFulfilled, (state) => {
+        state.isAuthenticated = true; // Ensure the user remains authenticated
+        state.error = null; // Clear any previous error
+      })
+      // Handle token refresh errors
+      .addMatcher(authApi.endpoints.tokenRefresh.matchRejected, (state) => {
+        state.isAuthenticated = false; // Mark as not authenticated
+        state.user = null; // Clear user data
+        state.error = "Session expired. Please log in again."; // Set error message
+      });
   },
 });
 
-// Export the actions for use in components
+// Export actions to use in components
 export const { setUser, resetAuth } = authSlice.actions;
 
-// Redux Persist configuration
+// Redux Persist configuration for the auth slice
 const persistConfig = {
-  key: "auth", // The key under which the auth slice is stored in local storage
+  key: "auth", // Key under which the auth slice is stored in LocalStorage
   storage, // Storage engine
-  whitelist: ["user"], // Only persist the user state
+  whitelist: ["user", "isAuthenticated"], // Persist user and authentication state
 };
 
-// Wrap the reducer with persistReducer
+// Wrap the reducer with Redux Persist for persistence
 export default persistReducer(persistConfig, authSlice.reducer);

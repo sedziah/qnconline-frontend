@@ -7,18 +7,14 @@
 import { apiClient } from "../api_client/apiClient";
 import {
   loginUrl,
+  fetchUserUrl,
   logoutUrl,
-  checkSessionUrl,
   registerUrl,
-  verifyEmailUrl,
-  resendVerificationUrl,
   resetPasswordRequestUrl,
-  changePasswordUrl,
   passwordResetConfirmUrl,
-  guestUserCreateUrl,
-  subscribeEmailUrl,
-  uploadDocumentsUrl,
-  tokenObtainPairUrl,
+  changePasswordUrl,
+  resendActivationUrl,
+  verifyEmailUrl,
   tokenRefreshUrl,
 } from "../endpoints/endpoints";
 
@@ -33,17 +29,20 @@ export const authApi = apiClient.injectEndpoints({
       }),
     }),
 
+    // Fetch user endpoint
+    fetchUser: builder.query({
+      query: () => ({
+        url: fetchUserUrl,
+        method: "GET",
+      }),
+    }),
+
     // Logout endpoint
     logout: builder.mutation({
       query: () => ({
         url: logoutUrl,
         method: "POST",
       }),
-    }),
-
-    // Check session query
-    checkSession: builder.query({
-      query: () => checkSessionUrl,
     }),
 
     // Register endpoint
@@ -55,29 +54,23 @@ export const authApi = apiClient.injectEndpoints({
       }),
     }),
 
-    // Verify email endpoint
-    verifyEmail: builder.mutation({
-      query: ({ token }) => ({
-        url: verifyEmailUrl.replace(':token', token),
-        method: "GET",
-      }),
-    }),
-
-    // Resend verification email endpoint
-    resendVerification: builder.mutation({
-      query: (email) => ({
-        url: resendVerificationUrl,
-        method: "POST",
-        body: { email },
-      }),
-    }),
-
-    // Reset password request endpoint
+    // Password reset request endpoint
     resetPasswordRequest: builder.mutation({
       query: (email) => ({
         url: resetPasswordRequestUrl,
         method: "POST",
         body: { email },
+      }),
+    }),
+
+    // Password reset confirmation endpoint
+    passwordResetConfirm: builder.mutation({
+      query: ({ uidb64, token, newPassword }) => ({
+        url: passwordResetConfirmUrl
+          .replace(":uidb64", uidb64)
+          .replace(":token", token),
+        method: "POST",
+        body: { new_password: newPassword },
       }),
     }),
 
@@ -90,47 +83,20 @@ export const authApi = apiClient.injectEndpoints({
       }),
     }),
 
-    // Password reset confirm endpoint
-    passwordResetConfirm: builder.mutation({
-      query: ({ uidb64, token, newPassword }) => ({
-        url: passwordResetConfirmUrl.replace(':uidb64', uidb64).replace(':token', token),
-        method: "POST",
-        body: { new_password: newPassword },
-      }),
-    }),
-
-    // Guest user creation endpoint
-    guestUserCreate: builder.mutation({
-      query: () => ({
-        url: guestUserCreateUrl,
-        method: "POST",
-      }),
-    }),
-
-    // Subscribe email endpoint
-    subscribeEmail: builder.mutation({
+    // Resend email activation endpoint
+    resendActivation: builder.mutation({
       query: (email) => ({
-        url: subscribeEmailUrl,
+        url: resendActivationUrl,
         method: "POST",
         body: { email },
       }),
     }),
 
-    // Upload documents endpoint
-    uploadDocuments: builder.mutation({
-      query: (formData) => ({
-        url: uploadDocumentsUrl,
+    // Verify email endpoint
+    verifyEmail: builder.mutation({
+      query: ({ uid, token }) => ({
+        url: verifyEmailUrl.replace(":uid", uid).replace(":token", token),
         method: "POST",
-        body: formData,
-      }),
-    }),
-
-    // Token obtain pair endpoint
-    tokenObtainPair: builder.mutation({
-      query: (credentials) => ({
-        url: tokenObtainPairUrl,
-        method: "POST",
-        body: credentials,
       }),
     }),
 
@@ -147,17 +113,13 @@ export const authApi = apiClient.injectEndpoints({
 
 export const {
   useLoginMutation,
+  useFetchUserQuery,
   useLogoutMutation,
-  useCheckSessionQuery,
   useRegisterMutation,
-  useVerifyEmailMutation,
-  useResendVerificationMutation,
   useResetPasswordRequestMutation,
-  useChangePasswordMutation,
   usePasswordResetConfirmMutation,
-  useGuestUserCreateMutation,
-  useSubscribeEmailMutation,
-  useUploadDocumentsMutation,
-  useTokenObtainPairMutation,
+  useChangePasswordMutation,
+  useResendActivationMutation,
+  useVerifyEmailMutation,
   useTokenRefreshMutation,
 } = authApi;

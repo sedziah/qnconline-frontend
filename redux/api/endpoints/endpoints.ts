@@ -12,19 +12,16 @@
 /////////////////////////
 
 export const loginUrl = "accounts/auth/jwt/create/";
-export const logoutUrl = "accounts/logout/";
-export const checkSessionUrl = "accounts/check-session/";
-export const registerUrl = "accounts/register/";
-export const verifyEmailUrl = "accounts/verify-email/:token/";
-export const resendVerificationUrl = "accounts/resend-verification/";
-export const resetPasswordRequestUrl = "accounts/reset-password-request/";
-export const changePasswordUrl = "accounts/change-password/";
-export const passwordResetConfirmUrl = "accounts/password-reset-confirm/:uidb64/:token/";
-export const guestUserCreateUrl = "accounts/guest-user/";
-export const subscribeEmailUrl = "accounts/subscribe/";
-export const uploadDocumentsUrl = "accounts/upload-documents/";
-export const tokenObtainPairUrl = "accounts/token/";
-export const tokenRefreshUrl = "accounts/token/refresh/";
+export const fetchUserUrl = "accounts/auth/user/";
+export const logoutUrl = "accounts/auth/logout/";
+export const registerUrl = "accounts/auth/users/";
+export const resetPasswordRequestUrl = "accounts/auth/users/reset_password/";
+export const passwordResetConfirmUrl = "accounts/auth/users/reset_password_confirm/";
+export const changePasswordUrl = "accounts/auth/users/set_password/";
+export const resendActivationUrl = "accounts/auth/users/resend_activation/";
+export const verifyEmailUrl = "accounts/auth/users/activation/";
+export const tokenRefreshUrl = "accounts/auth/jwt/refresh/";
+
 
 
 /////////////////////////

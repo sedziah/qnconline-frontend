@@ -13,28 +13,29 @@ import authReducer from "../slices/authSlice"; // Authentication state slice
 // Persistence configuration for the auth slice
 const persistConfig = {
   key: "auth", // Key to store auth state in localStorage
-  storage,
-  whitelist: ["user"], // Persist only the 'user' field in the auth state
+  storage, // Use LocalStorage for persisting state
+  whitelist: ["user", "isAuthenticated"], // Persist 'user' and 'isAuthenticated' fields
 };
 
-// Apply persistence to the auth reducer
+// Wrap the auth reducer with persistence
 const persistedAuthReducer = persistReducer(persistConfig, authReducer);
 
+// Store configuration
 export const store = configureStore({
   reducer: {
-    auth: persistedAuthReducer, // Persisted local state for authentication
+    auth: persistedAuthReducer, // Persisted authentication state
     [authApi.reducerPath]: authApi.reducer, // RTK Query reducer for authentication API
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // Disable serializable check for Redux Persist
-    }).concat(authApi.middleware), // RTK Query middleware for authentication API
+      serializableCheck: false, // Disable serializable check due to redux-persist usage
+    }).concat(authApi.middleware), // Include RTK Query middleware
 });
 
-// Export persisted store
+// Create the persistor to persist the store
 export const persistor = persistStore(store);
 
-// Define RootState and AppDispatch types
+// Define RootState and AppDispatch types for type safety in the app
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
