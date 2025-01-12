@@ -9,21 +9,31 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // Defaults to localStorage
 import { authApi } from "../api/features/authApi"; // Authentication API slice
 import authReducer from "../slices/authSlice"; // Authentication state slice
+import productReducer from "../slices/productSlice"; // Product state slice
 
 // Persistence configuration for the auth slice
-const persistConfig = {
+const authPersistConfig = {
   key: "auth", // Key to store auth state in localStorage
   storage, // Use LocalStorage for persisting state
   whitelist: ["user", "isAuthenticated"], // Persist 'user' and 'isAuthenticated' fields
 };
 
-// Wrap the auth reducer with persistence
-const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+// Persistence configuration for the product slice
+const productPersistConfig = {
+  key: "product", // Key to store product state in localStorage
+  storage, // Use LocalStorage for persisting state
+  whitelist: ["activeCategories"], // Persist only 'activeCategories'
+};
+
+// Wrap the reducers with persistence
+const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+const persistedProductReducer = persistReducer(productPersistConfig, productReducer);
 
 // Store configuration
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer, // Persisted authentication state
+    product: persistedProductReducer, // Persisted product state
     [authApi.reducerPath]: authApi.reducer, // RTK Query reducer for authentication API
   },
   middleware: (getDefaultMiddleware) =>

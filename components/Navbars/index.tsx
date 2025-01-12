@@ -1,22 +1,76 @@
-"use client"
-import { COLORS, HIDDENROUTES } from '@/constants';
-import { HambergerMenu, Heart, Logout, SearchNormal, Shop, ShoppingCart, Trade, User } from 'iconsax-react';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { apiService } from '@/library/services/apiService';
-import { ProductCategory } from '@/library/types';
-import Drawer from 'react-modern-drawer';
-import 'react-modern-drawer/dist/index.css';
-import MobileDrawer from './MobileDrawer';
-import { usePathname } from 'next/navigation';
-import { FaSearch } from 'react-icons/fa';
+"use client";
+import React, { useEffect, useState } from "react";
+import { COLORS, HIDDENROUTES } from "@/constants";
+import {
+  HambergerMenu,
+  Heart,
+  Logout,
+  SearchNormal,
+  Shop,
+  ShoppingCart,
+  Trade,
+  User,
+} from "iconsax-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { apiService } from "@/library/services/apiService";
+import { ProductCategory } from "@/library/types";
+import Drawer from "react-modern-drawer";
+import "react-modern-drawer/dist/index.css";
+import MobileDrawer from "./MobileDrawer";
+import { usePathname } from "next/navigation";
+import { FaSearch } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../redux/store/store";
+import { productsApi } from "../../redux/api/features/productsApi";
+
+// const Navbar = () => {
+//   const dispatch = useDispatch<AppDispatch>();
+
+//   // Extract state from the Redux store
+//   const { activeCategories, isLoading, error } = useSelector(
+//     (state: RootState) => state.product
+//   );
+
+//   // Fetch active categories on component mount
+//   useEffect(() => {
+//     dispatch(productsApi.endpoints.fetchActiveProductCategories.initiate());
+//   }, [dispatch]);
+
+//   return (
+//     <nav className="navbar">
+//       <div className="container">
+//         <h1>Navbar</h1>
+//         {isLoading && <p>Loading categories...</p>}
+//         {error && <p style={{ color: "red" }}>{error}</p>}
+//         <ul className="categories-list">
+//           {activeCategories.map((category) => (
+//             <li key={category.id}>{category.name}</li>
+//           ))}
+//         </ul>
+//       </div>
+//     </nav>
+//   );
+// };
+
+// export default Navbar;
 
 const Navbar = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  // Extract state from the Redux store
+  const { activeCategories, isLoading, error } = useSelector(
+    (state: RootState) => state.product
+  );
+
+  // Fetch active categories on component mount
+  useEffect(() => {
+    dispatch(productsApi.endpoints.fetchActiveProductCategories.initiate());
+  }, [dispatch]);
+
   const [isOpen, setIsOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [categories, setCategories] = useState<ProductCategory[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const path = usePathname();
   const router = useRouter();
@@ -30,17 +84,6 @@ const Navbar = () => {
     setScrollPosition(window.pageYOffset);
   };
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const fetchedCategories = await apiService.getProductCategories();
-        setCategories(fetchedCategories);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
-    fetchCategories();
-  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -82,16 +125,18 @@ const Navbar = () => {
             zIndex={9999}
             size={300}
           >
-            <MobileDrawer categories={categories} setIsOpen={setIsOpen} />
+            <MobileDrawer categories={activeCategories} setIsOpen={setIsOpen} />
           </Drawer>
 
           <div
             style={{
               zIndex: 8888,
               transitionTimingFunction: "linear",
-              transition: "transform 0.7s ease-out, opacity 0.7s ease-out"
+              transition: "transform 0.7s ease-out, opacity 0.7s ease-out",
             }}
-            className={`w-full transition shadow z-50 bg-white ${scrollPosition > 275 ? "fixed top-0" : "relative"}`}
+            className={`w-full transition shadow z-50 bg-white ${
+              scrollPosition > 275 ? "fixed top-0" : "relative"
+            }`}
           >
             {/* Mobile Nav */}
             <div className="lg:hidden px-4 py-2">
@@ -118,7 +163,10 @@ const Navbar = () => {
                 </div>
               </div>
 
-              <form onSubmit={handleSearchSubmit} className="flex-1 relative h-12">
+              <form
+                onSubmit={handleSearchSubmit}
+                className="flex-1 relative h-12"
+              >
                 <input
                   className="border border-lightGray w-full bg-white h-10 px-5 pr-12 rounded-lg text-sm focus:outline-none"
                   type="search"
@@ -126,7 +174,10 @@ const Navbar = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for products..."
                 />
-                <button type="submit" className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <button
+                  type="submit"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                >
                   <SearchNormal size="20" color={COLORS.lightGray} />
                 </button>
               </form>
@@ -144,19 +195,31 @@ const Navbar = () => {
                 />
               </a>
               <div className="flex flex-row items-center justify-center gap-x-5">
-                <a href="/trade-in" className="flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all">
+                <a
+                  href="/trade-in"
+                  className="flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all"
+                >
                   <Trade size="20" color="#000" />
                   <span>Trade In</span>
                 </a>
-                <a href="/about" className="flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all">
+                <a
+                  href="/about"
+                  className="flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all"
+                >
                   <span>About us</span>
                 </a>
-                <a href="/help" className="flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all">
+                <a
+                  href="/help"
+                  className="flex gap-x-1 flex-row items-center hover:underline text-sm font-medium transition-all"
+                >
                   <span>Help</span>
                 </a>
               </div>
 
-              <form onSubmit={handleSearchSubmit} className="flex-1 relative h-12">
+              <form
+                onSubmit={handleSearchSubmit}
+                className="flex-1 relative h-12"
+              >
                 <input
                   className="border border-lightGray w-full bg-white h-10 px-5 pr-12 rounded-lg text-sm focus:outline-none"
                   type="search"
@@ -164,7 +227,10 @@ const Navbar = () => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search for products..."
                 />
-                <button type="submit" className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <button
+                  type="submit"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                >
                   <SearchNormal size="20" color={COLORS.lightGray} />
                 </button>
               </form>
@@ -182,14 +248,17 @@ const Navbar = () => {
             {/* Category List */}
             <div className="hidden md:hidden sm:hidden lg:block bg-bglight overflow-hidden pl-7">
               <div className="w-full flex flex-row">
-                <button onClick={toggleDrawer} className="flex w-[120px] flex-row gap-x-2 py-2.5">
+                <button
+                  onClick={toggleDrawer}
+                  className="flex w-[120px] flex-row gap-x-2 py-2.5"
+                >
                   <HambergerMenu size="20" color="#000" />
                   <p className="text-sm capitalize font-normal">All Items</p>
                 </button>
                 <div className="overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 w-full flex flex-row items-center overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
                   <div className="flex flex-row gap-x-6">
-                    {categories.length > 0 ? (
-                      categories.map((category) => (
+                    {activeCategories?.length > 0 ? (
+                      activeCategories.map((category) => (
                         <a
                           key={category.name}
                           href={`/products?s=${category.slug}&name=${category.name}`}
@@ -201,7 +270,7 @@ const Navbar = () => {
                     ) : (
                       <div className="flex flex-row gap-3">
                         {Array(15)
-                          .fill('')
+                          .fill("")
                           .map((_, index) => (
                             <div
                               key={index}
