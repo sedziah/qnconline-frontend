@@ -149,6 +149,17 @@ export interface Deals {
   isActive: boolean
 }
 
+// DailyDeals Interface (for the provided response format)
+export interface DailyDeal {
+  id: UUID; // Primary Key
+  full_name: string; // Concatenated product and variation name
+  price: number; // Price of the product variation
+  product_slug: string; // Slug from the Product model
+  condition: string; // Condition of the product variation (e.g., "new", "used")
+  // inventory_quantity: number; // Available stock
+  image_url: IMAGE; // URL of the primary image for the product variation
+}
+
 // Supplier Table
 export interface Supplier {
   id: UUID // Primary Key

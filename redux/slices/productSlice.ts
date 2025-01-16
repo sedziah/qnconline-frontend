@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // LocalStorage for persistence
 import { productsApi } from "../api/features/productsApi";
-import { ActiveCategory, Deals, Product } from "../../library/types/index";
+import { ActiveCategory, DailyDeal, Product } from "../../library/types/index";
 
 // Define the state structure
 interface ProductState {
   activeCategories: ActiveCategory[];
-  dailyDeals: Deals[];
+  dailyDeals: DailyDeal[]; // Correct type for daily deals
   featuredProducts: Product[];
   productsByCategory: Product[];
   singleProduct: Product | null;
@@ -20,7 +20,7 @@ interface ProductState {
 // Initial state for the product slice
 const initialState: ProductState = {
   activeCategories: [],
-  dailyDeals: [],
+  dailyDeals: [], // Initialize dailyDeals with correct structure
   featuredProducts: [],
   productsByCategory: [],
   singleProduct: null,
@@ -69,8 +69,8 @@ const productSlice = createSlice({
     );
     builder.addMatcher(
       productsApi.endpoints.fetchDailyDeals.matchFulfilled,
-      (state, action: PayloadAction<Deals[]>) => {
-        state.dailyDeals = action.payload;
+      (state, action: PayloadAction<DailyDeal[]>) => {
+        state.dailyDeals = action.payload; // Update dailyDeals with correct data
         state.isLoading = false;
       }
     );

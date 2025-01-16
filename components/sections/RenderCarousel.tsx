@@ -4,14 +4,15 @@ import React, { useState, useEffect } from 'react';
 import NewProductCard from '../Cards/NewProductCard';
 import ProductCardSkeleton from '../Cards/ProductCardSkeleton';
 import dynamic from 'next/dynamic';
-import { Product } from '../../library/types';
+import { DailyDeal } from '../../library/types'; // Use the DailyDeal type
+import MobilePhoneCard from '../Cards/MobilePhoneCard';
 
 const Carousel = dynamic(() => import('react-multi-carousel'), { ssr: false });
 
 interface RenderCarouselProps {
   title: string;
   subtitle?: string;
-  payload: Product[]; // Use Product interface directly
+  payload: DailyDeal[]; // Use DailyDeal interface for the payload
   loading: boolean; // Add loading state
 }
 
@@ -91,44 +92,20 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
             renderButtonGroupOutside={false}
             renderDotsOutside={false}
           >
-            {payload && payload.length > 0 ? (
-              payload.map((product, index) => (
-                <div key={index} className="mx-1 py-3">
-                  <NewProductCard
-                    product={{
-                      // ...product?.product,
-                      id: product?.id || 'N/A',
-                      // name: product?.name || 'No name available',
-                      name: `${product?.product?.name || 'No product name'} - ${
-                        product?.name || 'No variation name'
-                      }`,
-                      slug: product?.slug || 'no-slug',
-                      brand: product?.brand || { /* default brand object if necessary */ },
-                      category: product?.category || { /* default category object if necessary */ },
-                      base_price: product?.base_price || '0.00',
-                      description: product?.description || 'No description available',
-                      currency: product?.currency || 'USD',
-                      priceAdjustment: product?.priceAdjustment || '',
-                      price: product?.price || 0,
-                      inventoryQuantity: product?.inventoryQuantity || 0,
-                      condition: product?.condition || 'New',
-                      images: product?.images || [],
-                      reviews: product?.reviews || [],
-                      specifications: product?.specifications || [],
-                      deals: product?.deals || [],
-                      catalogueId: product?.catalogueId || '', // Optional field
-                      actualPrice: product?.actualPrice || 0,  // Optional field
-                      isFeatured: product?.isFeatured || false, // Optional field
-                      freeDelivery: product?.freeDelivery || false, // Optional field
-                      pagination: product?.pagination,
-                      variations: product?.variations || [],   // Required field
-                    }}
-                  />
-                </div>
-              ))
-            ) : (
-              <div>No products available</div>
-            )}
+            {payload.map((deal) => (
+              <div key={deal.id} className="mx-1 py-3">
+                <MobilePhoneCard
+                  product={{
+                    id: deal.id,
+                    full_name: deal.full_name, // Use full_name directly
+                    product_slug: deal.product_slug,
+                    price: deal.price,
+                    condition: deal.condition,
+                    image_url: deal.image_url,
+                  }}
+                />
+              </div>
+            ))}
           </Carousel>
         )}
       </div>

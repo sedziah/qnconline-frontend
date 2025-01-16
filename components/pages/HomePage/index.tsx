@@ -51,7 +51,7 @@ const HomePage = () => {
       <RenderCarousel
         title="Featured Products"
         subtitle="Top-Rated Favorites Curated for You. Explore Now!"
-        payload={featuredProducts}
+        payload={dailyDeals}
         loading={isLoading}
       />
 
