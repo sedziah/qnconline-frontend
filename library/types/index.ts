@@ -26,6 +26,12 @@ export interface Category {
   updatedAt: DATETIME
 }
 
+export interface ActiveCategory {
+  id: string;   // UUID
+  name: string; // Category name
+  slug: string; // Unique slug for the active category
+}
+
 // CategoryImage Table
 export interface CategoryImage {
   id: UUID // Primary Key
