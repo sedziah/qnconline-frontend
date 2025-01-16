@@ -5,7 +5,8 @@ const nextConfig = {
         domains: [
             'images.ctfassets.net',
             'www.backmarket.com',
-            'q1p0.ldn.idrivee2-61.com'
+            'q1p0.ldn.idrivee2-61.com',
+            'qnc-online.nyc3.digitaloceanspaces.com',
         ],
         remotePatterns: [{
             protocol: 'https',
