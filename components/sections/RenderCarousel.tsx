@@ -98,7 +98,10 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
                     product={{
                       // ...product?.product,
                       id: product?.id || 'N/A',
-                      name: product?.name || 'No name available',
+                      // name: product?.name || 'No name available',
+                      name: `${product?.product?.name || 'No product name'} - ${
+                        product?.name || 'No variation name'
+                      }`,
                       slug: product?.slug || 'no-slug',
                       brand: product?.brand || { /* default brand object if necessary */ },
                       category: product?.category || { /* default category object if necessary */ },
