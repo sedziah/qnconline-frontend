@@ -30,6 +30,7 @@ export const tokenRefreshUrl = "accounts/auth/jwt/refresh/";
 export const fetchactiveProductCategoriesUrl =
   "products/categories/active-product-categories/";
 export const fetchdDailyDealsUrl = "products/daily-deals/";
+export const fetchdNewArrivalsUrl = "products/new-arrivals/";
 export const featuredProductsUrl = "products/featured-products/";
 export const productsByCategoryUrl = (categorySlug: string) =>
   `products/category/${categorySlug}/`;

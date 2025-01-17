@@ -2,12 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // LocalStorage for persistence
 import { productsApi } from "../api/features/productsApi";
-import { ActiveCategory, DailyDeal, Product } from "../../library/types/index";
+import { ActiveCategory, MobileCardData, Product } from "../../library/types/index";
 
 // Define the state structure
 interface ProductState {
   activeCategories: ActiveCategory[];
-  dailyDeals: DailyDeal[]; // Correct type for daily deals
+  dailyDeals: MobileCardData[]; // Correct type for daily deals
+  newArrivals: MobileCardData[];
   featuredProducts: Product[];
   productsByCategory: Product[];
   singleProduct: Product | null;
@@ -21,6 +22,7 @@ interface ProductState {
 const initialState: ProductState = {
   activeCategories: [],
   dailyDeals: [], // Initialize dailyDeals with correct structure
+  newArrivals: [],
   featuredProducts: [],
   productsByCategory: [],
   singleProduct: null,
@@ -69,13 +71,36 @@ const productSlice = createSlice({
     );
     builder.addMatcher(
       productsApi.endpoints.fetchDailyDeals.matchFulfilled,
-      (state, action: PayloadAction<DailyDeal[]>) => {
+      (state, action: PayloadAction<MobileCardData[]>) => {
         state.dailyDeals = action.payload; // Update dailyDeals with correct data
         state.isLoading = false;
       }
     );
     builder.addMatcher(
       productsApi.endpoints.fetchDailyDeals.matchRejected,
+      (state, action) => {
+        state.error = action.error?.message || "Failed to fetch daily deals products";
+        state.isLoading = false;
+      }
+    );
+
+    // Fetch New Arrivals
+    builder.addMatcher(
+      productsApi.endpoints.fetchNewArrivals.matchPending,
+      (state) => {
+        state.isLoading = true;
+        state.error = null;
+      }
+    );
+    builder.addMatcher(
+      productsApi.endpoints.fetchNewArrivals.matchFulfilled,
+      (state, action: PayloadAction<MobileCardData[]>) => {
+        state.newArrivals = action.payload; // Update dailyDeals with correct data
+        state.isLoading = false;
+      }
+    );
+    builder.addMatcher(
+      productsApi.endpoints.fetchNewArrivals.matchRejected,
       (state, action) => {
         state.error = action.error?.message || "Failed to fetch daily deals products";
         state.isLoading = false;

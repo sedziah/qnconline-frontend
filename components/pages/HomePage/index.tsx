@@ -16,8 +16,8 @@ const HomePage = () => {
   // Access state from Redux store
   const {
     dailyDeals,
+    newArrivals,
     featuredProducts,
-    sustainableProducts,
     isLoading,
     error,
   } = useSelector((state: RootState) => state.product);
@@ -25,6 +25,7 @@ const HomePage = () => {
   useEffect(() => {
     // Dispatch the API calls to fetch daily deals, featured products, and sustainable products
     dispatch(productsApi.endpoints.fetchDailyDeals.initiate());
+    dispatch(productsApi.endpoints.fetchNewArrivals.initiate());
     dispatch(productsApi.endpoints.fetchFeaturedProducts.initiate());
     dispatch(productsApi.endpoints.fetchSustainableProducts.initiate());
   }, [dispatch]);
@@ -47,21 +48,21 @@ const HomePage = () => {
         loading={isLoading}
       />
 
+      {/* New Arrivals Products Section */}
+      <RenderCarousel
+        title="New Arrivals"
+        subtitle="Discover Our Latest Additions. Stay Ahead of the Trends!!"
+        payload={newArrivals}
+        loading={isLoading}
+      />
+
       {/* Featured Products Section */}
       <RenderCarousel
         title="Featured Products"
         subtitle="Top-Rated Favorites Curated for You. Explore Now!"
-        payload={dailyDeals}
+        payload={newArrivals}
         loading={isLoading}
       />
-
-      {/* Sustainable Products Section */}
-      {/* <RenderCarousel
-        title="Sustainable Products"
-        subtitle="Explore Our Eco-Friendly Products"
-        payload={sustainableProducts}
-        loading={isLoading}
-      /> */}
 
       {/* Information Card Section */}
       <InfoCard

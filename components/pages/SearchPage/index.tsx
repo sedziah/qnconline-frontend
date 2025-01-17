@@ -1,5 +1,5 @@
 "use client"
-import NewProductCard from '@/components/Cards/NewProductCard'
+import NewProductCard from '@/components/Cards/MobilePhoneCard'
 import FilterSection from '@/components/FIlters/NewFilter'
 import FloatingFilter from '@/components/FloatingFilter'
 import { apiService } from '@/library/services/apiService'

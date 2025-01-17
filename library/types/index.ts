@@ -156,9 +156,39 @@ export interface DailyDeal {
   price: number; // Price of the product variation
   product_slug: string; // Slug from the Product model
   condition: string; // Condition of the product variation (e.g., "new", "used")
-  // inventory_quantity: number; // Available stock
+  inventory_quantity: number; // Available stock
   image_url: IMAGE; // URL of the primary image for the product variation
+  discount: number;
+  reviews: string;
 }
+
+export interface DailyDeal {
+  id: UUID; // Primary Key
+  full_name: string; // Concatenated product and variation name
+  price: number; // Price of the product variation
+  product_slug: string; // Slug from the Product model
+  condition: string; // Condition of the product variation (e.g., "new", "used")
+  inventory_quantity: number; // Available stock
+  image_url: IMAGE; // URL of the primary image for the product variation
+  discount: number;
+  reviews: string;
+}
+
+export interface MobileCardData {
+  id: string;
+  full_name: string;
+  price: number;
+  product_slug: string;
+  condition: string;
+  inventory_quantity: number;
+  image_url: string;
+  discount: number;
+  memory: string;
+  sim: string;
+  free_delivery: boolean;
+}
+
+
 
 // Supplier Table
 export interface Supplier {

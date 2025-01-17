@@ -8,8 +8,9 @@ import {
   sustainableProductsUrl,
   fetchSingleProductUrl,
   categorySearchUrl,
+  fetchdNewArrivalsUrl
 } from "../endpoints/endpoints"; // Import your endpoint constants
-import { Product, DailyDeal, Category, ActiveCategory } from "../../../library/types/index";
+import { Product, MobileCardData, Category, ActiveCategory } from "../../../library/types/index";
 
 export const productsApi = apiClient.injectEndpoints({
   endpoints: (builder) => ({
@@ -22,9 +23,17 @@ export const productsApi = apiClient.injectEndpoints({
     }),
 
     // Fetch daily deals
-    fetchDailyDeals: builder.query<DailyDeal[], void>({
+    fetchDailyDeals: builder.query<MobileCardData[], void>({
       query: () => ({
         url: fetchdDailyDealsUrl,
+        method: "GET",
+      }),
+    }),
+
+    // Fetch New Arrivals
+    fetchNewArrivals: builder.query<MobileCardData[], void>({
+      query: () => ({
+        url: fetchdNewArrivalsUrl,
         method: "GET",
       }),
     }),

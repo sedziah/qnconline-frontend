@@ -1,10 +1,9 @@
 "use client";
 import 'react-multi-carousel/lib/styles.css';
 import React, { useState, useEffect } from 'react';
-import NewProductCard from '../Cards/NewProductCard';
 import ProductCardSkeleton from '../Cards/ProductCardSkeleton';
 import dynamic from 'next/dynamic';
-import { DailyDeal } from '../../library/types'; // Use the DailyDeal type
+import { MobileCardData } from '../../library/types'; // Use the DailyDeal type
 import MobilePhoneCard from '../Cards/MobilePhoneCard';
 
 const Carousel = dynamic(() => import('react-multi-carousel'), { ssr: false });
@@ -12,7 +11,7 @@ const Carousel = dynamic(() => import('react-multi-carousel'), { ssr: false });
 interface RenderCarouselProps {
   title: string;
   subtitle?: string;
-  payload: DailyDeal[]; // Use DailyDeal interface for the payload
+  payload: MobileCardData[]; // Use DailyDeal interface for the payload
   loading: boolean; // Add loading state
 }
 
@@ -97,11 +96,16 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({ title, subtitle, payloa
                 <MobilePhoneCard
                   product={{
                     id: deal.id,
-                    full_name: deal.full_name, // Use full_name directly
+                    full_name: deal.full_name,
                     product_slug: deal.product_slug,
                     price: deal.price,
                     condition: deal.condition,
+                    inventory_quantity: deal.inventory_quantity || 0,
                     image_url: deal.image_url,
+                    memory: deal.memory || "N/A",
+                    sim: deal.sim || "N/A",
+                    discount: deal.discount || 0,
+                    free_delivery: deal.free_delivery || false,
                   }}
                 />
               </div>
