@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from '@/library/services/apiService';
-import NewProductCard from './Cards/NewProductCard';
+import NewProductCard from './Cards/MobilePhoneCard';
 import FilterSection from "./FIlters/NewFilter";
 
 type ProductsWrapperProps = {
