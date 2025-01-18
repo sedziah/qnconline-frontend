@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import React from 'react';
+import Link from "next/link";
+import Image from "next/image";
+import React from "react";
 
 interface MobilePhoneCardProps {
   product: {
@@ -26,7 +26,8 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
   // Calculate the average rating if reviews exist
   const rating =
     product.reviews && product.reviews.length > 0
-      ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length
+      ? product.reviews.reduce((sum, review) => sum + review.rating, 0) /
+        product.reviews.length
       : 0;
 
   return (
@@ -37,7 +38,7 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
             width={150}
             height={150}
             className="object-contain h-full"
-            src={product.image_url || '/placeholder-image.png'}
+            src={product.image_url || "/placeholder-image.png"}
             alt={product.full_name}
           />
         </div>
@@ -45,15 +46,37 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
 
       <div className="pt-6">
         <div className="mb-4 flex items-center justify-between gap-4">
+          {/* Discount Section */}
           <span
             className={`me-2 rounded py-0.5 text-xs font-medium ${
-              discount !== "No discount"
-                ? 'bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-300'
-                : 'bg-gray-100 text-gray-500'
+              product.discount > 0
+                ? "bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-300"
+                : "bg-gray-100 text-gray-500"
             }`}
           >
-            {discount}
+            {product.discount > 0 ? `${product.discount}% off` : "No discount"}
           </span>
+
+          {/* Free Delivery Section */}
+          {product.free_delivery && (
+            <span className="flex items-center gap-2 text-xs font-medium text-green-600">
+              <svg
+                className="h-4 w-4 text-green-600"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 9.75A2.25 2.25 0 015.25 7.5h13.5A2.25 2.25 0 0121 9.75v4.5a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 14.25v-4.5zm3 3.75a.75.75 0 100-1.5.75.75 0 000 1.5zm12 0a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                />
+              </svg>
+              Free Delivery
+            </span>
+          )}
         </div>
       </div>
 
@@ -61,12 +84,12 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
         <span
           className="text-sm font-semibold leading-tight text-gray-900 hover:underline flex items-center"
           style={{
-            height: '1rem',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            display: '-webkit-box',
+            height: "1rem",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
             WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
+            WebkitBoxOrient: "vertical",
           }}
         >
           {product.full_name}
@@ -74,7 +97,9 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
       </Link>
       <div className="mt-4">
         <ul className="text-sm text-gray-500">
-          <li>{product.condition} - {product.memory} - ({product.sim})</li>
+          <li>
+            {product.condition} - {product.memory} - ({product.sim})
+          </li>
         </ul>
       </div>
 
@@ -84,7 +109,7 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
             <svg
               key={index}
               className={`h-4 w-4 ${
-                index < Math.round(rating) ? 'text-yellow-400' : 'text-gray-300'
+                index < Math.round(rating) ? "text-yellow-400" : "text-gray-300"
               }`}
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
