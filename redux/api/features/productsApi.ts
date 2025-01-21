@@ -8,9 +8,16 @@ import {
   sustainableProductsUrl,
   fetchSingleProductUrl,
   categorySearchUrl,
-  fetchdNewArrivalsUrl
+  fetchdNewArrivalsUrl,
+  fetchIphonesUrl,
+  categoryAndFilterUrl
 } from "../endpoints/endpoints"; // Import your endpoint constants
-import { Product, MobileCardData, Category, ActiveCategory } from "../../../library/types/index";
+import {
+  Product,
+  MobileCardData,
+  Category,
+  ActiveCategory,
+} from "../../../library/types/index";
 
 export const productsApi = apiClient.injectEndpoints({
   endpoints: (builder) => ({
@@ -86,6 +93,28 @@ export const productsApi = apiClient.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    // Fetch iPhones by category slug
+    fetchIPhones: builder.query<Product[], void>({
+      query: () => ({
+        url: fetchIphonesUrl,
+        method: "GET",
+      }),
+    }),
+
+    // Fetch products dynamically by category slug
+    fetchProductsByCategoryAndFilter: builder.query<
+  { variations: Product[] }, 
+  { categorySlug: string; filters?: Record<string, string[]> }
+>({
+  query: ({ categorySlug, filters }) => {
+    const params = filters ? new URLSearchParams(filters).toString() : "";
+    return {
+      url: `${categoryAndFilterUrl(categorySlug)}?${params}`,
+      method: "GET",
+    };
+  },
+}),
   }),
   overrideExisting: false, // Ensures existing endpoints are not overridden
 });
@@ -100,4 +129,5 @@ export const {
   useSearchProductsQuery,
   useFetchSustainableProductsQuery,
   useCategorySearchQuery,
+  useFetchProductsByCategoryAndFilterQuery
 } = productsApi;

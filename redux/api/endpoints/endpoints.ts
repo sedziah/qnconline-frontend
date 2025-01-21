@@ -32,6 +32,7 @@ export const fetchactiveProductCategoriesUrl =
 export const fetchdDailyDealsUrl = "products/daily-deals/";
 export const fetchdNewArrivalsUrl = "products/new-arrivals/";
 export const featuredProductsUrl = "products/featured-products/";
+export const fetchIphonesUrl = "products/product-category/iphones/";
 export const productsByCategoryUrl = (categorySlug: string) =>
   `products/category/${categorySlug}/`;
 export const productSearchUrl = "products/search/";
@@ -40,3 +41,5 @@ export const fetchSingleProductUrl = (productId: string) =>
   `products/product/${productId}/`;
 export const categorySearchUrl = (categorySlug: string) =>
   `products/${categorySlug}/`;
+export const categoryAndFilterUrl = (categorySlug: string) =>
+  `products/category/${categorySlug}/`;
