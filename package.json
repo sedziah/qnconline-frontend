@@ -21,7 +21,7 @@
     "react-multi-carousel": "^2.8.5",
     "react-redux": "^9.2.0",
     "react-responsive-modal": "^6.4.2",
-    "react-switch": "^7.0.0",
+    "react-switch": "^7.1.0",
     "redux-persist": "^6.0.0",
     "sharp": "^0.33.5"
   },
