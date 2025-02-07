@@ -294,3 +294,8 @@ export enum DashboardFilter {
   "trade-ins",
   "credit"
 }
+
+type Model = {
+  model: string;
+  storage: string[];
+};

@@ -14,7 +14,7 @@ import ScreenConditionForm from './ScreenConditionForm'
 const TradeInPage = () => {
   const router = useRouter()
   const [activeStep, setActiveStep] = useState<number>(0)
-  const steps = ["Your device", "Carrier", "Screen condition", "Functionality"]
+  const steps = ["Your device", "Carrier", "Screen condition", "Appearance", "Functionality"]
   // Will be sent dynamically based on the trade in type
 
   // state to hold the data as an array
