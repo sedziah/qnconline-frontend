@@ -43,3 +43,35 @@ export const categorySearchUrl = (categorySlug: string) =>
   `products/${categorySlug}/`;
 export const categoryAndFilterUrl = (categorySlug: string) =>
   `products/category/${categorySlug}/`;
+
+/////////////////////////
+// Trade-In
+/////////////////////////
+
+// Fetch all categories available for trade-in
+export const fetchTradeInCategoriesUrl = "trade-in/categories/";
+
+// Fetch all brands for a specific category
+export const fetchBrandsByCategoryUrl = (categoryId: string) =>
+  `trade-in/categories/${categoryId}/brands/`;
+
+// Fetch all models for a specific brand
+export const fetchModelsByBrandUrl = (brandId: string) =>
+  `trade-in/brands/${brandId}/models/`;
+
+// Calculate the trade-in value based on user input
+export const calculateTradeInValueUrl = "trade-in/calculate/";
+
+// Fetch all trade-in requests submitted by the user
+export const fetchUserTradeInRequestsUrl = "trade-in/user-requests/";
+
+// Fetch details of a specific trade-in request
+export const fetchTradeInRequestDetailsUrl = (requestId: string) =>
+  `trade-in/request/${requestId}/`;
+
+// Submit a new trade-in request
+export const submitTradeInRequestUrl = "trade-in/submit/";
+
+// Cancel a specific trade-in request
+export const cancelTradeInRequestUrl = (requestId: string) =>
+  `trade-in/request/${requestId}/cancel/`;

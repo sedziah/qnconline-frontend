@@ -4,24 +4,22 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "@/redux/store/store";
-import { productsApi } from "@/redux/api/features/productsApi";
 import { useFetchProductsByCategoryAndFilterQuery } from "@/redux/api/features/productsApi";
 import FilterSection from "./Filters/NewFilter";
-import NewProductCard from "./Cards/NewProductCard";
+import MobilePhoneCard from "./Cards/MobilePhoneCard";
 
 const ProductsWrapper: React.FC = () => {
   const searchParams = useSearchParams();
   const categorySlug = searchParams.get("s") || ""; // Get slug
   const categoryName = searchParams.get("name") || ""; // Get category name
 
-  // Validate slug
-  console.log("Category Slug:", categorySlug);
-
   const [filters, setFilters] = useState<Record<string, string[]>>({});
 
   const { data, error, isLoading } = useFetchProductsByCategoryAndFilterQuery({
     categorySlug: categorySlug,
   });
+
+  console.log(data)
 
   const handleFilterChange = (newFilters: Record<string, string[]>) => {
     setFilters(newFilters);
@@ -58,7 +56,7 @@ const ProductsWrapper: React.FC = () => {
           ) : data?.variations?.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
               {data.variations.map((product) => (
-                <NewProductCard key={product.id} product={product} />
+                <MobilePhoneCard key={product.id} product={product} />
               ))}
             </div>
           ) : (

@@ -17,7 +17,6 @@ const HomePage = () => {
   const {
     dailyDeals,
     newArrivals,
-    featuredProducts,
     isLoading,
     error,
   } = useSelector((state: RootState) => state.product);
