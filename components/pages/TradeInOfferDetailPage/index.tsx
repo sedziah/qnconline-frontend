@@ -4,11 +4,73 @@ import { TickCircle } from "iconsax-react";
 import { useRouter, useSearchParams, useParams } from "next/navigation";
 import React from "react";
 
+// ✅ Trade-in Offer Calculation Function
+const calculateTradeInOffer = (
+  tradeInDetails: { label: string; value: string }[]
+) => {
+  let basePrice = 100; // Default base price
+
+  const model =
+    tradeInDetails.find((item) => item.label === "Model")?.value || "Unknown";
+  const storage =
+    tradeInDetails.find((item) => item.label === "Storage")?.value || "Unknown";
+  const carrier =
+    tradeInDetails.find((item) => item.label === "Carrier")?.value || "Unknown";
+  const screenCondition =
+    tradeInDetails.find((item) => item.label === "Screen Condition")?.value ||
+    "Unknown";
+  const appearance =
+    tradeInDetails.find((item) => item.label === "Appearance")?.value ||
+    "Unknown";
+  const functionality =
+    tradeInDetails.find((item) => item.label === "Functionality")?.value ||
+    "Unknown";
+
+  // ✅ Adjust base price based on the model
+  const modelPricing = {
+    "iPhone 13 Mini": 250,
+    "iPhone 13 Pro": 400,
+    "iPhone 12 Pro": 300,
+  };
+  basePrice = modelPricing[model] || basePrice;
+
+  // ✅ Adjust based on storage capacity
+  if (storage.includes("256GB")) basePrice += 30;
+  if (storage.includes("512GB")) basePrice += 50;
+
+  // ✅ Carrier impact (Unlocked is worth more)
+  if (carrier === "Unlocked") basePrice += 20;
+  if (carrier === "Sprint" || carrier === "T-Mobile") basePrice -= 10;
+
+  // ✅ Screen condition impact
+  const screenImpact = {
+    Flawless: 0,
+    Good: -10,
+    Used: -30,
+    Cracked: -80, // Big deduction for cracked screens
+  };
+  basePrice += screenImpact[screenCondition] || 0;
+
+  // ✅ Appearance impact
+  const appearanceImpact = {
+    Flawless: 0,
+    Good: -10,
+    Used: -20,
+    Cracked: -50,
+  };
+  basePrice += appearanceImpact[appearance] || 0;
+
+  // ✅ Functionality impact
+  if (functionality === "No") basePrice -= 50; // Non-functional devices are worth less
+
+  return Math.max(basePrice, 0); // Ensure price never goes below 0
+};
+
 const TradeInOfferDetailPage = () => {
   const searchParams = useSearchParams();
-  const { type, offerID } = useParams(); // Extract dynamic route parameters
+  const { type, offerID } = useParams(); // Extract device model & offer ID
 
-  // Extract trade-in details from URL query parameters
+  // Extract trade-in details from URL
   const tradeInDetails = [
     { label: "Model", value: searchParams.get("Model") || type || "Unknown" },
     { label: "Storage", value: searchParams.get("Storage") || "Unknown" },
@@ -23,6 +85,9 @@ const TradeInOfferDetailPage = () => {
       value: searchParams.get("Functionality") || "Unknown",
     },
   ];
+
+  // ✅ Calculate the trade-in offer
+  const offerPrice = calculateTradeInOffer(tradeInDetails);
 
   return (
     <>
@@ -43,12 +108,14 @@ const TradeInOfferDetailPage = () => {
             <p className="text-sm mt-3 text-gray-600 font-normal leading-7">
               We found the best price offered among our partners. The
               refurbisher is ready to pay:{" "}
-              <span className="font-bold">$70.00</span> for your{" "}
+              <span className="font-bold">GHS {offerPrice.toFixed(2)}</span> for
+              your{" "}
               <span className="font-bold">
                 {tradeInDetails.find((item) => item.label === "Model")?.value}{" "}
                 {tradeInDetails.find((item) => item.label === "Storage")?.value}{" "}
                 {tradeInDetails.find((item) => item.label === "Carrier")?.value}
               </span>
+              .
             </p>
           </div>
 
@@ -88,7 +155,8 @@ const TradeInOfferDetailPage = () => {
               <TickCircle size="20" color="#2f3137" />
               <div className="w-full">
                 <p className="text-sm text-gray-600 font-medium">
-                  Add banking & ID info to receive your $70.00 payment
+                  Add banking & ID info to receive your GHS {offerPrice.toFixed(2)}{" "}
+                  payment
                 </p>
                 <p className="text-sm mt-2 text-gray-600 font-normal">
                   These details will only be used to verify your identity and
