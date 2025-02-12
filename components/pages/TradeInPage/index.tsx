@@ -27,11 +27,26 @@ const TradeInPage = () => {
     { label: string; value: string }[]
   >([]);
 
-  const handleNext = () => {
+  const handleNext = (selectedData?: { label: string; value: string }) => {
+    if (selectedData) {
+      setListItems((prevList) => {
+        const existingIndex = prevList.findIndex(
+          (item) => item.label === selectedData.label
+        );
+        if (existingIndex !== -1) {
+          // Update existing item
+          const updatedList = [...prevList];
+          updatedList[existingIndex] = selectedData;
+          return updatedList;
+        }
+        // Add new item
+        return [...prevList, selectedData];
+      });
+    }
+
     if (activeStep < steps.length - 1) {
       setActiveStep(activeStep + 1);
     } else {
-      // Navigate to the offer page with offer ID
       let device = "unknown";
       let offerID = "unknown";
       router.push(`/trade-in/${device}/${offerID}`);
@@ -100,8 +115,9 @@ const TradeInPage = () => {
             <div className="mt-10">
               {
                 {
-                  "Your device": <DeviceForm handleNext={handleNext} />,
-                  "Carrier": <CarrierForm handleNext={handleNext} />,
+                  "Your device": <DeviceForm handleNext={(selectedValue) => handleNext({ label: "Model", value: selectedValue })} />
+                  ,
+                  Carrier: <CarrierForm handleNext={handleNext} />,
                   "Screen condition": (
                     <ScreenConditionForm handleNext={handleNext} />
                   ),

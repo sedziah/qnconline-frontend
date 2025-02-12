@@ -13,7 +13,17 @@ type Model = {
   storage: string[]; // Available storage options for the model
 };
 
-const DeviceForm = ({ handleNext }: Props) => {
+const DeviceForm = ({
+  handleNext,
+}: {
+  handleNext: (value: string) => void;
+}) => {
+  const [selectedDevice, setSelectedDevice] = useState("");
+
+  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const deviceName = event.target.value;
+    setSelectedDevice(deviceName);
+  };
   // State to store available brands
   const [brands, setBrands] = useState<string[]>([]);
   // State to store the selected brand
@@ -57,7 +67,12 @@ const DeviceForm = ({ handleNext }: Props) => {
           const data = await response.json();
           console.log("Fetched Models:", data);
           // Map the data to the Model type and update state
-          setModels(data.map((model: Model) => ({ model: model.model, storage: model.storage })));
+          setModels(
+            data.map((model: Model) => ({
+              model: model.model,
+              storage: model.storage,
+            }))
+          );
         } catch (error) {
           console.error("Error fetching models:", error);
         }
@@ -116,7 +131,9 @@ const DeviceForm = ({ handleNext }: Props) => {
         >
           <Warning2 size="24" color="#2f3137" />
           <div className="w-full">
-            <p className="text-[13px] font-medium text-black">Find your model</p>
+            <p className="text-[13px] font-medium text-black">
+              Find your model
+            </p>
             <p className="text-black text-[13px] font-normal my-5">
               {"“Settings” > “About phone”."}
             </p>
@@ -172,7 +189,11 @@ const DeviceForm = ({ handleNext }: Props) => {
         className="my-7 transition flex items-end justify-end"
       >
         <button
-          onClick={handleNext}
+          onClick={() => {
+            handleNext({ label: "Model", value: selectedModel });
+            handleNext({ label: "Storage", value: selectedStorage });
+          }}
+          disabled={!selectedModel || !selectedStorage} // Prevents proceeding without selection
           className="h-10 px-5 flex items-center justify-center text-white text-sm font-medium bg-primary rounded-md"
         >
           Next
