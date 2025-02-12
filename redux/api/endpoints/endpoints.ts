@@ -75,3 +75,6 @@ export const submitTradeInRequestUrl = "trade-in/submit/";
 // Cancel a specific trade-in request
 export const cancelTradeInRequestUrl = (requestId: string) =>
   `trade-in/request/${requestId}/cancel/`;
+
+// Newsletter
+export const subscribeNewsletterUrl = "accounts/auth/email-subscribe/";

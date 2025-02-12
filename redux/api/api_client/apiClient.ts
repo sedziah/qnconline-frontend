@@ -72,10 +72,19 @@ const baseQueryWithReauth: BaseQueryFn<
 };
 
 // Create the API client
-export const apiClient = createApi({
+//export const apiClient = createApi({
+//   reducerPath: "apiClient",
+//   baseQuery: baseQueryWithReauth,
+//   endpoints: () => ({}), // Endpoints will be injected by features
+// });
+
+const apiClient = createApi({
   reducerPath: "apiClient",
-  baseQuery: baseQueryWithReauth,
-  endpoints: () => ({}), // Endpoints will be injected by features
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.NEXT_PUBLIC_API_URL || baseURL,
+    credentials: "include", // Ensures session cookies work
+  }),
+  endpoints: () => ({}),
 });
 
 export default apiClient;

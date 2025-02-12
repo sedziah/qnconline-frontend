@@ -8,6 +8,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // Defaults to localStorage
 import { authApi } from "../api/features/authApi"; // Authentication API slice
+import { newsletterApi } from "../api/features/newsletterApi";
+import newsletterReducer from "../slices/newsletterSlice";
 import authReducer from "../slices/authSlice"; // Authentication state slice
 import productReducer from "../slices/productSlice"; // Product state slice
 
@@ -34,12 +36,14 @@ export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer, // Persisted authentication state
     product: persistedProductReducer, // Persisted product state
+    newsletter: newsletterReducer, // Newsletter state slice
     [authApi.reducerPath]: authApi.reducer, // RTK Query reducer for authentication API
+    [newsletterApi.reducerPath]: newsletterApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, // Disable serializable check due to redux-persist usage
-    }).concat(authApi.middleware), // Include RTK Query middleware
+    }).concat(authApi.middleware, newsletterApi.middleware), // Include RTK Query middleware
 });
 
 // Create the persistor to persist the store

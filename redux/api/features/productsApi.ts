@@ -1,4 +1,4 @@
-import { apiClient } from "../api_client/apiClient";
+import apiClient  from "../api_client/apiClient";
 import {
   fetchactiveProductCategoriesUrl,
   fetchdDailyDealsUrl,

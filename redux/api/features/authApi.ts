@@ -4,7 +4,7 @@
  * Authentication-related API endpoints, injected into the apiClient.
  */
 
-import { apiClient } from "../api_client/apiClient";
+import  apiClient  from "../api_client/apiClient";
 import {
   loginUrl,
   fetchUserUrl,
