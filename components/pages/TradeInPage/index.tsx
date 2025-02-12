@@ -33,13 +33,13 @@ const TradeInPage = () => {
         const existingIndex = prevList.findIndex(
           (item) => item.label === selectedData.label
         );
+
         if (existingIndex !== -1) {
-          // Update existing item
           const updatedList = [...prevList];
           updatedList[existingIndex] = selectedData;
           return updatedList;
         }
-        // Add new item
+
         return [...prevList, selectedData];
       });
     }
@@ -47,11 +47,101 @@ const TradeInPage = () => {
     if (activeStep < steps.length - 1) {
       setActiveStep(activeStep + 1);
     } else {
-      let device = "unknown";
-      let offerID = "unknown";
-      router.push(`/trade-in/${device}/${offerID}`);
+      console.log("🔹 Attempting to navigate with dynamic routing...");
+
+      // ✅ Extract the selected device model from listItems
+      const deviceModel =
+        listItems.find((item) => item.label === "Model")?.value || "unknown";
+
+      // ✅ Generate a dynamic offerID (random or from backend)
+      const offerID = Math.floor(Math.random() * 100000).toString(); // Example: Generate a random ID
+
+      // ✅ Convert listItems to query parameters
+      const queryParams = new URLSearchParams();
+      listItems.forEach((item) => {
+        queryParams.append(item.label, item.value);
+      });
+
+      console.log(
+        "Navigating to:",
+        `/trade-in/${deviceModel}/${offerID}?${queryParams.toString()}`
+      );
+
+      // ✅ Navigate to the correct dynamic route
+      router.push(
+        `/trade-in/${deviceModel}/${offerID}?${queryParams.toString()}`
+      );
     }
   };
+
+  // const handleNext = (selectedData?: { label: string; value: string }) => {
+  //   if (selectedData) {
+  //     setListItems((prevList) => {
+  //       const existingIndex = prevList.findIndex(
+  //         (item) => item.label === selectedData.label
+  //       );
+
+  //       if (existingIndex !== -1) {
+  //         const updatedList = [...prevList];
+  //         updatedList[existingIndex] = selectedData;
+  //         return updatedList;
+  //       }
+
+  //       return [...prevList, selectedData];
+  //     });
+  //   }
+
+  //   if (activeStep < steps.length - 1) {
+  //     setActiveStep(activeStep + 1);
+  //   } else {
+  //     // Convert listItems to query parameters
+  //     const queryParams = new URLSearchParams();
+  //     listItems.forEach((item) => {
+  //       queryParams.append(item.label, item.value);
+  //     });
+
+  //     console.log("Navigating with:", queryParams.toString()); // ✅ Debugging log
+
+  //     // Navigate to the offer page with trade-in data
+  //     // router.push(`/trade-in/offer?${queryParams.toString()}`);
+  //     router.push(`/trade-in/device-name/offerID?Model=iPhone12Pro&Storage=128GB&Carrier=Unlocked`);
+  //   }
+  // };
+
+  // const handleNext = (selectedData?: { label: string; value: string }) => {
+  //   if (selectedData) {
+  //     setListItems((prevList) => {
+  //       const existingIndex = prevList.findIndex(
+  //         (item) => item.label === selectedData.label
+  //       );
+  //       if (existingIndex !== -1) {
+  //         // Update existing item
+  //         const updatedList = [...prevList];
+  //         updatedList[existingIndex] = selectedData;
+  //         return updatedList;
+  //       }
+  //       // Add new item
+  //       return [...prevList, selectedData];
+  //     });
+  //   }
+
+  //   if (activeStep < steps.length - 1) {
+  //     setActiveStep(activeStep + 1);
+  //   } else {
+  //     // Serialize listItems to a query string
+  //     const queryParams = new URLSearchParams();
+  //     listItems.forEach((item) => {
+  //       queryParams.append(item.label, item.value);
+  //     });
+
+  //     // ✅ Log the serialized query string
+  //     console.log("Serialized Trade-in Data:", queryParams.toString());
+
+  //     // let device = "unknown";
+  //     // let offerID = "unknown";
+  //     // router.push(`/trade-in/${device}/${offerID}`);
+  //   }
+  // };
 
   const handleBack = () => {
     if (activeStep > 0) {

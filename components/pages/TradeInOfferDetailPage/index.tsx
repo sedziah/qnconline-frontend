@@ -1,15 +1,34 @@
 "use client";
 import DefaultNavbar from "@/components/Navbars/DefaultNavbar";
 import { TickCircle } from "iconsax-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams, useParams } from "next/navigation";
 import React from "react";
 
 const TradeInOfferDetailPage = () => {
+  const searchParams = useSearchParams();
+  const { type, offerID } = useParams(); // Extract dynamic route parameters
+
+  // Extract trade-in details from URL query parameters
+  const tradeInDetails = [
+    { label: "Model", value: searchParams.get("Model") || type || "Unknown" },
+    { label: "Storage", value: searchParams.get("Storage") || "Unknown" },
+    { label: "Carrier", value: searchParams.get("Carrier") || "Unknown" },
+    {
+      label: "Screen Condition",
+      value: searchParams.get("Screen Condition") || "Unknown",
+    },
+    { label: "Appearance", value: searchParams.get("Appearance") || "Unknown" },
+    {
+      label: "Functionality",
+      value: searchParams.get("Functionality") || "Unknown",
+    },
+  ];
+
   return (
     <>
       <DefaultNavbar />
       <div className="w-full h-screen overflow-hidden overflow-y-scroll bg-bglight">
-        <div className="w-full  px-4 pt-28 max-w-xl mx-auto">
+        <div className="w-full px-4 pt-28 max-w-xl mx-auto">
           <div className="border-b border-lightGray pb-3">
             <p className="text-base font-normal text-center text-black">
               See the offer
@@ -26,26 +45,26 @@ const TradeInOfferDetailPage = () => {
               refurbisher is ready to pay:{" "}
               <span className="font-bold">$70.00</span> for your{" "}
               <span className="font-bold">
-                Fairphone Fairphone 4 256 GB T-Mobile.
+                {tradeInDetails.find((item) => item.label === "Model")?.value}{" "}
+                {tradeInDetails.find((item) => item.label === "Storage")?.value}{" "}
+                {tradeInDetails.find((item) => item.label === "Carrier")?.value}
               </span>
             </p>
           </div>
 
           <RenderButtonGroup />
 
+          {/* Display Trade-in Details */}
           <div className="my-7 rounded-lg overflow-hidden border p-4 space-y-6 border-lightGray">
-            <div className="border-b border-lightGray/20 pb-3 flex flex-row items-center justify-between">
-              <p className="text-sm font-normal text-black">Screen</p>
-              <p className="text-sm text-black font-semibold">Good</p>
-            </div>
-            <div className="border-b border-lightGray/20 pb-3 flex flex-row items-center justify-between">
-              <p className="text-sm font-normal text-black">Sides</p>
-              <p className="text-sm text-black font-semibold">Good</p>
-            </div>
-            <div className="pb-3 flex flex-row items-center justify-between">
-              <p className="text-sm font-normal text-black">Functional</p>
-              <p className="text-sm text-black font-semibold">Good</p>
-            </div>
+            {tradeInDetails.map((item) => (
+              <div
+                key={item.label}
+                className="border-b border-lightGray/20 pb-3 flex flex-row items-center justify-between"
+              >
+                <p className="text-sm font-normal text-black">{item.label}</p>
+                <p className="text-sm text-black font-semibold">{item.value}</p>
+              </div>
+            ))}
           </div>
 
           <div className="mt-10">
@@ -112,7 +131,7 @@ const RenderButtonGroup = () => {
       >
         No Thanks
       </button>
-      <button className="px-6  py-2 ml-4 bg-primary text-sm font-medium rounded-md text-white  transition-all">
+      <button className="px-6 py-2 ml-4 bg-primary text-sm font-medium rounded-md text-white transition-all">
         Accept
       </button>
     </div>
