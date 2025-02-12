@@ -115,8 +115,7 @@ const TradeInPage = () => {
             <div className="mt-10">
               {
                 {
-                  "Your device": <DeviceForm handleNext={(selectedValue) => handleNext({ label: "Model", value: selectedValue })} />
-                  ,
+                  "Your device": <DeviceForm handleNext={handleNext} />,
                   Carrier: <CarrierForm handleNext={handleNext} />,
                   "Screen condition": (
                     <ScreenConditionForm handleNext={handleNext} />

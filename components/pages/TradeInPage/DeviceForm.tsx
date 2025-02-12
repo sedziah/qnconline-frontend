@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 
 // Define the props for the component
 type Props = {
-  handleNext: () => void; // Function to handle the "Next" button click
+  handleNext: (selectedData: { label: string; value: string }) => void;
 };
 
 // Define the type for a Model
@@ -16,8 +16,9 @@ type Model = {
 const DeviceForm = ({
   handleNext,
 }: {
-  handleNext: (value: string) => void;
+  handleNext: (selectedData: { label: string; value: string }) => void;
 }) => {
+
   const [selectedDevice, setSelectedDevice] = useState("");
 
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -193,7 +194,7 @@ const DeviceForm = ({
             handleNext({ label: "Model", value: selectedModel });
             handleNext({ label: "Storage", value: selectedStorage });
           }}
-          disabled={!selectedModel || !selectedStorage} // Prevents proceeding without selection
+          disabled={!selectedModel || !selectedStorage}
           className="h-10 px-5 flex items-center justify-center text-white text-sm font-medium bg-primary rounded-md"
         >
           Next
