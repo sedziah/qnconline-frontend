@@ -37,6 +37,9 @@ const TradeInPage = () => {
         if (existingIndex !== -1) {
           const updatedList = [...prevList];
           updatedList[existingIndex] = selectedData;
+          
+          // ✅ Debugging: Print updated listItems
+          console.log("Updated listItems:", updatedList);
           return updatedList;
         }
 
