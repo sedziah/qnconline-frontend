@@ -1,4 +1,4 @@
-import apiClient  from "../api_client/apiClient";
+import apiClient from "../api_client/apiClient";
 import {
   fetchactiveProductCategoriesUrl,
   fetchdDailyDealsUrl,
@@ -10,7 +10,7 @@ import {
   categorySearchUrl,
   fetchdNewArrivalsUrl,
   fetchIphonesUrl,
-  categoryAndFilterUrl
+  categoryAndFilterUrl,
 } from "../endpoints/endpoints"; // Import your endpoint constants
 import {
   Product,
@@ -104,17 +104,32 @@ export const productsApi = apiClient.injectEndpoints({
 
     // Fetch products dynamically by category slug
     fetchProductsByCategoryAndFilter: builder.query<
-  { variations: Product[] }, 
-  { categorySlug: string; filters?: Record<string, string[]> }
->({
-  query: ({ categorySlug, filters }) => {
-    const params = filters ? new URLSearchParams(filters).toString() : "";
-    return {
-      url: `${categoryAndFilterUrl(categorySlug)}?${params}`,
-      method: "GET",
-    };
-  },
-}),
+      { variations: Product[] },
+      {
+        categorySlug: string;
+        filters?: Record<string, string[]>;
+        searchQuery?: string;
+      } // ✅ Add searchQuery
+    >({
+      query: ({ categorySlug, filters, searchQuery }) => {
+        const params = new URLSearchParams();
+
+        if (filters) {
+          Object.keys(filters).forEach((key) => {
+            filters[key].forEach((value) => params.append(key, value));
+          });
+        }
+
+        if (searchQuery) {
+          params.append("q", searchQuery); // ✅ Include searchQuery
+        }
+
+        return {
+          url: `${categoryAndFilterUrl(categorySlug)}?${params.toString()}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
   overrideExisting: false, // Ensures existing endpoints are not overridden
 });
@@ -129,5 +144,5 @@ export const {
   useSearchProductsQuery,
   useFetchSustainableProductsQuery,
   useCategorySearchQuery,
-  useFetchProductsByCategoryAndFilterQuery
+  useFetchProductsByCategoryAndFilterQuery,
 } = productsApi;

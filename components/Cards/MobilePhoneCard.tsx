@@ -5,24 +5,25 @@ import React from "react";
 interface MobilePhoneCardProps {
   product: {
     id: string;
-    full_name: string;
-    price: number;
-    product_slug: string;
+    product: {
+      name: string;
+      slug: string;
+      base_price: string;
+      currency: string;
+    };
+    name: string; // Variation Name
+    price: string;
+    inventory_quantity?: number; // ✅ Make optional (API may not always provide it)
     condition: string;
-    inventory_quantity: number;
-    memory: string;
-    sim: string;
-    image_url: string;
-    reviews?: { rating: number }[]; // Optional reviews array
-    discount: number;
-    free_delivery: boolean;
+    variation_specifications?: { specification_name: string; value: string }[]; // ✅ Optional
+    images?: { image: string; alt_text?: string; image_type?: string }[]; // ✅ Optional
+    reviews?: { rating: number }[]; // ✅ Optional reviews array
+    discount?: number; // ✅ Optional (if missing from API)
+    free_delivery?: boolean; // ✅ Optional (if missing from API)
   };
 }
 
 const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
-  // Default "No discount" for now
-  const discount = "No discount";
-
   // Calculate the average rating if reviews exist
   const rating =
     product.reviews && product.reviews.length > 0
@@ -32,14 +33,14 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
 
   return (
     <div className="rounded-lg hover:shadow-xl transition-opacity bg-white p-4 shadow-lg">
-      <Link href={`/products/${product.product_slug}`} passHref>
+      <Link href={`/products/${product.product.slug}`} passHref>
         <div className="h-40 w-full flex justify-center items-center">
           <Image
             width={150}
             height={150}
             className="object-contain h-full"
-            src={product.image_url || "/placeholder-image.png"}
-            alt={product.full_name}
+            src={product.images?.[0]?.image || "/placeholder-image.png"}
+            alt={product.images?.[0]?.alt_text || "Product Image"}
           />
         </div>
       </Link>
@@ -80,7 +81,7 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
         </div>
       </div>
 
-      <Link href={`/products/${product.product_slug}`} passHref>
+      <Link href={`/products/${product.product.slug}`} passHref>
         <span
           className="text-sm font-semibold leading-tight text-gray-900 hover:underline flex items-center"
           style={{
@@ -92,14 +93,16 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
             WebkitBoxOrient: "vertical",
           }}
         >
-          {product.full_name}
+          {product.product.name} - {product.name} ({product.condition})
         </span>
       </Link>
       <div className="mt-4">
         <ul className="text-sm text-gray-500">
-          <li>
-            {product.condition} - {product.memory} - ({product.sim})
-          </li>
+          {product.variation_specifications.map((spec) => (
+            <li key={spec.specification_name}>
+              {spec.specification_name}: {spec.value}
+            </li>
+          ))}
         </ul>
       </div>
 

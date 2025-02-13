@@ -27,6 +27,8 @@ const ProductContent = () => {
   const categorySlug = searchParams.get('s') // Extract the slug from the URL
   const categoryName = searchParams.get('name') || 'All Products' // Extract the name from the URL
 
+  console.log(categorySlug)
+
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
     { label: categoryName }, 

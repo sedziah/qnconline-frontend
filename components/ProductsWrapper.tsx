@@ -10,6 +10,8 @@ type ProductsWrapperProps = {
   searchQuery?: string; // ✅ Accept searchQuery as a prop
 };
 
+
+
 const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
   const searchParams = useSearchParams();
   const categorySlug = searchParams.get("s") || ""; // Get slug
@@ -35,6 +37,17 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
     );
   }
 
+  useEffect(() => {
+    if (data) {
+      console.log("Fetched Products:", data);
+      console.log("Variations:", data.variations); // Log product variations
+      console.log("Specifications:", data.specifications); // Log available specifications
+      console.log("Pagination Info:", data.pagination); // Log pagination details
+    }
+  }, [data]);
+  
+  
+
   return (
     <div className="w-full max-w-6xl mx-auto">
       <h1 className="text-2xl font-bold text-center my-10">
@@ -49,7 +62,7 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
         {/* Filters Section */}
         <div className="w-full lg:w-1/4">
           <FilterSection
-            specifications={data?.specifications || {}}
+            specifications={data?.product_specifications || {}}
             onFiltersChange={handleFilterChange}
           />
         </div>
