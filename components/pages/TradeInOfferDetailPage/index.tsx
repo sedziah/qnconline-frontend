@@ -26,13 +26,14 @@ const calculateTradeInOffer = (
     tradeInDetails.find((item) => item.label === "Functionality")?.value ||
     "Unknown";
 
-  // ✅ Adjust base price based on the model
-  const modelPricing = {
-    "iPhone 13 Mini": 250,
-    "iPhone 13 Pro": 400,
+  const modelPricing: { [key: string]: number } = {
+    "iPhone 13 Mini": 200,
+    "iPhone 13 Pro": 250,
     "iPhone 12 Pro": 300,
   };
-  basePrice = modelPricing[model] || basePrice;
+
+  // ✅ Use default with optional chaining
+  basePrice = modelPricing[model] ?? basePrice;
 
   // ✅ Adjust based on storage capacity
   if (storage.includes("256GB")) basePrice += 30;
@@ -43,22 +44,26 @@ const calculateTradeInOffer = (
   if (carrier === "Sprint" || carrier === "T-Mobile") basePrice -= 10;
 
   // ✅ Screen condition impact
-  const screenImpact = {
-    Flawless: 0,
-    Good: -10,
+  const screenImpact: { [key: string]: number } = {
+    Flawless: 50,
+    Good: 20,
     Used: -30,
-    Cracked: -80, // Big deduction for cracked screens
+    Cracked: -80,
   };
-  basePrice += screenImpact[screenCondition] || 0;
 
-  // ✅ Appearance impact
-  const appearanceImpact = {
+  // ✅ Use optional chaining with nullish coalescing to handle undefined keys
+  basePrice += screenImpact[screenCondition] ?? 0;
+
+  // ✅ Add an index signature to allow string keys
+  const appearanceImpact: { [key: string]: number } = {
     Flawless: 0,
     Good: -10,
     Used: -20,
     Cracked: -50,
   };
-  basePrice += appearanceImpact[appearance] || 0;
+
+  // ✅ Use optional chaining with nullish coalescing for safety
+  basePrice += appearanceImpact[appearance] ?? 0;
 
   // ✅ Functionality impact
   if (functionality === "No") basePrice -= 50; // Non-functional devices are worth less
@@ -70,24 +75,25 @@ const TradeInOfferDetailPage = () => {
   const searchParams = useSearchParams();
   const { type, offerID } = useParams(); // Extract device model & offer ID
 
-  // Extract trade-in details from URL
-  const tradeInDetails = [
-    { label: "Model", value: searchParams.get("Model") || type || "Unknown" },
-    { label: "Storage", value: searchParams.get("Storage") || "Unknown" },
-    { label: "Carrier", value: searchParams.get("Carrier") || "Unknown" },
-    {
-      label: "Screen Condition",
-      value: searchParams.get("Screen Condition") || "Unknown",
-    },
-    { label: "Appearance", value: searchParams.get("Appearance") || "Unknown" },
-    {
-      label: "Functionality",
-      value: searchParams.get("Functionality") || "Unknown",
-    },
-  ];
+  // ✅ Normalize trade-in details with type assertion
+const tradeInDetails = [
+  { label: "Model", value: (searchParams.get("Model") || type || "Unknown") as string },
+  { label: "Storage", value: (searchParams.get("Storage") || "Unknown") as string },
+  { label: "Carrier", value: (searchParams.get("Carrier") || "Unknown") as string },
+  {
+    label: "Screen Condition",
+    value: (searchParams.get("Screen Condition") || "Unknown") as string,
+  },
+  { label: "Appearance", value: (searchParams.get("Appearance") || "Unknown") as string },
+  {
+    label: "Functionality",
+    value: (searchParams.get("Functionality") || "Unknown") as string,
+  },
+];
 
-  // ✅ Calculate the trade-in offer
-  const offerPrice = calculateTradeInOffer(tradeInDetails);
+// ✅ Pass the normalized array
+const offerPrice = calculateTradeInOffer(tradeInDetails);
+
 
   return (
     <>
@@ -155,8 +161,8 @@ const TradeInOfferDetailPage = () => {
               <TickCircle size="20" color="#2f3137" />
               <div className="w-full">
                 <p className="text-sm text-gray-600 font-medium">
-                  Add banking & ID info to receive your GHS {offerPrice.toFixed(2)}{" "}
-                  payment
+                  Add banking & ID info to receive your GHS{" "}
+                  {offerPrice.toFixed(2)} payment
                 </p>
                 <p className="text-sm mt-2 text-gray-600 font-normal">
                   These details will only be used to verify your identity and

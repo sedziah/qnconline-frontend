@@ -15,7 +15,7 @@ import {
 import {
   Product,
   MobileCardData,
-  Category,
+  ProductListingResponse,
   ActiveCategory,
 } from "../../../library/types/index";
 
@@ -103,25 +103,29 @@ export const productsApi = apiClient.injectEndpoints({
     }),
 
     // Fetch products dynamically by category slug
+    // redux/api/features/productsApi.ts
+
     fetchProductsByCategoryAndFilter: builder.query<
-      { variations: Product[] },
+      ProductListingResponse,
       {
         categorySlug: string;
         filters?: Record<string, string[]>;
         searchQuery?: string;
-      } // ✅ Add searchQuery
+      }
     >({
       query: ({ categorySlug, filters, searchQuery }) => {
         const params = new URLSearchParams();
 
+        // ✅ Pass filters as query params
         if (filters) {
           Object.keys(filters).forEach((key) => {
             filters[key].forEach((value) => params.append(key, value));
           });
         }
 
+        // ✅ Pass search query if available
         if (searchQuery) {
-          params.append("q", searchQuery); // ✅ Include searchQuery
+          params.append("q", searchQuery);
         }
 
         return {
@@ -129,6 +133,17 @@ export const productsApi = apiClient.injectEndpoints({
           method: "GET",
         };
       },
+      // ✅ Correct Options for RTK Query
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.variations.map(({ id }) => ({
+                type: "Products" as const,
+                id,
+              })),
+              { type: "Products", id: "LIST" },
+            ]
+          : [{ type: "Products", id: "LIST" }],
     }),
   }),
   overrideExisting: false, // Ensures existing endpoints are not overridden

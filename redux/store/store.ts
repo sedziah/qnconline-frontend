@@ -12,6 +12,8 @@ import { newsletterApi } from "../api/features/newsletterApi";
 import newsletterReducer from "../slices/newsletterSlice";
 import authReducer from "../slices/authSlice"; // Authentication state slice
 import productReducer from "../slices/productSlice"; // Product state slice
+import filterReducer from  "../slices/filterSlice"
+import apiClient from "../api/api_client/apiClient";
 
 // Persistence configuration for the auth slice
 const authPersistConfig = {
@@ -37,8 +39,9 @@ export const store = configureStore({
     auth: persistedAuthReducer, // Persisted authentication state
     product: persistedProductReducer, // Persisted product state
     newsletter: newsletterReducer, // Newsletter state slice
-    [authApi.reducerPath]: authApi.reducer, // RTK Query reducer for authentication API
-    [newsletterApi.reducerPath]: newsletterApi.reducer,
+    filter: filterReducer,
+    [apiClient.reducerPath]: apiClient.reducer,// RTK Query reducer for authentication API
+
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

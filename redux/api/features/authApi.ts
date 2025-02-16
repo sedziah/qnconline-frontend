@@ -4,113 +4,103 @@
  * Authentication-related API endpoints, injected into the apiClient.
  */
 
-import  apiClient  from "../api_client/apiClient";
-import {
-  loginUrl,
-  fetchUserUrl,
-  logoutUrl,
-  registerUrl,
-  resetPasswordRequestUrl,
-  passwordResetConfirmUrl,
-  changePasswordUrl,
-  resendActivationUrl,
-  verifyEmailUrl,
-  tokenRefreshUrl,
-} from "../endpoints/endpoints";
+// redux/api/features/authApi.ts
+import apiClient from "../api_client/apiClient";
 
 export const authApi = apiClient.injectEndpoints({
   endpoints: (builder) => ({
-    // Login endpoint
+    // ✅ 1. Login
     login: builder.mutation({
       query: (credentials) => ({
-        url: loginUrl,
+        url: "/auth/login/",
         method: "POST",
         body: credentials,
       }),
     }),
 
-    // Fetch user endpoint
+    // ✅ 2. Fetch User Profile
     fetchUser: builder.query({
       query: () => ({
-        url: fetchUserUrl,
+        url: "/auth/user/",
         method: "GET",
       }),
     }),
 
-    // Logout endpoint
+    // ✅ 3. Logout
     logout: builder.mutation({
       query: () => ({
-        url: logoutUrl,
+        url: "/auth/logout/",
         method: "POST",
       }),
     }),
 
-    // Register endpoint
+    // ✅ 4. Register
     register: builder.mutation({
       query: (userData) => ({
-        url: registerUrl,
+        url: "/auth/register/",
         method: "POST",
         body: userData,
       }),
     }),
 
-    // Password reset request endpoint
+    // ✅ 5. Password Reset Request
     resetPasswordRequest: builder.mutation({
       query: (email) => ({
-        url: resetPasswordRequestUrl,
+        url: "/auth/password/reset/",
         method: "POST",
         body: { email },
       }),
     }),
 
-    // Password reset confirmation endpoint
+    // ✅ 6. Password Reset Confirm
     passwordResetConfirm: builder.mutation({
-      query: ({ uidb64, token, newPassword }) => ({
-        url: passwordResetConfirmUrl
-          .replace(":uidb64", uidb64)
-          .replace(":token", token),
+      query: ({ uid, token, newPassword }) => ({
+        url: `/auth/password/reset/confirm/`,
         method: "POST",
-        body: { new_password: newPassword },
+        body: { uid, token, new_password: newPassword },
       }),
     }),
 
-    // Change password endpoint
+    // ✅ 7. Change Password
     changePassword: builder.mutation({
       query: (passwordData) => ({
-        url: changePasswordUrl,
+        url: "/auth/password/change/",
         method: "POST",
         body: passwordData,
       }),
     }),
 
-    // Resend email activation endpoint
+    // ✅ 8. Resend Activation Email
     resendActivation: builder.mutation({
       query: (email) => ({
-        url: resendActivationUrl,
+        url: "/auth/activation/resend/",
         method: "POST",
         body: { email },
       }),
     }),
 
-    // Verify email endpoint
+    // ✅ 9. Verify Email
     verifyEmail: builder.mutation({
       query: ({ uid, token }) => ({
-        url: verifyEmailUrl.replace(":uid", uid).replace(":token", token),
+        url: `/auth/activation/verify/`,
         method: "POST",
+        body: { uid, token },
       }),
     }),
 
-    // Token refresh endpoint
+    // ✅ 10. Token Refresh (for JWT)
     tokenRefresh: builder.mutation({
       query: (refreshToken) => ({
-        url: tokenRefreshUrl,
+        url: "/auth/token/refresh/",
         method: "POST",
         body: { refresh: refreshToken },
       }),
     }),
   }),
+  overrideExisting: false,
 });
 
+// 🟢 Export Hooks for All Auth Operations
 export const {
   useLoginMutation,
   useFetchUserQuery,

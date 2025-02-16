@@ -176,16 +176,20 @@ export interface DailyDeal {
 
 export interface MobileCardData {
   id: string;
-  full_name: string;
-  price: number;
   product_slug: string;
+  full_name: string;
+  name: string;
+  price: number | string;
+  discounted_price?: number | string;
+  inventory_quantity?: number;
   condition: string;
-  inventory_quantity: number;
-  image_url: string;
-  discount: number;
-  memory: string;
-  sim: string;
-  free_delivery: boolean;
+  image_url?: string; // ✅ Add this line for direct image URL
+  variation_specifications?: { specification_name: string; value: string }[];
+  images?: { image: string; alt_text?: string; image_type?: string }[];
+  reviews?: { rating: number }[];
+  discount?: number;
+  free_delivery?: boolean;
+  deals?: { id: string; description: string }[];
 }
 
 
@@ -251,14 +255,37 @@ export interface ProductDetailsResponse {
   // Add any other fields that the API returns
 }
 
-
+// Define the type for Product Variation
 export interface ProductVariation {
   id: string;
-  product_name: string;
+  product: {
+    id: string;
+    slug: string;
+    name: string;
+    base_price?: string;
+    currency?: string;
+  };
+  name: string;
   price: string;
-  currency: string;
-  specifications: { specification_name: string; value: string }[];
-  images: { image: string; alt_text: string }[];
+  discounted_price: string;
+  inventory_quantity?: number;
+  condition: string;
+  variation_specifications?: { specification_name: string; value: string }[];
+  images?: { image: string; alt_text?: string; image_type?: string }[];
+  reviews?: { rating: number }[];
+  deals?: { id: string; description: string }[];
+}
+
+// Define the type for API Response
+export interface ProductsApiResponse {
+  variations: ProductVariation[];
+  specifications: Record<string, string[]>;
+  pagination: {
+    current_page: number;
+    total_pages: number;
+    total_products: number;
+    page_size: number;
+  };
 }
 
 // ProductCondition Table
@@ -276,7 +303,7 @@ export interface SpecificationOptions {
 
 // API response for the product listing with dynamic specifications
 export interface ProductListingResponse {
-  products: Product[]
+  variations: Product[]; // ✅ Add this line
   specifications: Record<string, string[]> // Adjust this if needed
   pagination: Pagination
   // Add other fields here if necessary (pagination, etc.)

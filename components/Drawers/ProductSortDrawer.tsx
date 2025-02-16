@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { IoMdClose } from "react-icons/io";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";
 import FloatingButton from "../FloatingButton";
-import FilterSection from "../Filters/NewFilter";
 
 type PropType = {
   openFilter: boolean;
@@ -45,8 +44,20 @@ export const ProductSortDrawer = ({
         <div className="w-16"></div>
       </div>
 
-      <div className="h-full overflow-y-scroll flex flex-col space-y-3 w-full px-4 mt-14">
-        {SORTOPTION?.map((option) => (
+      {/* ✅ Show Available Specifications */}
+      <div className="mt-16 px-4">
+        <h2 className="text-sm font-bold mb-2">Specifications</h2>
+        <ul className="space-y-2">
+          {Object.entries(specifications).map(([key, values]) => (
+            <li key={key} className="text-xs text-gray-600">
+              <strong>{key}:</strong> {values.join(", ")}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="h-full overflow-y-scroll flex flex-col space-y-3 w-full px-4 mt-4">
+        {SORTOPTION.map((option) => (
           <button
             key={option}
             className="px-3 hover:bg-primary/10 py-4 flex flex-row items-center rounded-lg border border-bg-primary/10 gap-x-3"

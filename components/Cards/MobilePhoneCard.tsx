@@ -5,25 +5,38 @@ import React from "react";
 interface MobilePhoneCardProps {
   product: {
     id: string;
-    product: {
-      name: string;
-      slug: string;
-      base_price: string;
-      currency: string;
-    };
-    name: string; // Variation Name
+    product_slug: string;
+    full_name: string;
+    name: string;
     price: string;
-    inventory_quantity?: number; // ✅ Make optional (API may not always provide it)
+    discounted_price?: string;
+    inventory_quantity?: number;
     condition: string;
-    variation_specifications?: { specification_name: string; value: string }[]; // ✅ Optional
-    images?: { image: string; alt_text?: string; image_type?: string }[]; // ✅ Optional
-    reviews?: { rating: number }[]; // ✅ Optional reviews array
-    discount?: number; // ✅ Optional (if missing from API)
-    free_delivery?: boolean; // ✅ Optional (if missing from API)
+    variation_specifications?: { specification_name: string; value: string }[];
+    images?: { image: string; alt_text?: string; image_type?: string }[];
+    reviews?: { rating: number }[];
+    discount?: number;
+    free_delivery?: boolean;
+    deals?: { id: string; description: string }[]; // ✅ Optional now
   };
 }
 
 const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
+  console.log("Product object:", product);
+
+  // Determine Colour and Condition
+  const colourSpec = product.variation_specifications?.find(
+    (spec) => spec.specification_name === "Color"
+  )?.value;
+
+  const condition = product.condition ?? "N/A";
+
+  // Determine Display Price
+  const displayPrice =
+    product.discounted_price && parseFloat(product.discounted_price) > 0
+      ? product.discounted_price
+      : product.price;
+
   // Calculate the average rating if reviews exist
   const rating =
     product.reviews && product.reviews.length > 0
@@ -33,7 +46,7 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
 
   return (
     <div className="rounded-lg hover:shadow-xl transition-opacity bg-white p-4 shadow-lg">
-      <Link href={`/products/${product.product.slug}`} passHref>
+      <Link href={`/products/${product.product_slug}`} passHref>
         <div className="h-40 w-full flex justify-center items-center">
           <Image
             width={150}
@@ -50,12 +63,14 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
           {/* Discount Section */}
           <span
             className={`me-2 rounded py-0.5 text-xs font-medium ${
-              product.discount > 0
-                ? "bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-300"
+              product.discount && product.discount > 0
+                ? "bg-primary-100 text-primary-800"
                 : "bg-gray-100 text-gray-500"
             }`}
           >
-            {product.discount > 0 ? `${product.discount}% off` : "No discount"}
+            {product.discount && product.discount > 0
+              ? `${product.discount}% off`
+              : "No discount"}
           </span>
 
           {/* Free Delivery Section */}
@@ -81,7 +96,8 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
         </div>
       </div>
 
-      <Link href={`/products/${product.product.slug}`} passHref>
+      {/* Product Title */}
+      <Link href={`/products/${product.product_slug}`} passHref>
         <span
           className="text-sm font-semibold leading-tight text-gray-900 hover:underline flex items-center"
           style={{
@@ -93,19 +109,23 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
             WebkitBoxOrient: "vertical",
           }}
         >
-          {product.product.name} - {product.name} ({product.condition})
+          {product.full_name}
         </span>
       </Link>
-      <div className="mt-4">
-        <ul className="text-sm text-gray-500">
-          {product.variation_specifications.map((spec) => (
-            <li key={spec.specification_name}>
-              {spec.specification_name}: {spec.value}
-            </li>
-          ))}
-        </ul>
+
+      {/* ✅ Condition & Colour Side-by-Side */}
+      <div className="mt-2 flex items-center gap-4 text-xs text-gray-500">
+        <span className="bg-gray-100 px-2 py-1 rounded">
+          Condition: {condition}
+        </span>
+        {colourSpec && (
+          <span className="bg-gray-100 px-2 py-1 rounded">
+            Colour: {colourSpec}
+          </span>
+        )}
       </div>
 
+      {/* Star Ratings */}
       <div className="mt-2 flex items-center gap-2">
         <div className="flex items-center">
           {[...Array(5)].map((_, index) => (
@@ -127,29 +147,29 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
         </p>
       </div>
 
+      {/* Price Section */}
       <div className="mt-4 flex items-center justify-between gap-4">
         <p className="text-lg font-extrabold leading-tight text-gray-900">
-          {`₵ ${product.price}`}
+          {`₵ ${displayPrice}`}
         </p>
 
+        {/* Add to Cart Button */}
         <button
           type="button"
-          className="inline-flex items-center rounded-lg bg-primary px-3 py-2.5 text-xs font-medium text-white hover:bg-primary focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+          className="inline-flex items-center rounded-lg bg-primary px-3 py-2.5 text-xs font-medium text-white hover:bg-primary-dark"
         >
           <svg
             className="h-5 w-5"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
             fill="none"
             viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
           >
             <path
-              stroke="currentColor"
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="2"
               d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6"
             />
           </svg>

@@ -1,4 +1,4 @@
-import { apiClient } from "../api_client/apiClient";
+import apiClient  from "../api_client/apiClient";
 import {
   fetchactiveProductCategoriesUrl,
   fetchdDailyDealsUrl,
@@ -108,9 +108,18 @@ export const productsApi = apiClient.injectEndpoints({
   { categorySlug: string; filters?: Record<string, string[]> }
 >({
   query: ({ categorySlug, filters }) => {
-    const params = filters ? new URLSearchParams(filters).toString() : "";
+    const params = new URLSearchParams();
+  
+    if (filters) {
+      Object.entries(filters).forEach(([key, values]) => {
+        values.forEach((value) => {
+          params.append(key, value);
+        });
+      });
+    }
+  
     return {
-      url: `${categoryAndFilterUrl(categorySlug)}?${params}`,
+      url: `${categoryAndFilterUrl(categorySlug)}?${params.toString()}`,
       method: "GET",
     };
   },
