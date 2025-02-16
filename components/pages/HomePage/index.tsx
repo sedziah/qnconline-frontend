@@ -17,7 +17,6 @@ const HomePage = () => {
   const {
     dailyDeals,
     newArrivals,
-    featuredProducts,
     isLoading,
     error,
   } = useSelector((state: RootState) => state.product);
@@ -56,10 +55,10 @@ const HomePage = () => {
         loading={isLoading}
       />
 
-      {/* Featured Products Section */}
+      {/* Discount Sales */}
       <RenderCarousel
-        title="Featured Products"
-        subtitle="Top-Rated Favorites Curated for You. Explore Now!"
+        title="Discount Sales"
+        subtitle="Unbeatable Deals on Your Favorite Products. Shop and Save Now!"
         payload={newArrivals}
         loading={isLoading}
       />

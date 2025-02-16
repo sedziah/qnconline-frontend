@@ -13,7 +13,7 @@ import {
 } from "iconsax-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { apiService } from "@/library/services/apiService";
+// import { apiService } from "@/library/services/apiService";
 import { ProductCategory } from "@/library/types";
 import Drawer from "react-modern-drawer";
 import "react-modern-drawer/dist/index.css";

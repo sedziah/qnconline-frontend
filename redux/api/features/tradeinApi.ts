@@ -1,4 +1,4 @@
-import apiClient from "../api_client/apiClient";
+import apiClient  from "../api_client/apiClient";
 import {
   fetchactiveProductCategoriesUrl,
   fetchdDailyDealsUrl,
@@ -10,12 +10,12 @@ import {
   categorySearchUrl,
   fetchdNewArrivalsUrl,
   fetchIphonesUrl,
-  categoryAndFilterUrl,
+  categoryAndFilterUrl
 } from "../endpoints/endpoints"; // Import your endpoint constants
 import {
   Product,
   MobileCardData,
-  ProductListingResponse,
+  Category,
   ActiveCategory,
 } from "../../../library/types/index";
 
@@ -103,48 +103,27 @@ export const productsApi = apiClient.injectEndpoints({
     }),
 
     // Fetch products dynamically by category slug
-    // redux/api/features/productsApi.ts
-
     fetchProductsByCategoryAndFilter: builder.query<
-      ProductListingResponse,
-      {
-        categorySlug: string;
-        filters?: Record<string, string[]>;
-        searchQuery?: string;
-      }
-    >({
-      query: ({ categorySlug, filters, searchQuery }) => {
-        const params = new URLSearchParams();
-
-        // ✅ Pass filters as query params
-        if (filters) {
-          Object.keys(filters).forEach((key) => {
-            filters[key].forEach((value) => params.append(key, value));
-          });
-        }
-
-        // ✅ Pass search query if available
-        if (searchQuery) {
-          params.append("q", searchQuery);
-        }
-
-        return {
-          url: `${categoryAndFilterUrl(categorySlug)}?${params.toString()}`,
-          method: "GET",
-        };
-      },
-      // ✅ Correct Options for RTK Query
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.variations.map(({ id }) => ({
-                type: "Products" as const,
-                id,
-              })),
-              { type: "Products", id: "LIST" },
-            ]
-          : [{ type: "Products", id: "LIST" }],
-    }),
+  { variations: Product[] }, 
+  { categorySlug: string; filters?: Record<string, string[]> }
+>({
+  query: ({ categorySlug, filters }) => {
+    const params = new URLSearchParams();
+  
+    if (filters) {
+      Object.entries(filters).forEach(([key, values]) => {
+        values.forEach((value) => {
+          params.append(key, value);
+        });
+      });
+    }
+  
+    return {
+      url: `${categoryAndFilterUrl(categorySlug)}?${params.toString()}`,
+      method: "GET",
+    };
+  },
+}),
   }),
   overrideExisting: false, // Ensures existing endpoints are not overridden
 });
@@ -159,5 +138,5 @@ export const {
   useSearchProductsQuery,
   useFetchSustainableProductsQuery,
   useCategorySearchQuery,
-  useFetchProductsByCategoryAndFilterQuery,
+  useFetchProductsByCategoryAndFilterQuery
 } = productsApi;

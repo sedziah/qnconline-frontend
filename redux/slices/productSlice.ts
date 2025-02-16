@@ -9,8 +9,10 @@ interface ProductState {
   activeCategories: ActiveCategory[];
   dailyDeals: MobileCardData[]; // Correct type for daily deals
   newArrivals: MobileCardData[];
+  iPhones: Product[];
   featuredProducts: Product[];
   productsByCategory: Product[];
+  productsByCategoryAndFilter: Product[];
   singleProduct: Product | null;
   sustainableProducts: Product[];
   searchResults: Product[];
@@ -23,8 +25,10 @@ const initialState: ProductState = {
   activeCategories: [],
   dailyDeals: [], // Initialize dailyDeals with correct structure
   newArrivals: [],
+  iPhones: [],
   featuredProducts: [],
   productsByCategory: [],
+  productsByCategoryAndFilter: [],
   singleProduct: null,
   sustainableProducts: [],
   searchResults: [],
@@ -130,6 +134,30 @@ const productSlice = createSlice({
       }
     );
 
+    // Fetch iPhones
+    builder.addMatcher(
+      productsApi.endpoints.fetchIPhones.matchPending,
+      (state) => {
+        state.isLoading = true;
+        state.error = null;
+      }
+    );
+    builder.addMatcher(
+      productsApi.endpoints.fetchIPhones.matchFulfilled,
+      (state, action: PayloadAction<Product[]>) => {
+        console.log("API Response:", action.payload); // Log the API response
+        state.iPhones = action.payload;
+        state.isLoading = false;
+      }
+    );
+    builder.addMatcher(
+      productsApi.endpoints.fetchIPhones.matchRejected,
+      (state, action) => {
+        state.error = action.error?.message || "Failed to fetch iPhone products";
+        state.isLoading = false;
+      }
+    );
+
     // Fetch products by category
     builder.addMatcher(
       productsApi.endpoints.fetchProductsByCategory.matchPending,
@@ -221,6 +249,30 @@ const productSlice = createSlice({
         state.isLoading = false;
       }
     );
+
+    // Handle fetchProductsByCategoryAndFilter
+    builder.addMatcher(
+      productsApi.endpoints.fetchProductsByCategoryAndFilter.matchPending,
+      (state) => {
+        state.isLoading = true;
+        state.error = null;
+      }
+    );
+    builder.addMatcher(
+      productsApi.endpoints.fetchProductsByCategoryAndFilter.matchFulfilled,
+      (state, action: PayloadAction<{ variations: Product[] }>) => {
+        state.productsByCategoryAndFilter = action.payload.variations;
+        state.isLoading = false;
+      }
+    );
+    builder.addMatcher(
+      productsApi.endpoints.fetchProductsByCategoryAndFilter.matchRejected,
+      (state, action) => {
+        state.error = action.error?.message || "Failed to fetch products by category and filter.";
+        state.isLoading = false;
+      }
+    );
+    
   },
 });
 
