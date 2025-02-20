@@ -1,8 +1,8 @@
 "use client"
-import Breadcrumb from '@/components/breadcrumb';
-import { CTAOne } from '@/components/CTAS/CTAOne';
-import FloatingFilter from '@/components/FloatingFilter';
-import ProductsWrapper from '@/components/ProductsWrapper';
+import Breadcrumb from '../../components/breadcrumb';
+import { CTAOne } from '../../components/CTAS/CTAOne';
+import FloatingFilter from '../../components/FloatingFilter';
+import ProductsWrapper from '../../components/ProductsWrapper';
 import { useSearchParams } from 'next/navigation';
 import React, { Suspense } from 'react';
 
