@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useFetchProductsByCategoryAndFilterQuery } from "@/redux/api/features/productsApi";
-// import FilterSection from "../components/Filters/NewFilter";
+import FilterSection from "../components/Filters/NewFilter";
 import MobilePhoneCard from "./Cards/MobilePhoneCard";
 import { ProductsApiResponse, ProductVariation } from "../library/types/index";
 
