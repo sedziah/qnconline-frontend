@@ -1,79 +1,83 @@
-import React, { useEffect, useState } from 'react'
-import { BiSortAlt2 } from 'react-icons/bi'
-import { FaFilter } from 'react-icons/fa'
-import { useSearchParams } from 'next/navigation'
-import { Product, ProductListingResponse } from '@/library/types'
-import { apiService } from '@/library/services/apiService'
-import { ProductSortDrawer } from './Drawers/ProductSortDrawer'
-import { FilterDrawer } from './Drawers/FilterDrawer'
+// components/FloatingFilter.tsx
 
+import React, { useEffect } from 'react';
+import { BiSortAlt2 } from 'react-icons/bi';
+import { FaFilter } from 'react-icons/fa';
+import { useSearchParams } from 'next/navigation';
+import { useSelector, useDispatch } from 'react-redux';
+import { useFetchProductsByCategoryAndFilterQuery } from '../redux/api/features/productsApi';
+import { updateFilters } from '../redux/slices/filterSlice';
+import { RootState } from '../redux/store/store';
+import { ProductSortDrawer } from './Drawers/ProductSortDrawer';
+import { FilterDrawer } from './Drawers/FilterDrawer';
+import { ProductListingResponse } from '@/library/types';
 
 const FloatingFilter = () => {
-  const [openFilter, setOpenFilter] = useState(false)
-  const [openSortingDrawer, setOpenSortingDrawer] = useState(false)
-  const [filters, setFilters] = useState<Record<string, string[]>>({})
-  const [specifications, setSpecifications] = useState<Record<string, string[]>>({})
-  const searchParams = useSearchParams()
-  const categorySlug = searchParams.get('s') // Extract the slug from the URL
-  const [products, setProducts] = useState<Product[]>()
+  const dispatch = useDispatch();
+  const filters = useSelector((state: RootState) => state.filter.filters);
+  const searchParams = useSearchParams();
+  const categorySlug = searchParams.get('s') ?? '';
 
-  useEffect(() => {
-    const fetchProductsAndSpecs = async () => {
-      try {
-        const fetchedProducts: ProductListingResponse = await apiService.getProductsByCategory(categorySlug!, filters)
-        setProducts(fetchedProducts?.products)
-        setSpecifications(fetchedProducts.specifications) // Set specifications to display filters
-      } catch (error) {
-        console.error("Error fetching products:", error)
-      } finally {
-      }
+  // ✅ Proper Destructuring for RTK Query
+  const { data, refetch } = useFetchProductsByCategoryAndFilterQuery(
+    {
+      categorySlug,
+      filters,
+    },
+    {
+      // ✅ RTK Query Options (Stale-time settings)
+      refetchOnMountOrArgChange: true,
+      pollingInterval: 0,
     }
+  );
 
-    fetchProductsAndSpecs()
-  }, [categorySlug, filters])
+  // ✅ Automatically Re-fetch on Filter Change
+  useEffect(() => {
+    refetch();
+  }, [filters, refetch]);
 
+  // ✅ Update Redux with Filter Changes
   const handleFiltersChange = (updatedFilters: Record<string, string[]>) => {
-    setFilters(updatedFilters)  // Update filters state
-  }
+    dispatch(updateFilters(updatedFilters));
+  };
 
-  const toggleFilterDrawer = () => setOpenFilter(!openFilter)
-  const toogleOpenSortingDrawer = () => setOpenSortingDrawer(!openSortingDrawer)
+  const [openFilter, setOpenFilter] = React.useState(false);
+  const [openSortingDrawer, setOpenSortingDrawer] = React.useState(false);
+
+  const toggleFilterDrawer = () => setOpenFilter(!openFilter);
+  const toggleSortingDrawer = () => setOpenSortingDrawer(!openSortingDrawer);
 
   return (
     <>
-      {/* Drawer for spectifications */}
+      {/* Drawer for Specifications */}
       <FilterDrawer
         handleFiltersChange={handleFiltersChange}
-        productCount={products?.length!}
-        specifications={specifications}
-        openFilter={openFilter} toggleFilterDrawer={toggleFilterDrawer} />
-      
+        productCount={data?.variations?.length ?? 0}
+        specifications={data?.specifications ?? {}}
+        openFilter={openFilter}
+        toggleFilterDrawer={toggleFilterDrawer}
+      />
 
-      {/* Drawer for product sorting */}
+      {/* Drawer for Sorting */}
       <ProductSortDrawer
         handleFiltersChange={handleFiltersChange}
-        productCount={products?.length!}
-        specifications={specifications}
+        productCount={data?.variations?.length ?? 0}
+        specifications={data?.specifications ?? {}}
         openFilter={openSortingDrawer}
-        toggleFilterDrawer={toogleOpenSortingDrawer} />
-      
-      
+        toggleFilterDrawer={toggleSortingDrawer}
+      />
 
-      <div className='block lg:hidden bg-white shadow-md transition-all border-t-2 border-lightGray/20 px-4 py-3 w-full fixed bottom-0 '>
-        <div className='flex flex-row items-center justify-center w-full'>
-          <button onClick={toggleFilterDrawer} className='w-full justify-center h-10 flex items-center text-base flex-row gap-x-2'>
-            <p>Filters</p>
-            <FaFilter />
-          </button>
-          <div className='h-8 w-0.5 border bg-bglight'></div>
-          <button onClick={toogleOpenSortingDrawer} className='w-full justify-center h-10 flex items-center text-base flex-row gap-x-2'>
-            <p>Sort</p>
-            <BiSortAlt2 />
-          </button>
-        </div>
+      {/* Floating Buttons */}
+      <div className='fixed bottom-0 w-full bg-white shadow-md border-t px-4 py-3 flex justify-around'>
+        <button onClick={toggleFilterDrawer} className='flex items-center gap-2 text-base'>
+          <FaFilter /> Filters
+        </button>
+        <button onClick={toggleSortingDrawer} className='flex items-center gap-2 text-base'>
+          <BiSortAlt2 /> Sort
+        </button>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default FloatingFilter
+export default FloatingFilter;

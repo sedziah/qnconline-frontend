@@ -1,88 +1,104 @@
-import React, { useState, useEffect } from 'react';
-import { apiService } from '@/library/services/apiService';
-import NewProductCard from './Cards/NewProductCard';
-import FilterSection from "./FIlters/NewFilter";
+"use client";
+
+import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useFetchProductsByCategoryAndFilterQuery } from "@/redux/api/features/productsApi";
+import FilterSection from "../components/Filters/Filters";
+import MobilePhoneCard from "./Cards/MobilePhoneCard";
+import { ProductsApiResponse, ProductVariation } from "../library/types/index";
 
 type ProductsWrapperProps = {
-  categorySlug?: string; // Make optional
-  categoryName?: string; // Make optional
-  searchQuery?: string;  // Add searchQuery as an optional prop
+  searchQuery?: string; // ✅ Accept searchQuery as a prop
+  categorySlug?: string; // ✅ Add this
+  categoryName?: string; // ✅ Add this
 };
 
-const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ categorySlug, categoryName, searchQuery }) => {
-  const [variations, setVariations] = useState<any[]>([]);
-  const [availableFilters, setAvailableFilters] = useState<Record<string, string[]>>({});
-  const [loading, setLoading] = useState(true);
-  const [totalPages, setTotalPages] = useState(1);
+const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
+  const searchParams = useSearchParams();
+  const categorySlug = searchParams.get("s") || ""; // Get slug
+  const categoryName = searchParams.get("name") || ""; // Get category name
+
   const [filters, setFilters] = useState<Record<string, string[]>>({});
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        let fetchedData;
-        if (searchQuery) {
-          // Fetch search results
-          fetchedData = await apiService.searchProducts(searchQuery);
-        } else if (categorySlug) {
-          // Fetch products by category
-          fetchedData = await apiService.getProductsByCategory(categorySlug, filters);
-        }
+  // ✅ Fetch products using the search query if available
+  const { data, error, isLoading } = useFetchProductsByCategoryAndFilterQuery({
+    categorySlug,
+    searchQuery,
+  }) as { data?: ProductsApiResponse; error?: Error; isLoading: boolean };
 
-        if (fetchedData) {
-          setVariations(fetchedData.variations || fetchedData); // Use 'variations' if available
-          setAvailableFilters(fetchedData.specifications || {}); // Use 'specifications' for filters
-          setTotalPages(fetchedData.pagination?.total_pages || 1);
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // Log the data to the console
+  console.log("Fetched Products:", data);
 
-    fetchData();
-  }, [filters, categorySlug, searchQuery]);
-
-  const handleFilterChange = (newFilters: { [key: string]: string[] }) => {
+  const handleFilterChange = (newFilters: Record<string, string[]>) => {
     setFilters(newFilters);
   };
 
+  if (!categorySlug && !searchQuery) {
+    return (
+      <p className="text-center text-red-500">
+        Error: No category or search query provided.
+      </p>
+    );
+  }
+
   return (
     <div className="w-full max-w-6xl mx-auto">
+      <h1 className="text-2xl font-bold text-center my-10">
+        {searchQuery
+          ? `Search Results for "${searchQuery}"`
+          : categoryName
+          ? `Shop ${categoryName}`
+          : "Shop Products"}
+      </h1>
+
       <div className="flex flex-col lg:flex-row my-10 gap-6">
+        {/* Filters Section */}
         <div className="w-full lg:w-1/4">
-          <FilterSection specifications={availableFilters} onFiltersChange={handleFilterChange} />
+          <FilterSection
+            specifications={data?.specifications || {}}
+            onFiltersChange={handleFilterChange}
+          />
         </div>
 
+        {/* Products Section */}
         <div className="w-full lg:w-3/4">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-bold">
-              {searchQuery ? `Search Results for "${searchQuery}"` : `Shop ${categoryName}`}
-            </h1>
-          </div>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p className="text-red-500">Error: {error.toString()}</p>
+          ) : (
+            <>
+              {/* ✅ Log variations here before rendering */}
+              {console.log("Rendering Variations:", data?.variations)}
 
-          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-            {loading ? (
-              Array(15)
-                .fill({})
-                .map((_, key) => (
-                  <div key={key} className="w-full">
-                    <div className="h-40 w-full bg-gray-200 rounded animate-pulse"></div>
-                    <div className="h-2 w-3/4 mt-2 bg-gray-200 rounded animate-pulse"></div>
-                    <div className="h-2 w-3/4 mt-2 bg-gray-200 rounded animate-pulse"></div>
-                  </div>
-                ))
-            ) : variations.length > 0 ? (
-              variations.map((variation) => (
-                <div key={variation?.id} className="mx-1 py-3">
-                  <NewProductCard product={variation} /> {/* Pass variation as product prop */}
+              {data?.variations?.length ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+                  {data.variations.map((variation: ProductVariation, index) => (
+                    <MobilePhoneCard
+                      key={variation.id}
+                      product={{
+                        id: variation.id,
+                        product_slug: categorySlug, // ✅ Use categorySlug from URL since product slug is gone
+                        full_name: `${variation.name}`, // ✅ Combine name for clarity
+                        name: variation.name,
+                        price: variation.price,
+                        discounted_price: variation.discounted_price,
+                        inventory_quantity: variation.inventory_quantity,
+                        condition: variation.condition,
+                        variation_specifications:
+                          variation.variation_specifications ?? [],
+                        images: variation.images ?? [],
+                        reviews: variation.reviews ?? [],
+                        deals: variation.deals ?? [],
+                      }}
+                    />
+                  ))}
                 </div>
-              ))
-            ) : (
-              <p>No products found.</p>
-            )}
-          </div>
+              ) : (
+                <p className="text-gray-500 text-center">No products found.</p>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
