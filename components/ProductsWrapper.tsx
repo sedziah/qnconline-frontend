@@ -20,10 +20,11 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
 
   const [filters, setFilters] = useState<Record<string, string[]>>({});
 
-  // ✅ Fetch products using the search query if available
+  // ✅ Fetch products using categorySlug, searchQuery, and selected filters
   const { data, error, isLoading } = useFetchProductsByCategoryAndFilterQuery({
     categorySlug,
     searchQuery,
+    filters, // ✅ Pass filters to the API request
   }) as { data?: ProductsApiResponse; error?: Error; isLoading: boolean };
 
   // Log the data to the console
