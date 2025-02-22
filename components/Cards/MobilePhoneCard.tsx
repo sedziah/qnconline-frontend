@@ -22,7 +22,6 @@ interface MobilePhoneCardProps {
 }
 
 const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
-  console.log("Product object:", product);
 
   // Determine Colour and Condition
   const colourSpec = product.variation_specifications?.find(

@@ -1,7 +1,7 @@
 "use client";
+
 import Breadcrumb from "@/components/breadcrumb";
 import { CTAOne } from "@/components/CTAS/CTAOne";
-import FloatingFilter from "@/components/FloatingFilter";
 import ProductsWrapper from "@/components/ProductsWrapper";
 import { useSearchParams } from "next/navigation";
 import React, { Suspense } from "react";
@@ -12,12 +12,10 @@ import RenderReviews from "@/components/sections/RenderReviews";
 const ProductListingPage = () => {
   return (
     <>
-      {/* Loading indicator while waiting for the content */}
+      {/* Suspense: Show loading UI while fetching products */}
       <Suspense
         fallback={
-          <div>
-            <div className="h-40 w-full bg-gray-200 rounded animate-pulse"></div>
-          </div>
+          <div className="h-40 w-full bg-gray-200 rounded animate-pulse"></div>
         }
       >
         <ProductContent />
@@ -28,10 +26,16 @@ const ProductListingPage = () => {
 
 const ProductContent = () => {
   const searchParams = useSearchParams();
-  const categorySlug = searchParams.get("s"); // Extract the slug from the URL
-  const categoryName = searchParams.get("name") || "All Products"; // Extract the name from the URL
+  const categorySlug = searchParams.get("s"); // Extract the category slug
+  const categoryName = searchParams.get("name") || "All Products"; // Get category name
+  const filters = Object.fromEntries(searchParams.entries()); // Extract filters from URL
 
-  console.log(categorySlug);
+  // Remove category-related parameters from filters
+  delete filters["s"];
+  delete filters["name"];
+
+  console.log("Category Slug:", categorySlug);
+  console.log("Filters:", filters);
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },
@@ -45,16 +49,16 @@ const ProductContent = () => {
       />
       <CTAOne />
 
-      {/* Pass both categorySlug and categoryName to ProductsWrapper */}
+      {/* Pass category & filters to ProductsWrapper */}
       {categorySlug && (
         <ProductsWrapper
           categorySlug={categorySlug}
           categoryName={categoryName}
+          filters={filters} // Pass filters dynamically
         />
       )}
 
-      {/* <FloatingFilter /> */}
-
+      {/* Reviews section */}
       {/* {categorySlug && <RenderReviews />} */}
     </>
   );

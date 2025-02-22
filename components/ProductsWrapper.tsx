@@ -12,6 +12,7 @@ type ProductsWrapperProps = {
   searchQuery?: string; // ✅ Accept searchQuery as a prop
   categorySlug?: string; // ✅ Add this
   categoryName?: string; // ✅ Add this
+  filters?: Record<string, string>; // ✅ Add filters prop
 };
 
 const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
