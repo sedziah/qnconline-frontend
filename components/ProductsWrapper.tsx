@@ -90,6 +90,7 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
                           variation.variation_specifications ?? [],
                         images: variation.images ?? [],
                         reviews: variation.reviews ?? [],
+                        free_delivery: variation.free_delivery ?? false,
                         deals: variation.deals ?? [],
                       }}
                     />
