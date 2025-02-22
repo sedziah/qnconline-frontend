@@ -6,6 +6,7 @@ import { useFetchProductsByCategoryAndFilterQuery } from "@/redux/api/features/p
 import FilterSection from "../components/Filters/Filters";
 import MobilePhoneCard from "./Cards/MobilePhoneCard";
 import { ProductsApiResponse, ProductVariation } from "../library/types/index";
+import FloatingFilter from "./FloatingFilter";
 
 type ProductsWrapperProps = {
   searchQuery?: string; // ✅ Accept searchQuery as a prop
@@ -70,7 +71,6 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
           ) : (
             <>
               {/* ✅ Log variations here before rendering */}
-              {console.log("Rendering Variations:", data?.variations)}
 
               {data?.variations?.length ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
@@ -90,6 +90,7 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
                           variation.variation_specifications ?? [],
                         images: variation.images ?? [],
                         reviews: variation.reviews ?? [],
+                        free_delivery: variation.free_delivery ?? false,
                         deals: variation.deals ?? [],
                       }}
                     />
@@ -102,6 +103,11 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
           )}
         </div>
       </div>
+      {/* ✅ Move Floating Filter here, using specifications directly */}
+      <FloatingFilter
+        specifications={data?.specifications || {}}
+        onFiltersChange={handleFilterChange} // ✅ Pass the function correctly
+      />
     </div>
   );
 };

@@ -273,6 +273,7 @@ export interface ProductVariation {
   variation_specifications?: { specification_name: string; value: string }[];
   images?: { image: string; alt_text?: string; image_type?: string }[];
   reviews?: { rating: number }[];
+  free_delivery: boolean;
   deals?: { id: string; description: string }[];
 }
 
