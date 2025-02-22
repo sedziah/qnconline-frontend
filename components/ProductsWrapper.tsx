@@ -103,7 +103,10 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
         </div>
       </div>
       {/* ✅ Move Floating Filter here, using specifications directly */}
-      <FloatingFilter specifications={data?.specifications || {}} />
+      <FloatingFilter
+        specifications={data?.specifications || {}}
+        onFiltersChange={handleFilterChange} // ✅ Pass the function correctly
+      />
     </div>
   );
 };
