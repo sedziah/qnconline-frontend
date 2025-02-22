@@ -84,7 +84,6 @@ const Navbar = () => {
     setScrollPosition(window.pageYOffset);
   };
 
-
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
@@ -168,7 +167,7 @@ const Navbar = () => {
                 className="flex-1 relative h-12"
               >
                 <input
-                  className="border border-lightGray w-full bg-white h-10 px-5 pr-12 rounded-lg text-sm focus:outline-none"
+                  className="border border-lightGray w-full bg-white h-10 px-5 pr-12 rounded-lg text-[16px] focus:outline-none"
                   type="search"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -176,7 +175,7 @@ const Navbar = () => {
                 />
                 <button
                   type="submit"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2"
                 >
                   <SearchNormal size="20" color={COLORS.lightGray} />
                 </button>
