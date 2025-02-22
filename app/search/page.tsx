@@ -33,7 +33,7 @@ const SearchContent = () => {
       {/* Display products using ProductsWrapper, passing the searchQuery */}
       <ProductsWrapper searchQuery={searchQuery} />
 
-      <FloatingFilter />
+      {/* <FloatingFilter /> */}
     </div>
   );
 };
