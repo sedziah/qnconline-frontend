@@ -53,7 +53,7 @@ const ProductContent = () => {
         />
       )}
 
-      <FloatingFilter />
+      {/* <FloatingFilter /> */}
 
       {/* {categorySlug && <RenderReviews />} */}
     </>
