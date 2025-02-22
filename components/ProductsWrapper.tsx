@@ -28,8 +28,6 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
     filters, // ✅ Pass filters to the API request
   }) as { data?: ProductsApiResponse; error?: Error; isLoading: boolean };
 
-  // Log the data to the console
-  console.log("Fetched Products:", data);
 
   const handleFilterChange = (newFilters: Record<string, string[]>) => {
     setFilters(newFilters);
