@@ -7,7 +7,7 @@ import RenderAppearanceControl from '@/components/sections/RenderAppearanceContr
 import RenderBatteryControl from '@/components/sections/RenderBatteryControl'
 import RenderCarousel from '@/components/sections/RenderCarousel'
 import { RenderColorSelector } from '@/components/sections/RenderColorSelector'
-import RenderProductSummary from '@/components/sections/RenderProductSummary'
+// import RenderProductSummary from '@/components/sections/RenderProductSummary'
 import RenderReviews from '@/components/sections/RenderReviews'
 import RenderStorageControl from '@/components/sections/RenderStorageControl'
 import RenderTradeInPromo from '@/components/sections/RenderTradeInPromo'
@@ -50,7 +50,7 @@ export const ProductListingDetail = () => {
 
       <Breadcrumb items={breadcrumbItems} />
 
-      <RenderProductSummary />
+      {/* <RenderProductSummary /> */}
 
       <RenderAppearanceControl />
 

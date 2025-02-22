@@ -70,7 +70,6 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
           ) : (
             <>
               {/* ✅ Log variations here before rendering */}
-              {console.log("Rendering Variations:", data?.variations)}
 
               {data?.variations?.length ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">

@@ -72,9 +72,9 @@ const FloatingFilter = () => {
         <button onClick={toggleFilterDrawer} className='flex items-center gap-2 text-base'>
           <FaFilter /> Filters
         </button>
-        {/* <button onClick={toggleSortingDrawer} className='flex items-center gap-2 text-base'>
+        <button onClick={toggleSortingDrawer} className='flex items-center gap-2 text-base'>
           <BiSortAlt2 /> Sort
-        </button> */}
+        </button>
       </div>
     </>
   );
