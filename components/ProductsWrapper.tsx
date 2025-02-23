@@ -2,16 +2,19 @@
 
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useFetchProductsByCategoryAndFilterQuery } from "@/redux/api/features/productsApi";
+import {
+  useFetchProductsByCategoryAndFilterQuery,
+  useSearchProductsQuery,
+} from "@/redux/api/features/productsApi";
 import FilterSection from "../components/Filters/Filters";
 import MobilePhoneCard from "./Cards/MobilePhoneCard";
-import { ProductsApiResponse, ProductVariation } from "../library/types/index";
+import { ProductVariation } from "../library/types/index";
 import FloatingFilter from "./FloatingFilter";
 
 type ProductsWrapperProps = {
-  searchQuery?: string; // ✅ Accept searchQuery as a prop
-  categorySlug?: string; // ✅ Add this
-  categoryName?: string; // ✅ Add this
+  searchQuery?: string;
+  categorySlug?: string;
+  categoryName?: string;
 };
 
 const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
@@ -21,12 +24,15 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
 
   const [filters, setFilters] = useState<Record<string, string[]>>({});
 
-  // ✅ Fetch products using categorySlug, searchQuery, and selected filters
-  const { data, error, isLoading } = useFetchProductsByCategoryAndFilterQuery({
-    categorySlug,
-    searchQuery,
-    filters, // ✅ Pass filters to the API request
-  }) as { data?: ProductsApiResponse; error?: Error; isLoading: boolean };
+  // ✅ Call both hooks unconditionally but use `skip` to prevent unnecessary API calls
+  const searchResults = useSearchProductsQuery(searchQuery || "", { skip: !searchQuery });
+  const categoryResults = useFetchProductsByCategoryAndFilterQuery(
+    { categorySlug, filters },
+    { skip: !!searchQuery } // Skip category fetch when searching
+  );
+
+  // ✅ Decide which data to use
+  const { data, error, isLoading } = searchQuery ? searchResults : categoryResults;
 
   // Log the data to the console
   console.log("Fetched Products:", data);
@@ -71,23 +77,21 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
           ) : (
             <>
               {/* ✅ Log variations here before rendering */}
-
               {data?.variations?.length ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-                  {data.variations.map((variation: ProductVariation, index) => (
+                  {data.variations.map((variation: ProductVariation) => (
                     <MobilePhoneCard
                       key={variation.id}
                       product={{
                         id: variation.id,
-                        product_slug: categorySlug, // ✅ Use categorySlug from URL since product slug is gone
-                        full_name: `${variation.name}`, // ✅ Combine name for clarity
+                        product_slug: categorySlug,
+                        full_name: `${variation.name}`,
                         name: variation.name,
                         price: variation.price,
                         discounted_price: variation.discounted_price,
                         inventory_quantity: variation.inventory_quantity,
                         condition: variation.condition,
-                        variation_specifications:
-                          variation.variation_specifications ?? [],
+                        variation_specifications: variation.variation_specifications ?? [],
                         images: variation.images ?? [],
                         reviews: variation.reviews ?? [],
                         free_delivery: variation.free_delivery ?? false,
