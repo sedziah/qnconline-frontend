@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import { useDispatch } from "react-redux";
-// import { addToCart } from "../../redux/slices/cartSlice";
+import { addToCart } from "../../redux/slices/cartSlice";
 
 interface MobilePhoneCardProps {
   product: {
@@ -47,18 +47,18 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
       : 0;
 
   // Handle Add to Cart
-  // const handleAddToCart = () => {
-  //   dispatch(
-  //     addToCart({
-  //       id: product.id,
-  //       full_name: product.full_name,
-  //       price: product.price,
-  //       discounted_price: product.discounted_price,
-  //       image: product.images?.[0]?.image || "/placeholder-image.png",
-  //       quantity: 1,
-  //     })
-  //   );
-  // };
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        id: product.id,
+        full_name: product.full_name,
+        price: product.price,
+        discounted_price: product.discounted_price,
+        image: product.images?.[0]?.image || "/placeholder-image.png",
+        quantity: 1,
+      })
+    );
+  };
 
   return (
     <div className="rounded-lg hover:shadow-xl transition-opacity bg-white p-4 shadow-lg">
@@ -173,7 +173,7 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
         <button
           type="button"
           className="inline-flex items-center rounded-lg bg-primary px-3 py-2.5 text-xs font-medium text-white hover:bg-primary-dark"
-          // onClick={handleAddToCart}
+          onClick={handleAddToCart}
         >
           <svg
             className="h-5 w-5"
