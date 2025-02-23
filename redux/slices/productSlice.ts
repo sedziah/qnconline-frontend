@@ -7,8 +7,18 @@ import {
   MobileCardData,
   Product,
   ProductVariation,
-  ProductListingResponse
+  ProductListingResponse,
 } from "../../library/types/index";
+
+interface CartItem {
+  id: string; // Unique identifier (product variation ID)
+  name: string;
+  price: number;
+  discounted_price?: number;
+  quantity: number;
+  image?: string;
+  variation_specifications?: { specification_name: string; value: string }[];
+}
 
 // Define the state structure
 interface ProductState {
@@ -25,6 +35,7 @@ interface ProductState {
   searchResults: Product[];
   isLoading: boolean;
   error: string | null;
+  cart: CartItem[]; // ✅ Add cart array to store cart items
 }
 
 // Initial state for the product slice
@@ -42,8 +53,8 @@ const initialState: ProductState = {
   searchResults: [],
   isLoading: false,
   error: null,
+  cart: [], // ✅ Initialize an empty cart
 };
-
 
 // Define the product slice
 const productSlice = createSlice({
