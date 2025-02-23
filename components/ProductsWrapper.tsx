@@ -34,9 +34,6 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
   // ✅ Decide which data to use
   const { data, error, isLoading } = searchQuery ? searchResults : categoryResults;
 
-  // Log the data to the console
-  console.log("Fetched Products:", data);
-
   const handleFilterChange = (newFilters: Record<string, string[]>) => {
     setFilters(newFilters);
   };
