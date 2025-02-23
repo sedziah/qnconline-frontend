@@ -8,8 +8,11 @@ import {
 } from "@/redux/api/features/productsApi";
 import FilterSection from "../components/Filters/Filters";
 import MobilePhoneCard from "./Cards/MobilePhoneCard";
-import { ProductVariation } from "../library/types/index";
 import FloatingFilter from "./FloatingFilter";
+import {
+  ProductListingResponse,
+  ProductVariation,
+} from "../library/types/index";
 
 type ProductsWrapperProps = {
   searchQuery?: string;
@@ -25,17 +28,18 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
   const [filters, setFilters] = useState<Record<string, string[]>>({});
 
   // ✅ Call both hooks unconditionally but use `skip` to prevent unnecessary API calls
-  const searchResults = useSearchProductsQuery(searchQuery || "", { skip: !searchQuery });
+  const searchResults = useSearchProductsQuery(searchQuery || "", {
+    skip: !searchQuery,
+  });
   const categoryResults = useFetchProductsByCategoryAndFilterQuery(
     { categorySlug, filters },
     { skip: !!searchQuery } // Skip category fetch when searching
   );
 
   // ✅ Decide which data to use
-  const { data, error, isLoading } = searchQuery ? searchResults : categoryResults;
-
-  // Log the data to the console
-  console.log("Fetched Products:", data);
+  const { data, error, isLoading } = searchQuery
+    ? searchResults
+    : categoryResults;
 
   const handleFilterChange = (newFilters: Record<string, string[]>) => {
     setFilters(newFilters);
@@ -48,6 +52,15 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
       </p>
     );
   }
+
+  // ✅ Ensure data is treated as ProductListingResponse
+  const productData: ProductListingResponse | null = !Array.isArray(data)
+    ? (data as ProductListingResponse)
+    : null;
+
+  console.log("API Response:", productData);
+  console.log("Variations:", productData?.variations);
+  console.log("Specifications:", productData?.specifications);
 
   return (
     <div className="w-full max-w-6xl mx-auto">
@@ -63,7 +76,7 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
         {/* Filters Section */}
         <div className="w-full lg:w-1/4">
           <FilterSection
-            specifications={data?.specifications || {}}
+            specifications={productData?.specifications || {}}
             onFiltersChange={handleFilterChange}
           />
         </div>
@@ -74,43 +87,40 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
             <p>Loading...</p>
           ) : error ? (
             <p className="text-red-500">Error: {error.toString()}</p>
+          ) : productData?.variations?.length ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+              {productData.variations.map((variation: ProductVariation) => (
+                <MobilePhoneCard
+                  key={variation.id}
+                  product={{
+                    id: variation.id,
+                    product_slug: categorySlug,
+                    full_name: `${variation.name}`,
+                    name: variation.name,
+                    price: variation.price,
+                    discounted_price: variation.discounted_price,
+                    inventory_quantity: variation.inventory_quantity,
+                    condition: variation.condition,
+                    variation_specifications:
+                      variation.variation_specifications ?? [],
+                    images: variation.images ?? [],
+                    reviews: variation.reviews ?? [],
+                    free_delivery: variation.free_delivery ?? false,
+                    deals: variation.deals ?? [],
+                  }}
+                />
+              ))}
+            </div>
           ) : (
-            <>
-              {/* ✅ Log variations here before rendering */}
-              {data?.variations?.length ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-                  {data.variations.map((variation: ProductVariation) => (
-                    <MobilePhoneCard
-                      key={variation.id}
-                      product={{
-                        id: variation.id,
-                        product_slug: categorySlug,
-                        full_name: `${variation.name}`,
-                        name: variation.name,
-                        price: variation.price,
-                        discounted_price: variation.discounted_price,
-                        inventory_quantity: variation.inventory_quantity,
-                        condition: variation.condition,
-                        variation_specifications: variation.variation_specifications ?? [],
-                        images: variation.images ?? [],
-                        reviews: variation.reviews ?? [],
-                        free_delivery: variation.free_delivery ?? false,
-                        deals: variation.deals ?? [],
-                      }}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <p className="text-gray-500 text-center">No products found.</p>
-              )}
-            </>
+            <p className="text-gray-500 text-center">No products found.</p>
           )}
         </div>
       </div>
+
       {/* ✅ Move Floating Filter here, using specifications directly */}
       <FloatingFilter
-        specifications={data?.specifications || {}}
-        onFiltersChange={handleFilterChange} // ✅ Pass the function correctly
+        specifications={productData?.specifications || {}}
+        onFiltersChange={handleFilterChange}
       />
     </div>
   );

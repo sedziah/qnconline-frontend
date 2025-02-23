@@ -2,7 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // LocalStorage for persistence
 import { productsApi } from "../api/features/productsApi";
-import { ActiveCategory, MobileCardData, Product } from "../../library/types/index";
+import {
+  ActiveCategory,
+  MobileCardData,
+  Product,
+  ProductVariation,
+  ProductListingResponse
+} from "../../library/types/index";
 
 // Define the state structure
 interface ProductState {
@@ -12,7 +18,8 @@ interface ProductState {
   iPhones: Product[];
   featuredProducts: Product[];
   productsByCategory: Product[];
-  productsByCategoryAndFilter: Product[];
+  productsByCategoryAndFilter: ProductVariation[];
+  specifications: Record<string, string[]>;
   singleProduct: Product | null;
   sustainableProducts: Product[];
   searchResults: Product[];
@@ -29,12 +36,14 @@ const initialState: ProductState = {
   featuredProducts: [],
   productsByCategory: [],
   productsByCategoryAndFilter: [],
+  specifications: {}, // ✅ Correct initialization
   singleProduct: null,
   sustainableProducts: [],
   searchResults: [],
   isLoading: false,
   error: null,
 };
+
 
 // Define the product slice
 const productSlice = createSlice({
@@ -60,7 +69,8 @@ const productSlice = createSlice({
     builder.addMatcher(
       productsApi.endpoints.fetchActiveProductCategories.matchRejected,
       (state, action) => {
-        state.error = action.error?.message || "Failed to fetch active categories";
+        state.error =
+          action.error?.message || "Failed to fetch active categories";
         state.isLoading = false;
       }
     );
@@ -83,7 +93,8 @@ const productSlice = createSlice({
     builder.addMatcher(
       productsApi.endpoints.fetchDailyDeals.matchRejected,
       (state, action) => {
-        state.error = action.error?.message || "Failed to fetch daily deals products";
+        state.error =
+          action.error?.message || "Failed to fetch daily deals products";
         state.isLoading = false;
       }
     );
@@ -106,7 +117,8 @@ const productSlice = createSlice({
     builder.addMatcher(
       productsApi.endpoints.fetchNewArrivals.matchRejected,
       (state, action) => {
-        state.error = action.error?.message || "Failed to fetch daily deals products";
+        state.error =
+          action.error?.message || "Failed to fetch daily deals products";
         state.isLoading = false;
       }
     );
@@ -129,7 +141,8 @@ const productSlice = createSlice({
     builder.addMatcher(
       productsApi.endpoints.fetchFeaturedProducts.matchRejected,
       (state, action) => {
-        state.error = action.error?.message || "Failed to fetch featured products";
+        state.error =
+          action.error?.message || "Failed to fetch featured products";
         state.isLoading = false;
       }
     );
@@ -153,7 +166,8 @@ const productSlice = createSlice({
     builder.addMatcher(
       productsApi.endpoints.fetchIPhones.matchRejected,
       (state, action) => {
-        state.error = action.error?.message || "Failed to fetch iPhone products";
+        state.error =
+          action.error?.message || "Failed to fetch iPhone products";
         state.isLoading = false;
       }
     );
@@ -176,7 +190,8 @@ const productSlice = createSlice({
     builder.addMatcher(
       productsApi.endpoints.fetchProductsByCategory.matchRejected,
       (state, action) => {
-        state.error = action.error?.message || "Failed to fetch products by category";
+        state.error =
+          action.error?.message || "Failed to fetch products by category";
         state.isLoading = false;
       }
     );
@@ -245,7 +260,8 @@ const productSlice = createSlice({
     builder.addMatcher(
       productsApi.endpoints.fetchSustainableProducts.matchRejected,
       (state, action) => {
-        state.error = action.error?.message || "Failed to fetch sustainable products";
+        state.error =
+          action.error?.message || "Failed to fetch sustainable products";
         state.isLoading = false;
       }
     );
@@ -260,19 +276,21 @@ const productSlice = createSlice({
     );
     builder.addMatcher(
       productsApi.endpoints.fetchProductsByCategoryAndFilter.matchFulfilled,
-      (state, action: PayloadAction<{ variations: Product[] }>) => {
-        state.productsByCategoryAndFilter = action.payload.variations;
+      (state, action: PayloadAction<ProductListingResponse>) => {
+        state.productsByCategoryAndFilter = action.payload.variations; // ✅ Store ProductVariation[]
+        state.specifications = action.payload.specifications; // ✅ Store specifications separately
         state.isLoading = false;
       }
     );
     builder.addMatcher(
       productsApi.endpoints.fetchProductsByCategoryAndFilter.matchRejected,
       (state, action) => {
-        state.error = action.error?.message || "Failed to fetch products by category and filter.";
+        state.error =
+          action.error?.message ||
+          "Failed to fetch products by category and filter.";
         state.isLoading = false;
       }
     );
-    
   },
 });
 

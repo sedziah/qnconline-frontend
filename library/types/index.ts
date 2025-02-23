@@ -116,7 +116,6 @@ export interface Product {
   freeDelivery?: boolean
   pagination: Pagination
   variations: any[]
-  
 }
 
 // Feature Table
@@ -304,11 +303,11 @@ export interface SpecificationOptions {
 
 // API response for the product listing with dynamic specifications
 export interface ProductListingResponse {
-  variations: Product[]; // ✅ Add this line
-  specifications: Record<string, string[]> // Adjust this if needed
-  pagination: Pagination
-  // Add other fields here if necessary (pagination, etc.)
+  variations: ProductVariation[]; // ✅ Change to ProductVariation[]
+  specifications: Record<string, string[]>;
+  pagination: Pagination;
 }
+
 
 // Interface to handle filters (passed to API calls)
 export interface FilterParams {
