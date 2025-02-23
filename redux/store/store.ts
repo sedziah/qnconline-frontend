@@ -13,6 +13,7 @@ import newsletterReducer from "../slices/newsletterSlice";
 import authReducer from "../slices/authSlice"; // Authentication state slice
 import productReducer from "../slices/productSlice"; // Product state slice
 import filterReducer from  "../slices/filterSlice"
+import cartReducer  from  "../slices/cartSlice"
 import apiClient from "../api/api_client/apiClient";
 
 // Persistence configuration for the auth slice
@@ -40,6 +41,8 @@ export const store = configureStore({
     product: persistedProductReducer, // Persisted product state
     newsletter: newsletterReducer, // Newsletter state slice
     filter: filterReducer,
+    cart: cartReducer,
+
     [apiClient.reducerPath]: apiClient.reducer,// RTK Query reducer for authentication API
 
   },
