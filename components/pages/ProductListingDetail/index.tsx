@@ -14,7 +14,7 @@ import RenderTradeInPromo from '@/components/sections/RenderTradeInPromo'
 import LoadingScreen from '@/components/ui/LoadingScreen'
 import ErrorMessage from '@/components/ui/ErrorMessage'
 // import { apiService } from '@/library/services/apiService'
-import { Product } from '@/library/types'
+import { MobileCardData, Product } from '@/library/types'
 import { useFetchProductByIdQuery } from '@/redux/api/features/productsApi'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -111,7 +111,12 @@ export const ProductListingDetail = ({ slug }: { slug: string }) => {
       <RenderCarousel
         title="You may also like"
         subtitle="Related Projects"
-        payload={productData?.related_variations}
+        payload={productData?.related_variations.map((product) => ({
+          id: product.id,
+          full_name: product.name,
+          product_slug: product.slug,
+          image_url: product.images?.[0]?.image || "/placeholder-image.png",
+        })) as MobileCardData[]}
         loading={isLoading}
       />
 
