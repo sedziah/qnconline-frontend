@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // ✅ Persist cart in localStorage
+import { toast } from "sonner"
 
 // ✅ Define Cart Item Type
 export interface CartItem {
@@ -34,8 +35,9 @@ const cartSlice = createSlice({
       if (existingItem) {
         existingItem.quantity += action.payload.quantity; // ✅ Increase quantity if already in cart
       } else {
-        state.cart.push({ ...action.payload, quantity: Math.max(1, action.payload.quantity) }); // ✅ Ensure quantity is at least 1
+        state.cart.push({ ...action.payload, quantity: Math.max(1, action.payload.quantity) }); // �� Ensure quantity is at least 1
       }
+      toast.success("Item added to cart");
     },
 
     // ✅ Increase item quantity

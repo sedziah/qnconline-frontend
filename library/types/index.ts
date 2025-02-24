@@ -115,7 +115,8 @@ export interface Product {
   catalogueId?: UUID // Optional field
   actualPrice?: number // Optional custom fields
   isFeatured?: boolean
-  freeDelivery?: boolean
+  free_delivery?: boolean
+  discounted_price?: number
   pagination: Pagination
   variations: any[]
 }

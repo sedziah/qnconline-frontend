@@ -18,20 +18,36 @@ import { Product } from '@/library/types'
 import { useFetchProductByIdQuery } from '@/redux/api/features/productsApi'
 import { useSearchParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '@/redux/slices/cartSlice'
 
 export const ProductListingDetail = ({ slug }: { slug: string }) => {
   const searchParams = useSearchParams()
+  const dispatch = useDispatch();
   const productName = searchParams.get('name')
   const [mostWantedProducts, setMostWantedProducts] = useState<Product[]>([])
 
   const { data: productData, isLoading, isError } = useFetchProductByIdQuery<{
     data: {
       main_variation: Product
+      related_variations: Product[]
       specifications: { specificationName: string; value: string }[]
     }, isLoading: boolean,
     isError: boolean
   }>(slug)
 
+  const handleAddToCart = (product: Product) => {
+    dispatch(
+      addToCart({
+        id: product?.id,
+        full_name: product.name,
+        price: product.price,
+        discounted_price: product.discounted_price,
+        image: product.images?.[0]?.image || "/placeholder-image.png",
+        quantity: 1,
+      })
+    )
+  };
 
   const breadcrumbItems = [
     { label: 'Home', href: '/' },
@@ -62,11 +78,15 @@ export const ProductListingDetail = ({ slug }: { slug: string }) => {
 
   return (
     <>
-      <FloatingInfo product={productData?.main_variation} />
+      <FloatingInfo
+        product={productData?.main_variation}
+        handleAddToCart={handleAddToCart}
+      />
 
       <Breadcrumb items={breadcrumbItems} />
 
-      <RenderProductSummary product={{
+      <RenderProductSummary
+        product={{
         ...productData?.main_variation,
         specifications: productData?.specifications
           ? Object.entries(productData.specifications).map(([key, values]) => ({
@@ -74,7 +94,9 @@ export const ProductListingDetail = ({ slug }: { slug: string }) => {
             value: values
           }))
           : [] as any
-      }} />
+        }}
+        handleAddToCart={handleAddToCart}
+      />
 
       <RenderAppearanceControl />
 
@@ -86,17 +108,17 @@ export const ProductListingDetail = ({ slug }: { slug: string }) => {
 
       <RenderTradeInPromo />
 
-      {/* <RenderCarousel
+      <RenderCarousel
         title="You may also like"
         subtitle="Related Projects"
-        payload={mostWantedProducts}
-        loading={loading}
+        payload={productData?.related_variations}
+        loading={isLoading}
       />
 
-      <RenderCarousel
+      {/* <RenderCarousel
         title="Pairs well with"
-        payload={mostWantedProducts}
-        loading={loading}
+        payload={productData?.related_variations}
+        loading={isLoading}
       /> */}
 
       {/* <RenderReviews product={productData?.main_variation} /> */}

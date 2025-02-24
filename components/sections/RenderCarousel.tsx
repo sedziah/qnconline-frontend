@@ -4,14 +4,14 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import ProductCardSkeleton from "../Cards/ProductCardSkeleton";
 import MobilePhoneCard from "../Cards/MobilePhoneCard";
-import { MobileCardData } from "../../library/types";
+import { MobileCardData, Product } from "../../library/types";
 
 const Carousel = dynamic(() => import("react-multi-carousel"), { ssr: false });
 
 interface RenderCarouselProps {
   title: string;
   subtitle?: string;
-  payload: MobileCardData[];
+  payload: Product[];
   loading: boolean;
 }
 
@@ -53,21 +53,16 @@ const RenderCarousel: React.FC<RenderCarouselProps> = ({
                 key={deal.id}
                 product={{
                   id: deal.id,
-                  full_name: deal.full_name ?? "Unnamed Product",
-                  name: deal.full_name ?? "Unnamed Product",
-                  product_slug: deal.product_slug ?? "unknown-slug",
+                  full_name: deal.name ?? "Unnamed Product",
+                  name: deal.name ?? "Unnamed Product",
+                  product_slug: deal.slug ?? "unknown-slug",
                   price: deal.price?.toString() ?? "0",
                   discounted_price: deal.discounted_price?.toString() ?? undefined,
                   condition: deal.condition ?? "N/A",
-                  inventory_quantity: deal.inventory_quantity ?? 0,
-                  images: [{
-                    image: deal.image_url ?? "/placeholder-image.png",
-                    alt_text: deal.full_name || "Product Image",
-                    image_type: "main",
-                  }],
-                  discount: deal.discount ?? 0,
+                  inventory_quantity: deal.inventoryQuantity ?? 0,
+                  images: deal.images,
+                  discount: deal.discounted_price ?? 0,
                   free_delivery: deal.free_delivery ?? false,
-                  deals: deal.deals ?? [],
                 }}
               />
             ))}

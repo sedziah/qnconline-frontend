@@ -1,43 +1,44 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import { Product } from '@/library/types';
+import { Product } from '@/library/types'
 import { useFetchProductsByCategoryQuery } from '@/redux/api/features/productsApi'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 
 interface FloatingInfoProps {
-  product: Product | null;
+  product: Product | null
+  handleAddToCart: (product: Product) => void
 }
 
-const FloatingInfo: React.FC<FloatingInfoProps> = ({ product }) => {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+const FloatingInfo: React.FC<FloatingInfoProps> = ({ product, handleAddToCart }) => {
+  const [scrollPosition, setScrollPosition] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
 
   const handleScroll = () => {
-    const position = window.pageYOffset;
-    setScrollPosition(position);
-    setIsVisible(position >= 300);
-  };
+    const position = window.pageYOffset
+    setScrollPosition(position)
+    setIsVisible(position >= 300)
+  }
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
 
   if (!product) {
-    return null;
+    return null
   }
 
   // Use the first image in `product.images` or fallback to a placeholder
   const imageUrl = product?.images && product?.images.length > 0
-    ? product?.images[0].image 
-    : "https://via.placeholder.com/100";
+    ? product?.images[0].image
+    : "https://via.placeholder.com/100"
 
   // Calculate the original price using base_price and priceAdjustment
   const basePrice = typeof product?.base_price === "number" ? product?.base_price : parseFloat(product?.base_price!)
   const originalPrice = basePrice + parseFloat(product?.priceAdjustment!)
-  const priceAdjustment = parseFloat(product?.priceAdjustment!);
+  const priceAdjustment = parseFloat(product?.priceAdjustment!)
 
   return (
     <div
@@ -77,6 +78,7 @@ const FloatingInfo: React.FC<FloatingInfoProps> = ({ product }) => {
             )}
           </div>
           <button
+            onClick={() => handleAddToCart(product)}
             className="bg-primary flex gap-2 items-center text-white px-4 py-2 rounded-md hover:bg-[#f75b21] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -89,7 +91,7 @@ const FloatingInfo: React.FC<FloatingInfoProps> = ({ product }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default FloatingInfo;
+export default FloatingInfo

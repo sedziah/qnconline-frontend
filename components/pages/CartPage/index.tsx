@@ -1,14 +1,16 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store"; // ✅ Correct Import
 import { CartItem as CartItemType } from "../../../redux/slices/cartSlice"; // ✅ Correct Import
 import CartItem from "@/components/Cards/CartItem";
 import DefaultNavbar from "@/components/Navbars/DefaultNavbar";
+import LoadingScreen from "@/components/ui/LoadingScreen"
 
 const CartPage = () => {
-  // ✅ Fetch cart data from Redux
+  // �� Fetch cart data from Redux
   const cart = useSelector((state: RootState) => state.cart.cart);
+  const [isLoading, setIsLoading] = useState(true);
 
   // ✅ Calculate total price
   const calculateTotal = () => {
@@ -17,6 +19,16 @@ const CartPage = () => {
       0
     );
   };
+
+  useEffect(() => {
+    if (cart) {
+      setIsLoading(false);
+    }
+  }, [cart]);
+
+  if (isLoading) {
+    return <LoadingScreen />
+  }
 
   return (
     <div className="bg-bglight max-h-full overflow-hidden overflow-y-scroll">
@@ -32,8 +44,8 @@ const CartPage = () => {
             {/* ✅ Cart Items Section */}
             <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
               <div className="space-y-6">
-                {cart.length > 0 ? (
-                  cart.map((item: CartItemType) => (
+                {cart?.length > 0 ? (
+                  cart?.map((item: CartItemType) => (
                     <CartItem key={item.id} item={item} />
                   ))
                 ) : (
