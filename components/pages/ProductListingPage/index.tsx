@@ -5,9 +5,6 @@ import FloatingFilter from "@/components/FloatingFilter";
 import ProductsWrapper from "@/components/ProductsWrapper";
 import { useSearchParams } from "next/navigation";
 import React, { Suspense } from "react";
-import { BiSortAlt2 } from "react-icons/bi";
-import { FaFilter } from "react-icons/fa";
-import RenderReviews from "@/components/sections/RenderReviews";
 
 const ProductListingPage = () => {
   return (
@@ -30,8 +27,6 @@ const ProductContent = () => {
   const searchParams = useSearchParams();
   const categorySlug = searchParams.get("s"); // Extract the slug from the URL
   const categoryName = searchParams.get("name") || "All Products"; // Extract the name from the URL
-
-  console.log(categorySlug);
 
   const breadcrumbItems = [
     { label: "Home", href: "/" },

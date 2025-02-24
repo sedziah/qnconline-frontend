@@ -62,7 +62,7 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
 
   return (
     <div className="rounded-lg hover:shadow-xl transition-opacity bg-white p-4 shadow-lg">
-      <Link href={`/products/${product.product_slug}`} passHref>
+      <Link href={`/products/${product.id}`} passHref>
         <div className="h-40 w-full flex justify-center items-center">
           <Image
             width={150}
@@ -113,7 +113,7 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
       </div>
 
       {/* Product Title */}
-      <Link href={`/products/${product.product_slug}`} passHref>
+      <Link href={`/products/${product.id}`} passHref>
         <span
           className="text-sm font-semibold leading-tight text-gray-900 hover:underline flex items-center"
           style={{
