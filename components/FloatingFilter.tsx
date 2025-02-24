@@ -1,79 +1,92 @@
-import React, { useEffect, useState } from 'react'
-import { BiSortAlt2 } from 'react-icons/bi'
-import { FaFilter } from 'react-icons/fa'
-import { useSearchParams } from 'next/navigation'
-import { Product, ProductListingResponse } from '@/library/types'
-import { apiService } from '@/library/services/apiService'
-import { ProductSortDrawer } from './Drawers/ProductSortDrawer'
-import { FilterDrawer } from './Drawers/FilterDrawer'
+import React, { useState } from "react";
+import { FaFilter } from "react-icons/fa";
+import NewFilterCard from "../components/Cards/NewFilterCard";
 
+type FloatingFilterProps = {
+  specifications: Record<string, string[]>; 
+  onFiltersChange: (filters: Record<string, string[]>) => void;
+};
 
-const FloatingFilter = () => {
-  const [openFilter, setOpenFilter] = useState(false)
-  const [openSortingDrawer, setOpenSortingDrawer] = useState(false)
-  const [filters, setFilters] = useState<Record<string, string[]>>({})
-  const [specifications, setSpecifications] = useState<Record<string, string[]>>({})
-  const searchParams = useSearchParams()
-  const categorySlug = searchParams.get('s') // Extract the slug from the URL
-  const [products, setProducts] = useState<Product[]>()
+const FloatingFilter: React.FC<FloatingFilterProps> = ({ specifications, onFiltersChange }) => {
+  const [openFilter, setOpenFilter] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
 
-  useEffect(() => {
-    const fetchProductsAndSpecs = async () => {
-      try {
-        const fetchedProducts: ProductListingResponse = await apiService.getProductsByCategory(categorySlug!, filters)
-        setProducts(fetchedProducts?.products)
-        setSpecifications(fetchedProducts.specifications) // Set specifications to display filters
-      } catch (error) {
-        console.error("Error fetching products:", error)
-      } finally {
+  const toggleFilterDrawer = () => setOpenFilter(!openFilter);
+
+  // Handle filter changes
+  const handleFilterChange = (filterType: string, option: string, isChecked: boolean) => {
+    setSelectedFilters((prevFilters) => {
+      const updatedOptions = isChecked
+        ? [...(prevFilters[filterType] || []), option]
+        : prevFilters[filterType]?.filter((item) => item !== option) || [];
+
+      const updatedFilters = {
+        ...prevFilters,
+        [filterType]: updatedOptions.length > 0 ? updatedOptions : [],
+      };
+
+      if (updatedFilters[filterType].length === 0) {
+        delete updatedFilters[filterType];
       }
-    }
 
-    fetchProductsAndSpecs()
-  }, [categorySlug, filters])
+      if (typeof onFiltersChange === "function") {
+        onFiltersChange(updatedFilters);
+      }
 
-  const handleFiltersChange = (updatedFilters: Record<string, string[]>) => {
-    setFilters(updatedFilters)  // Update filters state
-  }
-
-  const toggleFilterDrawer = () => setOpenFilter(!openFilter)
-  const toogleOpenSortingDrawer = () => setOpenSortingDrawer(!openSortingDrawer)
+      return updatedFilters;
+    });
+  };
 
   return (
     <>
-      {/* Drawer for spectifications */}
-      <FilterDrawer
-        handleFiltersChange={handleFiltersChange}
-        productCount={products?.length!}
-        specifications={specifications}
-        openFilter={openFilter} toggleFilterDrawer={toggleFilterDrawer} />
-      
-
-      {/* Drawer for product sorting */}
-      <ProductSortDrawer
-        handleFiltersChange={handleFiltersChange}
-        productCount={products?.length!}
-        specifications={specifications}
-        openFilter={openSortingDrawer}
-        toggleFilterDrawer={toogleOpenSortingDrawer} />
-      
-      
-
-      <div className='block lg:hidden bg-white shadow-md transition-all border-t-2 border-lightGray/20 px-4 py-3 w-full fixed bottom-0 '>
-        <div className='flex flex-row items-center justify-center w-full'>
-          <button onClick={toggleFilterDrawer} className='w-full justify-center h-10 flex items-center text-base flex-row gap-x-2'>
-            <p>Filters</p>
-            <FaFilter />
-          </button>
-          <div className='h-8 w-0.5 border bg-bglight'></div>
-          <button onClick={toogleOpenSortingDrawer} className='w-full justify-center h-10 flex items-center text-base flex-row gap-x-2'>
-            <p>Sort</p>
-            <BiSortAlt2 />
-          </button>
-        </div>
+      {/* ✅ Floating Filter Button (Mobile Only) */}
+      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-auto bg-white shadow-md border px-6 py-3 flex space-x-4 rounded-full lg:hidden">
+        <button
+          onClick={toggleFilterDrawer}
+          className="flex items-center gap-2 text-sm font-semibold px-4 py-2 bg-gray-100 rounded-full hover:bg-gray-200 transition"
+        >
+          <FaFilter /> Filters
+        </button>
       </div>
-    </>
-  )
-}
 
-export default FloatingFilter
+      {/* ✅ Filter Drawer for Mobile */}
+      {openFilter && (
+        <div className="fixed inset-0 bg-white z-50 p-5 overflow-y-auto lg:hidden shadow-lg">
+          {/* ✅ Close Button */}
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-lg font-semibold">Filters</h2>
+            <button onClick={toggleFilterDrawer} className="text-gray-600 text-xl">
+              ✖
+            </button>
+          </div>
+
+          {/* ✅ Render Filters */}
+          <div className="filter-section space-y-4">
+            {Object.keys(specifications || {}).length === 0 ? (
+              Array(10)
+                .fill({})
+                .map((_, key) => (
+                  <div key={key} className="w-full flex flex-row items-center gap-x-3 my-2">
+                    <div className="h-5 w-5 bg-gray-200 rounded animate-pulse"></div>
+                    <div className="h-5 w-full bg-gray-200 rounded animate-pulse"></div>
+                  </div>
+                ))
+            ) : (
+              Object.keys(specifications).map((specKey) => (
+                <NewFilterCard
+                  key={specKey}
+                  label={specKey}
+                  options={specifications[specKey]}
+                  selectedOptions={selectedFilters[specKey] || []}
+                  onChange={(option, checked) => handleFilterChange(specKey, option, checked)}
+                />
+              ))
+            )}
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default FloatingFilter;

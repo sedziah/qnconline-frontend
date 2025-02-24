@@ -26,6 +26,12 @@ export interface Category {
   updatedAt: DATETIME
 }
 
+export interface ActiveCategory {
+  id: string;   // UUID
+  name: string; // Category name
+  slug: string; // Unique slug for the active category
+}
+
 // CategoryImage Table
 export interface CategoryImage {
   id: UUID // Primary Key
@@ -110,7 +116,6 @@ export interface Product {
   freeDelivery?: boolean
   pagination: Pagination
   variations: any[]
-  
 }
 
 // Feature Table
@@ -142,6 +147,51 @@ export interface Deals {
   endDate: DATETIME
   isActive: boolean
 }
+
+// DailyDeals Interface (for the provided response format)
+export interface DailyDeal {
+  id: UUID; // Primary Key
+  full_name: string; // Concatenated product and variation name
+  price: number; // Price of the product variation
+  product_slug: string; // Slug from the Product model
+  condition: string; // Condition of the product variation (e.g., "new", "used")
+  inventory_quantity: number; // Available stock
+  image_url: IMAGE; // URL of the primary image for the product variation
+  discount: number;
+  reviews: string;
+}
+
+export interface DailyDeal {
+  id: UUID; // Primary Key
+  full_name: string; // Concatenated product and variation name
+  price: number; // Price of the product variation
+  product_slug: string; // Slug from the Product model
+  condition: string; // Condition of the product variation (e.g., "new", "used")
+  inventory_quantity: number; // Available stock
+  image_url: IMAGE; // URL of the primary image for the product variation
+  discount: number;
+  reviews: string;
+}
+
+export interface MobileCardData {
+  id: string;
+  product_slug: string;
+  full_name: string;
+  name: string;
+  price: number | string;
+  discounted_price?: number | string;
+  inventory_quantity?: number;
+  condition: string;
+  image_url?: string; // ✅ Add this line for direct image URL
+  variation_specifications?: { specification_name: string; value: string }[];
+  images?: { image: string; alt_text?: string; image_type?: string }[];
+  reviews?: { rating: number }[];
+  discount?: number;
+  free_delivery?: boolean;
+  deals?: { id: string; description: string }[];
+}
+
+
 
 // Supplier Table
 export interface Supplier {
@@ -204,14 +254,38 @@ export interface ProductDetailsResponse {
   // Add any other fields that the API returns
 }
 
-
+// Define the type for Product Variation
 export interface ProductVariation {
   id: string;
-  product_name: string;
+  product: {
+    id: string;
+    slug: string;
+    name: string;
+    base_price?: string;
+    currency?: string;
+  };
+  name: string;
   price: string;
-  currency: string;
-  specifications: { specification_name: string; value: string }[];
-  images: { image: string; alt_text: string }[];
+  discounted_price: string;
+  inventory_quantity?: number;
+  condition: string;
+  variation_specifications?: { specification_name: string; value: string }[];
+  images?: { image: string; alt_text?: string; image_type?: string }[];
+  reviews?: { rating: number }[];
+  free_delivery: boolean;
+  deals?: { id: string; description: string }[];
+}
+
+// Define the type for API Response
+export interface ProductsApiResponse {
+  variations: ProductVariation[];
+  specifications: Record<string, string[]>;
+  pagination: {
+    current_page: number;
+    total_pages: number;
+    total_products: number;
+    page_size: number;
+  };
 }
 
 // ProductCondition Table
@@ -229,11 +303,11 @@ export interface SpecificationOptions {
 
 // API response for the product listing with dynamic specifications
 export interface ProductListingResponse {
-  products: Product[]
-  specifications: Record<string, string[]> // Adjust this if needed
-  pagination: Pagination
-  // Add other fields here if necessary (pagination, etc.)
+  variations: ProductVariation[]; // ✅ Change to ProductVariation[]
+  specifications: Record<string, string[]>;
+  pagination: Pagination;
 }
+
 
 // Interface to handle filters (passed to API calls)
 export interface FilterParams {
@@ -247,3 +321,8 @@ export enum DashboardFilter {
   "trade-ins",
   "credit"
 }
+
+type Model = {
+  model: string;
+  storage: string[];
+};

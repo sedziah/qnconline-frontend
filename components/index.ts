@@ -9,7 +9,7 @@ import TradeInOfferDetailPage from "./pages/TradeInOfferDetailPage"
 import DashboardPage from "./pages/Dashboard"
 import Breadcrumb from "./breadcrumb"
 import SigninPage from "./pages/SigninPage"
-import SearchPage from "./pages/SearchPage"
+// import SearchPage from "./pages/SearchPage"
 import ContactPage from "./pages/contactPage/page"
 // import GenericListingDetailPage from "./pages/GenericListingDetailPage"
 
@@ -25,7 +25,7 @@ export {
   TradeInOfferDetailPage,
   TradeInPage,
   DashboardPage,
-  SearchPage,
+  // SearchPage,
   ContactPage,
   // GenericListingDetailPage
 }

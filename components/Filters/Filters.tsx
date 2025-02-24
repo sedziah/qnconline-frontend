@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
-import NewFilterCard from '../Cards/NewFilterCard';
+import React, { useState } from "react";
+import NewFilterCard from "../Cards/NewFilterCard";
 
 type FilterSectionProps = {
   specifications: Record<string, string[]>; // Expect specifications
   onFiltersChange: (filters: Record<string, string[]>) => void;
 };
 
-const FilterSection: React.FC<FilterSectionProps> = ({ specifications, onFiltersChange }) => {
-  const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
+const FilterSection: React.FC<FilterSectionProps> = ({
+  specifications,
+  onFiltersChange,
+}) => {
+  const [selectedFilters, setSelectedFilters] = useState<
+    Record<string, string[]>
+  >({});
 
   // Handle filter changes
-  const handleFilterChange = (filterType: string, option: string, isChecked: boolean) => {
+  const handleFilterChange = (
+    filterType: string,
+    option: string,
+    isChecked: boolean
+  ) => {
     setSelectedFilters((prevFilters) => {
       const updatedOptions = isChecked
         ? [...(prevFilters[filterType] || []), option]
@@ -38,7 +47,10 @@ const FilterSection: React.FC<FilterSectionProps> = ({ specifications, onFilters
           ? Array(10)
               .fill({})
               .map((_, key) => (
-                <div key={key} className="w-full flex flex-row items-center gap-x-3 my-2">
+                <div
+                  key={key}
+                  className="w-full flex flex-row items-center gap-x-3 my-2"
+                >
                   <div className="h-5 w-5 bg-gray-200 rounded animate-pulse"></div>
                   <div className="h-5 w-full bg-gray-200 rounded animate-pulse"></div>
                 </div>
@@ -49,7 +61,9 @@ const FilterSection: React.FC<FilterSectionProps> = ({ specifications, onFilters
                 label={specKey}
                 options={specifications[specKey]}
                 selectedOptions={selectedFilters[specKey] || []}
-                onChange={(option, checked) => handleFilterChange(specKey, option, checked)}
+                onChange={(option, checked) =>
+                  handleFilterChange(specKey, option, checked)
+                }
               />
             ))}
       </div>

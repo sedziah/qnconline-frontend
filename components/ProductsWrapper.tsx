@@ -1,90 +1,127 @@
-import React, { useState, useEffect } from 'react';
-import { apiService } from '@/library/services/apiService';
-import NewProductCard from './Cards/NewProductCard';
-import FilterSection from "./FIlters/NewFilter";
+"use client";
+
+import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import {
+  useFetchProductsByCategoryAndFilterQuery,
+  useSearchProductsQuery,
+} from "@/redux/api/features/productsApi";
+import FilterSection from "../components/Filters/Filters";
+import MobilePhoneCard from "./Cards/MobilePhoneCard";
+import FloatingFilter from "./FloatingFilter";
+import {
+  ProductListingResponse,
+  ProductVariation,
+} from "../library/types/index";
 
 type ProductsWrapperProps = {
-  categorySlug?: string; // Make optional
-  categoryName?: string; // Make optional
-  searchQuery?: string;  // Add searchQuery as an optional prop
+  searchQuery?: string;
+  categorySlug?: string;
+  categoryName?: string;
 };
 
-const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ categorySlug, categoryName, searchQuery }) => {
-  const [variations, setVariations] = useState<any[]>([]);
-  const [availableFilters, setAvailableFilters] = useState<Record<string, string[]>>({});
-  const [loading, setLoading] = useState(true);
-  const [totalPages, setTotalPages] = useState(1);
+const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
+  const searchParams = useSearchParams();
+  const categorySlug = searchParams.get("s") || ""; // Get slug
+  const categoryName = searchParams.get("name") || ""; // Get category name
+
   const [filters, setFilters] = useState<Record<string, string[]>>({});
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        let fetchedData;
-        if (searchQuery) {
-          // Fetch search results
-          fetchedData = await apiService.searchProducts(searchQuery);
-        } else if (categorySlug) {
-          // Fetch products by category
-          fetchedData = await apiService.getProductsByCategory(categorySlug, filters);
-        }
+  // ✅ Call both hooks unconditionally but use `skip` to prevent unnecessary API calls
+  const searchResults = useSearchProductsQuery(searchQuery || "", {
+    skip: !searchQuery,
+  });
+  const categoryResults = useFetchProductsByCategoryAndFilterQuery(
+    { categorySlug, filters },
+    { skip: !!searchQuery } // Skip category fetch when searching
+  );
 
-        if (fetchedData) {
-          setVariations(fetchedData.variations || fetchedData); // Use 'variations' if available
-          setAvailableFilters(fetchedData.specifications || {}); // Use 'specifications' for filters
-          setTotalPages(fetchedData.pagination?.total_pages || 1);
-        }
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // ✅ Decide which data to use
+  const { data, error, isLoading } = searchQuery
+    ? searchResults
+    : categoryResults;
 
-    fetchData();
-  }, [filters, categorySlug, searchQuery]);
-
-  const handleFilterChange = (newFilters: { [key: string]: string[] }) => {
+  const handleFilterChange = (newFilters: Record<string, string[]>) => {
     setFilters(newFilters);
   };
 
+  if (!categorySlug && !searchQuery) {
+    return (
+      <p className="text-center text-red-500">
+        Error: No category or search query provided.
+      </p>
+    );
+  }
+
+  // ✅ Ensure data is treated as ProductListingResponse
+  const productData: ProductListingResponse | null = !Array.isArray(data)
+    ? (data as ProductListingResponse)
+    : null;
+
+  console.log("API Response:", productData);
+  console.log("Variations:", productData?.variations);
+  console.log("Specifications:", productData?.specifications);
+
   return (
     <div className="w-full max-w-6xl mx-auto">
+      <h1 className="text-2xl font-bold text-center my-10">
+        {searchQuery
+          ? `Search Results for "${searchQuery}"`
+          : categoryName
+          ? `Shop ${categoryName}`
+          : "Shop Products"}
+      </h1>
+
       <div className="flex flex-col lg:flex-row my-10 gap-6">
+        {/* Filters Section */}
         <div className="w-full lg:w-1/4">
-          <FilterSection specifications={availableFilters} onFiltersChange={handleFilterChange} />
+          <FilterSection
+            specifications={productData?.specifications || {}}
+            onFiltersChange={handleFilterChange}
+          />
         </div>
 
+        {/* Products Section */}
         <div className="w-full lg:w-3/4">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-bold">
-              {searchQuery ? `Search Results for "${searchQuery}"` : `Shop ${categoryName}`}
-            </h1>
-          </div>
-
-          <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-            {loading ? (
-              Array(15)
-                .fill({})
-                .map((_, key) => (
-                  <div key={key} className="w-full">
-                    <div className="h-40 w-full bg-gray-200 rounded animate-pulse"></div>
-                    <div className="h-2 w-3/4 mt-2 bg-gray-200 rounded animate-pulse"></div>
-                    <div className="h-2 w-3/4 mt-2 bg-gray-200 rounded animate-pulse"></div>
-                  </div>
-                ))
-            ) : variations.length > 0 ? (
-              variations.map((variation) => (
-                <div key={variation?.id} className="mx-1 py-3">
-                  <NewProductCard product={variation} /> {/* Pass variation as product prop */}
-                </div>
-              ))
-            ) : (
-              <p>No products found.</p>
-            )}
-          </div>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p className="text-red-500">Error: {error.toString()}</p>
+          ) : productData?.variations?.length ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+              {productData.variations.map((variation: ProductVariation) => (
+                <MobilePhoneCard
+                  key={variation.id}
+                  product={{
+                    id: variation.id,
+                    product_slug: categorySlug,
+                    full_name: `${variation.name}`,
+                    name: variation.name,
+                    price: variation.price,
+                    discounted_price: variation.discounted_price,
+                    inventory_quantity: variation.inventory_quantity,
+                    condition: variation.condition,
+                    variation_specifications:
+                      variation.variation_specifications ?? [],
+                    images: variation.images ?? [],
+                    reviews: variation.reviews ?? [],
+                    free_delivery: variation.free_delivery ?? false,
+                    deals: variation.deals ?? [],
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-500 text-center">No products found.</p>
+          )}
         </div>
       </div>
+
+      {/* ✅ Move Floating Filter here, using specifications directly */}
+      <FloatingFilter
+        specifications={productData?.specifications || {}}
+        onFiltersChange={handleFilterChange}
+      />
     </div>
   );
 };

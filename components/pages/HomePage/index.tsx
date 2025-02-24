@@ -1,64 +1,38 @@
 "use client";
-import React, { useEffect, useState } from 'react';
-import BannerCarousel from '../../Banners/BannerCarousel';
-import InfoCard from '../../Cards/InfoCard';
-import NewsLetter from '../../NewsLetter';
-import RenderCarousel from '../../sections/RenderCarousel';
-import { apiService } from '../../../library/services/apiService';
-import { Product } from '../../../library/types';
-import CTAFive from '@/components/CTAS/CTAFive'
-import RenderMostWantedCategory from '@/components/sections/RenderMostWantedCategory'
-
-// Define the SustainableProduct type
-interface SustainableProduct {
-  id: string;
-  name: string;
-  slug: string;
-  category: string;
-  image_url: string;
-}
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../redux/store/store";
+import { productsApi } from "../../../redux/api/features/productsApi";
+import BannerCarousel from "../../Banners/BannerCarousel";
+import InfoCard from "../../Cards/InfoCard";
+import NewsLetter from "../../NewsLetter";
+import RenderCarousel from "../../sections/RenderCarousel";
+import CTAFive from "@/components/CTAS/CTAFive";
+import RenderMostWantedCategory from "@/components/sections/RenderMostWantedCategory";
 
 const HomePage = () => {
-  const [mostWantedProducts, setMostWantedProducts] = useState<Product[]>([]);
-  const [sustainableProducts, setSustainableProducts] = useState<SustainableProduct[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useDispatch<AppDispatch>();
+
+  // Access state from Redux store
+  const {
+    dailyDeals,
+    newArrivals,
+    isLoading,
+    error,
+  } = useSelector((state: RootState) => state.product);
 
   useEffect(() => {
-    // Fetch daily deals or most wanted products
-    const fetchMostWantedProducts = async () => {
-      try {
-        const products = await apiService.getDailyDeals();
-        setMostWantedProducts(products); // Assuming the response is an array of products
-        setError(null);
-      } catch (err) {
-        console.error('Failed to fetch products', err);
-        setError('Failed to fetch products.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    // Fetch sustainable products
-    const fetchSustainableProducts = async () => {
-      try {
-        const products = await apiService.getSustainableProducts();
-        setSustainableProducts(products); // Ensure the API returns SustainableProduct[]
-      } catch (err) {
-        console.error('Failed to fetch sustainable products', err);
-        setError('Failed to fetch sustainable products.');
-      }
-    };
-
-    fetchMostWantedProducts();
-    fetchSustainableProducts();
-  }, []);
+    // Dispatch the API calls to fetch daily deals, featured products, and sustainable products
+    dispatch(productsApi.endpoints.fetchDailyDeals.initiate());
+    dispatch(productsApi.endpoints.fetchNewArrivals.initiate());
+    dispatch(productsApi.endpoints.fetchFeaturedProducts.initiate());
+    dispatch(productsApi.endpoints.fetchSustainableProducts.initiate());
+  }, [dispatch]);
 
   return (
-    <div className='bg-bglight'>
+    <div className="bg-bglight">
       {/* Banner Carousel */}
       <BannerCarousel />
-
 
       {/* CTA Component */}
       <CTAFive />
@@ -69,45 +43,25 @@ const HomePage = () => {
       <RenderCarousel
         title="Daily Deals"
         subtitle="Amazing offers just for today. Don't Miss Out!"
-        payload={mostWantedProducts}
-        loading={loading}
+        payload={dailyDeals}
+        loading={isLoading}
       />
 
-      {/* New Arrivals Section */}
+      {/* New Arrivals Products Section */}
       <RenderCarousel
         title="New Arrivals"
-        subtitle="Discover Our Newest Arrivals!"
-        payload={mostWantedProducts}
-        loading={loading}
+        subtitle="Discover Our Latest Additions. Stay Ahead of the Trends!!"
+        payload={newArrivals}
+        loading={isLoading}
       />
 
-      {/* Sustainable Products Section */}
-      {/* <RenderSustainableProduct products={sustainableProducts} loading={loading} /> */}
-
-      {/* Trending Products Section */}
+      {/* Discount Sales */}
       <RenderCarousel
-        title="Trending Products"
-        subtitle="Hot Right Now! Discover What's Trending Today."
-        payload={mostWantedProducts}
-        loading={loading}
+        title="Discount Sales"
+        subtitle="Unbeatable Deals on Your Favorite Products. Shop and Save Now!"
+        payload={newArrivals}
+        loading={isLoading}
       />
-
-      {/* Sustainable Products Section */}
-      {/* <RenderSustainableProduct products={sustainableProducts} loading={loading} /> */}
-
-      {/* Blog Carousel Section */}
-      {/* <RenderBlogCarousel /> */}
-
-      {/* Featured Products Section */}
-      {/* <RenderCarousel
-        title="Featured Products"
-        subtitle="Top-Rated Favorites Curated for You. Explore Now!"
-        payload={mostWantedProducts}
-        loading={loading}
-      /> */}
-
-      {/* Video Reviews Section */}
-      {/* <RenderVideoReviews /> */}
 
       {/* Information Card Section */}
       <InfoCard
