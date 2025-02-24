@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { Product } from '@/library/types'
-import { useFetchProductsByCategoryQuery } from '@/redux/api/features/productsApi'
 import React, { useEffect, useState } from 'react'
 
 interface FloatingInfoProps {

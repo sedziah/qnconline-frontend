@@ -19,11 +19,11 @@ const CartItem: React.FC<Props> = ({ item }) => {
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm md:p-6">
       <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
-        {/* ✅ Product Image */}
-        <a href="#" className="shrink-0 md:order-1">
+        {/* �� Product Image */}
+        <a href={`/products/${item.id}`} className="shrink-0 md:order-1">
           <img
             className="h-20 w-20 block"
-            src={item.image || "/placeholder.png"} // ✅ Use actual product image
+            src={item.image || "/placeholder.png"} // �� Use actual product image
             alt={item.full_name}
           />
         </a>
@@ -83,7 +83,7 @@ const CartItem: React.FC<Props> = ({ item }) => {
 
         {/* ✅ Product Details */}
         <div className="w-full min-w-0 flex-1 space-y-4 md:order-2 md:max-w-md">
-          <a href="#" className="text-sm font-medium text-gray-900 hover:underline">
+          <a href={`/products/${item.id}`} className="text-sm font-medium text-gray-900 hover:underline">
             {item.full_name}
           </a>
 

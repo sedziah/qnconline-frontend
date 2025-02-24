@@ -263,7 +263,7 @@ const Navbar = () => {
                   <HambergerMenu size="20" color="#000" />
                   <p className="text-sm capitalize font-normal">All Items</p>
                 </button>
-                <div className="overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 w-full flex flex-row items-center overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
+                <div className=" scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 w-full flex flex-row items-center overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
                   <div className="flex flex-row gap-x-6">
                     {activeCategories?.length > 0 ? (
                       activeCategories.map((category) => (
