@@ -115,16 +115,14 @@ export const ProductListingDetail = ({ slug }: { slug: string }) => {
           id: product.id,
           full_name: product.name,
           product_slug: product.slug,
+          price: product.price,
+          discounted_price: product.discounted_price,
+          discount: product.discounted_price,
+          free_delivery: product.free_delivery,
           image_url: product.images?.[0]?.image || "/placeholder-image.png",
         })) as MobileCardData[]}
         loading={isLoading}
       />
-
-      {/* <RenderCarousel
-        title="Pairs well with"
-        payload={productData?.related_variations}
-        loading={isLoading}
-      /> */}
 
       {/* <RenderReviews product={productData?.main_variation} /> */}
 
