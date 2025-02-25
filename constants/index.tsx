@@ -12,7 +12,7 @@ export {
 /**
  * routes to hide footer and navbar components
  */
-export const HIDDENROUTES = ["/signin", "/signup", "/cart"]
+export const HIDDENROUTES = ["/signin", "/signup", "/cart", "/shipping", "/checkout", '/payment']
 
 export const ANIMATIONSTYLE = {
     transitionTimingFunction: "linear",

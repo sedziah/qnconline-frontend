@@ -9,9 +9,10 @@ type PropType = {
   placeholder?: string
   required?: boolean
   className?: string
+  error?: string
 }
 
-const CustomInput = ({ labal, onChange, value, placeholder, type, className, required = false }: PropType) => {
+const CustomInput = ({ labal, onChange, value, placeholder, type, className, required = false, error }: PropType) => {
   return (
     <div className="relative">
       <input value={value} onChange={onChange} type={type} id={labal} className={className ?? "block rounded-lg px-2.5 pb-2 pt-5 w-full text-sm text-black border hover:bg-lightGray/20 border-lightGray appearance-none focus:outline-none focus:ring-0 focus:border-lightGray peer"} placeholder={placeholder} required={required} />
@@ -20,6 +21,8 @@ const CustomInput = ({ labal, onChange, value, placeholder, type, className, req
       {value?.trim()?.length > 1 && <button className='absolute z-50 top-1/4 right-2 w-6 h-6 hover:bg-lightGray/20 border border-black rounded-full flex items-center justify-center text-sm'>
         <IoClose />
       </button>}
+
+      {error && <p className='text-red-500 text-sm'>{error}</p>}
     </div>
   )
 }

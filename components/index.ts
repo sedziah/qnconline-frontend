@@ -9,9 +9,11 @@ import TradeInOfferDetailPage from "./pages/TradeInOfferDetailPage"
 import DashboardPage from "./pages/Dashboard"
 import Breadcrumb from "./breadcrumb"
 import SigninPage from "./pages/SigninPage"
+import ShippingPage from "./pages/ShippingPage"
 // import SearchPage from "./pages/SearchPage"
-import ContactPage from "./pages/contactPage/page"
+import ContactPage from "./pages/contactPage"
 // import GenericListingDetailPage from "./pages/GenericListingDetailPage"
+import PaymentPage from "./pages/PaymentPage/index"
 
 export {
   HomePage,
@@ -25,7 +27,9 @@ export {
   TradeInOfferDetailPage,
   TradeInPage,
   DashboardPage,
+  ShippingPage,
   // SearchPage,
   ContactPage,
   // GenericListingDetailPage
+  PaymentPage
 }
