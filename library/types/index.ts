@@ -108,12 +108,15 @@ export interface Product {
   condition: string
   images: ProductImage[]
   reviews: any[]
-  specifications: ProductSpecification[]
+  specifications: {
+    [key: string]: string[]
+  }
   deals: Deals[]
   catalogueId?: UUID // Optional field
   actualPrice?: number // Optional custom fields
   isFeatured?: boolean
-  freeDelivery?: boolean
+  free_delivery?: boolean
+  discounted_price?: number
   pagination: Pagination
   variations: any[]
 }

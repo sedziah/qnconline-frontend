@@ -62,7 +62,7 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
 
   return (
     <div className="rounded-lg hover:shadow-xl transition-opacity bg-white p-4 shadow-lg">
-      <Link href={`/products/${product.product_slug}`} passHref>
+      <a href={`/products/${product.id}`}>
         <div className="h-40 w-full flex justify-center items-center">
           <Image
             width={150}
@@ -72,7 +72,7 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
             alt={product.images?.[0]?.alt_text || "Product Image"}
           />
         </div>
-      </Link>
+      </a>
 
       <div className="pt-6">
         <div className="mb-4 flex items-center justify-between gap-4">
@@ -113,7 +113,7 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
       </div>
 
       {/* Product Title */}
-      <Link href={`/products/${product.product_slug}`} passHref>
+      <a href={`/products/${product.id}`}>
         <span
           className="text-sm font-semibold leading-tight text-gray-900 hover:underline flex items-center"
           style={{
@@ -127,7 +127,7 @@ const MobilePhoneCard: React.FC<MobilePhoneCardProps> = ({ product }) => {
         >
           {product.full_name}
         </span>
-      </Link>
+      </a>
 
       {/* ✅ Condition & Colour Side-by-Side */}
       <div className="mt-2 flex items-center gap-4 text-xs text-gray-500">

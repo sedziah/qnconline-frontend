@@ -3,6 +3,7 @@ import "./globals.css";
 import { Navbar } from "@/components";
 import Footer from "@/components/Footer";
 import ClientWrapper from "./ClientWrapper"; // New wrapper component
+import { Toaster } from "sonner"
 
 export const metadata: Metadata = {
   title: "Q&C Online - Home",
@@ -21,6 +22,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Footer />
+          <Toaster />
         </ClientWrapper>
       </body>
     </html>

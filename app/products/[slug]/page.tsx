@@ -7,9 +7,14 @@ export const metadata: Metadata = {
   description: "A Home of Premium Products & Exemplary Customer Care!",
 }
 
+type DynamicProductPageProps = {
+  params: {
+    slug: string
+  }
+}
 
-const page = () => {
-  return <ProductListingDetail />
+const page = ({ params }: DynamicProductPageProps) => {
+  return <ProductListingDetail slug={params.slug} />
 }
 
 export default page

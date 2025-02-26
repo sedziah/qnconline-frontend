@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ReviewCard from '../Cards/ReviewCard'
 import { MdOutlineVerifiedUser } from 'react-icons/md'
+import { Product } from '@/library/types'
 
 const DUMMYDATA = [
   {
@@ -25,7 +26,7 @@ const DUMMYDATA = [
   }
 ]
 
-const RenderReviews = () => {
+const RenderReviews = ({ product }: { product: Product }) => {
   const [selectedFilter, setSelectedFilter] = useState<{
     percentage: number
     rating: string
@@ -33,9 +34,6 @@ const RenderReviews = () => {
     percentage: 100,
     rating: "all",
   })
-
-
-
 
 
   return (

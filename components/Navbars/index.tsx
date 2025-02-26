@@ -58,6 +58,8 @@ import { productsApi } from "../../redux/api/features/productsApi";
 const Navbar = () => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const cart = useSelector((state: RootState) => state.cart.cart);
+
   // Extract state from the Redux store
   const { activeCategories, isLoading, error } = useSelector(
     (state: RootState) => state.product
@@ -103,6 +105,17 @@ const Navbar = () => {
   };
 
   if (HIDDENROUTES?.includes(path) || absolutePath) return null;
+
+  const renderCartIcon = () => (
+    <a href="/cart" className="relative">
+      <ShoppingCart size="20" color="#000" />
+      {cart?.length > 0 && (
+        <span className="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+          {cart?.length}
+        </span>
+      )}
+    </a>
+  )
 
   return (
     <>
@@ -156,9 +169,7 @@ const Navbar = () => {
                   <a href="/signin">
                     <User size="20" color="#000" />
                   </a>
-                  <a href="/cart">
-                    <ShoppingCart size="20" color="#000" />
-                  </a>
+                  {renderCartIcon()}
                 </div>
               </div>
 
@@ -238,9 +249,7 @@ const Navbar = () => {
                 <a href="/signin">
                   <User size="20" color="#000" />
                 </a>
-                <a href="/cart">
-                  <ShoppingCart size="20" color="#000" />
-                </a>
+                  {renderCartIcon()}
               </div>
             </div>
 
@@ -254,7 +263,7 @@ const Navbar = () => {
                   <HambergerMenu size="20" color="#000" />
                   <p className="text-sm capitalize font-normal">All Items</p>
                 </button>
-                <div className="overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 w-full flex flex-row items-center overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
+                <div className=" scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 w-full flex flex-row items-center overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
                   <div className="flex flex-row gap-x-6">
                     {activeCategories?.length > 0 ? (
                       activeCategories.map((category) => (

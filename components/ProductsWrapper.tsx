@@ -1,66 +1,63 @@
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useState } from "react"
+import { useSearchParams } from "next/navigation"
 import {
   useFetchProductsByCategoryAndFilterQuery,
   useSearchProductsQuery,
-} from "@/redux/api/features/productsApi";
-import FilterSection from "../components/Filters/Filters";
-import MobilePhoneCard from "./Cards/MobilePhoneCard";
-import FloatingFilter from "./FloatingFilter";
+} from "@/redux/api/features/productsApi"
+import FilterSection from "../components/Filters/Filters"
+import MobilePhoneCard from "./Cards/MobilePhoneCard"
+import FloatingFilter from "./FloatingFilter"
 import {
   ProductListingResponse,
   ProductVariation,
-} from "../library/types/index";
+} from "../library/types/index"
+import LoadingScreen from "./ui/LoadingScreen"
 
 type ProductsWrapperProps = {
-  searchQuery?: string;
-  categorySlug?: string;
-  categoryName?: string;
-};
+  searchQuery?: string
+  categorySlug?: string
+  categoryName?: string
+}
 
 const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
-  const searchParams = useSearchParams();
-  const categorySlug = searchParams.get("s") || ""; // Get slug
-  const categoryName = searchParams.get("name") || ""; // Get category name
+  const searchParams = useSearchParams()
+  const categorySlug = searchParams.get("s") || "" // Get slug
+  const categoryName = searchParams.get("name") || "" // Get category name
 
-  const [filters, setFilters] = useState<Record<string, string[]>>({});
+  const [filters, setFilters] = useState<Record<string, string[]>>({})
 
   // ✅ Call both hooks unconditionally but use `skip` to prevent unnecessary API calls
   const searchResults = useSearchProductsQuery(searchQuery || "", {
     skip: !searchQuery,
-  });
+  })
   const categoryResults = useFetchProductsByCategoryAndFilterQuery(
     { categorySlug, filters },
     { skip: !!searchQuery } // Skip category fetch when searching
-  );
+  )
 
   // ✅ Decide which data to use
   const { data, error, isLoading } = searchQuery
     ? searchResults
-    : categoryResults;
+    : categoryResults
 
   const handleFilterChange = (newFilters: Record<string, string[]>) => {
-    setFilters(newFilters);
-  };
+    setFilters(newFilters)
+  }
 
   if (!categorySlug && !searchQuery) {
     return (
       <p className="text-center text-red-500">
         Error: No category or search query provided.
       </p>
-    );
+    )
   }
 
   // ✅ Ensure data is treated as ProductListingResponse
   const productData: ProductListingResponse | null = !Array.isArray(data)
     ? (data as ProductListingResponse)
-    : null;
-
-  console.log("API Response:", productData);
-  console.log("Variations:", productData?.variations);
-  console.log("Specifications:", productData?.specifications);
+    : null
 
   return (
     <div className="w-full max-w-6xl mx-auto">
@@ -68,8 +65,8 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
         {searchQuery
           ? `Search Results for "${searchQuery}"`
           : categoryName
-          ? `Shop ${categoryName}`
-          : "Shop Products"}
+            ? `Shop ${categoryName}`
+            : "Shop Products"}
       </h1>
 
       <div className="flex flex-col lg:flex-row my-10 gap-6">
@@ -84,7 +81,7 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
         {/* Products Section */}
         <div className="w-full lg:w-3/4">
           {isLoading ? (
-            <p>Loading...</p>
+            <LoadingScreen />
           ) : error ? (
             <p className="text-red-500">Error: {error.toString()}</p>
           ) : productData?.variations?.length ? (
@@ -123,7 +120,7 @@ const ProductsWrapper: React.FC<ProductsWrapperProps> = ({ searchQuery }) => {
         onFiltersChange={handleFilterChange}
       />
     </div>
-  );
-};
+  )
+}
 
-export default ProductsWrapper;
+export default ProductsWrapper
