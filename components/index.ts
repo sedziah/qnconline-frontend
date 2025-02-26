@@ -14,6 +14,10 @@ import ShippingPage from "./pages/ShippingPage"
 import ContactPage from "./pages/contactPage"
 // import GenericListingDetailPage from "./pages/GenericListingDetailPage"
 import PaymentPage from "./pages/PaymentPage/index"
+import ConfirmationPage from "./pages/ConfirmationPage"
+import PaymentFailedPage from "./pages/PaymentPage/PaymentFailedPage"
+import PaymentSuccessPage from "./pages/PaymentPage/PaymentSuccessPage"
+import OrderPage from "./pages/OrderPage"
 
 export {
   HomePage,
@@ -31,5 +35,9 @@ export {
   // SearchPage,
   ContactPage,
   // GenericListingDetailPage
-  PaymentPage
+  PaymentPage,
+  ConfirmationPage,
+  PaymentFailedPage,
+  OrderPage,
+  PaymentSuccessPage
 }

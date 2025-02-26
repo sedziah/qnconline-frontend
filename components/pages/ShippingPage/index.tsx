@@ -433,7 +433,7 @@ const ShippingPage = () => {
               </div>
 
               {/* Continue Button - Mobile */}
-              <div className='fixed bottom-0 left-0 right-0 p-4 bg-white border-t md:hidden'>
+              <div className='fixed bottom-0 z-50 left-0 right-0 p-4 bg-white border-t md:hidden'>
                 <button
                   type="submit"
                   className='w-full bg-primary text-white rounded-full py-3 font-medium hover:bg-primary/90 transition-colors'

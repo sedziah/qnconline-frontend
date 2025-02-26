@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
+    "@types/canvas-confetti": "^1.9.0",
     "axios": "^1.7.7",
+    "canvas-confetti": "^1.9.3",
     "iconsax-react": "^0.0.8",
     "next": "14.2.21",
     "react": "^18",
@@ -26,7 +28,8 @@
     "react-switch": "^7.0.0",
     "redux-persist": "^6.0.0",
     "sharp": "^0.33.5",
-    "sonner": "^2.0.1"
+    "sonner": "^2.0.1",
+    "tailwind-merge": "^3.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",
