@@ -5,8 +5,8 @@ import { RootState } from "@/redux/store/store"; // ✅ Correct Import
 import { CartItem as CartItemType } from "../../../redux/slices/cartSlice"; // ✅ Correct Import
 import CartItem from "@/components/Cards/CartItem";
 import DefaultNavbar from "@/components/Navbars/DefaultNavbar";
-import LoadingScreen from "@/components/ui/LoadingScreen"
-import { useRouter } from "next/navigation"
+import LoadingScreen from "@/components/ui/LoadingScreen";
+import { useRouter } from "next/navigation";
 
 const CartPage = () => {
   // �� Fetch cart data from Redux
@@ -17,7 +17,7 @@ const CartPage = () => {
   // ✅ Calculate total price
   const calculateTotal = () => {
     return cart.reduce(
-      (total, item) => total + Number(item.price) * Number(item.quantity), 
+      (total, item) => total + Number(item.price) * Number(item.quantity),
       0
     );
   };
@@ -25,7 +25,7 @@ const CartPage = () => {
   const handleCheckout = () => {
     // Add logic to handle checkout
     router.push("/shipping");
-  }
+  };
 
   useEffect(() => {
     if (cart) {
@@ -34,7 +34,7 @@ const CartPage = () => {
   }, [cart]);
 
   if (isLoading) {
-    return <LoadingScreen />
+    return <LoadingScreen />;
   }
 
   return (
@@ -45,15 +45,27 @@ const CartPage = () => {
         <div className="mx-auto max-w-screen-xl px-4">
           <div className="flex items-center justify-between pt-16">
             <h2 className="text-xl font-semibold text-gray-900 sm:text-2xl">
-              Shopping Cart ({cart.length} {cart.length === 1 ? 'item' : 'items'})
+              Shopping Cart ({cart.length}{" "}
+              {cart.length === 1 ? "item" : "items"})
             </h2>
             <a
               href="/"
               className="text-primary hover:text-primary/90 inline-flex items-center text-sm font-medium"
             >
               Continue Shopping
-              <svg className="ml-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 12H5m14 0-4 4m4-4-4-4" />
+              <svg
+                className="ml-1 h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 12H5m14 0-4 4m4-4-4-4"
+                />
               </svg>
             </a>
           </div>
@@ -67,16 +79,35 @@ const CartPage = () => {
                     <CartItem key={item.id} item={item} />
                   ))
                 ) : (
-                    <div className="flex flex-col items-center justify-center py-12 text-center">
-                      <svg className="w-16 h-16 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                      </svg>
-                      <p className="text-xl font-medium text-gray-900 mb-2">Your cart is empty</p>
-                      <p className="text-gray-500 mb-6">Looks like you haven't added anything to your cart yet.</p>
-                      <a href="/" className="bg-primary text-white px-6 py-3 rounded-full hover:bg-primary/90 transition-colors">
-                        Start Shopping
-                      </a>
-                    </div>
+                  <div className="flex flex-col items-center justify-center py-12 text-center">
+                    <svg
+                      className="w-16 h-16 text-gray-400 mb-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                      />
+                    </svg>
+                    <p className="text-xl font-medium text-gray-900 mb-2">
+                      Your cart is empty
+                    </p>
+                    <p className="text-gray-500 mb-6">
+                      Looks like you haven&apos;t added anything to your cart
+                      yet.
+                    </p>
+
+                    <a
+                      href="/"
+                      className="bg-primary text-white px-6 py-3 rounded-full hover:bg-primary/90 transition-colors"
+                    >
+                      Start Shopping
+                    </a>
+                  </div>
                 )}
               </div>
             </div>
@@ -85,12 +116,16 @@ const CartPage = () => {
             {cart.length > 0 && (
               <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:relative md:border-none md:p-0 md:mt-0 md:w-96 transition-transform duration-300 ease-in-out transform translate-y-0">
                 <div className="space-y-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm sm:p-6">
-                  <p className="text-lg font-semibold text-gray-900">Order Summary</p>
+                  <p className="text-lg font-semibold text-gray-900">
+                    Order Summary
+                  </p>
 
                   <div className="space-y-3">
                     <dl className="flex items-center justify-between">
                       <dt className="text-gray-600">Subtotal</dt>
-                      <dd className="font-medium text-gray-900">₵{calculateTotal().toFixed(2)}</dd>
+                      <dd className="font-medium text-gray-900">
+                        ₵{calculateTotal().toFixed(2)}
+                      </dd>
                     </dl>
                     <dl className="flex items-center justify-between">
                       <dt className="text-gray-600">Shipping</dt>
@@ -98,15 +133,20 @@ const CartPage = () => {
                     </dl>
                     <div className="border-t border-gray-200 pt-3">
                       <dl className="flex items-center justify-between">
-                        <dt className="text-base font-semibold text-gray-900">Total</dt>
-                        <dd className="text-base font-semibold text-gray-900">₵{calculateTotal().toFixed(2)}</dd>
+                        <dt className="text-base font-semibold text-gray-900">
+                          Total
+                        </dt>
+                        <dd className="text-base font-semibold text-gray-900">
+                          ₵{calculateTotal().toFixed(2)}
+                        </dd>
                       </dl>
                     </div>
                   </div>
 
                   <button
                     onClick={handleCheckout}
-                    className="w-full rounded-full bg-primary px-5 py-3 text-sm font-medium text-white hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors">
+                    className="w-full rounded-full bg-primary px-5 py-3 text-sm font-medium text-white hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
+                  >
                     Proceed to Checkout
                   </button>
                 </div>
