@@ -48,20 +48,20 @@ const HomePage = () => {
       />
 
       {/* New Arrivals Products Section */}
-      <RenderCarousel
+      {/* <RenderCarousel
         title="New Arrivals"
         subtitle="Discover Our Latest Additions. Stay Ahead of the Trends!!"
         payload={newArrivals}
         loading={isLoading}
-      />
+      /> */}
 
       {/* Discount Sales */}
-      <RenderCarousel
+      {/* <RenderCarousel
         title="Discount Sales"
         subtitle="Unbeatable Deals on Your Favorite Products. Shop and Save Now!"
         payload={newArrivals}
         loading={isLoading}
-      />
+      /> */}
 
       {/* Information Card Section */}
       <InfoCard
