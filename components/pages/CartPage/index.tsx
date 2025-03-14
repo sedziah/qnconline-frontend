@@ -147,7 +147,13 @@ const CartPage = () => {
                     onClick={handleCheckout}
                     className="w-full rounded-full bg-primary px-5 py-3 text-sm font-medium text-white hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
                   >
-                    Proceed to Checkout
+                    Guest Checkout
+                  </button>
+                  <button
+                    onClick={handleCheckout}
+                    className="w-full rounded-full bg-primary px-5 py-3 text-sm font-medium text-white hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-colors"
+                  >
+                    Sign In & Checkout
                   </button>
                 </div>
               </div>
